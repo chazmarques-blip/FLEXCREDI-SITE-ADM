@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLEXCREDI - Cards de Documentos Corrigidos</title>
+    <link rel="stylesheet" href="signer-exact-fix.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f9fafb;
+            margin: 0;
+            padding: 20px;
+        }
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .comparison-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .size-note {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="comparison-header">
+            <h1 style="color: #1f2937; margin-bottom: 8px;">📐 FLEXCREDI - Cards Corrigidos</h1>
+            <p style="color: #6b7280;">Caixas de documentos agora com tamanho IDÊNTICO</p>
+        </div>
+
+        <div class="size-note">
+            <h3 style="color: #1f2937; margin-bottom: 8px;">✅ Correções Aplicadas:</h3>
+            <ul style="color: #6b7280; margin: 0; padding-left: 20px;">
+                <li><strong>Altura:</strong> Reduzida de 100px para 80px</li>
+                <li><strong>Padding:</strong> Reduzido de 12px 8px para 8px 6px</li>
+                <li><strong>Ícones:</strong> Reduzidos de 24x24px para 20x20px</li>
+                <li><strong>Texto:</strong> Fontes menores (8px, 7px)</li>
+                <li><strong>Gap:</strong> Reduzido de 8px para 6px</li>
+            </ul>
+        </div>
+
+        <!-- SIGNATÁRIO PRINCIPAL - CORRIGIDO -->
+        <div class="signer-container">
+            <div class="signer-header">
+                <div class="signer-title">
+                    <svg class="signer-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Signatário Principal (CORRIGIDO)
+                </div>
+                <div class="header-right">
+                    <div class="documents-badge">
+                        <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"/>
+                        </svg>
+                        0/4 Documentos
+                    </div>
+                    <button class="edit-btn">📝 Editar</button>
+                </div>
+            </div>
+
+            <div class="signer-content">
+                <div class="personal-info">
+                    <div class="section-label">Informações Pessoais</div>
+                    <div class="info-grid">
+                        <div class="info-field">
+                            <div class="field-label">Nome Completo</div>
+                            <div class="field-value">Carlos Eduardo Silva</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">Email</div>
+                            <div class="field-value">carlos.silva@email.com</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">Telefone</div>
+                            <div class="field-value">(11) 99999-9999</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">SSN</div>
+                            <div class="field-value">123-45-6789</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">Endereço</div>
+                            <div class="field-value">123 Main Street</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">CEP</div>
+                            <div class="field-value">01234-567</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">Cidade</div>
+                            <div class="field-value">São Paulo</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">Estado</div>
+                            <div class="field-value">SP</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOCUMENTOS CORRIGIDOS - TAMANHO REDUZIDO -->
+                <div class="documents-section">
+                    <div class="section-label">Documentos</div>
+                    <div class="documents-grid">
+                        <div class="document-card">
+                            <div class="doc-icon">
+                                <svg fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
+                                </svg>
+                            </div>
+                            <div class="doc-title">Carteira de M...</div>
+                            <div class="doc-subtitle">Foto frente e verso</div>
+                            <div class="doc-status">Pendente</div>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="doc-icon">
+                                <svg fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                                    <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a2 2 0 002 2h8a2 2 0 002-2V3a2 2 0 012 2v6h-3a3 3 0 00-3 3v3H6a2 2 0 01-2-2V5z"/>
+                                </svg>
+                            </div>
+                            <div class="doc-title">Comprovant...</div>
+                            <div class="doc-subtitle">Conta de luz</div>
+                            <div class="doc-status">Pendente</div>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="doc-icon">
+                                <svg fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7z"/>
+                                </svg>
+                            </div>
+                            <div class="doc-title">Social Securit...</div>
+                            <div class="doc-subtitle">Cartão do Social</div>
+                            <div class="doc-status">Pendente</div>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="doc-icon">
+                                <svg fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
+                                    <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9z"/>
+                                </svg>
+                            </div>
+                            <div class="doc-title">Cartão Banc...</div>
+                            <div class="doc-subtitle">Para débito auto.</div>
+                            <div class="doc-status">Pendente</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contract-section">
+                <div class="contract-header">
+                    <div class="contract-title">📋 Contrato de Crédito</div>
+                    <div class="contract-status">Pré-Aprovado - Sujeito à Análise Final</div>
+                </div>
+                
+                <div class="contract-info-primary">
+                    <div class="contract-details">
+                        <div class="contract-item">
+                            <div class="item-label">Valor</div>
+                            <div class="item-value">$ 25,000</div>
+                        </div>
+                        <div class="contract-item">
+                            <div class="item-label">Taxa</div>
+                            <div class="item-value">18.5% a.a.</div>
+                        </div>
+                        <div class="contract-item">
+                            <div class="item-label">Prazo</div>
+                            <div class="item-value">24 meses</div>
+                        </div>
+                        <div class="contract-item">
+                            <div class="item-label">Parcela</div>
+                            <div class="item-value">$ 1,287/mês</div>
+                        </div>
+                    </div>
+                    <div class="contract-actions">
+                        <button class="contract-btn btn-review">👁️ Revisar Pré-Aprovação</button>
+                        <button class="contract-btn btn-waiting">⏳ Aguardando Documentos</button>
+                    </div>
+                </div>
+                <div class="contract-number">Pré-Contrato #FL2024001</div>
+            </div>
+        </div>
+
+        <!-- CO-SIGNATÁRIOS - REFERÊNCIA -->
+        <div class="co-signer-container" style="margin-top: 24px;">
+            <div class="signer-header">
+                <div class="signer-title">
+                    <svg class="signer-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                    </svg>
+                    Co-signatários (REFERÊNCIA)
+                </div>
+                <div class="header-right">
+                    <div class="documents-badge">Documentos Pendentes</div>
+                    <button class="edit-btn">📝 Editar</button>
+                    <button class="add-btn">+ Adicionar</button>
+                </div>
+            </div>
+
+            <div class="signer-content">
+                <div class="personal-info">
+                    <div class="section-label">Informações Pessoais</div>
+                    <div class="info-grid">
+                        <div class="info-field">
+                            <div class="field-label">Nome Completo</div>
+                            <div class="field-value">Charles Marques</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">Email</div>
+                            <div class="field-value">chaz.marques@gmail.com</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">Telefone</div>
+                            <div class="field-value">7274521318</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">SSN</div>
+                            <div class="field-value">953-92-5241</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">Endereço</div>
+                            <div class="field-value">10355 Emerald Woods Av.</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">CEP</div>
+                            <div class="field-value">32836</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">Cidade</div>
+                            <div class="field-value">Orlando</div>
+                        </div>
+                        <div class="info-field">
+                            <div class="field-label">Estado</div>
+                            <div class="field-value">FL</div>
+                        </div>
+                    </div>
+                    
+                    <div class="relationship-field">
+                        <div class="field-label">Relacionamento</div>
+                        <div class="field-value">Cônjuge</div>
+                    </div>
+                </div>
+
+                <!-- DOCUMENTOS TAMANHO ORIGINAL (REFERÊNCIA) -->
+                <div class="documents-section">
+                    <div class="section-label">Documentos</div>
+                    <div class="documents-grid">
+                        <div class="document-card">
+                            <div class="doc-icon">
+                                <svg fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
+                                </svg>
+                            </div>
+                            <div class="doc-title">Carteira de M...</div>
+                            <div class="doc-subtitle">Foto frente e verso</div>
+                            <div class="doc-status">Pendente</div>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="doc-icon">
+                                <svg fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                                    <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a2 2 0 002 2h8a2 2 0 002-2V3a2 2 0 012 2v6h-3a3 3 0 00-3 3v3H6a2 2 0 01-2-2V5z"/>
+                                </svg>
+                            </div>
+                            <div class="doc-title">Comprovant...</div>
+                            <div class="doc-subtitle">Conta de luz</div>
+                            <div class="doc-status">Pendente</div>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="doc-icon">
+                                <svg fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7z"/>
+                                </svg>
+                            </div>
+                            <div class="doc-title">Social Securit...</div>
+                            <div class="doc-subtitle">Cartão do Social</div>
+                            <div class="doc-status">Pendente</div>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="doc-icon">
+                                <svg fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
+                                    <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9z"/>
+                                </svg>
+                            </div>
+                            <div class="doc-title">Cartão Banc...</div>
+                            <div class="doc-subtitle">Para débito auto.</div>
+                            <div class="doc-status">Pendente</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contract-section">
+                <div class="contract-header">
+                    <div class="contract-title">📋 Contrato de Co-signatário</div>
+                </div>
+                
+                <div class="contract-info-cosigner">
+                    <div class="cosigner-status">
+                        <div class="status-icon">
+                            <svg width="16" height="16" fill="white" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                            </svg>
+                        </div>
+                        <div class="status-text">
+                            <h4>Aguardando Assinatura</h4>
+                            <p>O contrato está pronto para revisão e assinatura</p>
+                        </div>
+                    </div>
+                    <div class="cosigner-actions">
+                        <button class="contract-btn btn-review">👁️ Revisar</button>
+                        <button class="contract-btn btn-sign">✍️ Assinar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

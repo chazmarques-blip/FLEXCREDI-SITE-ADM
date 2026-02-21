@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/admin-dashboard.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.flexcredi.com"
+        }
+      ]
+    }
+  ]
+}

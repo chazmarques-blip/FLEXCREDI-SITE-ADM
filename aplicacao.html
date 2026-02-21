@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FLEXCREDI Credit Application - Complete and secure form to apply for your online loan. Fast and easy process.">
+    <meta name="keywords" content="credit application, loan form, apply for credit, FLEXCREDI">
+    <title>Credit Application - FLEXCREDI | Complete Form</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/flexcredi-logo-official.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout-adjustments.css">
+    
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="navbar container" role="navigation" aria-label="Navegação principal">
+            <!-- Logo -->
+            <a href="index.html" class="navbar-brand" aria-label="FLEXCREDI - Página inicial">
+                <img src="images/flexcredi-logo-official.png" alt="FLEXCREDI - Easy, Simple, Fast" class="logo-img">
+            </a>
+            
+            <!-- Menu de Navegação -->
+            <ul class="navbar-nav" id="navbar-nav">
+                <li><a href="sobre.html" class="nav-link"><i class="fas fa-info-circle"></i> <span data-translate="About Us">About Us</span></a></li>
+                <li class="nav-dropdown">
+                    <a href="servicos.html" class="nav-link"><i class="fas fa-credit-card"></i> <span data-translate="Our Services">Our Services</span> <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="servicos.html#credito-pessoal"><i class="fas fa-user"></i> <span data-translate="Personal Credit">Personal Credit</span></a></li>
+                        <li><a href="servicos.html#credito-negocio"><i class="fas fa-briefcase"></i> <span data-translate="Business Credit">Business Credit</span></a></li>
+                        <li><a href="servicos.html#quitacao"><i class="fas fa-hand-holding-dollar"></i> <span data-translate="Debt Consolidation">Debt Consolidation</span></a></li>
+                        <li><a href="servicos.html#reformas"><i class="fas fa-home"></i> <span data-translate="Home Improvement">Home Improvement</span></a></li>
+                    </ul>
+                </li>
+                <li><a href="como-funciona.html" class="nav-link"><i class="fas fa-cogs"></i> <span data-translate="How It Works">How It Works</span></a></li>
+                <li><a href="faq.html" class="nav-link"><i class="fas fa-question-circle"></i> <span data-translate="FAQ">FAQ</span></a></li>
+                <li><a href="contato.html" class="nav-link"><i class="fas fa-phone"></i> <span data-translate="Contact">Contact</span></a></li>
+            </ul>
+            
+            <!-- Seletor de Idiomas -->
+            <div class="language-selector">
+                <button class="language-btn active" data-lang="en" title="English" aria-label="Switch to English">
+                    🇺🇸
+                </button>
+                <button class="language-btn" data-lang="es" title="Español" aria-label="Switch to Spanish">
+                    🇪🇸
+                </button>
+                <button class="language-btn" data-lang="pt" title="Português" aria-label="Switch to Portuguese">
+                    🇧🇷
+                </button>
+            </div>
+            
+            <!-- Botões de Ação -->
+            <div class="navbar-buttons">
+                <a href="login.html" class="btn btn-secondary btn-sm"><i class="fas fa-user"></i> <span data-translate="Login">Login</span></a>
+                <a href="index.html" class="btn btn-outline btn-sm"><i class="fas fa-home"></i> <span data-translate="Home">Home</span></a>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Open mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Conteúdo Principal -->
+    <main id="main-content" role="main">
+        
+        <!-- Header da Aplicação -->
+        <section class="aplicacao-header" role="banner">
+            <div class="container">
+                <div class="aplicacao-intro text-center">
+                    <h1>FLEXCREDI Credit Application</h1>
+                    <p class="text-large">Complete your application in a few simple and secure steps</p>
+                    
+                    <!-- Progress Bar -->
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-step active" data-step="1">
+                                <div class="progress-circle">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <span class="progress-label">Personal Data</span>
+                            </div>
+                            <div class="progress-step" data-step="2">
+                                <div class="progress-circle">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <span class="progress-label">Address</span>
+                            </div>
+                            <div class="progress-step" data-step="3">
+                                <div class="progress-circle">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <span class="progress-label">Professional Data</span>
+                            </div>
+                            <div class="progress-step" data-step="4">
+                                <div class="progress-circle">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <span class="progress-label">Credit Information</span>
+                            </div>
+                            <div class="progress-step" data-step="5">
+                                <div class="progress-circle">
+                                    <i class="fas fa-upload"></i>
+                                </div>
+                                <span class="progress-label">Documents</span>
+                            </div>
+                            <div class="progress-step" data-step="6">
+                                <div class="progress-circle">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <span class="progress-label">Review</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Formulário Multi-Step -->
+        <section class="section aplicacao-form-section">
+            <div class="container">
+                <form id="form-aplicacao" class="aplicacao-form" novalidate>
+                    
+                    <!-- Etapa 1: Dados Pessoais -->
+                    <div class="form-step active" data-step="1">
+                        <div class="step-content">
+                            <div class="step-header text-center mb-4">
+                                <h2><i class="fas fa-user text-verde"></i> Personal Data</h2>
+                                <p>Let's start with your basic information</p>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="nome_completo" class="form-label">Full Name *</label>
+                                        <input type="text" id="nome_completo" name="nome_completo" class="form-control" required 
+                                               placeholder="Enter your full name">
+                                        <div class="form-error" id="nome_completo-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="ssn" class="form-label">Social Security / Tax ID *</label>
+                                        <input type="text" id="ssn" name="ssn" class="form-control" required 
+                                               placeholder="XXX-XX-XXXX">
+                                        <div class="form-error" id="ssn-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="data_nascimento" class="form-label">Date of Birth *</label>
+                                        <input type="date" id="data_nascimento" name="data_nascimento" class="form-control" required>
+                                        <div class="form-error" id="data_nascimento-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="estado_civil" class="form-label">Marital Status *</label>
+                                        <select id="estado_civil" name="estado_civil" class="form-control" required>
+                                            <option value="">Select</option>
+                                            <option value="single">Single</option>
+                                            <option value="married">Married</option>
+                                            <option value="divorced">Divorced</option>
+                                            <option value="widowed">Widowed</option>
+                                            <option value="domestic_partnership">Domestic Partnership</option>
+                                        </select>
+                                        <div class="form-error" id="estado_civil-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">Email *</label>
+                                        <input type="email" id="email" name="email" class="form-control" required 
+                                               placeholder="your@email.com">
+                                        <div class="form-error" id="email-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="telefone" class="form-label">Phone/WhatsApp *</label>
+                                        <input type="tel" id="telefone" name="telefone" class="form-control" required 
+                                               placeholder="(000) 000-0000">
+                                        <div class="form-error" id="telefone-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="nome_mae" class="form-label">Mother's Full Name *</label>
+                                        <input type="text" id="nome_mae" name="nome_mae" class="form-control" required 
+                                               placeholder="Mother's full name">
+                                        <div class="form-error" id="nome_mae-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="genero" class="form-label">Gender *</label>
+                                        <select id="genero" name="genero" class="form-control" required>
+                                            <option value="">Select</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="non_binary">Non-binary</option>
+                                            <option value="prefer_not_to_say">Prefer not to say</option>
+                                        </select>
+                                        <div class="form-error" id="genero-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-navigation">
+                            <button type="button" class="btn btn-primary btn-next">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Etapa 2: Endereço -->
+                    <div class="form-step" data-step="2">
+                        <div class="step-content">
+                            <div class="step-header text-center mb-4">
+                                <h2><i class="fas fa-home text-verde"></i> Address Information</h2>
+                                <p>We need to know where you live</p>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="zipcode" class="form-label">ZIP Code *</label>
+                                        <input type="text" id="zipcode" name="zipcode" class="form-control" required 
+                                               placeholder="33101">
+                                        <div class="form-error" id="zipcode-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="street" class="form-label">Street Address *</label>
+                                        <input type="text" id="street" name="street" class="form-control" required 
+                                               placeholder="Street name">
+                                        <div class="form-error" id="street-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="number" class="form-label">Number *</label>
+                                        <input type="text" id="number" name="number" class="form-control" required 
+                                               placeholder="123">
+                                        <div class="form-error" id="number-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="complement" class="form-label">Apt/Suite</label>
+                                        <input type="text" id="complement" name="complement" class="form-control" 
+                                               placeholder="Apt, Suite, etc.">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="neighborhood" class="form-label">Neighborhood *</label>
+                                        <input type="text" id="neighborhood" name="neighborhood" class="form-control" required 
+                                               placeholder="Neighborhood name">
+                                        <div class="form-error" id="neighborhood-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="city" class="form-label">City *</label>
+                                        <input type="text" id="city" name="city" class="form-control" required 
+                                               placeholder="City name">
+                                        <div class="form-error" id="city-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="state" class="form-label">State *</label>
+                                        <select id="state" name="state" class="form-control" required>
+                                            <option value="">Select state</option>
+                                            <option value="FL">Florida</option>
+                                            <option value="CA">California</option>
+                                            <option value="TX">Texas</option>
+                                            <option value="NY">New York</option>
+                                            <option value="GA">Georgia</option>
+                                            <option value="NC">North Carolina</option>
+                                            <option value="SC">South Carolina</option>
+                                            <option value="AL">Alabama</option>
+                                        </select>
+                                        <div class="form-error" id="state-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="tempo_residencia" class="form-label">Time at Current Residence *</label>
+                                        <select id="tempo_residencia" name="tempo_residencia" class="form-control" required>
+                                            <option value="">Select</option>
+                                            <option value="less_6_months">Less than 6 months</option>
+                                            <option value="6_months_1_year">6 months to 1 year</option>
+                                            <option value="1_2_years">1 to 2 years</option>
+                                            <option value="2_5_years">2 to 5 years</option>
+                                            <option value="more_5_years">More than 5 years</option>
+                                        </select>
+                                        <div class="form-error" id="tempo_residencia-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="tipo_residencia" class="form-label">Housing Type *</label>
+                                        <select id="tipo_residencia" name="tipo_residencia" class="form-control" required>
+                                            <option value="">Select</option>
+                                            <option value="owned">Owned</option>
+                                            <option value="mortgaged">Mortgaged</option>
+                                            <option value="rented">Rented</option>
+                                            <option value="family">Living with family</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <div class="form-error" id="tipo_residencia-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-navigation">
+                            <button type="button" class="btn btn-secondary btn-prev">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button type="button" class="btn btn-primary btn-next">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Etapa 3: Dados Profissionais -->
+                    <div class="form-step" data-step="3">
+                        <div class="step-content">
+                            <div class="step-header text-center mb-4">
+                                <h2><i class="fas fa-briefcase text-verde"></i> Dados Profissionais e Financeiros</h2>
+                                <p>Conte-nos sobre sua situação profissional</p>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="ocupacao" class="form-label">Ocupação/Profissão *</label>
+                                        <input type="text" id="ocupacao" name="ocupacao" class="form-control" required 
+                                               placeholder="Sua profissão atual">
+                                        <div class="form-error" id="ocupacao-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="situacao_profissional" class="form-label">Situação Profissional *</label>
+                                        <select id="situacao_profissional" name="situacao_profissional" class="form-control" required>
+                                            <option value="">Selecione</option>
+                                            <option value="empregado_clt">Empregado CLT</option>
+                                            <option value="funcionario_publico">Funcionário Público</option>
+                                            <option value="autonomo">Autônomo</option>
+                                            <option value="empresario">Empresário</option>
+                                            <option value="aposentado">Aposentado</option>
+                                            <option value="pensionista">Pensionista</option>
+                                            <option value="desempregado">Desempregado</option>
+                                        </select>
+                                        <div class="form-error" id="situacao_profissional-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="empresa" class="form-label">Nome da Empresa/Empregador *</label>
+                                        <input type="text" id="empresa" name="empresa" class="form-control" required 
+                                               placeholder="Nome da empresa onde trabalha">
+                                        <div class="form-error" id="empresa-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="tempo_servico" class="form-label">Tempo no Emprego Atual *</label>
+                                        <select id="tempo_servico" name="tempo_servico" class="form-control" required>
+                                            <option value="">Selecione</option>
+                                            <option value="menos_6_meses">Menos de 6 meses</option>
+                                            <option value="6_meses_1_ano">6 meses a 1 ano</option>
+                                            <option value="1_2_anos">1 a 2 anos</option>
+                                            <option value="2_5_anos">2 a 5 anos</option>
+                                            <option value="mais_5_anos">Mais de 5 anos</option>
+                                        </select>
+                                        <div class="form-error" id="tempo_servico-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="renda_mensal" class="form-label">Renda Mensal Líquida *</label>
+                                        <input type="number" id="renda_mensal" name="renda_mensal" class="form-control" required 
+                                               placeholder="0" min="0" step="0.01">
+                                        <div class="form-error" id="renda_mensal-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="outras_rendas" class="form-label">Outras Rendas Mensais</label>
+                                        <input type="number" id="outras_rendas" name="outras_rendas" class="form-control" 
+                                               placeholder="0" min="0" step="0.01">
+                                        <small class="form-hint">Aluguéis, pensões, freelances, etc.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="gastos_mensais" class="form-label">Gastos Mensais Aproximados *</label>
+                                        <input type="number" id="gastos_mensais" name="gastos_mensais" class="form-control" required 
+                                               placeholder="0" min="0" step="0.01">
+                                        <small class="form-hint">Moradia, alimentação, transporte, etc.</small>
+                                        <div class="form-error" id="gastos_mensais-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="possui_conta_banco" class="form-label">Possui Conta Bancária? *</label>
+                                        <select id="possui_conta_banco" name="possui_conta_banco" class="form-control" required>
+                                            <option value="">Selecione</option>
+                                            <option value="sim">Sim</option>
+                                            <option value="nao">Não</option>
+                                        </select>
+                                        <div class="form-error" id="possui_conta_banco-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-navigation">
+                            <button type="button" class="btn btn-secondary btn-prev">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button type="button" class="btn btn-primary btn-next">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Etapa 4: Informações do Crédito -->
+                    <div class="form-step" data-step="4">
+                        <div class="step-content">
+                            <div class="step-header text-center mb-4">
+                                <h2><i class="fas fa-dollar-sign text-verde"></i> Informações do Crédito</h2>
+                                <p>Conte-nos sobre suas necessidades de crédito</p>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="tipo_credito" class="form-label">Tipo de Crédito Desejado *</label>
+                                        <select id="tipo_credito" name="tipo_credito" class="form-control" required>
+                                            <option value="">Selecione</option>
+                                            <option value="pessoal">Crédito Pessoal</option>
+                                            <option value="negocio">Crédito para Negócios</option>
+                                            <option value="quitacao">Quitação de Dívidas</option>
+                                            <option value="reformas">Crédito para Reformas</option>
+                                        </select>
+                                        <div class="form-error" id="tipo_credito-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="valor_solicitado" class="form-label">Valor Solicitado *</label>
+                                        <input type="number" id="valor_solicitado" name="valor_solicitado" class="form-control" required 
+                                               placeholder="0" min="1000" max="25000" step="100">
+                                        <div class="form-error" id="valor_solicitado-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="proposito" class="form-label">Finalidade do Crédito *</label>
+                                        <select id="proposito" name="proposito" class="form-control" required>
+                                            <option value="">Selecione</option>
+                                            <option value="quitar_dividas">Quitar Dívidas</option>
+                                            <option value="reformar_casa">Reformar Casa</option>
+                                            <option value="investir_negocio">Investir no Negócio</option>
+                                            <option value="capital_giro">Capital de Giro</option>
+                                            <option value="viagem">Viagem</option>
+                                            <option value="educacao">Educação</option>
+                                            <option value="saude">Saúde/Emergência</option>
+                                            <option value="casamento">Casamento</option>
+                                            <option value="carro">Compra/Conserto de Veículo</option>
+                                            <option value="outros">Outros</option>
+                                        </select>
+                                        <div class="form-error" id="proposito-error"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="parcelas_desejadas" class="form-label">Número de Parcelas Desejadas *</label>
+                                        <select id="parcelas_desejadas" name="parcelas_desejadas" class="form-control" required>
+                                            <option value="">Selecione</option>
+                                            <option value="6">6 parcelas</option>
+                                            <option value="12">12 parcelas</option>
+                                            <option value="18">18 parcelas</option>
+                                            <option value="24">24 parcelas</option>
+                                            <option value="36">36 parcelas</option>
+                                            <option value="48">48 parcelas</option>
+                                            <option value="60">60 parcelas</option>
+                                        </select>
+                                        <div class="form-error" id="parcelas_desejadas-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Dados Bancários -->
+                            <div class="bank-info-section">
+                                <h3 class="text-verde mb-3">Dados Bancários para Recebimento</h3>
+                                
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="banco" class="form-label">Banco *</label>
+                                            <select id="banco" name="banco" class="form-control" required>
+                                                <option value="">Selecione o banco</option>
+                                                <option value="001">Banco do Brasil</option>
+                                                <option value="033">Santander</option>
+                                                <option value="104">Caixa Econômica Federal</option>
+                                                <option value="237">Bradesco</option>
+                                                <option value="341">Itaú</option>
+                                                <option value="260">Nubank</option>
+                                                <option value="323">Mercado Pago</option>
+                                                <option value="outros">Outros</option>
+                                            </select>
+                                            <div class="form-error" id="banco-error"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="tipo_conta" class="form-label">Tipo de Conta *</label>
+                                            <select id="tipo_conta" name="tipo_conta" class="form-control" required>
+                                                <option value="">Selecione</option>
+                                                <option value="corrente">Conta Corrente</option>
+                                                <option value="poupanca">Conta Poupança</option>
+                                            </select>
+                                            <div class="form-error" id="tipo_conta-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="agencia" class="form-label">Agência *</label>
+                                            <input type="text" id="agencia" name="agencia" class="form-control" required 
+                                                   placeholder="0000">
+                                            <div class="form-error" id="agencia-error"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="conta" class="form-label">Número da Conta *</label>
+                                            <input type="text" id="conta" name="conta" class="form-control" required 
+                                                   placeholder="00000-0">
+                                            <div class="form-error" id="conta-error"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="digito" class="form-label">Dígito</label>
+                                            <input type="text" id="digito" name="digito" class="form-control" 
+                                                   placeholder="0" maxlength="1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-navigation">
+                            <button type="button" class="btn btn-secondary btn-prev">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button type="button" class="btn btn-primary btn-next">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Etapa 5: Upload de Documentos -->
+                    <div class="form-step" data-step="5">
+                        <div class="step-content">
+                            <div class="step-header text-center mb-4">
+                                <h2><i class="fas fa-upload text-verde"></i> Documentos Necessários</h2>
+                                <p>Envie os documentos para validarmos sua identidade e renda</p>
+                            </div>
+                            
+                            <div class="document-upload-section">
+                                <div class="document-requirements mb-4">
+                                    <div class="alert alert-info">
+                                        <h4><i class="fas fa-info-circle"></i> Formatos Aceitos</h4>
+                                        <p>PDF, JPG, PNG | Tamanho máximo: 5MB por arquivo</p>
+                                        <p><strong>Dica:</strong> Certifique-se de que os documentos estão legíveis e completos</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="upload-grid">
+                                    <!-- RG ou CNH -->
+                                    <div class="upload-item">
+                                        <div class="upload-header">
+                                            <h4><i class="fas fa-id-card text-verde"></i> RG ou CNH *</h4>
+                                            <p>Documento de identificação com foto (frente e verso)</p>
+                                        </div>
+                                        <div class="upload-area" data-document="rg_cnh">
+                                            <div class="upload-dropzone">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <p>Clique aqui ou arraste os arquivos</p>
+                                                <input type="file" id="rg_cnh" name="rg_cnh" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                                            </div>
+                                            <div class="upload-preview"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Comprovante de Residência -->
+                                    <div class="upload-item">
+                                        <div class="upload-header">
+                                            <h4><i class="fas fa-home text-verde"></i> Comprovante de Residência *</h4>
+                                            <p>Conta de luz, água, telefone ou extrato bancário (últimos 3 meses)</p>
+                                        </div>
+                                        <div class="upload-area" data-document="comprovante_residencia">
+                                            <div class="upload-dropzone">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <p>Clique aqui ou arraste o arquivo</p>
+                                                <input type="file" id="comprovante_residencia" name="comprovante_residencia" accept=".pdf,.jpg,.jpeg,.png">
+                                            </div>
+                                            <div class="upload-preview"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Comprovante de Renda -->
+                                    <div class="upload-item">
+                                        <div class="upload-header">
+                                            <h4><i class="fas fa-receipt text-verde"></i> Comprovante de Renda *</h4>
+                                            <p>Holerites (últimos 3 meses) ou declaração de imposto de renda</p>
+                                        </div>
+                                        <div class="upload-area" data-document="comprovante_renda">
+                                            <div class="upload-dropzone">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <p>Clique aqui ou arraste os arquivos</p>
+                                                <input type="file" id="comprovante_renda" name="comprovante_renda" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                                            </div>
+                                            <div class="upload-preview"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Extrato Bancário -->
+                                    <div class="upload-item">
+                                        <div class="upload-header">
+                                            <h4><i class="fas fa-university text-verde"></i> Extrato Bancário</h4>
+                                            <p>Extrato dos últimos 3 meses (opcional, mas recomendado)</p>
+                                        </div>
+                                        <div class="upload-area" data-document="extrato_bancario">
+                                            <div class="upload-dropzone">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <p>Clique aqui ou arraste os arquivos</p>
+                                                <input type="file" id="extrato_bancario" name="extrato_bancario" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                                            </div>
+                                            <div class="upload-preview"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-navigation">
+                            <button type="button" class="btn btn-secondary btn-prev">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button type="button" class="btn btn-primary btn-next">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Etapa 6: Revisão Final -->
+                    <div class="form-step" data-step="6">
+                        <div class="step-content">
+                            <div class="step-header text-center mb-4">
+                                <h2><i class="fas fa-check text-verde"></i> Revisão Final</h2>
+                                <p>Revise todos os dados antes de enviar sua aplicação</p>
+                            </div>
+                            
+                            <!-- Resumo dos Dados -->
+                            <div class="review-section">
+                                <div id="review-content">
+                                    <!-- Conteúdo será preenchido via JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <!-- Termos e Condições -->
+                            <div class="terms-section">
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="aceita_termos" name="aceita_termos" required>
+                                    <label for="aceita_termos" class="checkbox-label">
+                                        Li e aceito os <a href="termos-uso.html" target="_blank">Termos de Uso</a> 
+                                        e a <a href="politica-privacidade.html" target="_blank">Política de Privacidade</a> 
+                                        da FLEXCREDI. *
+                                    </label>
+                                    <div class="form-error" id="aceita_termos-error"></div>
+                                </div>
+                                
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="autoriza_consulta" name="autoriza_consulta" required>
+                                    <label for="autoriza_consulta" class="checkbox-label">
+                                        Autorizo a FLEXCREDI a consultar minhas informações nos órgãos de proteção ao crédito 
+                                        (SPC, SERASA, etc.) para análise de crédito. *
+                                    </label>
+                                    <div class="form-error" id="autoriza_consulta-error"></div>
+                                </div>
+                                
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="aceita_comunicacoes" name="aceita_comunicacoes">
+                                    <label for="aceita_comunicacoes" class="checkbox-label">
+                                        Aceito receber comunicações da FLEXCREDI por email, SMS e WhatsApp sobre 
+                                        produtos, serviços e promoções.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-navigation">
+                            <button type="button" class="btn btn-secondary btn-prev">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-large">
+                                <i class="fas fa-paper-plane"></i> Enviar Aplicação
+                            </button>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </section>
+        
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Informações da Empresa -->
+                <div class="footer-section">
+                    <h4>FLEXCREDI</h4>
+                    <p>Empodere seus sonhos com crédito fácil, simples e rápido.</p>
+                    <p><strong>Easy • Simple • Fast</strong></p>
+                </div>
+                
+                <!-- Suporte -->
+                <div class="footer-section">
+                    <h4>Precisa de Ajuda?</h4>
+                    <p>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+1234567890">+1 (234) 567-890</a>
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:suporte@flexcredi.com">suporte@flexcredi.com</a>
+                    </p>
+                    <p>
+                        <i class="fas fa-whatsapp"></i>
+                        <a href="https://wa.me/1234567890">WhatsApp</a>
+                    </p>
+                </div>
+                
+                <!-- Segurança -->
+                <div class="footer-section">
+                    <h4>Segurança</h4>
+                    <p>
+                        <i class="fas fa-shield-alt text-verde"></i>
+                        Site protegido por SSL
+                    </p>
+                    <p>
+                        <i class="fas fa-lock text-verde"></i>
+                        Dados criptografados
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 FLEXCREDI LLC. Todos os direitos reservados.</p>
+                <p>
+                    <a href="politica-privacidade.html">Política de Privacidade</a> • 
+                    <a href="termos-uso.html">Termos de Uso</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/aplicacao.js"></script>
+</body>
+</html>

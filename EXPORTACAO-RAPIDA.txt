@@ -1,0 +1,46 @@
+═══════════════════════════════════════════════════════════════
+  FLEXCREDI - EXPORTAÇÃO RÁPIDA PARA GITHUB (GUIA ULTRA-RESUMIDO)
+═══════════════════════════════════════════════════════════════
+
+📋 PASSO 1: PREPARAÇÃO (5 min)
+   └─ Leia: LEIA-PRIMEIRO-EXPORTACAO.md
+
+📝 PASSO 2: COPIAR SCRIPT (1 min)
+   └─ Abra: SCRIPT-REPRODUCAO-GITHUB.md
+   └─ Copie: TUDO (do === INÍCIO === até === FIM ===)
+
+🤖 PASSO 3: NOVO CHAT (40 min)
+   └─ Abra: Novo chat com IA que tenha GitHub
+   └─ Cole: Script completo
+   └─ Execute: 10 fases guiadas
+
+🚨 PASSO 4: IMAGENS - Fase 7 (Escolha uma):
+   [A] Upload Manual ........... Melhor qualidade (+ demorado)
+   [B] Placeholders SVG ........ Mais rápido (RECOMENDADO)
+   [C] URLs Públicas ........... Similar mas diferente
+   [D] Marcadores .............. Adicionar depois
+
+✅ PASSO 5: VERIFICAR (10 min)
+   └─ Receba: Link GitHub
+   └─ Teste: npm install + node server.js
+   └─ Abra: index.html no navegador
+
+═══════════════════════════════════════════════════════════════
+
+⏱️  TEMPO TOTAL: ~1 hora
+📦 RESULTADO: Projeto 100% no GitHub
+✅ ARQUIVOS: 121 completos
+🎯 STATUS: Pronto para deploy
+
+═══════════════════════════════════════════════════════════════
+
+🆘 AJUDA:
+   • Dúvida? Leia: INDEX-EXPORTACAO.md
+   • Imagens? Leia: SOLUCAO-IMAGENS.md
+   • Deploy? Leia: DEPLOYMENT-GUIDE.md
+
+═══════════════════════════════════════════════════════════════
+
+✨ COMECE: Abra LEIA-PRIMEIRO-EXPORTACAO.md
+
+═══════════════════════════════════════════════════════════════

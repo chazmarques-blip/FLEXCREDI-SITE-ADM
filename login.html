@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FLEXCREDI - Login do Cliente. Acesse sua conta segura para gerenciar pagamentos, visualizar extratos e acompanhar seu crédito.">
+    <meta name="keywords" content="login, área do cliente, acesso conta, FLEXCREDI, portal cliente">
+    <title>Login do Cliente - FLEXCREDI | Easy, Simple, Fast</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/flexcredi-logo-official.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout-adjustments.css">
+    <link rel="stylesheet" href="css/compact-login.css">
+    
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body class="compact-login-page">
+    <!-- Skip Link para Acessibilidade -->
+    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+    
+    <!-- Header Simplified -->
+    <header class="header header-simplified" role="banner">
+        <nav class="navbar container" role="navigation" aria-label="Navegação principal">
+            <!-- Logo -->
+            <a href="index.html" class="navbar-brand" aria-label="FLEXCREDI - Início">
+                <img src="images/flexcredi-logo-official.png" alt="FLEXCREDI - Easy, Simple, Fast" class="logo-img">
+            </a>
+            
+            <!-- Simple Nav -->
+            <div class="navbar-simple">
+                <a href="index.html" class="btn btn-outline btn-compact">
+                    <i class="fas fa-arrow-left"></i> Voltar ao Início
+                </a>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Conteúdo Principal -->
+    <main id="main-content" role="main" class="compact-login-main">
+        <div class="container">
+            <div class="compact-login-layout">
+                
+                <!-- Lado Esquerdo - Fluxo de Procedimentos -->
+                <div class="procedures-section">
+                    <div class="procedures-header">
+                        <h1>Área do Cliente FLEXCREDI</h1>
+                        <p>Gerencie sua conta e acompanhe seu crédito de forma simples e segura</p>
+                    </div>
+                    
+                    <div class="procedures-flow">
+                        <div class="procedure-step">
+                            <div class="step-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="step-content">
+                                <h3>Make Payments</h3>
+                                <p>Pay your monthly installments securely online</p>
+                            </div>
+                        </div>
+                        
+                        <div class="procedure-step">
+                            <div class="step-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="step-content">
+                                <h3>View Statements</h3>
+                                <p>Download and view your monthly statements</p>
+                            </div>
+                        </div>
+                        
+                        <div class="procedure-step">
+                            <div class="step-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="step-content">
+                                <h3>Track Progress</h3>
+                                <p>View your payment history and credit progress</p>
+                            </div>
+                        </div>
+                        
+                        <div class="procedure-step">
+                            <div class="step-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <div class="step-content">
+                                <h3>Account Settings</h3>
+                                <p>Update your contact information and preferences</p>
+                            </div>
+                        </div>
+                        
+                        <div class="procedure-step">
+                            <div class="step-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div class="step-content">
+                                <h3>Get Support</h3>
+                                <p>Access help center and contact support directly</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="help-section">
+                        <h4><i class="fas fa-question-circle"></i> Need Help?</h4>
+                        <p>Can't access your account? Our support team is here to help.</p>
+                        <div class="help-actions">
+                            <a href="tel:+1234567890" class="help-link">
+                                <i class="fas fa-phone"></i> Call Support
+                            </a>
+                            <a href="#faq" class="help-link">
+                                <i class="fas fa-book"></i> View FAQ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lado Direito - Formulário de Login Compacto -->
+                <div class="login-form-section">
+                    <div class="compact-login-form">
+                        <div class="form-header">
+                            <h2>Entrar na sua conta</h2>
+                        </div>
+                        
+                        <form id="form-login-compact" class="login-form-compact" novalidate>
+                            <div class="form-group-compact">
+                                <label for="login-email-compact" class="form-label-compact">EMAIL OR ACCOUNT NUMBER</label>
+                                <input type="text" id="login-email-compact" name="email" class="form-control-compact" required 
+                                       placeholder="Enter your email or account number">
+                            </div>
+                            
+                            <div class="form-group-compact">
+                                <label for="login-password-compact" class="form-label-compact">PASSWORD</label>
+                                <div class="password-input-container-compact">
+                                    <input type="password" id="login-password-compact" name="password" class="form-control-compact" required 
+                                           placeholder="Enter your password">
+                                    <button type="button" class="password-toggle-compact" id="password-toggle-compact">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-options-compact">
+                                <div class="checkbox-container-compact">
+                                    <input type="checkbox" id="remember-me-compact" name="rememberMe">
+                                    <label for="remember-me-compact" class="checkbox-label-compact">Remember me</label>
+                                </div>
+                                <a href="#forgot-password" class="forgot-password-link-compact">Forgot password?</a>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary-compact login-btn-compact">
+                                <i class="fas fa-sign-in-alt"></i> Sign In
+                            </button>
+                            
+                            <div class="login-divider-compact">
+                                <span>or</span>
+                            </div>
+                            
+                            <a href="aplicacao.html" class="btn-outline-compact login-btn-compact">Ver Minha Oferta</a>
+                            
+                            <!-- Master Access Button (for testing) -->
+                            <div class="master-access-section-compact">
+                                <p class="master-access-label">🔧 ACESSO DE TESTE</p>
+                                <button type="button" class="btn-success-compact" id="masterAccessBtnCompact">
+                                    <i class="fas fa-key"></i> Acesso Master (Teste)
+                                </button>
+                                <div class="master-credentials">
+                                    Email: master@flexcredi.com<br>
+                                    Senha: flexmaster2024
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer Minimal -->
+    <footer class="footer-minimal">
+        <div class="container">
+            <p>&copy; 2024 FLEXCREDI. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script>
+        // Compact Login Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const formCompact = document.getElementById('form-login-compact');
+            const masterBtnCompact = document.getElementById('masterAccessBtnCompact');
+            const passwordToggleCompact = document.getElementById('password-toggle-compact');
+            const passwordInputCompact = document.getElementById('login-password-compact');
+            
+            // Password toggle
+            if (passwordToggleCompact && passwordInputCompact) {
+                passwordToggleCompact.addEventListener('click', function() {
+                    const type = passwordInputCompact.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInputCompact.setAttribute('type', type);
+                    
+                    const icon = passwordToggleCompact.querySelector('i');
+                    icon.classList.toggle('fa-eye');
+                    icon.classList.toggle('fa-eye-slash');
+                });
+            }
+            
+            // Master access
+            if (masterBtnCompact) {
+                masterBtnCompact.addEventListener('click', function() {
+                    // Create user data for dashboard
+                    const userData = {
+                        id: 'master-user-' + Date.now(),
+                        fullName: 'Master User',
+                        email: 'master@flexcredi.com',
+                        phone: '(11) 99999-9999',
+                        ssn: '123-45-6789',
+                        address: '123 Main Street',
+                        zipCode: '01234-567',
+                        city: 'São Paulo',
+                        state: 'SP',
+                        desiredAmount: 25000,
+                        purpose: 'Expandir negócio',
+                        availableCredit: 30000,
+                        creditScore: 785,
+                        applicationDate: new Date().toISOString(),
+                        status: 'pre-approved',
+                        documents: {
+                            driverLicense: { uploaded: false, approved: false, fileName: '', previewData: '' },
+                            proofAddress: { uploaded: false, approved: false, fileName: '', previewData: '' },
+                            socialSecurity: { uploaded: false, approved: false, fileName: '', previewData: '' },
+                            bankCard: { uploaded: false, approved: false, fileName: '', previewData: '' }
+                        }
+                    };
+                    
+                    localStorage.setItem('flexcredi_user', JSON.stringify(userData));
+                    window.location.href = 'dashboard-cliente.html';
+                });
+            }
+            
+            // Form submission
+            if (formCompact) {
+                formCompact.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Simulate login process
+                    const formData = new FormData(this);
+                    const email = formData.get('email');
+                    const password = formData.get('password');
+                    
+                    if (email && password) {
+                        // Create test user and redirect to dashboard
+                        if (masterBtnCompact) {
+                            masterBtnCompact.click();
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

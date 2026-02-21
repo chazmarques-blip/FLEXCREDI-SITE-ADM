@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload GARANTIDO - FLEXCREDI</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #e74c3c;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .alert {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        .alert h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .alert p {
+            color: #856404;
+            line-height: 1.6;
+        }
+        
+        .file-selector {
+            background: #f8f9fa;
+            border: 3px dashed #ced4da;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .file-selector:hover {
+            border-color: #e74c3c;
+            background: #fee;
+        }
+        
+        .file-selector.active {
+            border-color: #2ecc71;
+            background: #d4edda;
+        }
+        
+        .file-selector h3 {
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        
+        #fileInput {
+            display: none;
+        }
+        
+        .file-info {
+            background: #d4edda;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .file-info h4 {
+            color: #155724;
+            margin-bottom: 10px;
+        }
+        
+        .file-info p {
+            color: #155724;
+            margin: 5px 0;
+            font-weight: 600;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            font-weight: 700;
+            margin: 10px 0;
+            text-transform: uppercase;
+        }
+        
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.4);
+        }
+        
+        .btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .progress {
+            width: 100%;
+            height: 40px;
+            background: #e9ecef;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%);
+            width: 0%;
+            transition: width 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        .log {
+            background: #2c3e50;
+            color: #2ecc71;
+            padding: 25px;
+            border-radius: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .log-entry {
+            margin-bottom: 8px;
+        }
+        
+        .success { color: #2ecc71; font-weight: bold; }
+        .error { color: #e74c3c; font-weight: bold; }
+        .info { color: #3498db; }
+        .warning { color: #f39c12; font-weight: bold; }
+        
+        .links {
+            margin-top: 30px;
+            padding: 25px;
+            background: #d4edda;
+            border-radius: 10px;
+            display: none;
+            border: 2px solid #28a745;
+        }
+        
+        .links h3 {
+            color: #155724;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .links a {
+            display: block;
+            color: #155724;
+            text-decoration: none;
+            margin-bottom: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .links a:hover {
+            background: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚨 UPLOAD GARANTIDO - FLEXCREDI</h1>
+        <p class="subtitle">Método com verificação automática</p>
+        
+        <div class="alert">
+            <h3>❌ PROBLEMA DETECTADO:</h3>
+            <p><strong>O arquivo index.html NÃO EXISTE no GitHub!</strong></p>
+            <p>Esta ferramenta vai criar o arquivo corretamente e verificar se funcionou.</p>
+        </div>
+        
+        <div class="file-selector" id="fileSelector" onclick="document.getElementById('fileInput').click()">
+            <h3>📁 CLIQUE AQUI PARA SELECIONAR</h3>
+            <p style="font-size: 18px; color: #e74c3c; font-weight: bold;">index-para-upload.html</p>
+            <p style="color: #7f8c8d; margin-top: 10px;">Tamanho esperado: ~94 KB</p>
+        </div>
+        
+        <input type="file" id="fileInput" accept=".html">
+        
+        <div class="file-info" id="fileInfo">
+            <h4>✅ ARQUIVO SELECIONADO</h4>
+            <p id="fileName"></p>
+            <p id="fileSize"></p>
+            <p id="fileSizeCheck"></p>
+        </div>
+        
+        <button class="btn" id="uploadBtn" onclick="startUpload()" disabled>
+            ⚠️ SELECIONE O ARQUIVO PRIMEIRO
+        </button>
+        
+        <div class="progress" id="progressContainer">
+            <div class="progress-bar" id="progress">0%</div>
+        </div>
+        
+        <div class="log" id="log"></div>
+        
+        <div class="links" id="links">
+            <h3>🎉 DEPLOY CONCLUÍDO COM SUCESSO!</h3>
+            <a href="https://github.com/chazmarques-blip/FLEXCREDI-COMPLETO/blob/main/index.html" target="_blank">📦 Ver index.html no GitHub →</a>
+            <a href="https://vercel.com/charles-marques-projects/flexcredi" target="_blank">🚀 Painel Vercel (aguarde build) →</a>
+            <a href="https://flexcredi.vercel.app" target="_blank">🌐 Testar Site (aguarde 5 min) →</a>
+        </div>
+    </div>
+
+    <script>
+        const TOKEN = "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";
+        const USER = "chazmarques-blip";
+        const REPO = "FLEXCREDI-COMPLETO";
+        const headers = {
+            "Authorization": `token ${TOKEN}`,
+            "Accept": "application/vnd.github.v3+json"
+        };
+
+        let fileContent = null;
+        let fileSize = 0;
+
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            fileSize = file.size;
+            const fileSizeKB = fileSize / 1024;
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                fileContent = event.target.result;
+                
+                document.getElementById('fileSelector').classList.add('active');
+                document.getElementById('fileInfo').style.display = 'block';
+                document.getElementById('fileName').textContent = `📄 Nome: ${file.name}`;
+                document.getElementById('fileSize').textContent = `📊 Tamanho: ${fileSizeKB.toFixed(1)} KB`;
+                
+                // Verifica tamanho
+                if (fileSizeKB < 80) {
+                    document.getElementById('fileSizeCheck').textContent = `⚠️ ATENÇÃO: Arquivo muito pequeno! Esperado: ~94 KB`;
+                    document.getElementById('fileSizeCheck').style.color = '#e74c3c';
+                } else if (fileSizeKB > 100) {
+                    document.getElementById('fileSizeCheck').textContent = `⚠️ ATENÇÃO: Arquivo muito grande! Esperado: ~94 KB`;
+                    document.getElementById('fileSizeCheck').style.color = '#e74c3c';
+                } else {
+                    document.getElementById('fileSizeCheck').textContent = `✅ Tamanho correto!`;
+                    document.getElementById('fileSizeCheck').style.color = '#28a745';
+                }
+                
+                const btn = document.getElementById('uploadBtn');
+                btn.disabled = false;
+                btn.textContent = '🚀 FAZER UPLOAD AGORA';
+            };
+            reader.readAsText(file);
+        });
+
+        function log(message, type = 'info') {
+            const logEl = document.getElementById('log');
+            logEl.style.display = 'block';
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            const time = new Date().toLocaleTimeString();
+            entry.textContent = `[${time}] ${message}`;
+            logEl.appendChild(entry);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function updateProgress(percent, text) {
+            document.getElementById('progressContainer').style.display = 'block';
+            const progressBar = document.getElementById('progress');
+            progressBar.style.width = percent + '%';
+            progressBar.textContent = text || (percent + '%');
+        }
+
+        async function uploadFile(content) {
+            log('📤 Iniciando upload do index.html...', 'info');
+            
+            updateProgress(10, '10% - Preparando...');
+            
+            // Não precisa de SHA porque o arquivo não existe (404)
+            const contentB64 = btoa(unescape(encodeURIComponent(content)));
+            
+            updateProgress(30, '30% - Codificando...');
+            
+            const data = {
+                message: `fix: Criar index.html completo com carousel de 6 slides`,
+                content: contentB64,
+                branch: "main"
+            };
+            
+            log(`📊 Tamanho do conteúdo: ${(content.length / 1024).toFixed(1)} KB`, 'info');
+            log(`📦 Tamanho codificado: ${(contentB64.length / 1024).toFixed(1)} KB`, 'info');
+            
+            try {
+                updateProgress(50, '50% - Enviando...');
+                
+                log('🌐 Conectando ao GitHub...', 'info');
+                
+                const response = await fetch(
+                    `https://api.github.com/repos/${USER}/${REPO}/contents/index.html`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            ...headers,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    }
+                );
+                
+                updateProgress(75, '75% - Processando...');
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    updateProgress(100, '100% - Concluído!');
+                    
+                    log('', 'info');
+                    log('✅ INDEX.HTML CRIADO COM SUCESSO!', 'success');
+                    log(`📦 Commit SHA: ${result.commit.sha.substring(0, 7)}`, 'success');
+                    log(`🔗 URL: ${result.content.html_url}`, 'success');
+                    log('', 'info');
+                    
+                    // Verifica se realmente foi criado
+                    await verifyUpload();
+                    
+                    return true;
+                } else {
+                    const error = await response.text();
+                    log('', 'info');
+                    log(`❌ ERRO ${response.status}`, 'error');
+                    log(`Detalhes: ${error}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                log('', 'info');
+                log(`❌ ERRO: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        async function verifyUpload() {
+            log('', 'info');
+            log('🔍 Verificando se o upload funcionou...', 'warning');
+            
+            try {
+                const response = await fetch(
+                    `https://api.github.com/repos/${USER}/${REPO}/contents/index.html`,
+                    { headers }
+                );
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const sizeKB = (data.size / 1024).toFixed(1);
+                    
+                    log(`✅ Arquivo confirmado no GitHub!`, 'success');
+                    log(`📊 Tamanho: ${sizeKB} KB`, 'success');
+                    log('', 'info');
+                    log('🎉 TUDO CERTO! Próximos passos:', 'success');
+                    log('   1. Vercel detectará em ~30 segundos', 'info');
+                    log('   2. Build levará ~3-5 minutos', 'info');
+                    log('   3. Teste: https://flexcredi.vercel.app', 'info');
+                    log('', 'info');
+                    log('✅ Verifique se o carousel tem 6 slides!', 'success');
+                    
+                    return true;
+                } else {
+                    log(`❌ Arquivo NÃO foi criado! Status: ${response.status}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                log(`❌ Erro na verificação: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        async function startUpload() {
+            if (!fileContent) {
+                alert('Por favor, selecione o arquivo primeiro!');
+                return;
+            }
+            
+            const btn = document.getElementById('uploadBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ UPLOAD EM PROGRESSO...';
+            
+            log('🚀 INICIANDO DEPLOY DO FLEXCREDI', 'success');
+            log('', 'info');
+            
+            const success = await uploadFile(fileContent);
+            
+            if (success) {
+                btn.textContent = '✅ DEPLOY CONCLUÍDO!';
+                btn.style.background = 'linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)';
+                document.getElementById('links').style.display = 'block';
+            } else {
+                btn.disabled = false;
+                btn.textContent = '🔄 TENTAR NOVAMENTE';
+            }
+        }
+    </script>
+</body>
+</html>

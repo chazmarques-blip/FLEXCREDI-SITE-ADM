@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FLEXCREDI - Dashboard do Cliente. Gerencie sua aplicação de crédito, veja status e histórico.">
+    <meta name="keywords" content="dashboard, área do cliente, FLEXCREDI, gestão de crédito">
+    <title>Meu Dashboard - FLEXCREDI | Easy, Simple, Fast</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/flexcredi-logo-official.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout-adjustments.css">
+    <link rel="stylesheet" href="css/perfect-alignment.css">
+    <link rel="stylesheet" href="css/signer-layout-unification.css">
+    <link rel="stylesheet" href="css/compact-layout.css">
+    <link rel="stylesheet" href="css/client-functions.css">
+    <link rel="stylesheet" href="css/contract-styling.css">
+    <link rel="stylesheet" href="css/contract-modal-fixed.css">
+    <link rel="stylesheet" href="css/compact-horizontal-progress.css">
+    <link rel="stylesheet" href="css/signer-horizontal-fix.css">
+    <link rel="stylesheet" href="css/signer-horizontal-force.css">
+    <link rel="stylesheet" href="css/signer-cobuyer-match.css">
+    <link rel="stylesheet" href="css/signer-exact-match.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- PDF.js para renderizar PDFs como imagem -->
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+    
+    <!-- Contract System - Simple Version -->
+    <script src="js/simple-contract-display.js"></script>
+    <!-- Compact Horizontal Progress System -->
+    <script src="js/compact-horizontal-progress.js"></script>
+    <script src="js/compact-progress-controls.js"></script>
+    <script src="js/compact-progress-alignment-fix.js"></script>
+    <!-- Signer Horizontal Layout Enforcer -->
+    <script src="js/signer-horizontal-enforcer.js"></script>
+</head>
+<body class="dashboard-page">
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+    
+    <!-- Header Dashboard -->
+    <header class="dashboard-header" role="banner">
+        <nav class="navbar container" role="navigation">
+            <!-- Logo -->
+            <a href="index.html" class="navbar-brand">
+                <img src="images/flexcredi-logo-official.png" alt="FLEXCREDI - Easy, Simple, Fast" class="logo-img">
+            </a>
+            
+            <!-- User Menu -->
+            <div class="user-menu">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Cliente&background=2ECC71&color=fff" alt="Avatar" class="user-avatar" id="userAvatar">
+                    <span class="user-name" id="userName" data-translate="Welcome">Bem-vindo</span>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" type="button" id="userDropdown">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#profile" class="dropdown-item" data-translate="My Profile">Meu Perfil</a>
+                        <a href="#settings" class="dropdown-item" data-translate="Settings">Configurações</a>
+                        <a href="#help" class="dropdown-item" data-translate="Help">Ajuda</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-btn" data-translate="Logout">Sair</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="dashboard-main">
+        <div class="container">
+            
+            <!-- Status Header -->
+            <section class="status-header">
+                <div class="status-card">
+                    <div class="status-info">
+                        <div class="user-header">
+                            <h1 class="user-greeting" id="userGreeting">Bem-vindo, Carlos Eduardo Silva!</h1>
+                            
+                            <!-- Detalhes do Financiamento inline na mesma linha -->
+                            <div class="financing-details" id="financingDetails">
+                                <div class="financing-item">
+                                    <span class="financing-label">VALOR:</span>
+                                    <span class="financing-value" id="financingAmount">$25,000</span>
+                                </div>
+                                <div class="financing-item">
+                                    <span class="financing-label">TAXA:</span>
+                                    <span class="financing-value" id="financingRate">18.5% a.a.</span>
+                                </div>
+                                <div class="financing-item">
+                                    <span class="financing-label">PRAZO:</span>
+                                    <span class="financing-value" id="financingTerm">24 meses</span>
+                                </div>
+                                <div class="financing-item">
+                                    <span class="financing-label">PARCELA:</span>
+                                    <span class="financing-value" id="financingPayment">$1,287/mês</span>
+                                </div>
+                            </div>
+                            
+                            <div class="user-score">
+                                <span class="score-value" id="creditScore">785</span>
+                                <span class="score-label">SCORE</span>
+                            </div>
+                        </div>
+                        
+                        <div class="application-status" id="applicationStatus">
+                            <span class="status-badge status-pre-approved">PRÉ-APROVADO</span>
+                            <span class="status-description">Sua pré-aprovação está em fase de análise, submeta a documentação necessária para finalizar o processo.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Dashboard Sections -->
+            <div class="dashboard-sections">
+
+                <!-- Main Signer Section -->
+                <section class="dashboard-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-user-tie"></i> Signatário Principal</h2>
+                        <span class="completion-indicator" id="mainSignerStatus">Pendente</span>
+                    </div>
+                    
+                    <div class="cobuyer-card main-signer-card" id="mainSignerCard">
+                        <div class="cobuyer-header">
+                            <div class="cobuyer-title">
+                                <i class="fas fa-user-tie"></i>
+                                <span id="signerFullName">Carregando...</span>
+                            </div>
+                            <div class="cobuyer-status status-incomplete" id="signerOverallStatus">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>Informações Pendentes</span>
+                            </div>
+                            <div class="cobuyer-actions">
+                                <button class="btn-edit" id="editSignerBtn" onclick="toggleSignerEdit()">
+                                    <i class="fas fa-edit"></i> Editar
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="cobuyer-content">
+                            <div class="cobuyer-info-section">
+                                <div class="cobuyer-section-title">INFORMAÇÕES PESSOAIS</div>
+                                <div class="cobuyer-profile-wrapper" id="signerProfile">
+                                    <div class="cobuyer-profile-grid">
+                                        <!-- Profile info will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="cobuyer-info-section">
+                                <div class="cobuyer-section-title">DOCUMENTOS</div>
+                                <div class="cobuyer-documents-grid" id="signerDocuments">
+                                    <!-- Documents will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contract Section integrated into signer card -->
+                        <div class="signer-contract-section">
+                            <div class="cobuyer-section-title contract-title">
+                                <i class="fas fa-file-contract"></i> CONTRATO DE CRÉDITO
+                                <span class="contract-status" id="contractStatus">Pronto para Assinatura</span>
+                            </div>
+                            <div class="contract-content-inline">
+                                <div class="contract-header-inline">
+                                    <h4>Contrato de Empréstimo #FL2024001</h4>
+                                </div>
+                                <div class="contract-inline-layout">
+                                    <div class="contract-values-inline">
+                                        <div class="value-item">
+                                            <span class="label">VALOR:</span>
+                                            <span class="value">$25,000</span>
+                                        </div>
+                                        <div class="value-item">
+                                            <span class="label">TAXA:</span>
+                                            <span class="value">18.5% a.a.</span>
+                                        </div>
+                                        <div class="value-item">
+                                            <span class="label">PRAZO:</span>
+                                            <span class="value">24 meses</span>
+                                        </div>
+                                        <div class="value-item">
+                                            <span class="label">PARCELA:</span>
+                                            <span class="value">$1,287/mês</span>
+                                        </div>
+                                    </div>
+                                    <div class="contract-buttons-inline">
+                                        <button class="btn btn-outline contract-btn-review-inline" id="reviewContractBtn">
+                                            <i class="fas fa-eye"></i> Revisar Contrato
+                                        </button>
+                                        <button class="btn btn-primary contract-btn-sign-inline" id="signContractBtn" disabled>
+                                            <i class="fas fa-signature"></i> Assinar Eletronicamente
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Co-buyers Section -->
+                <section class="dashboard-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-users"></i> Co-signatários</h2>
+                        <button class="btn-add" id="addCobuyerBtn">
+                            <i class="fas fa-plus"></i> Adicionar
+                        </button>
+                    </div>
+                    <div class="cobuyers-list" id="cobuyersList">
+                        <div class="empty-state" id="emptyState">
+                            <i class="fas fa-users"></i>
+                            <p>Nenhum co-signatário adicionado</p>
+                            <small>Co-signatários podem melhorar sua aprovação</small>
+                        </div>
+                    </div>
+                </section>
+
+
+
+            </div>
+
+            <!-- Client Functions Menu - Horizontal Layout -->
+            <section class="client-functions-horizontal">
+                <div class="functions-horizontal-grid">
+                    <div class="function-card-horizontal" id="makePaymentsCard">
+                        <div class="function-icon-horizontal">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="function-content-horizontal">
+                            <h4>Make Payments</h4>
+                            <small>Pay your monthly installments securely online</small>
+                        </div>
+                    </div>
+
+                    <div class="function-card-horizontal" id="viewStatementsCard">
+                        <div class="function-icon-horizontal">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="function-content-horizontal">
+                            <h4>View Statements</h4>
+                            <small>Download and view your monthly statements</small>
+                        </div>
+                    </div>
+
+                    <div class="function-card-horizontal" id="trackProgressCard">
+                        <div class="function-icon-horizontal">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="function-content-horizontal">
+                            <h4>Track Progress</h4>
+                            <small>View your payment history and credit progress</small>
+                        </div>
+                    </div>
+
+                    <div class="function-card-horizontal" id="accountSettingsCard">
+                        <div class="function-icon-horizontal">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div class="function-content-horizontal">
+                            <h4>Account Settings</h4>
+                            <small>Update your contact information and preferences</small>
+                        </div>
+                    </div>
+
+                    <div class="function-card-horizontal" id="getSupportCard">
+                        <div class="function-icon-horizontal">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="function-content-horizontal">
+                            <h4>Get Support</h4>
+                            <small>Access help center and contact support directly</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer Simplified -->
+    <footer class="footer-simple">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 FLEXCREDI. <span data-translate="All rights reserved">Todos os direitos reservados</span>.</p>
+                <div class="footer-links">
+                    <a href="politica-privacidade.html" data-translate="Privacy Policy">Política de Privacidade</a>
+                    <a href="termos-uso.html" data-translate="Terms of Use">Termos de Uso</a>
+                    <a href="contato.html" data-translate="Contact">Contato</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

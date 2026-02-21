@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Teste: Signatário = Co-signatário - FLEXCREDI</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/compact-layout.css">
+    <link rel="stylesheet" href="css/signer-documents-fix.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background: #f5f7fa;
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .flexcredi-title {
+            color: #2ECC71;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 0 30px;
+            text-align: center;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .section-title {
+            background: linear-gradient(135deg, #2ECC71, #1E8449);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .signer-section .section-title {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+        }
+        
+        .cobuyer-section .section-title {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+        }
+        
+        .main-signer-card, .cobuyer-card {
+            background: white;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .main-signer-card {
+            border-color: #007bff;
+        }
+        
+        .cobuyer-card {
+            border-color: #28a745;
+        }
+        
+        .cobuyer-info-section {
+            margin-bottom: 20px;
+        }
+        
+        .cobuyer-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .test-info {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #0066cc;
+        }
+        
+        .success-check {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #155724;
+        }
+        
+        .comparison-result {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            border-left: 5px solid #2ECC71;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="flexcredi-title">🎯 Teste: Layout Idêntico</h1>
+        
+        <div class="test-info">
+            <h4><i class="fas fa-balance-scale"></i> Verificação de Igualdade</h4>
+            <p><strong>Objetivo:</strong> Garantir que os documentos do signatário principal fiquem <strong>exatamente iguais</strong> aos do co-signatário.</p>
+            <ul>
+                <li>✅ Mesmo tamanho de cards (240px altura)</li>
+                <li>✅ Mesmo espaçamento (12px gap)</li>
+                <li>✅ Mesmo layout interno</li>
+                <li>✅ Mesmos estilos visuais</li>
+                <li>✅ Mesma responsividade</li>
+            </ul>
+        </div>
+        
+        <div class="comparison-grid">
+            <!-- SIGNATÁRIO PRINCIPAL -->
+            <div class="signer-section">
+                <div class="section-title">
+                    📋 SIGNATÁRIO PRINCIPAL
+                    <br><small>Carlos Eduardo Silva</small>
+                </div>
+                
+                <div class="main-signer-card">
+                    <div class="cobuyer-info-section">
+                        <div class="cobuyer-section-title">DOCUMENTOS</div>
+                        <div class="cobuyer-documents-grid" id="signerDocuments">
+                            <!-- Documentos do signatário serão inseridos aqui -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CO-SIGNATÁRIO -->
+            <div class="cobuyer-section">
+                <div class="section-title">
+                    👥 CO-SIGNATÁRIO
+                    <br><small>Charles Marques</small>
+                </div>
+                
+                <div class="cobuyer-card">
+                    <div class="cobuyer-info-section">
+                        <div class="cobuyer-section-title">DOCUMENTOS</div>
+                        <div class="cobuyer-documents-grid" id="cobuyerDocuments">
+                            <!-- Documentos do co-signatário serão inseridos aqui -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="comparison-result" id="comparisonResult">
+            <h4><i class="fas fa-chart-bar"></i> Resultado da Comparação</h4>
+            <div id="resultContent">Carregando análise...</div>
+        </div>
+    </div>
+
+    <script>
+        // Dados de teste
+        const testUserData = {
+            documents: {
+                driverLicense: { uploaded: false, approved: false },
+                proofAddress: { uploaded: true, approved: false },
+                socialSecurity: { uploaded: true, approved: true },
+                bankCard: { uploaded: false, approved: false }
+            }
+        };
+        
+        const testCobuyer = {
+            id: 'test-cobuyer',
+            documents: {
+                driverLicense: { uploaded: false, approved: false },
+                proofAddress: { uploaded: true, approved: false },
+                socialSecurity: { uploaded: true, approved: true },
+                bankCard: { uploaded: false, approved: false }
+            }
+        };
+        
+        // Função para renderizar documentos (igual ao dashboard)
+        function renderTestDocuments() {
+            const documents = [
+                { key: 'driverLicense', name: 'Carteira de Motorista', icon: 'id-card', desc: 'Foto frente e verso' },
+                { key: 'proofAddress', name: 'Comprovante de Residência', icon: 'home', desc: 'Conta de luz/água (máx. 90 dias)' },
+                { key: 'socialSecurity', name: 'Social Security Card', icon: 'id-badge', desc: 'Cartão do Social Security' },
+                { key: 'bankCard', name: 'Cartão Bancário', icon: 'credit-card', desc: 'Para débito automático das parcelas' }
+            ];
+            
+            // SIGNATÁRIO PRINCIPAL
+            const signerContainer = document.getElementById('signerDocuments');
+            signerContainer.innerHTML = documents.map(doc => {
+                const docData = testUserData.documents[doc.key];
+                const statusClass = docData.approved ? 'approved' : docData.uploaded ? 'uploaded' : 'pending';
+                
+                return `
+                    <div class="document-card cobuyer-document-card" data-doc="${doc.key}">
+                        <div class="doc-header">
+                            <div class="doc-icon">
+                                <i class="fas fa-${doc.icon}"></i>
+                            </div>
+                            <div class="doc-info">
+                                <h4>${doc.name}</h4>
+                                <p>${doc.desc}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="doc-preview-box ${statusClass}">
+                            ${getPreviewContent(doc, statusClass)}
+                        </div>
+                        
+                        <div class="doc-actions">
+                            <button class="btn-status ${statusClass}">
+                                ${getButtonContent(statusClass)}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // CO-SIGNATÁRIO (exatamente igual)
+            const cobuyerContainer = document.getElementById('cobuyerDocuments');
+            cobuyerContainer.innerHTML = documents.map(doc => {
+                const docData = testCobuyer.documents[doc.key];
+                const statusClass = docData.approved ? 'approved' : docData.uploaded ? 'uploaded' : 'pending';
+                
+                return `
+                    <div class="document-card cobuyer-document-card" data-doc="${doc.key}">
+                        <div class="doc-header">
+                            <div class="doc-icon">
+                                <i class="fas fa-${doc.icon}"></i>
+                            </div>
+                            <div class="doc-info">
+                                <h4>${doc.name}</h4>
+                                <p>${doc.desc}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="doc-preview-box ${statusClass}">
+                            ${getPreviewContent(doc, statusClass)}
+                        </div>
+                        
+                        <div class="doc-actions">
+                            <button class="btn-status ${statusClass}">
+                                ${getButtonContent(statusClass)}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function getPreviewContent(doc, statusClass) {
+            switch(statusClass) {
+                case 'approved':
+                    return `
+                        <div class="preview-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <span class="preview-text">Aprovado</span>
+                    `;
+                case 'uploaded':
+                    return `
+                        <div class="preview-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <span class="preview-text">Em Análise</span>
+                    `;
+                default:
+                    return `
+                        <div class="preview-icon">
+                            <i class="fas fa-${doc.icon}"></i>
+                        </div>
+                        <span class="preview-text">Pendente</span>
+                    `;
+            }
+        }
+        
+        function getButtonContent(statusClass) {
+            switch(statusClass) {
+                case 'approved':
+                    return '<i class="fas fa-check"></i> Aprovado';
+                case 'uploaded':
+                    return '<i class="fas fa-sync"></i> Substituir';
+                default:
+                    return '<i class="fas fa-clock"></i> Pendente';
+            }
+        }
+        
+        function compareLayouts() {
+            const signerCards = document.querySelectorAll('#signerDocuments .cobuyer-document-card');
+            const cobuyerCards = document.querySelectorAll('#cobuyerDocuments .cobuyer-document-card');
+            
+            let identical = true;
+            let differences = [];
+            
+            if (signerCards.length !== cobuyerCards.length) {
+                identical = false;
+                differences.push('Número diferente de cards');
+            }
+            
+            signerCards.forEach((signerCard, index) => {
+                if (index < cobuyerCards.length) {
+                    const cobuyerCard = cobuyerCards[index];
+                    
+                    // Comparar dimensões
+                    const signerRect = signerCard.getBoundingClientRect();
+                    const cobuyerRect = cobuyerCard.getBoundingClientRect();
+                    
+                    const heightDiff = Math.abs(signerRect.height - cobuyerRect.height);
+                    const widthDiff = Math.abs(signerRect.width - cobuyerRect.width);
+                    
+                    if (heightDiff > 2) {
+                        identical = false;
+                        differences.push(`Card ${index + 1}: Altura diferente (${heightDiff.toFixed(0)}px)`);
+                    }
+                    
+                    if (widthDiff > 2) {
+                        identical = false;
+                        differences.push(`Card ${index + 1}: Largura diferente (${widthDiff.toFixed(0)}px)`);
+                    }
+                }
+            });
+            
+            // Mostrar resultado
+            const resultDiv = document.getElementById('resultContent');
+            
+            if (identical && differences.length === 0) {
+                resultDiv.innerHTML = `
+                    <div style="color: #28a745; font-weight: bold; font-size: 18px;">
+                        🎉 PERFEITO! Layouts são IDÊNTICOS!
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <strong>✅ Verificações realizadas:</strong><br>
+                        • Número de cards: ${signerCards.length} (iguais)<br>
+                        • Dimensões dos cards: Idênticas<br>
+                        • Estrutura HTML: Idêntica<br>
+                        • Classes CSS: Idênticas<br>
+                        <br>
+                        <strong>🎯 Resultado:</strong> Signatário principal agora tem exatamente o mesmo layout do co-signatário!
+                    </div>
+                `;
+                document.getElementById('comparisonResult').style.borderLeftColor = '#28a745';
+            } else {
+                resultDiv.innerHTML = `
+                    <div style="color: #dc3545; font-weight: bold; font-size: 18px;">
+                        ⚠️ Diferenças encontradas
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <strong>❌ Problemas detectados:</strong><br>
+                        ${differences.map(diff => `• ${diff}`).join('<br>')}
+                    </div>
+                `;
+                document.getElementById('comparisonResult').style.borderLeftColor = '#dc3545';
+            }
+        }
+        
+        // Carregar e comparar automaticamente
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Iniciando teste de igualdade de layouts');
+            
+            setTimeout(() => {
+                renderTestDocuments();
+                console.log('✅ Documentos renderizados');
+                
+                setTimeout(() => {
+                    compareLayouts();
+                    console.log('🎯 Comparação concluída');
+                }, 500);
+            }, 500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+/* MATCH PERFEITO: Signatário = Co-signatários */
+/* Ajusta quadros de documentos do signatário para ficar IDÊNTICO aos co-signatários */
+
+/* FORÇA dimensões exatas dos co-signatários */
+.main-signer-card .cobuyer-documents-grid#signerDocuments {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px !important;
+    margin-top: 12px !important;
+}
+
+/* Cards QUADRADOS com dimensões EXATAS dos co-signatários */
+.main-signer-card .cobuyer-document-card,
+.main-signer-card .document-card {
+    height: 140px !important;
+    min-height: 140px !important;
+    max-height: 140px !important;
+    width: 100% !important;
+    aspect-ratio: 1 / 1 !important; /* Força formato quadrado */
+    
+    background: #fff !important;
+    border: 2px dashed #e5e7eb !important;
+    border-radius: 8px !important;
+    
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    
+    padding: 12px 8px 8px 8px !important;
+    box-sizing: border-box !important;
+    
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* Header do documento - título e descrição */
+.main-signer-card .doc-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    
+    padding: 0 !important;
+    margin: 0 0 8px 0 !important;
+    
+    width: 100% !important;
+    flex-shrink: 0 !important;
+}
+
+/* Remover ícone do header - não aparece nos co-signatários */
+.main-signer-card .doc-header .doc-icon {
+    display: none !important;
+}
+
+/* Título do documento */
+.main-signer-card .doc-header .doc-info {
+    width: 100% !important;
+    text-align: center !important;
+}
+
+.main-signer-card .doc-header .doc-info h4 {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #374151 !important;
+    margin: 0 0 2px 0 !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+.main-signer-card .doc-header .doc-info p {
+    font-size: 9px !important;
+    color: #6b7280 !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+/* Área de preview - quadrado central com ícone - AJUSTADO PARA CARD QUADRADO */
+.main-signer-card .doc-preview-box {
+    width: 60px !important;
+    height: 60px !important;
+    
+    background: #f9fafb !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 6px !important;
+    
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    
+    margin: 8px 0 !important;
+    flex-shrink: 0 !important;
+    
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.main-signer-card .doc-preview-box:hover {
+    background: #f3f4f6 !important;
+    border-color: #d1d5db !important;
+}
+
+/* Ícone do preview - AJUSTADO PARA CARD QUADRADO */
+.main-signer-card .doc-preview-box .preview-icon i {
+    font-size: 20px !important;
+    color: #f59e0b !important; /* Cor laranja igual aos co-signatários */
+    margin-bottom: 3px !important;
+}
+
+/* Texto "Pendente" do preview */
+.main-signer-card .doc-preview-box .preview-text {
+    font-size: 9px !important;
+    font-weight: 500 !important;
+    color: #f59e0b !important; /* Cor laranja igual aos co-signatários */
+    text-align: center !important;
+    margin: 0 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+}
+
+/* Botão de ação - AJUSTADO PARA CARD QUADRADO */
+.main-signer-card .doc-actions {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+}
+
+.main-signer-card .doc-actions button,
+.main-signer-card .btn-status {
+    width: 100% !important;
+    height: 26px !important; /* Menor para caber no card quadrado */
+    
+    background: #f59e0b !important; /* Laranja igual aos co-signatários */
+    border: none !important;
+    border-radius: 6px !important;
+    
+    font-size: 9px !important; /* Fonte menor para botão menor */
+    font-weight: 600 !important;
+    color: #fff !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+    
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.main-signer-card .doc-actions button:hover,
+.main-signer-card .btn-status:hover {
+    background: #d97706 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.main-signer-card .doc-actions button i,
+.main-signer-card .btn-status i {
+    font-size: 8px !important;
+    margin-right: 2px !important;
+}
+
+/* Estados dos documentos */
+.main-signer-card .doc-preview-box.uploaded {
+    background: #ecfdf5 !important;
+    border-color: #10b981 !important;
+}
+
+.main-signer-card .doc-preview-box.uploaded .preview-icon i {
+    color: #10b981 !important;
+}
+
+.main-signer-card .doc-preview-box.uploaded .preview-text {
+    color: #10b981 !important;
+}
+
+.main-signer-card .btn-status.uploaded {
+    background: #10b981 !important;
+}
+
+.main-signer-card .btn-status.uploaded:hover {
+    background: #059669 !important;
+}
+
+/* Responsividade mantendo CARDS QUADRADOS */
+@media (max-width: 1200px) {
+    .main-signer-card .cobuyer-documents-grid#signerDocuments {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-signer-card .cobuyer-documents-grid#signerDocuments {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+    
+    .main-signer-card .cobuyer-document-card {
+        height: 120px !important; /* Quadrado menor para tablet */
+        min-height: 120px !important;
+        max-height: 120px !important;
+    }
+    
+    .main-signer-card .doc-preview-box {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    
+    .main-signer-card .doc-preview-box .preview-icon i {
+        font-size: 16px !important;
+    }
+    
+    .main-signer-card .doc-actions button {
+        height: 22px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-signer-card .cobuyer-documents-grid#signerDocuments {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+    
+    .main-signer-card .cobuyer-document-card {
+        height: 110px !important; /* Quadrado ainda menor para mobile */
+        min-height: 110px !important;
+        max-height: 110px !important;
+    }
+    
+    .main-signer-card .doc-header .doc-info h4 {
+        font-size: 9px !important;
+    }
+    
+    .main-signer-card .doc-header .doc-info p {
+        font-size: 7px !important;
+    }
+    
+    .main-signer-card .doc-preview-box {
+        width: 40px !important;
+        height: 40px !important;
+    }
+    
+    .main-signer-card .doc-preview-box .preview-icon i {
+        font-size: 14px !important;
+    }
+    
+    .main-signer-card .doc-actions button {
+        font-size: 8px !important;
+        height: 20px !important;
+    }
+}

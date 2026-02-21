@@ -1,0 +1,44 @@
+🚀 FLEXCREDI - FIX RÁPIDO DO VERCEL
+=====================================
+
+PROBLEMA: Site https://flexcredi.vercel.app não está carregando
+CAUSA: Deploy travado no Vercel
+
+SOLUÇÃO: 1 COMANDO APENAS
+=====================================
+
+Abra o terminal e cole:
+
+chmod +x fix-vercel-simple.sh && ./fix-vercel-simple.sh
+
+
+AGUARDE: 3-5 minutos
+
+
+VERIFIQUE:
+1. https://flexcredi.vercel.app (deve carregar)
+2. https://vercel.com/charles-marques-projects/flexcredi (status: Ready)
+
+
+PRONTO! ✅
+=====================================
+
+ALTERNATIVA (se não funcionar):
+
+python3 fix-vercel-deploy.py
+
+
+ou ainda:
+
+1. Vá em: https://github.com/chazmarques-blip/FLEXCREDI-COMPLETO
+2. Clique em vercel.json
+3. Clique no lápis (editar)
+4. Adicione um espaço em branco
+5. Commit changes
+6. Aguarde 3 minutos
+
+
+FIM
+=====================================
+
+Qualquer dúvida, veja: SOLUCAO-DEPLOY-VERCEL-COMPLETA.md

@@ -1,0 +1,25 @@
+=== COPIE E COLE ISTO NO CHAT COM GITHUB ===
+
+Olá! Preciso transferir um projeto FLEXCREDI completo para o GitHub.
+
+PROJETO: Sistema de crédito digital com frontend HTML/CSS/JS + backend Node.js Express
+STATUS: 100% funcional, pronto para deploy Railway + Vercel
+
+AÇÃO: 
+1. Criar repositório GitHub "flexcredi" (público)
+2. Usar LS para ver todos os arquivos disponíveis neste ambiente
+3. Ler arquivos principais começando por:
+   - README.md (documentação completa)
+   - NOVO-CHAT-INSTRUCOES.md (contexto)
+   - EXPORTAR-PROJETO-COMPLETO.md (lista de arquivos)
+4. Recriar TODOS os arquivos no repositório GitHub
+5. Me fornecer o link do repositório criado
+
+COMEÇAR AGORA:
+Execute: LS
+Execute: Read README.md
+Execute: Read EXPORTAR-PROJETO-COMPLETO.md
+
+Depois pergunte: "Devo continuar lendo e transferindo todos os arquivos para o GitHub?"
+
+=== FIM DA MENSAGEM ===

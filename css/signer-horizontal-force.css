@@ -1,0 +1,115 @@
+/* FORÇA TOTAL: Layout horizontal de 4 colunas para documentos do signatário principal */
+/* Este arquivo tem PRIORIDADE MÁXIMA e deve sobrescrever TODOS os outros estilos */
+
+/* RESET COMPLETO e FORÇA 4 COLUNAS HORIZONTAL */
+body .cobuyer-card.main-signer-card .cobuyer-documents-grid#signerDocuments,
+body .main-signer-card.cobuyer-card .cobuyer-documents-grid#signerDocuments,
+body .dashboard-sections .main-signer-card .cobuyer-documents-grid,
+body #signerDocuments {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-rows: auto !important;
+    gap: 15px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* FORÇA altura dos cards igual aos co-signatários */
+body .main-signer-card .cobuyer-document-card,
+body .main-signer-card .document-card {
+    height: 240px !important;
+    min-height: 240px !important;
+    max-height: 240px !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+/* ANULAR TODAS as regras compact do compact-layout.css */
+body .main-signer-card .cobuyer-document-card {
+    height: 240px !important; /* Override compact-layout que força 200px */
+}
+
+/* Preview boxes com altura adequada */
+body .main-signer-card .doc-preview-box {
+    height: 120px !important;
+    min-height: 120px !important;
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+}
+
+/* Headers dos documentos */
+body .main-signer-card .doc-header {
+    padding: 12px !important;
+    margin-bottom: 8px !important;
+    flex-shrink: 0 !important;
+}
+
+/* Ações dos documentos */
+body .main-signer-card .doc-actions {
+    padding: 8px 12px !important;
+    margin-top: auto !important;
+    flex-shrink: 0 !important;
+}
+
+/* FORÇA textos legíveis sem ellipsis no layout horizontal */
+body .main-signer-card .doc-info h4,
+body .main-signer-card .doc-info p {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+/* Responsividade para tablets */
+@media (max-width: 1200px) {
+    body .cobuyer-card.main-signer-card .cobuyer-documents-grid#signerDocuments,
+    body .main-signer-card.cobuyer-card .cobuyer-documents-grid#signerDocuments,
+    body .main-signer-card .cobuyer-documents-grid,
+    body #signerDocuments {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+}
+
+/* Responsividade para tablets pequenos */
+@media (max-width: 768px) {
+    body .cobuyer-card.main-signer-card .cobuyer-documents-grid#signerDocuments,
+    body .main-signer-card.cobuyer-card .cobuyer-documents-grid#signerDocuments,
+    body .main-signer-card .cobuyer-documents-grid,
+    body #signerDocuments {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+    
+    body .main-signer-card .cobuyer-document-card {
+        height: 200px !important;
+        min-height: 200px !important;
+        max-height: 200px !important;
+    }
+}
+
+/* Responsividade para mobile */
+@media (max-width: 600px) {
+    body .cobuyer-card.main-signer-card .cobuyer-documents-grid#signerDocuments,
+    body .main-signer-card.cobuyer-card .cobuyer-documents-grid#signerDocuments,
+    body .main-signer-card .cobuyer-documents-grid,
+    body #signerDocuments {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+    
+    body .main-signer-card .cobuyer-document-card {
+        height: 180px !important;
+        min-height: 180px !important;
+        max-height: 180px !important;
+    }
+}

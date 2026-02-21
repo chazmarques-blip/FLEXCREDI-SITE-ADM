@@ -1,0 +1,42 @@
+# Ignorar arquivos do backend (já deployado no Railway)
+server.js
+package.json
+package-lock.json
+node_modules/
+Procfile
+railway.json
+
+# Ignorar pasta backend
+backend/
+flexcredi-backend/
+
+# Ignorar arquivos de ambiente
+.env
+.env.*
+.env.production
+
+# Ignorar arquivos de documentação
+*.md
+README.md
+PLANO*.md
+GUIA*.md
+STATUS*.md
+CHECKLIST*.md
+DEPLOYMENT*.md
+ANALISE*.md
+
+# Ignorar arquivos de configuração Git
+.git/
+.gitignore
+
+# Ignorar scripts de desenvolvimento
+*.sh
+deploy-*.sh
+commit-*.sh
+
+# Ignorar arquivos de teste internos
+LEIA-*.md
+COMECE-*.txt
+EXPORTACAO-*.txt
+INDEX-*.md
+SCRIPT-*.md

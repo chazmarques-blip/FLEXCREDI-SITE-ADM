@@ -1,0 +1,41 @@
+INSTRUÇÕES PARA UPLOAD DO INDEX.HTML NO GITHUB
+
+========================================
+PASSO A PASSO SIMPLES
+========================================
+
+1. BAIXE O INDEX.HTML DO GENSPARK:
+   - Na aba "Explorador de Arquivos"
+   - Role até o topo da lista
+   - Encontre "index.html"
+   - Clique com botão direito
+   - Selecione "Download"
+
+2. ACESSE O GITHUB:
+   https://github.com/chazmarques-blip/FLEXCREDI-COMPLETO
+
+3. CLIQUE NO ARQUIVO index.html
+
+4. CLIQUE NO ÍCONE DE LÁPIS (Edit this file)
+
+5. DELETE TODO O CONTEÚDO (Cmd+A, Delete)
+
+6. ABRA O ARQUIVO BAIXADO:
+   - No Mac, abra com TextEdit ou VS Code
+   - Selecione tudo (Cmd+A)
+   - Copie (Cmd+C)
+
+7. VOLTE PARA O GITHUB:
+   - Cole o conteúdo (Cmd+V)
+
+8. COMMIT:
+   - Message: "fix: Atualizar index.html com carousel completo"
+   - Clique em "Commit changes"
+
+9. AGUARDE 5 MINUTOS
+
+10. TESTE: https://flexcredi.vercel.app
+
+========================================
+PRONTO! O VERCEL VAI FAZER DEPLOY AUTOMÁTICO
+========================================

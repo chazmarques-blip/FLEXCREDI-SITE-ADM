@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Teste Layout Compacto - FLEXCREDI</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/compact-layout.css">
+    <link rel="stylesheet" href="css/signer-documents-fix.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background: #f5f7fa;
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+        
+        .test-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .flexcredi-title {
+            color: #2ECC71;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 0 30px;
+            text-align: center;
+        }
+        
+        .main-signer-card {
+            background: white;
+            border: 2px solid #2ECC71;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .cobuyer-info-section {
+            margin-bottom: 20px;
+        }
+        
+        .cobuyer-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2ECC71;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .test-info {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #0066cc;
+        }
+        
+        .image-reference {
+            background: #f8f9fa;
+            border: 2px dashed #28a745;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .reference-title {
+            color: #28a745;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="flexcredi-title">🎯 Layout Compacto - Como na Imagem</h1>
+        
+        <div class="test-info">
+            <h4><i class="fas fa-info-circle"></i> Objetivo do Teste</h4>
+            <p><strong>Recriar exatamente o layout da imagem:</strong></p>
+            <ul>
+                <li>✅ Cards compactos em 4 colunas</li>
+                <li>✅ Header pequeno com ícone + título truncado</li>
+                <li>✅ Área central com ícone grande e "Pendente"</li>
+                <li>✅ Botão laranja na parte inferior</li>
+                <li>✅ Layout similar aos co-signatários da imagem</li>
+            </ul>
+        </div>
+        
+        <div class="image-reference">
+            <div class="reference-title">📋 Referência da Imagem dos Co-signatários</div>
+            <p>O layout abaixo deve reproduzir <strong>exatamente</strong> os cards de documentos dos co-signatários:</p>
+            <ul>
+                <li>✅ Layout vertical com título completo no topo</li>
+                <li>✅ Área de preview grande no centro com ícone</li>
+                <li>✅ Botão laranja "Pendente" na base</li>
+                <li>✅ Mesma altura e proporções</li>
+            </ul>
+        </div>
+        
+        <!-- Simulação da seção do signatário principal -->
+        <div class="main-signer-card">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #f0f2f5;">
+                <div style="width: 40px; height: 40px; background: #2ECC71; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px;">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <h3 style="margin: 0; color: #2ECC71; font-size: 18px;">Carlos Eduardo Silva</h3>
+                    <p style="margin: 2px 0 0; color: #6c757d; font-size: 14px;">Signatário Principal</p>
+                </div>
+                <div style="margin-left: auto;">
+                    <span style="background: #fff3cd; color: #856404; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500;">
+                        <i class="fas fa-exclamation-triangle"></i> Documentos Pendentes
+                    </span>
+                </div>
+            </div>
+            
+            <div class="cobuyer-info-section">
+                <div class="cobuyer-section-title">DOCUMENTOS</div>
+                <div class="cobuyer-documents-grid" id="signerDocuments">
+                    <!-- Os documentos serão inseridos aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simular dados do usuário
+        const testUserData = {
+            documents: {
+                driverLicense: { uploaded: false, approved: false },
+                proofAddress: { uploaded: false, approved: false },
+                socialSecurity: { uploaded: false, approved: false },
+                bankCard: { uploaded: false, approved: false }
+            }
+        };
+        
+        // Renderizar documentos EXATAMENTE como co-signatários
+        function renderCompactDocuments() {
+            const documentsContainer = document.getElementById('signerDocuments');
+            
+            const documents = [
+                { 
+                    key: 'driverLicense', 
+                    name: 'Carteira de Motorista', 
+                    icon: 'id-card', 
+                    desc: 'Foto frente e verso'
+                },
+                { 
+                    key: 'proofAddress', 
+                    name: 'Comprovante de Residência', 
+                    icon: 'home', 
+                    desc: 'Conta de luz/água'
+                },
+                { 
+                    key: 'socialSecurity', 
+                    name: 'Social Security Card', 
+                    icon: 'id-badge', 
+                    desc: 'Cartão do Social'
+                },
+                { 
+                    key: 'bankCard', 
+                    name: 'Cartão Bancário', 
+                    icon: 'credit-card', 
+                    desc: 'Para débito automático das parcelas'
+                }
+            ];
+            
+            documentsContainer.innerHTML = documents.map(doc => {
+                const docData = testUserData.documents[doc.key];
+                const statusClass = docData.approved ? 'approved' : docData.uploaded ? 'uploaded' : 'pending';
+                
+                return `
+                    <div class="document-card cobuyer-document-card" data-doc="${doc.key}">
+                        <div class="doc-header">
+                            <div class="doc-icon">
+                                <i class="fas fa-${doc.icon}"></i>
+                            </div>
+                            <div class="doc-info">
+                                <h4>${doc.name}</h4>
+                                <p>${doc.desc}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="doc-preview-box ${statusClass}">
+                            <div class="preview-icon">
+                                <i class="fas fa-${doc.icon}"></i>
+                            </div>
+                            <span class="preview-text">Pendente</span>
+                        </div>
+                        
+                        <div class="doc-actions">
+                            <button class="btn-status ${statusClass}">
+                                <i class="fas fa-clock"></i> Pendente
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            console.log('✅ Layout igual aos co-signatários renderizado!');
+        }
+        
+        // Função para simular diferentes estados
+        function simulateStates() {
+            const items = document.querySelectorAll('.cobuyer-document-card');
+            const states = ['pending', 'uploaded', 'approved'];
+            const stateTexts = {
+                'pending': 'Pendente',
+                'uploaded': 'Em Análise',
+                'approved': 'Aprovado'
+            };
+            const stateIcons = {
+                'pending': 'clock',
+                'uploaded': 'sync',
+                'approved': 'check'
+            };
+            
+            items.forEach((item, index) => {
+                const state = states[Math.floor(Math.random() * states.length)];
+                const preview = item.querySelector('.doc-preview-box');
+                const button = item.querySelector('.btn-status');
+                const text = item.querySelector('.preview-text');
+                const icon = button.querySelector('i');
+                
+                // Atualizar classes
+                preview.className = `doc-preview-box ${state}`;
+                button.className = `btn-status ${state}`;
+                
+                // Atualizar conteúdo
+                text.textContent = stateTexts[state];
+                icon.className = `fas fa-${stateIcons[state]}`;
+                button.innerHTML = `<i class="fas fa-${stateIcons[state]}"></i> ${stateTexts[state]}`;
+            });
+            
+            console.log('🔄 Estados simulados!');
+        }
+        
+        // Auto-carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Iniciando teste do layout compacto');
+            renderCompactDocuments();
+            
+            // Adicionar botão de teste
+            const container = document.querySelector('.test-container');
+            const testButton = document.createElement('div');
+            testButton.style.textAlign = 'center';
+            testButton.style.marginTop = '30px';
+            testButton.innerHTML = `
+                <button onclick="simulateStates()" style="
+                    background: #2ECC71; 
+                    color: white; 
+                    border: none; 
+                    padding: 10px 20px; 
+                    border-radius: 6px; 
+                    cursor: pointer; 
+                    font-size: 14px;
+                ">
+                    🔄 Simular Estados
+                </button>
+            `;
+            container.appendChild(testButton);
+        });
+    </script>
+</body>
+</html>

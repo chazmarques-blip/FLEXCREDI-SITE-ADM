@@ -1,0 +1,177 @@
+// FLEXCREDI - SCHEMA DO BANCO DE DADOS
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// USUÁRIOS ADMINISTRADORES
+model AdminUser {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  password    String
+  name        String
+  role        String   @default("admin")
+  isActive    Boolean  @default(true)
+  lastLogin   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  createdApplications Application[] @relation("CreatedBy")
+  approvedApplications Application[] @relation("ApprovedBy")
+  
+  @@map("admin_users")
+}
+
+// CLIENTES
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  phone        String?
+  name         String
+  document     String?
+  dateOfBirth  DateTime?
+  address      String?
+  city         String?
+  state        String?
+  zipCode      String?
+  nationality  String?
+  maritalStatus String?
+  occupation   String?
+  monthlyIncome Float?
+  
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  applications Application[]
+  documents    Document[]
+  
+  @@map("users")
+}
+
+// APLICAÇÕES DE CRÉDITO
+model Application {
+  id              String   @id @default(uuid())
+  userId          String
+  desiredAmount   Float
+  purpose         String
+  status          String   @default("pending")
+  creditScore     Int?
+  approvedAmount  Float?
+  interestRate    Float?
+  termMonths      Int?
+  monthlyPayment  Float?
+  
+  riskLevel       String?
+  riskScore       Float?
+  approvalNotes   String?
+  denialReason    String?
+  
+  createdById     String?
+  approvedById    String?
+  approvedAt      DateTime?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  user            User      @relation(fields: [userId], references: [id])
+  createdBy       AdminUser? @relation("CreatedBy", fields: [createdById], references: [id])
+  approvedBy      AdminUser? @relation("ApprovedBy", fields: [approvedById], references: [id])
+  documents       Document[]
+  contract        Contract?
+  
+  @@map("applications")
+}
+
+// DOCUMENTOS
+model Document {
+  id             String   @id @default(uuid())
+  userId         String
+  applicationId  String?
+  type           String
+  originalName   String
+  cloudinaryId   String
+  cloudinaryUrl  String
+  fileSize       Int
+  mimeType       String
+  
+  status         String   @default("pending")
+  reviewNotes    String?
+  reviewedAt     DateTime?
+  
+  extractedData  Json?
+  confidence     Float?
+  
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  
+  user           User         @relation(fields: [userId], references: [id])
+  application    Application? @relation(fields: [applicationId], references: [id])
+  
+  @@map("documents")
+}
+
+// CONTRATOS
+model Contract {
+  id             String   @id @default(uuid())
+  applicationId  String   @unique
+  contractNumber String   @unique
+  
+  principalAmount Float
+  interestRate    Float
+  termMonths      Int
+  monthlyPayment  Float
+  totalAmount     Float
+  
+  status          String   @default("generated")
+  generatedAt     DateTime @default(now())
+  signedAt        DateTime?
+  activatedAt     DateTime?
+  
+  signerIp        String?
+  signatureHash   String?
+  documentHash    String?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  application     Application @relation(fields: [applicationId], references: [id])
+  
+  @@map("contracts")
+}
+
+// CONFIGURAÇÕES DO SISTEMA
+model SystemSetting {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  value       String
+  type        String
+  description String?
+  category    String   @default("general")
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("system_settings")
+}
+
+// LOGS DE AUDITORIA
+model AuditLog {
+  id          String   @id @default(uuid())
+  userId      String?
+  action      String
+  entity      String?
+  entityId    String?
+  oldValues   Json?
+  newValues   Json?
+  ipAddress   String?
+  userAgent   String?
+  
+  createdAt   DateTime @default(now())
+  
+  @@map("audit_logs")
+}

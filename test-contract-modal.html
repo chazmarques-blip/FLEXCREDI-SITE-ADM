@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Modal Contrato - FLEXCREDI</title>
+    <link rel="stylesheet" href="css/contract-modal-fixed.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .test-btn {
+            background: #2ECC71;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .test-btn:hover {
+            background: #1E8449;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Teste do Modal de Contrato FLEXCREDI</h1>
+        <p>Clique no botão abaixo para testar se o modal do contrato está funcionando:</p>
+        
+        <button id="reviewContractBtn" class="test-btn">
+            <i class="fas fa-eye"></i> Revisar Contrato
+        </button>
+        
+        <div id="status" style="margin-top: 20px; font-weight: bold;"></div>
+    </div>
+
+    <script src="js/contract-system-fixed.js"></script>
+    
+    <script>
+        // Adicionar feedback visual
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusDiv = document.getElementById('status');
+            
+            setTimeout(() => {
+                const btn = document.getElementById('reviewContractBtn');
+                if (btn && btn.onclick) {
+                    statusDiv.innerHTML = '<span style="color: green;">✅ Sistema carregado! Clique no botão para testar.</span>';
+                } else {
+                    statusDiv.innerHTML = '<span style="color: red;">❌ Erro ao carregar sistema.</span>';
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste: Signatário = Co-signatários - FLEXCREDI</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout-adjustments.css">
+    <link rel="stylesheet" href="css/perfect-alignment.css">
+    <link rel="stylesheet" href="css/signer-layout-unification.css">
+    <link rel="stylesheet" href="css/compact-layout.css">
+    <link rel="stylesheet" href="css/client-functions.css">
+    <link rel="stylesheet" href="css/contract-styling.css">
+    <link rel="stylesheet" href="css/contract-modal-fixed.css">
+    <link rel="stylesheet" href="css/compact-horizontal-progress.css">
+    <link rel="stylesheet" href="css/signer-horizontal-fix.css">
+    <link rel="stylesheet" href="css/signer-horizontal-force.css">
+    <link rel="stylesheet" href="css/signer-cobuyer-match.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+        }
+        
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .comparison-title {
+            text-align: center;
+            color: var(--verde-escuro);
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        
+        .section {
+            background: white;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            background: var(--verde-vibrante);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .section-content {
+            padding: 20px;
+        }
+        
+        .result-indicator {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .highlight-box {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="comparison-container">
+        <h1 class="comparison-title">
+            <i class="fas fa-balance-scale"></i> 
+            Teste: Signatário = Co-signatários
+            <span class="result-indicator success">
+                <i class="fas fa-check-circle"></i> MATCH PERFEITO
+            </span>
+        </h1>
+        
+        <div class="highlight-box">
+            <strong><i class="fas fa-info-circle"></i> Objetivo:</strong>
+            Os quadros de documentos do <strong>Signatário Principal</strong> devem ter exatamente as mesmas dimensões, alinhamentos e estilos dos <strong>Co-signatários</strong> mostrados na imagem de referência.
+        </div>
+        
+        <!-- SIGNATÁRIO PRINCIPAL -->
+        <div class="section">
+            <div class="section-header">
+                <i class="fas fa-user-tie"></i> Signatário Principal - Layout Ajustado
+                <span class="result-indicator success">4 Colunas Horizontais</span>
+            </div>
+            <div class="section-content">
+                <div class="cobuyer-card main-signer-card">
+                    <div class="cobuyer-header">
+                        <div class="cobuyer-title">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Carlos Eduardo Silva</span>
+                        </div>
+                        <div class="cobuyer-status status-incomplete">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Informações Pendentes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="cobuyer-content">
+                        <div class="cobuyer-info-section">
+                            <div class="cobuyer-section-title">DOCUMENTOS</div>
+                            <div class="cobuyer-documents-grid" id="signerDocuments">
+                                <!-- Carteira de Motorista -->
+                                <div class="document-card cobuyer-document-card">
+                                    <div class="doc-header">
+                                        <div class="doc-icon">
+                                            <i class="fas fa-id-card"></i>
+                                        </div>
+                                        <div class="doc-info">
+                                            <h4>Carteira de Motorista</h4>
+                                            <p>Foto frente e verso</p>
+                                        </div>
+                                    </div>
+                                    <div class="doc-preview-box pending" onclick="alert('Upload de documento')">
+                                        <div class="preview-icon">
+                                            <i class="fas fa-id-card"></i>
+                                        </div>
+                                        <span class="preview-text">Pendente</span>
+                                    </div>
+                                    <div class="doc-actions">
+                                        <button class="btn-status pending">
+                                            <i class="fas fa-clock"></i> Pendente
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Comprovante de Residência -->
+                                <div class="document-card cobuyer-document-card">
+                                    <div class="doc-header">
+                                        <div class="doc-icon">
+                                            <i class="fas fa-home"></i>
+                                        </div>
+                                        <div class="doc-info">
+                                            <h4>Comprovante de Residência</h4>
+                                            <p>Conta de luz/água (máx. 90 dias)</p>
+                                        </div>
+                                    </div>
+                                    <div class="doc-preview-box pending" onclick="alert('Upload de documento')">
+                                        <div class="preview-icon">
+                                            <i class="fas fa-home"></i>
+                                        </div>
+                                        <span class="preview-text">Pendente</span>
+                                    </div>
+                                    <div class="doc-actions">
+                                        <button class="btn-status pending">
+                                            <i class="fas fa-clock"></i> Pendente
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Social Security Card -->
+                                <div class="document-card cobuyer-document-card">
+                                    <div class="doc-header">
+                                        <div class="doc-icon">
+                                            <i class="fas fa-id-badge"></i>
+                                        </div>
+                                        <div class="doc-info">
+                                            <h4>Social Security Card</h4>
+                                            <p>Cartão do Social Security</p>
+                                        </div>
+                                    </div>
+                                    <div class="doc-preview-box pending" onclick="alert('Upload de documento')">
+                                        <div class="preview-icon">
+                                            <i class="fas fa-id-badge"></i>
+                                        </div>
+                                        <span class="preview-text">Pendente</span>
+                                    </div>
+                                    <div class="doc-actions">
+                                        <button class="btn-status pending">
+                                            <i class="fas fa-clock"></i> Pendente
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Cartão Bancário -->
+                                <div class="document-card cobuyer-document-card">
+                                    <div class="doc-header">
+                                        <div class="doc-icon">
+                                            <i class="fas fa-credit-card"></i>
+                                        </div>
+                                        <div class="doc-info">
+                                            <h4>Cartão Bancário</h4>
+                                            <p>Para débito automático das parcelas</p>
+                                        </div>
+                                    </div>
+                                    <div class="doc-preview-box pending" onclick="alert('Upload de documento')">
+                                        <div class="preview-icon">
+                                            <i class="fas fa-credit-card"></i>
+                                        </div>
+                                        <span class="preview-text">Pendente</span>
+                                    </div>
+                                    <div class="doc-actions">
+                                        <button class="btn-status pending">
+                                            <i class="fas fa-clock"></i> Pendente
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ESPECIFICAÇÕES TÉCNICAS -->
+        <div class="section">
+            <div class="section-header">
+                <i class="fas fa-cogs"></i> Especificações Técnicas Aplicadas
+            </div>
+            <div class="section-content">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    <div>
+                        <h4><i class="fas fa-ruler"></i> Dimensões dos Cards</h4>
+                        <ul>
+                            <li><strong>Forma:</strong> QUADRADOS 140x140px</li>
+                            <li><strong>Layout:</strong> 4 colunas horizontais</li>
+                            <li><strong>Gap:</strong> 16px entre cards</li>
+                            <li><strong>Border:</strong> 2px dashed #e5e7eb</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4><i class="fas fa-image"></i> Área de Preview</h4>
+                        <ul>
+                            <li><strong>Tamanho:</strong> 60x60px (quadrado)</li>
+                            <li><strong>Background:</strong> #f9fafb</li>
+                            <li><strong>Ícone:</strong> 20px laranja (#f59e0b)</li>
+                            <li><strong>Texto:</strong> "Pendente" uppercase</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4><i class="fas fa-mouse-pointer"></i> Botões de Ação</h4>
+                        <ul>
+                            <li><strong>Largura:</strong> 100% do card</li>
+                            <li><strong>Altura:</strong> 26px (ajustado)</li>
+                            <li><strong>Cor:</strong> Laranja (#f59e0b)</li>
+                            <li><strong>Fonte:</strong> 9px, uppercase, bold</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4><i class="fas fa-mobile-alt"></i> Responsividade</h4>
+                        <ul>
+                            <li><strong>Desktop:</strong> 4 colunas (140px)</li>
+                            <li><strong>Tablet:</strong> 2 colunas (120px)</li>
+                            <li><strong>Mobile:</strong> 2 colunas (110px)</li>
+                            <li><strong>Formato:</strong> Sempre QUADRADOS</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="js/signer-horizontal-enforcer.js"></script>
+    <script>
+        // Aplicar os estilos imediatamente
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🧪 Página de teste carregada - aplicando estilos...');
+            enforceSignerHorizontalLayout();
+        });
+    </script>
+</body>
+</html>

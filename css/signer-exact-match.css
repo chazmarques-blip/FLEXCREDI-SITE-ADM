@@ -1,0 +1,297 @@
+/* MATCH EXATO: Replicação precisa das dimensões da foto dos co-signatários */
+/* Baseado na análise visual da imagem fornecida */
+
+/* Container principal - 4 colunas exatas */
+.main-signer-card .cobuyer-documents-grid#signerDocuments {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 12px !important;
+    margin-top: 16px !important;
+    width: 100% !important;
+}
+
+/* CARDS - Dimensões exatas da foto */
+.main-signer-card .cobuyer-document-card,
+.main-signer-card .document-card {
+    /* Dimensões baseadas na análise da foto */
+    width: 100% !important;
+    height: 160px !important;
+    min-height: 160px !important;
+    max-height: 160px !important;
+    
+    /* Visual exato da foto */
+    background: #ffffff !important;
+    border: 2px dashed #f59e0b !important; /* Borda laranja tracejada como na foto */
+    border-radius: 8px !important;
+    
+    /* Layout interno */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    
+    padding: 12px 8px 8px 8px !important;
+    box-sizing: border-box !important;
+    
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* TÍTULO - Posicionamento superior como na foto */
+.main-signer-card .doc-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    
+    width: 100% !important;
+    margin: 0 0 8px 0 !important;
+    padding: 0 !important;
+    
+    flex-shrink: 0 !important;
+}
+
+/* Esconder ícone do header - não aparece na foto */
+.main-signer-card .doc-header .doc-icon {
+    display: none !important;
+}
+
+.main-signer-card .doc-header .doc-info {
+    width: 100% !important;
+    text-align: center !important;
+}
+
+/* Títulos - tamanho e cor da foto */
+.main-signer-card .doc-header .doc-info h4 {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #374151 !important;
+    margin: 0 0 3px 0 !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+}
+
+.main-signer-card .doc-header .doc-info p {
+    font-size: 10px !important;
+    color: #6b7280 !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+}
+
+/* ÁREA CENTRAL DE PREVIEW - Como na foto */
+.main-signer-card .doc-preview-box {
+    width: 80px !important;
+    height: 80px !important;
+    
+    background: #fef3c7 !important; /* Fundo amarelo claro como na foto */
+    border: 1px solid #f59e0b !important;
+    border-radius: 8px !important;
+    
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    
+    margin: 0 !important;
+    flex: 1 !important;
+    
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.main-signer-card .doc-preview-box:hover {
+    background: #fde68a !important;
+    transform: translateY(-1px) !important;
+}
+
+/* ÍCONE - Tamanho e cor exatos da foto */
+.main-signer-card .doc-preview-box .preview-icon i {
+    font-size: 28px !important;
+    color: #f59e0b !important; /* Laranja exato da foto */
+    margin-bottom: 4px !important;
+    display: block !important;
+}
+
+/* TEXTO "PENDENTE" - Estilo exato da foto */
+.main-signer-card .doc-preview-box .preview-text {
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    color: #f59e0b !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin: 0 !important;
+}
+
+/* BOTÃO INFERIOR - Exato da foto */
+.main-signer-card .doc-actions {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+}
+
+.main-signer-card .doc-actions button,
+.main-signer-card .btn-status {
+    width: 100% !important;
+    height: 32px !important;
+    
+    background: #f59e0b !important; /* Laranja exato da foto */
+    border: none !important;
+    border-radius: 6px !important;
+    
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+    
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.main-signer-card .doc-actions button:hover,
+.main-signer-card .btn-status:hover {
+    background: #d97706 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+}
+
+.main-signer-card .doc-actions button i,
+.main-signer-card .btn-status i {
+    font-size: 9px !important;
+    margin-right: 3px !important;
+}
+
+/* ESTADOS DOS DOCUMENTOS */
+.main-signer-card .doc-preview-box.uploaded {
+    background: #d1fae5 !important;
+    border-color: #10b981 !important;
+}
+
+.main-signer-card .doc-preview-box.uploaded .preview-icon i {
+    color: #10b981 !important;
+}
+
+.main-signer-card .doc-preview-box.uploaded .preview-text {
+    color: #10b981 !important;
+}
+
+.main-signer-card .btn-status.uploaded {
+    background: #10b981 !important;
+}
+
+.main-signer-card .btn-status.uploaded:hover {
+    background: #059669 !important;
+}
+
+/* RESPONSIVIDADE - Mantendo proporções da foto */
+@media (max-width: 1200px) {
+    .main-signer-card .cobuyer-documents-grid#signerDocuments {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-signer-card .cobuyer-documents-grid#signerDocuments {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+    
+    .main-signer-card .cobuyer-document-card {
+        height: 140px !important;
+        min-height: 140px !important;
+        max-height: 140px !important;
+    }
+    
+    .main-signer-card .doc-preview-box {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    
+    .main-signer-card .doc-preview-box .preview-icon i {
+        font-size: 22px !important;
+    }
+    
+    .main-signer-card .doc-actions button {
+        height: 28px !important;
+        font-size: 10px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-signer-card .cobuyer-documents-grid#signerDocuments {
+        grid-template-columns: repeat(1, 1fr) !important;
+        gap: 6px !important;
+    }
+    
+    .main-signer-card .cobuyer-document-card {
+        height: 120px !important;
+        min-height: 120px !important;
+        max-height: 120px !important;
+        max-width: 200px !important;
+        margin: 0 auto !important;
+    }
+    
+    .main-signer-card .doc-header .doc-info h4 {
+        font-size: 11px !important;
+    }
+    
+    .main-signer-card .doc-header .doc-info p {
+        font-size: 9px !important;
+    }
+    
+    .main-signer-card .doc-preview-box {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    
+    .main-signer-card .doc-preview-box .preview-icon i {
+        font-size: 18px !important;
+    }
+    
+    .main-signer-card .doc-actions button {
+        height: 24px !important;
+        font-size: 9px !important;
+    }
+}
+
+/* AJUSTES FINAIS PARA MATCH PERFEITO */
+
+/* Garantir que textos não quebrem */
+.main-signer-card .doc-header .doc-info h4,
+.main-signer-card .doc-header .doc-info p {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+}
+
+/* Centralização perfeita dos elementos */
+.main-signer-card .cobuyer-document-card {
+    text-align: center !important;
+}
+
+/* Espaçamento uniforme */
+.main-signer-card .doc-preview-box {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
+
+/* Garantir visibilidade dos ícones */
+.main-signer-card .preview-icon {
+    line-height: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
