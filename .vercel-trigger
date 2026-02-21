@@ -1,0 +1,13 @@
+# Vercel Deploy Trigger
+# Este arquivo força o Vercel a fazer um novo deploy
+
+Deploy ID: force-redeploy-new-repository
+Timestamp: 2026-02-21T12:58:00Z
+Repository: FLEXCREDI-SITE-ADM
+Action: Force rebuild and redeploy
+Reason: Migração do repositório antigo para novo
+
+---
+
+Este é um arquivo de controle para forçar o Vercel a reconhecer
+as mudanças e fazer um deploy completo do novo repositório.
