@@ -2040,8 +2040,7 @@ const translations = {
         'State *': 'State *',
         
         // Document Upload
-        'Tap to take photo': 'Tap to take photo',
-        'or choose from gallery': 'or choose from gallery',
+        'Take Photo': 'Take Photo',
         '1. ID Document': '1. ID Document',
         '2. Proof of Residence': '2. Proof of Residence',
         '3. Debit Card': '3. Debit Card',
@@ -2477,8 +2476,7 @@ const translations = {
         'State *': 'Estado *',
         
         // Document Upload
-        'Tap to take photo': 'Toque para tomar foto',
-        'or choose from gallery': 'o elegir de la galería',
+        'Take Photo': 'Tomar Foto',
         '1. ID Document': '1. Documento de Identidad',
         '2. Proof of Residence': '2. Comprobante de Domicilio',
         '3. Debit Card': '3. Tarjeta de Débito',
@@ -2916,8 +2914,7 @@ const translations = {
         'State *': 'Estado *',
         
         // Document Upload
-        'Tap to take photo': 'Toque para tirar foto',
-        'or choose from gallery': 'ou escolha da galeria',
+        'Take Photo': 'Tirar Foto',
         '1. ID Document': '1. Documento de Identidade',
         '2. Proof of Residence': '2. Comprovante de Residência',
         '3. Debit Card': '3. Cartão de Débito',

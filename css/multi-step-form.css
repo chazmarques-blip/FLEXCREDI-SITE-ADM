@@ -815,18 +815,23 @@ select.form-control {
 /* Upload Area */
 .upload-area {
     position: relative;
-    background: #f8f9fa;
-    border: 2px dashed #dee2e6;
-    border-radius: 8px;
-    padding: 12px;
+    background: #f0fff4;
+    border: 1px solid #28a745;
+    border-radius: 4px;
+    padding: 6px 10px;
     text-align: center;
-    transition: all 0.3s ease;
-    margin-bottom: 8px;
-    min-height: 80px;
-    display: flex;
-    flex-direction: column;
+    transition: all 0.2s ease;
+    margin-bottom: 4px;
+    min-height: auto;
+    display: inline-flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    max-height: 32px;
 }
 
 .upload-area:hover {
@@ -852,31 +857,30 @@ select.form-control {
 }
 
 .upload-label {
-    display: flex;
-    flex-direction: column;
+    display: inline-flex;
+    flex-direction: row;
     align-items: center;
     cursor: pointer;
-    padding: 4px;
+    padding: 0;
+    gap: 4px;
 }
 
 .upload-label i {
-    font-size: 24px;
-    color: #6c757d;
-    margin-bottom: 4px;
+    font-size: 14px;
+    color: #28a745;
+    margin-bottom: 0;
 }
 
 .upload-text {
-    display: block;
+    display: inline;
     font-size: 11px;
     font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 2px;
+    color: #28a745;
+    margin-bottom: 0;
 }
 
 .upload-subtext {
-    display: block;
-    font-size: 9px;
-    color: #6c757d;
+    display: none;
 }
 
 /* Camera Button (Mobile) */
@@ -911,59 +915,63 @@ select.form-control {
         display: none !important;
     }
     
-    /* Make upload area look like a camera button on mobile */
+    /* Make upload area a compact button on mobile */
     .upload-area {
-        min-height: 70px;
-        padding: 10px;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        border: 2px solid #28a745;
-        border-style: solid;
+        min-height: auto;
+        max-height: 36px;
+        padding: 6px 12px;
+        background: #f0fff4;
+        border: 1px solid #28a745;
         cursor: pointer;
+        display: inline-flex;
+        width: auto;
+        gap: 5px;
     }
     
     .upload-area:active {
         transform: scale(0.98);
-        background: #e8f5e9;
+        background: #d4edda;
     }
     
     .upload-label {
-        padding: 2px;
+        padding: 0;
+        flex-direction: row;
+        gap: 4px;
     }
     
     .upload-label i {
-        font-size: 28px;
+        font-size: 14px;
         color: #28a745;
     }
     
     .upload-text {
-        font-size: 12px;
+        font-size: 11px;
         color: #28a745;
-        font-weight: 700;
+        font-weight: 600;
     }
     
     .upload-subtext {
-        font-size: 9px;
-        color: #6c757d;
+        display: none;
     }
     
     /* Document upload groups more compact */
     .document-upload-group {
-        margin-bottom: 12px;
-        padding: 10px;
+        margin-bottom: 8px;
+        padding: 6px;
     }
     
     .document-label {
-        font-size: 13px;
-        margin-bottom: 8px;
+        font-size: 11px;
+        margin-bottom: 4px;
     }
     
     .card-upload-section {
-        margin-bottom: 10px;
+        margin-bottom: 6px;
     }
     
     .sub-label {
-        font-size: 11px;
-        margin-bottom: 4px;
+        font-size: 10px;
+        margin-bottom: 3px;
     }
 }
 
