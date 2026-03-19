@@ -32,25 +32,33 @@ body {
     }
     
     .navbar {
-        height: 72px;
-        padding: 0 32px;
+        height: 60px;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 100%;
+        gap: 16px;
     }
     
-    /* Logo - MAIOR */
+    /* Logo - PROPORCIONAL */
     .logo-img {
-        height: 50px;
+        height: 44px;
         transition: transform 0.2s ease;
+        flex-shrink: 0;
     }
     
     .logo-img:hover {
         transform: scale(1.02);
     }
     
-    /* Menu Navigation - Fontes Slim */
+    /* Menu Navigation - COMPACTO */
     .navbar-nav {
-        gap: 4px;
+        gap: 2px;
         display: flex !important;
         list-style: none;
+        flex: 1;
+        justify-content: center;
     }
     
     .navbar-nav li {
@@ -58,17 +66,22 @@ body {
     }
     
     .nav-link {
-        font-size: 14px !important;
+        font-size: 13px !important;
         font-weight: 500 !important;
         color: #4b5563 !important;
-        padding: 8px 16px !important;
-        border-radius: 8px;
+        padding: 6px 12px !important;
+        border-radius: 6px;
         transition: all 0.2s ease;
         letter-spacing: -0.01em;
         border: none !important;
         position: relative;
         display: inline-flex;
         align-items: center;
+    }
+    
+    /* Remover TODOS os ícones do menu incluindo chevron */
+    .nav-link i {
+        display: none !important;
     }
     
     /* Remover tracinhos/underline animado do menu */
@@ -97,18 +110,6 @@ body {
         background: #f0fdf4;
     }
     
-    .nav-link i {
-        display: none !important;
-    }
-    
-    .nav-link i.fa-chevron-down {
-        display: inline-block !important;
-        font-size: 10px;
-        margin-left: 4px;
-        margin-right: 0;
-        opacity: 0.5;
-    }
-    
     /* Dropdown mais clean */
     .dropdown-menu {
         border: 1px solid #e5e7eb;
@@ -130,27 +131,28 @@ body {
     }
     
     /* =====================================================
-       SELETOR DE IDIOMAS - MODERNO E DISCRETO
+       SELETOR DE IDIOMAS - COMPACTO E CLEAN
        ===================================================== */
     
     .language-selector {
         display: flex;
         align-items: center;
-        gap: 4px;
+        gap: 2px;
         background: #f8fafc;
-        padding: 4px;
-        border-radius: 10px;
+        padding: 3px;
+        border-radius: 6px;
         border: 1px solid #e2e8f0;
+        flex-shrink: 0;
     }
     
     .language-btn {
-        width: 36px !important;
-        height: 32px !important;
-        min-width: 36px;
+        width: 28px !important;
+        height: 24px !important;
+        min-width: 28px;
         border: none !important;
         background: transparent !important;
-        border-radius: 8px;
-        font-size: 14px !important;
+        border-radius: 4px;
+        font-size: 10px !important;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -167,7 +169,7 @@ body {
     .language-btn.active {
         opacity: 1;
         background: white !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.08);
     }
     
     /* Esconder emojis e usar texto em desktop */
@@ -179,9 +181,9 @@ body {
         display: block;
         font-family: 'Inter', sans-serif;
         font-weight: 600;
-        font-size: 11px !important;
+        font-size: 10px !important;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.3px;
         color: #64748b;
     }
     
@@ -189,24 +191,45 @@ body {
         color: #16a34a;
     }
     
-    /* Botão LOGIN - Clean */
+    /* Botão LOGIN - COMPACTO E SEM ÍCONE */
+    .navbar-buttons {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+    
+    .navbar-buttons .btn i,
+    .btn-primary.btn-sm i {
+        display: none !important;
+    }
+    
     .btn-primary.btn-sm,
     .navbar-buttons .btn {
         background: #16a34a !important;
         border: none !important;
-        padding: 10px 24px !important;
-        font-size: 13px !important;
+        padding: 6px 16px !important;
+        font-size: 12px !important;
         font-weight: 600 !important;
-        border-radius: 10px !important;
+        border-radius: 6px !important;
         letter-spacing: -0.01em;
-        box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25);
+        box-shadow: 0 1px 3px rgba(22, 163, 74, 0.2);
         transition: all 0.2s ease;
+        height: 30px !important;
+        line-height: 1;
+        display: flex;
+        align-items: center;
     }
     
     .btn-primary.btn-sm:hover {
         background: #15803d !important;
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+        box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
+    }
+    
+    /* Mobile toggle hidden in desktop */
+    .mobile-menu-toggle {
+        display: none !important;
     }
     
     /* =====================================================
