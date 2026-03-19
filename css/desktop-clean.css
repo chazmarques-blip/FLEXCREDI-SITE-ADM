@@ -234,7 +234,7 @@ body {
     }
     
     /* =====================================================
-       3. HERO BANNER - 30% MENOR, SEM BARRA VERDE
+       3. HERO BANNER - 20% MENOR NA ALTURA, TEXTOS MANTIDOS
        ===================================================== */
     
     /* Remover barra verde do topo */
@@ -260,29 +260,30 @@ body {
     
     .hero-carousel {
         margin-top: 56px;
-        min-height: 200px !important;
-        max-height: 240px !important;
-        height: 240px !important;
+        min-height: 160px !important;
+        max-height: 190px !important;
+        height: 190px !important;
         overflow: hidden;
     }
     
     .carousel-slide {
-        min-height: 200px !important;
-        max-height: 240px !important;
-        height: 240px !important;
+        min-height: 160px !important;
+        max-height: 190px !important;
+        height: 190px !important;
     }
     
     .carousel-slide .hero-content {
-        padding: 24px 40px;
+        padding: 16px 40px;
         max-width: 550px;
     }
     
+    /* TEXTOS MANTIDOS NO TAMANHO ATUAL */
     .carousel-slide .hero-slogan {
         font-size: 9px;
         font-weight: 600;
         letter-spacing: 2px;
         text-transform: uppercase;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         opacity: 0.9;
     }
     
@@ -290,7 +291,7 @@ body {
         font-size: 26px;
         font-weight: 700;
         line-height: 1.2;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         letter-spacing: -0.02em;
     }
     
@@ -304,7 +305,7 @@ body {
     
     /* Carousel indicators */
     .carousel-indicators {
-        bottom: 12px;
+        bottom: 8px;
     }
     
     .carousel-indicators button {
