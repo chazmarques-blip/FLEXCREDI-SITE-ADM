@@ -100,6 +100,16 @@
         background: #dcfce7;
         border-color: #22c55e;
     }
+    
+    /* Mostrar emoji, esconder texto em mobile */
+    .language-btn .lang-text {
+        display: none;
+    }
+    
+    .language-btn .lang-emoji {
+        display: block;
+        font-size: 20px;
+    }
 
     /* Botão LOGIN maior e mais visível */
     .navbar-buttons {

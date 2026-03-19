@@ -1,0 +1,943 @@
+/* =====================================================
+   FLEXCREDI - DESKTOP OPTIMIZATION
+   Layout clean, profissional e moderno
+   ===================================================== */
+
+/* =====================================================
+   1. TIPOGRAFIA PROFISSIONAL
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* =====================================================
+   2. HEADER - SLIM E PROFISSIONAL
+   ===================================================== */
+
+@media (min-width: 768px) {
+    
+    .header {
+        background: white;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        padding: 0;
+    }
+    
+    .navbar {
+        height: 72px;
+        padding: 0 32px;
+    }
+    
+    /* Logo */
+    .logo-img {
+        height: 42px;
+        transition: transform 0.2s ease;
+    }
+    
+    .logo-img:hover {
+        transform: scale(1.02);
+    }
+    
+    /* Menu Navigation - Fontes Slim */
+    .navbar-nav {
+        gap: 8px;
+    }
+    
+    .nav-link {
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        color: #4b5563 !important;
+        padding: 8px 16px !important;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        letter-spacing: -0.01em;
+    }
+    
+    .nav-link:hover {
+        color: #16a34a !important;
+        background: #f0fdf4;
+    }
+    
+    .nav-link i {
+        font-size: 13px;
+        margin-right: 6px;
+        opacity: 0.7;
+    }
+    
+    /* Dropdown mais clean */
+    .dropdown-menu {
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        border-radius: 12px;
+        padding: 8px;
+    }
+    
+    .dropdown-item {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 10px 16px;
+        border-radius: 8px;
+    }
+    
+    .dropdown-item:hover {
+        background: #f0fdf4;
+        color: #16a34a;
+    }
+    
+    /* =====================================================
+       SELETOR DE IDIOMAS - MODERNO E DISCRETO
+       ===================================================== */
+    
+    .language-selector {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: #f8fafc;
+        padding: 4px;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .language-btn {
+        width: 36px !important;
+        height: 32px !important;
+        min-width: 36px;
+        border: none !important;
+        background: transparent !important;
+        border-radius: 8px;
+        font-size: 14px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        opacity: 0.6;
+        padding: 0 !important;
+    }
+    
+    .language-btn:hover {
+        opacity: 1;
+        background: #e2e8f0 !important;
+    }
+    
+    .language-btn.active {
+        opacity: 1;
+        background: white !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    /* Esconder emojis e usar texto em desktop */
+    .language-btn .lang-emoji {
+        display: none;
+    }
+    
+    .language-btn .lang-text {
+        display: block;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 11px !important;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #64748b;
+    }
+    
+    .language-btn.active .lang-text {
+        color: #16a34a;
+    }
+    
+    /* Botão LOGIN - Clean */
+    .btn-primary.btn-sm,
+    .navbar-buttons .btn {
+        background: #16a34a !important;
+        border: none !important;
+        padding: 10px 24px !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        border-radius: 10px !important;
+        letter-spacing: -0.01em;
+        box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25);
+        transition: all 0.2s ease;
+    }
+    
+    .btn-primary.btn-sm:hover {
+        background: #15803d !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    }
+    
+    /* =====================================================
+       3. HERO BANNER - AJUSTES
+       ===================================================== */
+    
+    .hero-carousel {
+        margin-top: 72px;
+        min-height: 320px;
+        max-height: 380px;
+    }
+    
+    .carousel-slide {
+        min-height: 320px;
+        max-height: 380px;
+    }
+    
+    .carousel-slide .hero-content {
+        padding: 40px 60px;
+        max-width: 650px;
+    }
+    
+    .carousel-slide .hero-slogan {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        opacity: 0.9;
+    }
+    
+    .carousel-slide h1 {
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 16px;
+        letter-spacing: -0.02em;
+    }
+    
+    .carousel-slide p {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.6;
+        opacity: 0.95;
+        max-width: 500px;
+    }
+    
+    /* Carousel indicators */
+    .carousel-indicators {
+        bottom: 20px;
+    }
+    
+    .carousel-indicators button {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin: 0 4px;
+        opacity: 0.5;
+    }
+    
+    .carousel-indicators button.active {
+        opacity: 1;
+        width: 24px;
+        border-radius: 4px;
+    }
+    
+    /* =====================================================
+       4. SEÇÃO FORMULÁRIO - COMPACTO E CLEAN
+       ===================================================== */
+    
+    #simulacao-rapida {
+        padding: 48px 0;
+        background: #fafafa;
+    }
+    
+    #simulacao-rapida .container {
+        max-width: 1200px;
+    }
+    
+    #simulacao-rapida .row.cards-side-by-side {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: 32px;
+        align-items: stretch;
+        margin: 0;
+    }
+    
+    #simulacao-rapida .row.cards-side-by-side > .col-6 {
+        width: calc(50% - 16px) !important;
+        flex: 0 0 calc(50% - 16px) !important;
+        max-width: calc(50% - 16px) !important;
+        padding: 0 !important;
+    }
+    
+    /* Card do Formulário */
+    .card {
+        background: white;
+        border-radius: 16px;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        padding: 32px;
+    }
+    
+    .card-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 6px;
+        letter-spacing: -0.02em;
+    }
+    
+    .card-title i {
+        font-size: 20px;
+        color: #16a34a;
+        margin-right: 10px;
+    }
+    
+    .card-subtitle {
+        font-size: 14px;
+        font-weight: 400;
+        color: #6b7280;
+        margin-bottom: 24px;
+    }
+    
+    /* Progress Bar - COMPACTA */
+    .progress-bar-container {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 24px;
+    }
+    
+    .progress-bar {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+    }
+    
+    .progress-bar::before {
+        content: '';
+        position: absolute;
+        top: 14px;
+        left: 10%;
+        right: 10%;
+        height: 2px;
+        background: #e5e7eb;
+        z-index: 0;
+    }
+    
+    .progress-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 1;
+        flex: 1;
+    }
+    
+    .progress-circle {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: white;
+        border: 2px solid #d1d5db;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        color: #9ca3af;
+        margin-bottom: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .progress-step.active .progress-circle {
+        background: #16a34a;
+        border-color: #16a34a;
+        color: white;
+        box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.15);
+    }
+    
+    .progress-step.completed .progress-circle {
+        background: #16a34a;
+        border-color: #16a34a;
+        color: white;
+    }
+    
+    .progress-label {
+        font-size: 11px;
+        font-weight: 500;
+        color: #9ca3af;
+        text-align: center;
+        max-width: 80px;
+        line-height: 1.3;
+    }
+    
+    .progress-step.active .progress-label {
+        color: #16a34a;
+        font-weight: 600;
+    }
+    
+    /* Slider de Valor - COMPACTO */
+    .compact-slider-group {
+        background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        border: 1px solid #bbf7d0;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .slider-labels-compact {
+        font-size: 12px;
+        font-weight: 600;
+        color: #374151;
+    }
+    
+    /* Input do valor - TAMANHO COMPATÍVEL */
+    .valor-input-compact,
+    input[type="text"].valor-display,
+    .valor-display {
+        width: 90px !important;
+        height: 36px !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        color: #16a34a !important;
+        text-align: center;
+        border: 2px solid #16a34a;
+        border-radius: 8px;
+        background: white;
+    }
+    
+    /* Form inputs */
+    .form-control {
+        height: 44px;
+        font-size: 14px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 10px 16px;
+        transition: all 0.2s ease;
+    }
+    
+    .form-control:focus {
+        border-color: #16a34a;
+        box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+    }
+    
+    .form-control::placeholder {
+        color: #9ca3af;
+        font-size: 14px;
+    }
+    
+    .form-group {
+        margin-bottom: 16px;
+    }
+    
+    /* Botão Next */
+    .btn-next,
+    button[type="button"].btn-success {
+        background: #16a34a !important;
+        border: none;
+        padding: 12px 32px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 10px;
+        transition: all 0.2s ease;
+    }
+    
+    .btn-next:hover {
+        background: #15803d !important;
+        transform: translateY(-1px);
+    }
+    
+    /* =====================================================
+       5. WHY APPLY SIDEBAR - CLEAN
+       ===================================================== */
+    
+    .benefits-card,
+    .card:has(.beneficios-lista) {
+        padding: 28px;
+    }
+    
+    .benefits-card .card-title,
+    h3:has(+ .beneficios-lista) {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+    
+    .beneficios-lista,
+    .benefits-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .beneficio-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .beneficio-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    
+    .beneficio-item i,
+    .benefit-icon {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        background: #f0fdf4;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        color: #16a34a;
+    }
+    
+    .beneficio-item h5,
+    .benefit-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 2px;
+    }
+    
+    .beneficio-item p,
+    .benefit-desc {
+        font-size: 12px;
+        font-weight: 400;
+        color: #6b7280;
+        line-height: 1.5;
+        margin: 0;
+    }
+    
+    /* Loan Calculator - COMPACTO */
+    .loan-calculator {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    
+    .calculator-title,
+    .loan-calculator h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: #16a34a;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+    
+    .calculator-label {
+        font-size: 12px;
+        font-weight: 500;
+        color: #4b5563;
+        margin-bottom: 6px;
+    }
+    
+    .frequency-selector {
+        display: flex;
+        gap: 6px;
+    }
+    
+    .frequency-btn {
+        flex: 1;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 500;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background: white;
+        color: #6b7280;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .frequency-btn:hover {
+        border-color: #16a34a;
+        color: #16a34a;
+    }
+    
+    .frequency-btn.active {
+        background: #16a34a;
+        border-color: #16a34a;
+        color: white;
+    }
+    
+    .result-box-compact {
+        background: #16a34a;
+        border-radius: 10px;
+        padding: 12px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 16px;
+    }
+    
+    .result-installments-compact {
+        font-size: 12px;
+        font-weight: 500;
+        color: rgba(255,255,255,0.9);
+    }
+    
+    .result-value-compact {
+        font-size: 18px;
+        font-weight: 700;
+        color: white;
+    }
+    
+    .interest-rate-compact {
+        font-size: 10px;
+        color: rgba(255,255,255,0.8);
+    }
+    
+    /* =====================================================
+       6. WHY CHOOSE SECTION - CLEAN E COMPACTO
+       ===================================================== */
+    
+    section:has(h2[data-translate*="Why Choose"]),
+    .why-choose-section {
+        padding: 64px 0;
+        background: white;
+    }
+    
+    .section-title h2,
+    h2[data-translate*="Why Choose"] {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 8px;
+        letter-spacing: -0.02em;
+    }
+    
+    .section-subtitle {
+        font-size: 15px;
+        font-weight: 400;
+        color: #6b7280;
+        margin-bottom: 40px;
+    }
+    
+    /* Benefit Cards Grid - COMPACTO */
+    .benefit-card,
+    .feature-card {
+        background: #fafafa;
+        border: 1px solid #f3f4f6;
+        border-radius: 16px;
+        padding: 28px 24px;
+        text-align: center;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+    
+    .benefit-card:hover {
+        background: white;
+        border-color: #e5e7eb;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        transform: translateY(-4px);
+    }
+    
+    .benefit-card i,
+    .feature-card i {
+        font-size: 28px;
+        color: #16a34a;
+        margin-bottom: 16px;
+        display: block;
+    }
+    
+    .benefit-card h5,
+    .feature-card h5 {
+        font-size: 15px;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 8px;
+    }
+    
+    .benefit-card p,
+    .feature-card p {
+        font-size: 13px;
+        font-weight: 400;
+        color: #6b7280;
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    /* =====================================================
+       7. SUCCESS STORIES - CLEAN E COMPACTO
+       ===================================================== */
+    
+    section:has(h2[data-translate*="Success Stories"]),
+    .success-stories-section {
+        padding: 64px 0;
+        background: #fafafa;
+    }
+    
+    .section-title h2[data-translate*="Success"],
+    h2[data-translate*="Success Stories"] {
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+    }
+    
+    /* Story Cards - COMPACTO */
+    .story-card,
+    .testimonial-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        border: 1px solid #f3f4f6;
+        transition: all 0.3s ease;
+    }
+    
+    .story-card:hover {
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        transform: translateY(-4px);
+    }
+    
+    .story-card img,
+    .testimonial-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+    
+    .story-card .card-body,
+    .testimonial-card .card-body {
+        padding: 20px;
+    }
+    
+    .story-card h5,
+    .testimonial-card h5 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 4px;
+    }
+    
+    .story-card .business-type,
+    .testimonial-card .subtitle {
+        font-size: 12px;
+        font-weight: 500;
+        color: #16a34a;
+        margin-bottom: 8px;
+    }
+    
+    .story-card p,
+    .testimonial-card p {
+        font-size: 13px;
+        color: #6b7280;
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    .story-card .loan-amount,
+    .testimonial-card .amount {
+        font-size: 14px;
+        font-weight: 600;
+        color: #16a34a;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid #f3f4f6;
+    }
+    
+    /* =====================================================
+       8. CTA SECTION - CLEAN
+       ===================================================== */
+    
+    .cta-section,
+    section:has(h2[data-translate*="Ready to Make"]) {
+        padding: 64px 0;
+        background: white;
+        text-align: center;
+    }
+    
+    .cta-section h2,
+    h2[data-translate*="Ready to Make"] {
+        font-size: 28px;
+        font-weight: 700;
+        color: #16a34a;
+        margin-bottom: 12px;
+        letter-spacing: -0.02em;
+    }
+    
+    .cta-section p {
+        font-size: 15px;
+        color: #6b7280;
+        margin-bottom: 24px;
+    }
+    
+    .cta-section .btn-primary {
+        padding: 14px 32px;
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 12px;
+    }
+    
+    .cta-section .btn-outline {
+        padding: 14px 32px;
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 12px;
+        border: 2px solid #e5e7eb;
+        color: #4b5563;
+        background: white;
+        margin-left: 12px;
+    }
+    
+    .cta-section .btn-outline:hover {
+        border-color: #16a34a;
+        color: #16a34a;
+    }
+    
+    .cta-section .security-badge {
+        font-size: 12px;
+        color: #9ca3af;
+        margin-top: 20px;
+    }
+    
+    /* =====================================================
+       9. FOOTER - CLEAN
+       ===================================================== */
+    
+    .footer {
+        background: #1f2937;
+        padding: 48px 0 24px 0;
+    }
+    
+    .footer-content {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+        gap: 40px;
+    }
+    
+    .footer-section h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: white;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .footer-section p {
+        font-size: 13px;
+        color: #9ca3af;
+        line-height: 1.6;
+    }
+    
+    .footer-section a {
+        font-size: 13px;
+        color: #9ca3af;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        display: block;
+        margin-bottom: 8px;
+    }
+    
+    .footer-section a:hover {
+        color: #16a34a;
+    }
+    
+    .footer .social-links {
+        display: flex;
+        gap: 12px;
+        margin-top: 16px;
+    }
+    
+    .footer .social-links a {
+        width: 36px;
+        height: 36px;
+        background: #374151;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #9ca3af;
+        font-size: 16px;
+        transition: all 0.2s ease;
+        margin: 0;
+    }
+    
+    .footer .social-links a:hover {
+        background: #16a34a;
+        color: white;
+    }
+    
+    .footer-bottom {
+        border-top: 1px solid #374151;
+        margin-top: 32px;
+        padding-top: 24px;
+        font-size: 12px;
+        color: #6b7280;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .footer-bottom a {
+        color: #6b7280;
+        margin-left: 16px;
+    }
+    
+    .footer-bottom a:hover {
+        color: #16a34a;
+    }
+    
+    /* =====================================================
+       10. ESPAÇAMENTOS GERAIS - CLEAN
+       ===================================================== */
+    
+    section {
+        padding: 56px 0;
+    }
+    
+    .container {
+        max-width: 1200px;
+        padding: 0 24px;
+    }
+    
+    /* Row gaps */
+    .row {
+        margin: 0 -12px;
+    }
+    
+    .row > [class*="col"] {
+        padding: 0 12px;
+    }
+    
+    /* Grid gaps para cards */
+    .row.g-4 {
+        gap: 24px;
+        margin: 0;
+    }
+    
+    .row.g-4 > [class*="col"] {
+        padding: 0;
+    }
+    
+    /* Scroll to top */
+    .scroll-to-top {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: #16a34a;
+        box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    }
+    
+    .scroll-to-top:hover {
+        transform: translateY(-2px);
+    }
+
+} /* END @media (min-width: 768px) */
+
+/* =====================================================
+   11. LARGE DESKTOP (1440px+)
+   ===================================================== */
+
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    .hero-carousel {
+        max-height: 420px;
+    }
+    
+    .carousel-slide h1 {
+        font-size: 42px;
+    }
+}
