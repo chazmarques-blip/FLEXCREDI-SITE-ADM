@@ -73,13 +73,13 @@
 }
 
 .language-btn {
-    width: 36px !important;
-    height: 36px !important;
-    min-width: 36px;
-    min-height: 36px;
-    font-size: 18px !important;
-    padding: 4px !important;
-    border-radius: 8px;
+    width: var(--touch-target-min) !important;
+    height: var(--touch-target-min) !important;
+    min-width: var(--touch-target-min);
+    min-height: var(--touch-target-min);
+    font-size: 20px !important;
+    padding: 6px !important;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,35 +139,45 @@
 
 .hero-carousel {
     padding-top: 72px !important; /* Header height + margin */
-    min-height: 200px;
-    max-height: 260px;
+    min-height: 240px;
+    max-height: 300px;
 }
 
 .carousel-slide .hero-content {
-    padding: 20px 16px 28px 16px !important;
+    padding: 16px 16px 24px 16px !important;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .carousel-slide .hero-slogan {
     font-size: 10px !important;
     letter-spacing: 2px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     opacity: 0.9;
     font-weight: 600;
 }
 
 .carousel-slide h1 {
-    font-size: 20px !important;
-    line-height: 1.3 !important;
-    margin-bottom: 12px;
+    font-size: 18px !important;
+    line-height: 1.35 !important;
+    margin-bottom: 10px;
     font-weight: 700;
+    max-width: 100%;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    white-space: normal !important;
+    word-wrap: break-word;
 }
 
 .carousel-slide p {
-    font-size: 13px !important;
+    font-size: 12px !important;
     line-height: 1.5 !important;
     margin-bottom: 0;
     opacity: 0.95;
+    max-width: 100%;
 }
 
 /* =====================================================
