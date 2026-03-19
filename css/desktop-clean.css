@@ -1076,6 +1076,36 @@ body {
         background: #fafafa;
     }
     
+    /* CORREÇÃO: Garantir que estrelas de avaliação apareçam */
+    .story-rating i,
+    .story-rating i.fas,
+    .story-rating i.fa-star {
+        display: inline-block !important;
+        font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome !important;
+        font-weight: 900 !important;
+        font-style: normal !important;
+        font-size: 14px !important;
+        color: #f59e0b !important;
+        margin-right: 2px;
+        background: transparent !important;
+        border: none !important;
+        width: auto !important;
+        height: auto !important;
+    }
+    
+    .story-rating i.fa-star::before {
+        content: "\f005" !important;
+        font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome !important;
+        font-weight: 900 !important;
+    }
+    
+    .story-rating {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        margin-bottom: 8px;
+    }
+    
     .section-title h2[data-translate*="Success"],
     h2[data-translate*="Success Stories"] {
         font-size: 28px;
