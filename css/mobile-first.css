@@ -1,0 +1,1149 @@
+/* =====================================================
+   FLEXCREDI - MOBILE-FIRST OPTIMIZATION
+   Arquivo principal de otimizações para dispositivos móveis
+   Prioridade: 99% uso mobile
+   ===================================================== */
+
+/* =====================================================
+   1. RESET E VARIÁVEIS MOBILE-FIRST
+   ===================================================== */
+
+:root {
+    /* Touch targets - Apple/Google guideline: 44px minimum */
+    --touch-target-min: 44px;
+    --touch-target-comfortable: 48px;
+    
+    /* Mobile typography scale */
+    --font-mobile-xs: 12px;
+    --font-mobile-sm: 14px;
+    --font-mobile-base: 16px;
+    --font-mobile-md: 18px;
+    --font-mobile-lg: 20px;
+    --font-mobile-xl: 24px;
+    --font-mobile-2xl: 28px;
+    --font-mobile-3xl: 32px;
+    
+    /* Mobile spacing scale */
+    --space-mobile-xs: 4px;
+    --space-mobile-sm: 8px;
+    --space-mobile-md: 12px;
+    --space-mobile-lg: 16px;
+    --space-mobile-xl: 24px;
+    --space-mobile-2xl: 32px;
+    --space-mobile-3xl: 48px;
+}
+
+/* =====================================================
+   2. HEADER MOBILE - OTIMIZADO
+   ===================================================== */
+
+/* Header compacto para mobile */
+.header {
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: white;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+.navbar {
+    height: 52px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    gap: 8px;
+}
+
+/* Logo menor em mobile */
+.logo-img {
+    height: 36px !important;
+    max-width: 120px;
+    object-fit: contain;
+}
+
+/* Seletor de idiomas compacto */
+.language-selector {
+    display: flex;
+    gap: 4px;
+    margin: 0 8px;
+}
+
+.language-btn {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px;
+    min-height: 36px;
+    font-size: 18px !important;
+    padding: 4px !important;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.language-btn.active {
+    background: #dcfce7;
+    border-color: #22c55e;
+}
+
+/* Botão LOGIN maior e mais visível */
+.navbar-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navbar-buttons .btn-primary.btn-sm {
+    padding: 10px 16px !important;
+    font-size: 13px !important;
+    min-width: 85px;
+    min-height: var(--touch-target-min);
+    height: var(--touch-target-min);
+    border-radius: 10px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+}
+
+/* Menu hamburguer maior */
+.mobile-menu-toggle {
+    width: var(--touch-target-min) !important;
+    height: var(--touch-target-min) !important;
+    min-width: var(--touch-target-min);
+    min-height: var(--touch-target-min);
+    font-size: 22px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #f3f4f6;
+    border: 2px solid #e5e7eb;
+    color: #374151;
+}
+
+.mobile-menu-toggle:active {
+    background: #e5e7eb;
+    transform: scale(0.95);
+}
+
+/* =====================================================
+   3. HERO BANNER MOBILE
+   ===================================================== */
+
+.hero-carousel {
+    padding-top: 72px !important; /* Header height + margin */
+    min-height: 200px;
+    max-height: 260px;
+}
+
+.carousel-slide .hero-content {
+    padding: 20px 16px 28px 16px !important;
+    text-align: center;
+}
+
+.carousel-slide .hero-slogan {
+    font-size: 10px !important;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    opacity: 0.9;
+    font-weight: 600;
+}
+
+.carousel-slide h1 {
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.carousel-slide p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 0;
+    opacity: 0.95;
+}
+
+/* =====================================================
+   4. SEÇÃO DE FORMULÁRIO - MOBILE FIRST
+   ===================================================== */
+
+/* Container da seção */
+#simulacao-rapida {
+    padding: 20px 0 32px 0 !important;
+}
+
+#simulacao-rapida .container {
+    padding: 0 16px;
+}
+
+/* Cards lado a lado → Empilhados em mobile */
+.cards-side-by-side {
+    flex-direction: column !important;
+    gap: 20px;
+}
+
+.cards-side-by-side .col-6 {
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+/* Card do formulário */
+.card {
+    padding: 20px !important;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* Título do card - CORRIGIR CORTE */
+.card-title {
+    font-size: var(--font-mobile-md) !important;
+    line-height: 1.3 !important;
+    margin-bottom: 8px !important;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-title i {
+    font-size: 24px !important;
+}
+
+.card-title span {
+    display: block;
+    white-space: normal !important;
+    word-wrap: break-word;
+}
+
+.card-subtitle {
+    font-size: var(--font-mobile-sm) !important;
+    line-height: 1.4;
+    color: #666;
+    margin-bottom: 16px !important;
+}
+
+/* =====================================================
+   5. PROGRESS BAR - MOBILE OTIMIZADA
+   ===================================================== */
+
+.progress-bar-container {
+    margin-bottom: 20px !important;
+    padding: 16px 12px !important;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+}
+
+.progress-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0;
+    position: relative;
+}
+
+.progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 15%;
+    right: 15%;
+    height: 3px;
+    background: #dee2e6;
+    z-index: 0;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    z-index: 1;
+    max-width: 80px;
+    padding: 0 2px;
+}
+
+/* Círculos maiores */
+.progress-circle {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px !important;
+    font-weight: 600;
+    color: #6c757d;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.progress-step.active .progress-circle {
+    border-color: #22c55e;
+    background: #22c55e;
+    color: white;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+    transform: scale(1.1);
+}
+
+.progress-step.completed .progress-circle {
+    border-color: #22c55e;
+    background: #22c55e;
+    color: white;
+}
+
+/* Labels legíveis */
+.progress-label {
+    font-size: 11px !important;
+    font-weight: 600;
+    color: #6c757d;
+    text-align: center;
+    line-height: 1.25;
+    max-width: 72px;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.progress-step.active .progress-label,
+.progress-step.completed .progress-label {
+    color: #16a34a;
+    font-weight: 700;
+}
+
+/* =====================================================
+   6. FORM INPUTS - TOUCH FRIENDLY
+   ===================================================== */
+
+.form-group {
+    margin-bottom: var(--space-mobile-lg) !important;
+}
+
+.form-label {
+    font-size: var(--font-mobile-sm) !important;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px !important;
+    display: block;
+}
+
+/* INPUTS MAIORES - 48px altura mínima */
+.form-control {
+    width: 100%;
+    height: var(--touch-target-comfortable) !important;
+    min-height: var(--touch-target-comfortable) !important;
+    padding: 12px 16px !important;
+    font-size: var(--font-mobile-base) !important;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    background: #fafafa;
+    transition: all 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #28a745;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.15);
+}
+
+.form-control::placeholder {
+    color: #999;
+    font-size: var(--font-mobile-sm);
+}
+
+/* Select dropdown */
+select.form-control {
+    padding-right: 40px !important;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 24px;
+}
+
+/* Checkbox maior */
+.form-check {
+    padding: 16px !important;
+    margin-bottom: 16px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.form-check-input {
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px;
+    margin-right: 12px;
+    margin-top: 0;
+    border-radius: 6px;
+    border: 2px solid #ccc;
+}
+
+.form-check-label {
+    font-size: var(--font-mobile-sm) !important;
+    line-height: 1.5;
+    color: #444;
+}
+
+/* =====================================================
+   7. SLIDER DE VALOR - MOBILE OTIMIZADO
+   ===================================================== */
+
+.compact-slider-group {
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 2px solid #86efac;
+}
+
+.compact-slider-wrapper {
+    flex-direction: column !important;
+    gap: 16px;
+    align-items: center;
+}
+
+.slider-container-compact {
+    width: 100%;
+}
+
+.custom-slider.compact {
+    height: 48px !important;
+    margin: 12px 0;
+    position: relative;
+}
+
+.custom-slider.compact .slider-track {
+    height: 10px !important;
+    border-radius: 5px;
+    background: #d1d5db;
+}
+
+.custom-slider.compact .slider-fill {
+    height: 100% !important;
+    background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+    border-radius: 5px;
+}
+
+.custom-slider.compact .slider-thumb {
+    width: 32px !important;
+    height: 32px !important;
+    border: 4px solid white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    background: #16a34a;
+}
+
+.custom-slider.compact .slider-thumb:active {
+    transform: translate(-50%, -50%) scale(1.15);
+}
+
+.slider-labels-compact {
+    font-size: 13px !important;
+    font-weight: 700;
+    color: #374151;
+    margin-top: 8px;
+    padding: 0 4px;
+}
+
+/* Display do valor */
+.valor-display-compact {
+    width: 100% !important;
+    justify-content: center !important;
+    margin-top: 4px;
+}
+
+.valor-input-compact {
+    width: 140px !important;
+    height: 52px !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: #16a34a !important;
+    text-align: center;
+    border: 3px solid #16a34a;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(22, 163, 74, 0.15);
+}
+
+/* =====================================================
+   8. BOTÕES DE NAVEGAÇÃO - TOUCH FRIENDLY
+   ===================================================== */
+
+.step-navigation {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px !important;
+    padding-top: 20px !important;
+    border-top: 2px solid #e9ecef;
+}
+
+.step-navigation button {
+    flex: 1;
+    height: var(--touch-target-comfortable) !important;
+    min-height: var(--touch-target-comfortable) !important;
+    font-size: var(--font-mobile-base) !important;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-prev {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+    border: 2px solid #e2e8f0 !important;
+}
+
+.btn-prev:active {
+    background: #e2e8f0 !important;
+    transform: scale(0.98);
+}
+
+.btn-next,
+.btn-submit {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.btn-next:active,
+.btn-submit:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+}
+
+/* Botão submit principal */
+.btn-submit-styled {
+    width: 100%;
+    height: 52px !important;
+    min-height: 52px;
+    font-size: var(--font-mobile-base) !important;
+    font-weight: 700;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+    box-shadow: 0 4px 16px rgba(34, 197, 94, 0.35);
+}
+
+/* =====================================================
+   9. SEÇÃO DE BENEFÍCIOS - MOBILE
+   ===================================================== */
+
+.benefits-card {
+    padding: 24px 20px !important;
+}
+
+.beneficios-lista {
+    gap: 12px !important;
+    display: flex;
+    flex-direction: column;
+}
+
+.beneficio-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 12px;
+    margin-bottom: 0 !important;
+    border-bottom: none !important;
+    border: 1px solid #e2e8f0;
+}
+
+.beneficio-item i.benefit-icon {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px;
+    font-size: 18px !important;
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #16a34a;
+}
+
+.beneficio-item .beneficio-content {
+    flex: 1;
+}
+
+.beneficio-item h5 {
+    font-size: 15px !important;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.beneficio-item h5::after {
+    display: none;
+}
+
+.beneficio-item p {
+    font-size: 13px !important;
+    line-height: 1.5;
+    color: #6b7280;
+    display: block;
+    margin: 0;
+}
+
+/* Why Apply Section */
+.section-title h2,
+h2[data-translate="Why Apply with FLEXCREDI?"] {
+    font-size: 22px !important;
+    line-height: 1.3;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.section-subtitle,
+p[data-translate*="Discover the advantages"] {
+    font-size: 14px !important;
+    color: #6b7280;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+/* Stats cards */
+.stat-card,
+[class*="stat"] {
+    padding: 20px 16px;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.stat-number,
+[class*="stat"] h3,
+[class*="stat"] .value {
+    font-size: 28px !important;
+    font-weight: 700;
+    color: #22c55e;
+    margin-bottom: 4px;
+}
+
+.stat-label,
+[class*="stat"] p,
+[class*="stat"] span {
+    font-size: 13px !important;
+    color: #6b7280;
+}
+
+/* =====================================================
+   10. CALCULADORA DE EMPRÉSTIMO - MOBILE
+   ===================================================== */
+
+.loan-calculator {
+    padding: 20px !important;
+    margin-top: 16px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #e5e7eb;
+}
+
+.calculator-title {
+    font-size: var(--font-mobile-base) !important;
+    font-weight: 700;
+    color: #16a34a;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.calculator-field {
+    margin-bottom: 16px;
+}
+
+.calculator-label {
+    font-size: var(--font-mobile-sm) !important;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+/* Slider row mobile */
+.slider-row {
+    display: flex;
+    flex-direction: column !important;
+    gap: 8px;
+    padding: 12px !important;
+    background: #f9fafb;
+    border-radius: 10px;
+}
+
+.loan-calculator .custom-slider {
+    height: 36px !important;
+    width: 100%;
+}
+
+.loan-calculator .slider-track {
+    height: 8px !important;
+}
+
+.loan-calculator .slider-thumb {
+    width: 24px !important;
+    height: 24px !important;
+}
+
+.valor-display-inline {
+    width: 100% !important;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.valor-input-compact {
+    font-size: 16px !important;
+    height: 40px !important;
+    width: 100px !important;
+}
+
+/* Frequency selector mobile */
+.frequency-selector {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.frequency-btn {
+    padding: 12px 8px !important;
+    font-size: 12px !important;
+    font-weight: 600;
+    border-radius: 8px;
+    min-height: var(--touch-target-min);
+}
+
+/* Result box */
+.result-box-compact {
+    height: 52px !important;
+    min-height: 52px;
+    padding: 0 16px !important;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.result-installments-compact {
+    font-size: 13px !important;
+}
+
+.result-value-compact {
+    font-size: 18px !important;
+    font-weight: 700;
+}
+
+.interest-rate-compact {
+    font-size: 11px !important;
+}
+
+/* =====================================================
+   11. WHY CHOOSE SECTION - MOBILE
+   ===================================================== */
+
+.section-title h2 {
+    font-size: var(--font-mobile-xl) !important;
+    line-height: 1.3;
+    margin-bottom: 8px;
+}
+
+.section-subtitle {
+    font-size: var(--font-mobile-sm) !important;
+    color: #6b7280;
+}
+
+/* Cards de benefícios em grid */
+.benefit-card {
+    padding: 20px !important;
+    border-radius: 16px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.benefit-card i {
+    font-size: 32px !important;
+    margin-bottom: 12px;
+    color: #22c55e;
+}
+
+.benefit-card h5 {
+    font-size: var(--font-mobile-base) !important;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.benefit-card p {
+    font-size: var(--font-mobile-sm) !important;
+    line-height: 1.5;
+    color: #6b7280;
+}
+
+/* =====================================================
+   12. CTA SECTION - MOBILE
+   ===================================================== */
+
+.cta-section {
+    padding: 32px 20px !important;
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: var(--font-mobile-xl) !important;
+    margin-bottom: 12px;
+}
+
+.cta-section p {
+    font-size: var(--font-mobile-sm) !important;
+    margin-bottom: 20px;
+}
+
+.cta-section .btn {
+    width: 100%;
+    max-width: 280px;
+    height: 52px;
+    font-size: var(--font-mobile-base);
+}
+
+/* =====================================================
+   13. FOOTER - MOBILE OTIMIZADO
+   ===================================================== */
+
+.footer {
+    padding: 32px 0 24px 0 !important;
+    margin-top: 40px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.footer-section {
+    text-align: center;
+}
+
+.footer-section h4 {
+    font-size: var(--font-mobile-base) !important;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: white;
+}
+
+.footer-section p,
+.footer-section a {
+    font-size: var(--font-mobile-sm) !important;
+    line-height: 1.6;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.footer-links li {
+    margin: 0;
+}
+
+.footer-links a {
+    padding: 8px 12px;
+    display: inline-block;
+}
+
+/* Social links */
+.footer-section .social-links {
+    justify-content: center;
+    gap: 12px;
+}
+
+.footer-section .social-links a {
+    width: var(--touch-target-min) !important;
+    height: var(--touch-target-min) !important;
+    font-size: 20px;
+}
+
+.footer-bottom {
+    font-size: 12px !important;
+    padding-top: 20px;
+    text-align: center;
+}
+
+/* =====================================================
+   14. SCROLL TO TOP BUTTON
+   ===================================================== */
+
+.scroll-to-top,
+[class*="scroll-top"],
+button[aria-label*="top"] {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 50%;
+    right: 16px !important;
+    bottom: 16px !important;
+}
+
+/* =====================================================
+   15. REVIEW SECTION - MOBILE
+   ===================================================== */
+
+.review-section {
+    padding: 16px !important;
+    margin-bottom: 12px !important;
+    border-radius: 12px;
+}
+
+.review-section h4 {
+    font-size: var(--font-mobile-sm) !important;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+}
+
+.review-item {
+    padding: 10px 0 !important;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.review-label {
+    font-size: 13px !important;
+    color: #6b7280;
+}
+
+.review-value {
+    font-size: var(--font-mobile-sm) !important;
+    font-weight: 600;
+    color: #1f2937;
+    text-align: left !important;
+}
+
+/* =====================================================
+   16. ALERTS E NOTICES - MOBILE
+   ===================================================== */
+
+.alert {
+    padding: 16px !important;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.alert p,
+.alert li {
+    font-size: var(--font-mobile-sm) !important;
+    line-height: 1.5;
+}
+
+.security-notice {
+    padding: 12px 16px !important;
+    font-size: var(--font-mobile-sm) !important;
+    border-radius: 10px;
+}
+
+/* =====================================================
+   17. UPLOAD AREAS - MOBILE
+   ===================================================== */
+
+.upload-area {
+    padding: 24px 16px !important;
+    border-radius: 12px;
+    min-height: 120px;
+}
+
+.upload-label i {
+    font-size: 36px !important;
+    margin-bottom: 12px;
+}
+
+.upload-text {
+    font-size: var(--font-mobile-sm) !important;
+    font-weight: 600;
+}
+
+.upload-subtext {
+    font-size: 12px !important;
+}
+
+.btn-camera {
+    padding: 12px 20px !important;
+    font-size: var(--font-mobile-sm) !important;
+    min-height: var(--touch-target-min);
+    border-radius: 10px;
+}
+
+/* =====================================================
+   18. STEP HEADERS - MOBILE
+   ===================================================== */
+
+.step-header {
+    padding: 16px !important;
+    margin-bottom: 16px !important;
+    border-radius: 12px;
+}
+
+.step-header h2 {
+    font-size: var(--font-mobile-base) !important;
+    line-height: 1.3;
+    margin-bottom: 6px;
+}
+
+.step-header p {
+    font-size: 13px !important;
+    line-height: 1.4;
+    color: #6b7280;
+}
+
+.section-title {
+    font-size: var(--font-mobile-sm) !important;
+    padding: 12px 14px !important;
+    margin-bottom: 12px !important;
+    border-radius: 10px;
+}
+
+/* =====================================================
+   19. DOCUMENT UPLOAD - MOBILE
+   ===================================================== */
+
+.document-upload-group {
+    padding: 16px !important;
+    border-radius: 12px;
+    margin-bottom: 16px !important;
+}
+
+.document-label {
+    font-size: var(--font-mobile-sm) !important;
+    margin-bottom: 12px;
+}
+
+.sub-label {
+    font-size: 13px !important;
+    margin-bottom: 8px;
+    margin-top: 12px;
+}
+
+/* =====================================================
+   20. GENERAL TOUCH IMPROVEMENTS
+   ===================================================== */
+
+/* Ensure all interactive elements are tappable */
+a, button, input, select, textarea, label, 
+[role="button"], [onclick], .clickable {
+    -webkit-tap-highlight-color: rgba(34, 197, 94, 0.2);
+}
+
+/* Prevent text selection on UI elements */
+.btn, button, .nav-link, .progress-step, .frequency-btn {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* =====================================================
+   21. TABLET ADJUSTMENTS (768px - 1024px)
+   ===================================================== */
+
+@media (min-width: 768px) {
+    .navbar {
+        height: 70px !important;
+    }
+    
+    .logo-img {
+        height: 50px !important;
+    }
+    
+    .hero-carousel {
+        padding-top: 90px !important;
+        min-height: 300px;
+        max-height: 380px;
+    }
+    
+    .carousel-slide h1 {
+        font-size: 28px !important;
+    }
+    
+    .cards-side-by-side {
+        flex-direction: row !important;
+    }
+    
+    .cards-side-by-side .col-6 {
+        width: 50% !important;
+        padding: 0 10px !important;
+    }
+    
+    .progress-circle {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    
+    .progress-label {
+        font-size: 11px !important;
+    }
+    
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-section {
+        text-align: left;
+    }
+}
+
+/* =====================================================
+   22. DESKTOP ADJUSTMENTS (1024px+)
+   ===================================================== */
+
+@media (min-width: 1024px) {
+    .navbar {
+        height: 80px !important;
+    }
+    
+    .logo-img {
+        height: 60px !important;
+    }
+    
+    .hero-carousel {
+        padding-top: 100px !important;
+        min-height: 350px;
+        max-height: 450px;
+    }
+    
+    .carousel-slide h1 {
+        font-size: 36px !important;
+    }
+    
+    .carousel-slide p {
+        font-size: 18px !important;
+    }
+    
+    .form-control {
+        height: 46px !important;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

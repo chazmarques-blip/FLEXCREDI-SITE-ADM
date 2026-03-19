@@ -18,6 +18,8 @@
     <!-- CORREÇÃO DEFINITIVA DO CAROUSEL -->
     <link rel="stylesheet" href="css/carousel-fix.css?v=1.0.1">
     <link rel="stylesheet" href="css/cache-buster.css">
+    <!-- MOBILE-FIRST OPTIMIZATION - LOAD LAST TO OVERRIDE -->
+    <link rel="stylesheet" href="css/mobile-first.css?v=2.0.0">
     
     <!-- Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
@@ -189,9 +191,9 @@
                             <div class="card-header">
                                 <h3 id="simulacao-titulo" class="card-title text-center">
                                     <i class="fas fa-calculator text-verde"></i>
-                                    <span data-translate="Start Your Credit Application in Seconds!">Start Your Credit Application in Seconds!</span>
+                                    <span data-translate="Start Your Credit Application in Seconds!" data-translate-mobile="Apply for Credit Now!">Start Your Credit Application in Seconds!</span>
                                 </h3>
-                                <p class="card-subtitle text-center" data-translate="Fill out the form below to discover your credit availability">Fill out the form below to discover your credit availability</p>
+                                <p class="card-subtitle text-center" data-translate="Fill out the form below to discover your credit availability" data-translate-mobile="Fill the form to check availability">Fill out the form below to discover your credit availability</p>
                             </div>
                             
                             <!-- Progress Bar -->
@@ -201,25 +203,25 @@
                                         <div class="progress-circle">
                                             <i class="fas fa-user"></i>
                                         </div>
-                                        <span class="progress-label" data-translate="Personal Info">Personal Info</span>
+                                        <span class="progress-label" data-translate="Personal Info" data-translate-mobile="Personal">Personal Info</span>
                                     </div>
                                     <div class="progress-step" data-step="2">
                                         <div class="progress-circle">
                                             <i class="fas fa-briefcase"></i>
                                         </div>
-                                        <span class="progress-label" data-translate="Housing & Employment">Housing & Employment</span>
+                                        <span class="progress-label" data-translate="Housing & Employment" data-translate-mobile="Housing">Housing & Employment</span>
                                     </div>
                                     <div class="progress-step" data-step="3">
                                         <div class="progress-circle">
                                             <i class="fas fa-university"></i>
                                         </div>
-                                        <span class="progress-label" data-translate="Bank & Documents">Bank & Documents</span>
+                                        <span class="progress-label" data-translate="Bank & Documents" data-translate-mobile="Documents">Bank & Documents</span>
                                     </div>
                                     <div class="progress-step" data-step="4">
                                         <div class="progress-circle">
                                             <i class="fas fa-check-circle"></i>
                                         </div>
-                                        <span class="progress-label" data-translate="Review & Submit">Review & Submit</span>
+                                        <span class="progress-label" data-translate="Review & Submit" data-translate-mobile="Submit">Review & Submit</span>
                                     </div>
                                 </div>
                             </div>
@@ -2299,6 +2301,44 @@
             
             console.log('✅ Legal links handler initialized');
         });
+
+    <!-- Mobile Text Optimization Script -->
+    <script>
+    (function() {
+        function updateMobileTexts() {
+            const isMobile = window.innerWidth < 768;
+            
+            document.querySelectorAll('[data-translate-mobile]').forEach(function(el) {
+                const mobileText = el.getAttribute('data-translate-mobile');
+                const desktopText = el.getAttribute('data-translate') || el.getAttribute('data-original-text');
+                
+                // Store original text if not stored
+                if (!el.getAttribute('data-original-text')) {
+                    el.setAttribute('data-original-text', el.textContent);
+                }
+                
+                if (isMobile && mobileText) {
+                    el.textContent = mobileText;
+                } else if (desktopText) {
+                    el.textContent = desktopText;
+                } else {
+                    el.textContent = el.getAttribute('data-original-text');
+                }
+            });
+        }
+        
+        // Run on load
+        document.addEventListener('DOMContentLoaded', updateMobileTexts);
+        
+        // Run on resize with debounce
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(updateMobileTexts, 150);
+        });
+    })();
+    </script>
+
     </script>
     
     <!-- Document Upload System -->
