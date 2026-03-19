@@ -11,6 +11,36 @@
 
 ## O que foi Implementado
 
+### 19/03/2026 - Correção Global de Ícones FontAwesome
+
+**Contexto**: Ícones FontAwesome estavam aparecendo como linhas horizontais (≡) ou quadrados em várias áreas do site (formulário multi-step, seções de benefícios, área de upload, botões).
+
+**Causa Raiz**: A regra CSS `* { font-family: 'Inter' !important; }` estava sobrescrevendo a font-family do FontAwesome em todos os elementos, incluindo os ícones `<i>`.
+
+**Arquivos Modificados**:
+- `/app/css/desktop-clean.css` - Correção global para ícones FontAwesome
+- `/app/css/mobile-first.css` - Correção para garantir funcionamento em dispositivos móveis
+
+**Solução Implementada**:
+1. Modificado o seletor global para excluir elementos `<i>` e classes FontAwesome:
+   ```css
+   *:not(i):not([class*="fa-"]):not(.fas):not(.far):not(.fab) {...}
+   ```
+2. Adicionado reset global para todos os ícones FontAwesome com:
+   - font-family correta do FontAwesome
+   - font-weight apropriado (900 para solid, 400 para regular/brands)
+   - display: inline-block
+3. Adicionado CSS específico para ícones em contextos específicos (botões, labels, headers, formulários)
+4. Adicionado mapeamento de content para ícones comuns (::before)
+
+**Verificação**:
+- ✅ Mobile: Todos os ícones do formulário funcionando (Steps 1-4)
+- ✅ Desktop: Todos os ícones funcionando (barra de progresso, benefícios, calculadora)
+- ✅ Área de upload: ícones de nuvem, câmera, documento OK
+- ✅ Botões de navegação: setas e ícones OK
+
+---
+
 ### 19/03/2026 - Correção de Ícones na Seção Success Stories
 
 **Contexto**: Os ícones de estrela (rating) na seção "Florida Success Stories" não estavam sendo exibidos corretamente na versão desktop.

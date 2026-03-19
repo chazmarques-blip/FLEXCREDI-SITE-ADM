@@ -37,6 +37,36 @@
 }
 
 /* =====================================================
+   CORREÇÃO GLOBAL FONTAWESOME - MOBILE
+   Garantir que ícones funcionem em todos os dispositivos
+   ===================================================== */
+
+/* Reset FontAwesome para todos os tamanhos de tela */
+i.fas, i.far, i.fab, i.fal, i.fad,
+.fas, .far, .fab, .fal, .fad,
+[class*="fa-"] {
+    font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome !important;
+    font-style: normal !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    line-height: 1;
+}
+
+i.fas, .fas {
+    font-weight: 900 !important;
+}
+
+i.far, .far {
+    font-weight: 400 !important;
+}
+
+i.fab, .fab {
+    font-family: "Font Awesome 6 Brands", "Font Awesome 5 Brands", FontAwesome !important;
+    font-weight: 400 !important;
+}
+
+/* =====================================================
    2. ESTILOS MOBILE ONLY (max-width: 767px)
    ===================================================== */
 
