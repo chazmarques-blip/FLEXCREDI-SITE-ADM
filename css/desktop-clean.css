@@ -41,9 +41,9 @@ body {
         gap: 12px;
     }
     
-    /* Logo - PROPORCIONAL */
+    /* Logo - 30% MAIOR */
     .logo-img {
-        height: 38px;
+        height: 50px;
         transition: transform 0.2s ease;
         flex-shrink: 0;
     }
