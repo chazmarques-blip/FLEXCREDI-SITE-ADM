@@ -1,0 +1,396 @@
+/* ============ UNIFICAÇÃO VISUAL SIGNATÁRIO PRINCIPAL ============ */
+
+/* Garantir que o signatário principal usando classes cobuyer tenha visual idêntico */
+.main-signer-card.cobuyer-card {
+    border: 1px solid #e1e5e9 !important;
+    border-radius: 8px !important;
+    padding: 20px !important;
+    margin-bottom: 16px !important;
+    background: var(--branco) !important;
+    box-shadow: var(--shadow-light) !important;
+}
+
+/* Header do signatário principal idêntico ao avalista */
+.main-signer-card .cobuyer-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 16px !important;
+    padding-bottom: 12px !important;
+    border-bottom: 1px solid #e1e5e9 !important;
+    background: none !important;
+    padding-top: 0 !important;
+}
+
+/* Título do signatário principal */
+.main-signer-card .cobuyer-title {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--cinza-escuro) !important;
+}
+
+/* Status do signatário principal */
+.main-signer-card .cobuyer-status {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+}
+
+/* Ações do signatário principal */
+.main-signer-card .cobuyer-actions {
+    display: flex !important;
+    gap: 8px !important;
+}
+
+/* Conteúdo em 2 colunas para signatário principal */
+.main-signer-card .cobuyer-content {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+}
+
+/* Seções de informação */
+.main-signer-card .cobuyer-info-section {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+}
+
+/* Títulos das seções */
+.main-signer-card .cobuyer-section-title {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: var(--verde-escuro) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin-bottom: 8px !important;
+}
+
+/* Grid de perfil em 2 colunas */
+.main-signer-card .cobuyer-profile-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px 12px !important;
+}
+
+/* Grid de documentos em linha horizontal (4 colunas) */
+.main-signer-card .cobuyer-documents-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 12px !important;
+}
+
+/* Cards de documento com altura uniforme */
+.main-signer-card .cobuyer-document-card {
+    height: 240px !important;
+}
+
+/* Responsividade para signatário principal */
+@media (max-width: 1024px) {
+    .main-signer-card .cobuyer-content {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .main-signer-card .cobuyer-documents-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-signer-card .cobuyer-documents-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+    
+    .main-signer-card .cobuyer-content {
+        gap: 16px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-signer-card .cobuyer-documents-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+    
+    .main-signer-card .cobuyer-profile-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Garantir alinhamento perfeito dos elementos */
+.main-signer-card .profile-item {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+}
+
+.main-signer-card .profile-label {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: #656d76 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+}
+
+.main-signer-card .profile-value {
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: var(--cinza-escuro) !important;
+    line-height: 1.4 !important;
+    padding: 6px 8px !important;
+    border-radius: 4px !important;
+    transition: all 0.2s !important;
+}
+
+.main-signer-card .profile-value.editable:not(.editing) {
+    background: #f8f9fa !important;
+    border: 1px solid transparent !important;
+    cursor: pointer !important;
+}
+
+.main-signer-card .profile-value.editable:not(.editing):hover {
+    background: #e9ecef !important;
+    border-color: var(--verde-vibrante) !important;
+}
+
+.main-signer-card .profile-value.editing {
+    background: var(--branco) !important;
+    border: 2px solid var(--verde-vibrante) !important;
+    outline: none !important;
+}
+
+/* Status colors para signatário principal */
+.main-signer-card .status-incomplete {
+    color: #856404 !important;
+}
+
+.main-signer-card .status-complete {
+    color: #155724 !important;
+}
+
+/* Botão de edição idêntico */
+.main-signer-card .btn-edit {
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+    border: 1px solid #d0d7de !important;
+    background: var(--branco) !important;
+    color: #656d76 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+.main-signer-card .btn-edit:hover {
+    border-color: var(--verde-vibrante) !important;
+    color: var(--verde-vibrante) !important;
+}
+
+/* ============ SEÇÃO DE CONTRATO INTEGRADA - LAYOUT INLINE ============ */
+
+/* Container da seção de contrato */
+.signer-contract-section {
+    margin-top: 24px !important;
+    padding-top: 20px !important;
+    border-top: 1px solid #e1e5e9 !important;
+}
+
+/* Título da seção de contrato */
+.contract-title {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: var(--verde-escuro) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin-bottom: 16px !important;
+}
+
+.contract-title i {
+    margin-right: 8px !important;
+}
+
+/* Status do contrato */
+.contract-status {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: #2563eb !important;
+    background: #eff6ff !important;
+    padding: 4px 8px !important;
+    border-radius: 12px !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+}
+
+/* Conteúdo do contrato inline */
+.contract-content-inline {
+    background: #f8f9fa !important;
+    border-radius: 8px !important;
+    padding: 16px !important;
+    border: 1px solid #e1e5e9 !important;
+}
+
+/* Header do contrato inline */
+.contract-header-inline h4 {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--cinza-escuro) !important;
+    margin: 0 0 12px 0 !important;
+    text-align: center !important;
+}
+
+/* Layout principal inline - valores e botões na mesma linha */
+.contract-inline-layout {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 20px !important;
+}
+
+/* Container dos valores inline */
+.contract-values-inline {
+    display: flex !important;
+    align-items: center !important;
+    gap: 24px !important;
+    flex: 1 !important;
+}
+
+/* Cada item de valor */
+.value-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    min-width: 80px !important;
+}
+
+.value-item .label {
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    color: #656d76 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+    margin-bottom: 2px !important;
+}
+
+.value-item .value {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--cinza-escuro) !important;
+    white-space: nowrap !important;
+}
+
+/* Container dos botões inline */
+.contract-buttons-inline {
+    display: flex !important;
+    gap: 10px !important;
+    flex-shrink: 0 !important;
+}
+
+/* Botões do contrato inline */
+.contract-btn-review-inline,
+.contract-btn-sign-inline {
+    padding: 8px 14px !important;
+    border-radius: 6px !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    border: none !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+}
+
+.contract-btn-review-inline {
+    background: var(--branco) !important;
+    color: #656d76 !important;
+    border: 1px solid #d0d7de !important;
+}
+
+.contract-btn-review-inline:hover {
+    border-color: var(--verde-vibrante) !important;
+    color: var(--verde-vibrante) !important;
+}
+
+.contract-btn-sign-inline {
+    background: var(--verde-vibrante) !important;
+    color: var(--branco) !important;
+}
+
+.contract-btn-sign-inline:hover {
+    background: var(--verde-escuro) !important;
+}
+
+.contract-btn-sign-inline:disabled {
+    background: #9ca3af !important;
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+}
+
+/* Responsividade para layout inline */
+@media (max-width: 1024px) {
+    .contract-inline-layout {
+        flex-direction: column !important;
+        gap: 16px !important;
+        align-items: stretch !important;
+    }
+    
+    .contract-values-inline {
+        justify-content: center !important;
+        gap: 16px !important;
+    }
+    
+    .contract-buttons-inline {
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .contract-values-inline {
+        flex-wrap: wrap !important;
+        gap: 12px !important;
+    }
+    
+    .value-item {
+        min-width: 70px !important;
+    }
+    
+    .contract-buttons-inline {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+    
+    .contract-btn-review-inline,
+    .contract-btn-sign-inline {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .contract-values-inline {
+        grid-template-columns: repeat(2, 1fr) !important;
+        display: grid !important;
+        gap: 8px !important;
+    }
+    
+    .signer-contract-section {
+        margin-top: 16px !important;
+        padding-top: 16px !important;
+    }
+}

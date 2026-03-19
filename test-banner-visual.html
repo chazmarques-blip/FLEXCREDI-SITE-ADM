@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banner Test - FLEXCREDI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { margin: 0; padding: 0; }
+        .debug-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 9999;
+        }
+        .measurements {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.8);
+            color: lime;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 11px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-info">
+        <div>Viewport: <span id="viewport"></span></div>
+        <div>Banner Height: <span id="bannerHeight"></span></div>
+        <div>Content Height: <span id="contentHeight"></span></div>
+        <div>Overflow: <span id="overflow"></span></div>
+    </div>
+
+    <section class="hero-carousel" id="testBanner">
+        <div class="carousel-container">
+            <div class="carousel-slide active slide-dark-text">
+                <div class="slide-background" style="background-image: url('images/mosaic-restaurant.jpg')"></div>
+                <div class="slide-overlay-light"></div>
+                <div class="container">
+                    <div class="hero-content" id="testContent">
+                        <div class="hero-slogan">Easy • Simple • Fast</div>
+                        <h1>Transform Your Culinary Passion Into Reality</h1>
+                        <p>From dream to customers' tables. Expand your restaurant, buy equipment and conquer new flavors with our specialized credit.</p>
+                        <div class="hero-buttons">
+                            <a href="#" class="btn btn-primary">See My Offer</a>
+                            <a href="#" class="btn btn-outline-dark">How It Works</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="measurements">
+        <div>MEASUREMENTS:</div>
+        <div>Slogan: <span id="sloganSize"></span></div>
+        <div>H1: <span id="h1Size"></span></div>
+        <div>P: <span id="pSize"></span></div>
+        <div>Buttons: <span id="btnSize"></span></div>
+    </div>
+
+    <script>
+        function updateMeasurements() {
+            const banner = document.getElementById('testBanner');
+            const content = document.getElementById('testContent');
+            const slogan = content.querySelector('.hero-slogan');
+            const h1 = content.querySelector('h1');
+            const p = content.querySelector('p');
+            const btn = content.querySelector('.btn');
+
+            document.getElementById('viewport').textContent = `${window.innerWidth}x${window.innerHeight}`;
+            document.getElementById('bannerHeight').textContent = `${banner.offsetHeight}px`;
+            document.getElementById('contentHeight').textContent = `${content.offsetHeight}px`;
+            
+            const overflow = content.offsetHeight > banner.offsetHeight;
+            document.getElementById('overflow').textContent = overflow ? '⚠️ YES!' : '✅ NO';
+            document.getElementById('overflow').style.color = overflow ? 'red' : 'lime';
+
+            document.getElementById('sloganSize').textContent = window.getComputedStyle(slogan).fontSize;
+            document.getElementById('h1Size').textContent = window.getComputedStyle(h1).fontSize;
+            document.getElementById('pSize').textContent = window.getComputedStyle(p).fontSize;
+            document.getElementById('btnSize').textContent = window.getComputedStyle(btn).fontSize;
+        }
+
+        window.addEventListener('load', updateMeasurements);
+        window.addEventListener('resize', updateMeasurements);
+    </script>
+</body>
+</html>

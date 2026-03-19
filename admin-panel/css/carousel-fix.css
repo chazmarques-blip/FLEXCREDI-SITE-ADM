@@ -1,0 +1,291 @@
+/* ===========================================
+   HERO CAROUSEL - CORREÇÃO DEFINITIVA
+   =========================================== */
+
+/* Container do Carousel */
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    background: var(--verde-vibrante); /* Fallback verde */
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Slides */
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease-in-out, visibility 0.8s;
+    z-index: 1;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+}
+
+/* Background das Imagens - CRÍTICO */
+.slide-background {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    z-index: 1 !important;
+}
+
+/* Garantir que imagens carreguem */
+.carousel-slide[data-slide="0"] .slide-background {
+    background-image: url('../images/mosaic-restaurant.jpg') !important;
+}
+
+.carousel-slide[data-slide="1"] .slide-background {
+    background-image: url('../images/mosaic-beauty.jpg') !important;
+}
+
+.carousel-slide[data-slide="2"] .slide-background {
+    background-image: url('../images/mosaic-construction.jpg') !important;
+}
+
+.carousel-slide[data-slide="3"] .slide-background {
+    background-image: url('../images/mosaic-foodtruck.jpg') !important;
+}
+
+.carousel-slide[data-slide="4"] .slide-background {
+    background-image: url('../images/mosaic-auto.jpg') !important;
+}
+
+.carousel-slide[data-slide="5"] .slide-background {
+    background-image: url('../images/mosaic-retail.jpg') !important;
+}
+
+/* Overlays */
+.slide-overlay-light {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.85) 0%, 
+        rgba(240, 248, 255, 0.9) 50%,
+        rgba(255, 255, 255, 0.75) 100%
+    );
+    z-index: 2;
+}
+
+.slide-overlay-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg, 
+        rgba(46, 204, 113, 0.75) 0%, 
+        rgba(39, 174, 96, 0.85) 30%,
+        rgba(44, 62, 80, 0.65) 70%,
+        rgba(52, 73, 94, 0.75) 100%
+    );
+    z-index: 2;
+}
+
+/* Conteúdo Hero */
+.carousel-slide .hero-content {
+    position: relative;
+    z-index: 10 !important;
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto;
+    padding: var(--spacing-xxl) var(--spacing-lg);
+}
+
+/* Textos - Dark (para fundos claros) */
+.slide-dark-text .hero-slogan,
+.slide-dark-text h1,
+.slide-dark-text p {
+    color: var(--cinza-escuro) !important;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+/* Textos - Light (para fundos escuros) */
+.slide-light-text .hero-slogan,
+.slide-light-text h1,
+.slide-light-text p {
+    color: var(--branco) !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Hero Slogan */
+.hero-slogan {
+    font-size: var(--font-size-small);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-md);
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+/* Hero Title */
+.carousel-slide h1 {
+    font-size: clamp(1.8rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Hero Description */
+.carousel-slide p {
+    font-size: var(--font-size-large);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Botões do Hero */
+.hero-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-buttons .btn {
+    min-width: 180px;
+}
+
+/* Navigation Buttons */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 var(--spacing-lg);
+    z-index: 20;
+    pointer-events: none;
+}
+
+.carousel-btn {
+    pointer-events: all;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--verde-vibrante);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-btn:hover {
+    background: var(--verde-vibrante);
+    color: var(--branco);
+    transform: scale(1.1);
+}
+
+/* Indicators */
+.carousel-indicators {
+    position: absolute;
+    bottom: var(--spacing-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--spacing-sm);
+    z-index: 20;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.indicator:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+}
+
+.indicator.active {
+    background: var(--branco);
+    width: 32px;
+    border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-carousel {
+        height: 500px;
+    }
+    
+    .carousel-slide .hero-content {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+    
+    .carousel-slide h1 {
+        font-size: 1.8rem;
+    }
+    
+    .carousel-slide p {
+        font-size: var(--font-size-base);
+    }
+    
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-carousel {
+        height: 450px;
+    }
+    
+    .carousel-slide h1 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-slogan {
+        font-size: 10px;
+    }
+}

@@ -1,0 +1,510 @@
+/* ============ BARRA DE PROGRESSO HORIZONTAL ULTRA-COMPACTA ============ */
+
+/* Container principal - integrado ao header verde */
+.compact-horizontal-progress {
+    margin: 6px 0 4px 0;
+    padding: 0;
+    width: 100%;
+    font-size: 10px;
+    line-height: 1.2;
+    height: 32px; /* Aumentar altura para acomodar labels */
+}
+
+/* Header mini com label e percentual */
+.progress-header-mini {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    height: 12px;
+}
+
+.progress-label {
+    font-size: 8px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.progress-percent {
+    font-size: 8px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1px 4px;
+    border-radius: 6px;
+    min-width: 22px;
+    text-align: center;
+}
+
+/* Track da barra de progresso */
+.progress-track {
+    position: relative;
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    overflow: visible;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 8px; /* Espaço para os labels */
+}
+
+/* Preenchimento da barra */
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.7) 50%,
+        rgba(255, 255, 255, 0.9) 100%
+    );
+    border-radius: 2px;
+    width: 50%;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+/* Container dos pontos das etapas */
+.progress-steps-container {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 24px; /* Aumentar para acomodar labels */
+    pointer-events: none;
+    padding: 0; /* Remover padding para permitir alinhamento preciso */
+    box-sizing: border-box;
+    overflow: visible; /* Garantir que labels não sejam cortados */
+}
+
+/* Pontos das etapas - ALINHAMENTO PERFEITO COM BARRA */
+.progress-step-dot {
+    position: absolute;
+    top: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    z-index: 2;
+}
+
+/* Primeira bolinha: alinhada com início da barra */
+.progress-step-dot:first-child {
+    left: 0;
+    transform: translateX(0); /* Sem centralização - extremo esquerdo */
+}
+
+/* Última bolinha: alinhada com fim da barra */
+.progress-step-dot:last-child {
+    left: 100%;
+    transform: translateX(-100%); /* Alinhada ao extremo direito */
+}
+
+/* Bolinhas do meio: centralizadas */
+.progress-step-dot:not(:first-child):not(:last-child) {
+    transform: translateX(-50%); /* Centralizada na posição */
+}
+
+/* Labels das etapas */
+.step-label {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1;
+    pointer-events: none;
+    min-width: 40px;
+    max-width: 60px;
+    overflow: visible;
+}
+
+/* Labels alinhados com as bolinhas nos extremos da barra */
+.progress-step-dot:first-child .step-label {
+    transform: translateX(0) !important;
+    left: 0 !important;  /* Alinhado com extremo esquerdo da barra */
+    text-align: left !important;
+    margin-left: 0 !important;
+}
+
+.progress-step-dot:last-child .step-label {
+    transform: translateX(-100%) !important;
+    left: 100% !important;  /* Alinhado com extremo direito da barra */
+    text-align: right !important;
+    margin-right: 0 !important;
+}
+
+/* Labels do meio centralizados com suas bolinhas */
+.progress-step-dot:not(:first-child):not(:last-child) .step-label {
+    transform: translateX(-50%) !important;
+    left: 50% !important;
+    text-align: center !important;
+}
+
+/* Estados dos labels */
+.progress-step-dot.completed .step-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+}
+
+.progress-step-dot.current .step-label {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.progress-step-dot.pending .step-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 300;
+}
+
+/* Estados dos pontos */
+.progress-step-dot.completed {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.8));
+    color: #2ECC71;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.3);
+}
+
+.progress-step-dot.current {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #333;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    animation: currentDotPulse 2s ease-in-out infinite;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+}
+
+.progress-step-dot.pending {
+    background: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Animação do ponto atual */
+@keyframes currentDotPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        box-shadow: 0 3px 12px rgba(255, 215, 0, 0.6);
+    }
+}
+
+/* Hover effect para melhor interatividade */
+.progress-step-dot:hover {
+    transform: translateX(-50%) scale(1.1);
+}
+
+.progress-step-dot:hover .step-label {
+    font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Notificações mini */
+.mini-progress-notification {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 10000;
+    background: linear-gradient(135deg, #2ECC71, #1E8449);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+    animation: slideInMini 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 250px;
+}
+
+.mini-progress-notification i {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+@keyframes slideInMini {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Notificação final */
+.final-mini-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10001;
+    background: white;
+    border-radius: 10px;
+    padding: 20px 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    max-width: 350px;
+    animation: finalMiniAppear 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.final-mini-notification.approved {
+    border-left: 6px solid #28a745;
+    color: #28a745;
+}
+
+.final-mini-notification.denied {
+    border-left: 6px solid #dc3545;
+    color: #dc3545;
+}
+
+.final-mini-notification.adjusted {
+    border-left: 6px solid #ffc107;
+    color: #e0a800;
+}
+
+.final-mini-notification i {
+    font-size: 24px;
+}
+
+.close-notification {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #999;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: color 0.2s ease;
+}
+
+.close-notification:hover {
+    color: #333;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+@keyframes finalMiniAppear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Responsividade ultra-compacta */
+@media (max-width: 768px) {
+    .compact-horizontal-progress {
+        margin: 4px 0 3px 0;
+        height: 28px;
+    }
+    
+    .progress-header-mini {
+        margin-bottom: 3px;
+        height: 10px;
+    }
+    
+    .progress-label,
+    .progress-percent {
+        font-size: 7px;
+    }
+    
+    .progress-track {
+        height: 5px;
+        margin-bottom: 6px;
+    }
+    
+    .progress-step-dot {
+        width: 8px;
+        height: 8px;
+        font-size: 4px;
+    }
+    
+    .progress-steps-container {
+        height: 20px;
+    }
+    
+    .step-label {
+        font-size: 7px;
+        top: 12px;
+        min-width: 35px;
+        max-width: 50px;
+    }
+    
+    .progress-steps-container {
+        padding: 0; /* Sem padding para manter alinhamento preciso */
+    }
+    
+    /* Manter alinhamento perfeito em tablets */
+    .progress-step-dot:first-child .step-label {
+        left: 0 !important; /* Extremo esquerdo exato */
+    }
+    
+    .progress-step-dot:last-child .step-label {
+        left: 100% !important; /* Extremo direito exato */
+    }
+    
+    .mini-progress-notification {
+        top: 70px;
+        right: 10px;
+        left: 10px;
+        font-size: 11px;
+        padding: 6px 10px;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .compact-horizontal-progress {
+        margin: 3px 0 2px 0;
+        height: 24px;
+    }
+    
+    .progress-header-mini {
+        height: 8px;
+        margin-bottom: 2px;
+    }
+    
+    .progress-label,
+    .progress-percent {
+        font-size: 6px;
+    }
+    
+    .progress-track {
+        height: 4px;
+        margin-bottom: 4px;
+    }
+    
+    .progress-step-dot {
+        width: 6px;
+        height: 6px;
+        font-size: 3px;
+    }
+    
+    .progress-steps-container {
+        height: 16px;
+        top: -1px;
+    }
+    
+    .step-label {
+        font-size: 6px;
+        top: 10px;
+        letter-spacing: 0.1px;
+        min-width: 30px;
+        max-width: 45px;
+    }
+    
+    .progress-steps-container {
+        padding: 0; /* Sem padding para manter alinhamento preciso */
+    }
+    
+    /* Manter alinhamento perfeito em mobile */
+    .progress-step-dot:first-child .step-label {
+        left: 0 !important; /* Extremo esquerdo exato */
+    }
+    
+    .progress-step-dot:last-child .step-label {
+        left: 100% !important; /* Extremo direito exato */
+    }
+    
+    /* Remover tooltips em mobile */
+    .progress-step-dot:hover::after,
+    .progress-step-dot:hover::before {
+        display: none;
+    }
+    
+    .final-mini-notification {
+        padding: 15px 20px;
+        font-size: 14px;
+        max-width: 90%;
+    }
+    
+    .final-mini-notification i {
+        font-size: 20px;
+    }
+}
+
+/* Integração específica com o layout existente */
+.status-info .compact-horizontal-progress {
+    order: 2; /* Posicionar entre financing-details e application-status */
+}
+
+/* Ajuste fino para o espaçamento no header verde */
+.status-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-header {
+    order: 1;
+}
+
+.financing-details {
+    order: 2;
+}
+
+.compact-horizontal-progress {
+    order: 3;
+}
+
+.application-status {
+    order: 4;
+}
+
+/* Melhorias de performance */
+.progress-fill,
+.progress-step-dot {
+    will-change: transform, width;
+}
+
+/* Estados hover para interatividade */
+.compact-horizontal-progress:hover .progress-step-dot {
+    transform: translate(-50%, -50%) scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+.compact-horizontal-progress:hover .progress-track {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Indicador de carregamento (opcional) */
+.progress-fill.loading {
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.7) 50%,
+        rgba(255, 255, 255, 0.3) 100%
+    );
+    background-size: 200% 100%;
+    animation: progressLoading 1.5s ease-in-out infinite;
+}
+
+@keyframes progressLoading {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}

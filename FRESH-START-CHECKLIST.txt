@@ -1,0 +1,164 @@
+═══════════════════════════════════════════════════════════════════════════
+🆕 FRESH START - CHECKLIST DE PROGRESSO
+═══════════════════════════════════════════════════════════════════════════
+
+Data: 22/02/2026
+Tempo estimado: 15 minutos
+Status: EM ANDAMENTO
+
+═══════════════════════════════════════════════════════════════════════════
+
+PROGRESSO GERAL: [▱▱▱▱▱▱▱▱] 0/8 (0%)
+
+═══════════════════════════════════════════════════════════════════════════
+
+PASSO 1: DELETE SERVIÇO ANTIGO
+[ ] 1.1 Acessar https://railway.app/
+[ ] 1.2 Entrar no projeto FlexCredi
+[ ] 1.3 Localizar serviço web-production-e227
+[ ] 1.4 Abrir Settings do serviço
+[ ] 1.5 Rolar até "Danger Zone"
+[ ] 1.6 Clicar em "Delete Service"
+[ ] 1.7 Confirmar exclusão
+STATUS: ⏳ AGUARDANDO VOCÊ DELETAR O SERVIÇO ANTIGO
+
+---
+
+PASSO 2: CRIAR NOVO SERVIÇO
+[ ] 2.1 Clicar em "+ New" ou "New Service"
+[ ] 2.2 Escolher "Deploy from GitHub repo"
+[ ] 2.3 Selecionar: chazmarques-blip/FLEXCREDI-SITE-ADM
+[ ] 2.4 Branch: main
+[ ] 2.5 Root Directory: backend
+[ ] 2.6 Clicar em "Deploy"
+STATUS: 🔒 AGUARDANDO PASSO 1
+
+---
+
+PASSO 3: CONFIGURAR VARIÁVEIS
+[ ] 3.1 Ir em "Variables"
+[ ] 3.2 Adicionar DATABASE_URL
+[ ] 3.3 Adicionar NODE_ENV=production
+[ ] 3.4 Adicionar PORT=3000
+[ ] 3.5 Adicionar JWT_SECRET (opcional)
+[ ] 3.6 Salvar variáveis
+STATUS: 🔒 AGUARDANDO PASSO 2
+
+---
+
+PASSO 4: AGUARDAR BUILD
+[ ] 4.1 Ir em "Deployments"
+[ ] 4.2 Clicar no deployment ativo
+[ ] 4.3 Acompanhar logs em tempo real
+[ ] 4.4 Aguardar "npm install" completar
+[ ] 4.5 Aguardar "prisma generate" completar
+[ ] 4.6 Aguardar "prisma db push" completar
+[ ] 4.7 Aguardar "Server running on port 3000"
+[ ] 4.8 Status mudar para "ACTIVE" (verde)
+STATUS: 🔒 AGUARDANDO PASSO 3
+
+---
+
+PASSO 5: GERAR DOMÍNIO
+[ ] 5.1 Ir em "Settings"
+[ ] 5.2 Procurar "Networking" ou "Domains"
+[ ] 5.3 Clicar em "Generate Domain"
+[ ] 5.4 Copiar a URL gerada
+[ ] 5.5 Anotar a URL para os próximos passos
+STATUS: 🔒 AGUARDANDO PASSO 4
+
+---
+
+PASSO 6: TESTAR ENDPOINTS
+[ ] 6.1 Testar /health
+[ ] 6.2 Testar /api/debug/database-test
+[ ] 6.3 Testar /api/admin/dashboard
+[ ] 6.4 Testar /api/applications
+[ ] 6.5 Testar /api/partners
+[ ] 6.6 Confirmar todos retornam success: true
+STATUS: 🔒 AGUARDANDO PASSO 5
+
+---
+
+PASSO 7: ATUALIZAR VERCEL
+[ ] 7.1 Localizar arquivo de config da API
+[ ] 7.2 Atualizar API_URL com nova Railway URL
+[ ] 7.3 Commit e push das alterações
+[ ] 7.4 Aguardar Vercel redeployar (~2 min)
+[ ] 7.5 Verificar status verde no Vercel
+STATUS: 🔒 AGUARDANDO PASSO 6
+
+---
+
+PASSO 8: CONFIRMAR DASHBOARD
+[ ] 8.1 Acessar https://flexcredi-dashboard.vercel.app/admin/
+[ ] 8.2 Abrir Console do navegador (F12)
+[ ] 8.3 Navegar pelas páginas do sidebar
+[ ] 8.4 Confirmar nenhum erro 400/500
+[ ] 8.5 Confirmar requests retornam 200
+[ ] 8.6 Confirmar páginas carregam corretamente
+STATUS: 🔒 AGUARDANDO PASSO 7
+
+═══════════════════════════════════════════════════════════════════════════
+
+INFORMAÇÕES IMPORTANTES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📦 Repositório: chazmarques-blip/FLEXCREDI-SITE-ADM
+🌿 Branch: main
+📁 Root Directory: backend
+🐳 Commit correto: e2b1f8f
+
+🔐 DATABASE_URL a usar:
+postgresql://postgres.oekfkdvrgyiklgkfqpbt:*x!4QaAuPepA5%23B@aws-1-us-east-2.pooler.supabase.com:6543/postgres
+
+⚠️  IMPORTANTE: Use %23 no lugar de # na URL (já está correto acima)
+
+═══════════════════════════════════════════════════════════════════════════
+
+COMANDOS DE TESTE (Use após PASSO 5):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Substitua SEU-NOVO-DOMINIO pela URL gerada no Passo 5:
+
+# Health check (deve mostrar uptime < 60s)
+curl https://SEU-NOVO-DOMINIO.up.railway.app/health | jq
+
+# Database test (deve retornar success: true)
+curl https://SEU-NOVO-DOMINIO.up.railway.app/api/debug/database-test | jq
+
+# Dashboard (deve retornar success: true)
+curl https://SEU-NOVO-DOMINIO.up.railway.app/api/admin/dashboard | jq
+
+# Applications (deve retornar success: true)
+curl https://SEU-NOVO-DOMINIO.up.railway.app/api/applications | jq
+
+# Partners (deve retornar success: true)
+curl https://SEU-NOVO-DOMINIO.up.railway.app/api/partners | jq
+
+═══════════════════════════════════════════════════════════════════════════
+
+PROBLEMAS COMUNS E SOLUÇÕES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ Problema: Não encontro "Delete Service"
+✅ Solução: Role ATÉ O FINAL da página Settings, está na "Danger Zone"
+
+❌ Problema: Build falha com erro de DATABASE_URL
+✅ Solução: Verifique se usou %23 no lugar de # na URL
+
+❌ Problema: Build trava em "npm install"
+✅ Solução: Aguarde 3-4 minutos, pode demorar na primeira vez
+
+❌ Problema: Endpoints retornam 500
+✅ Solução: Verifique se DATABASE_URL foi adicionada corretamente
+
+❌ Problema: Vercel não atualiza
+✅ Solução: Force redeploy no Vercel ou limpe cache do navegador
+
+═══════════════════════════════════════════════════════════════════════════
+
+PONTO ATUAL: AGUARDANDO VOCÊ COMPLETAR PASSO 1
+PRÓXIMA AÇÃO: Digite "sim" quando deletar o serviço antigo
+
+═══════════════════════════════════════════════════════════════════════════

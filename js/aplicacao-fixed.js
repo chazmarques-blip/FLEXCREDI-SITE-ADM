@@ -1,0 +1,4 @@
+// Simplified version - will be added to existing aplicacao.js
+const animations = document.createElement('style');
+animations.innerHTML = '@keyframes slideUpFadeIn { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } } @keyframes slideDownFadeOut { from { opacity: 1; transform: translate(-50%, 0); } to { opacity: 0; transform: translate(-50%, 20px); } } @keyframes fadeOut { to { opacity: 0; } } .progress-step.incomplete .progress-circle { border-color: #FFA500 !important; background: #FFF3E0 !important; } .progress-step.incomplete .progress-label { color: #F57C00 !important; } @media (max-width: 768px) { .incomplete-warning-toast { bottom: 60px !important; font-size: 13px !important; padding: 14px 18px !important; min-width: 260px !important; } .final-validation-warning { width: 95% !important; padding: 20px !important; } }';
+document.head.appendChild(animations);

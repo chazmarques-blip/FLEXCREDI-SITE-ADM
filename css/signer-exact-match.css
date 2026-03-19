@@ -1,0 +1,395 @@
+/* ULTRA CLEAN & COMPACT DESIGN - Professional document cards */
+
+/* Container principal - 4 colunas ultra compactas */
+.main-signer-card .cobuyer-documents-grid,
+.main-signer-card #signerDocuments,
+.cobuyer-card .cobuyer-documents-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 115px) !important;
+    gap: 8px !important;
+    margin-top: 10px !important;
+    width: auto !important;
+    max-width: 488px !important; /* 4 × 115px + 3 × 8px = 488px */
+    justify-content: start !important;
+}
+
+/* CARDS - Design ultra clean e compacto */
+.main-signer-card .cobuyer-document-card,
+.main-signer-card .document-card,
+.cobuyer-card .cobuyer-document-card,
+.cobuyer-card .document-card {
+    width: 115px !important;
+    height: 140px !important;
+    min-height: 140px !important;
+    max-height: 140px !important;
+    
+    background: #ffffff !important;
+    border: 1.5px dashed #f59e0b !important;
+    border-radius: 6px !important;
+    
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    
+    padding: 6px 4px 5px 4px !important;
+    box-sizing: border-box !important;
+    
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.2s ease !important;
+}
+
+.main-signer-card .cobuyer-document-card:hover,
+.cobuyer-card .cobuyer-document-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 3px 6px rgba(245, 158, 11, 0.12) !important;
+}
+
+/* TÍTULO - Ultra compacto */
+.main-signer-card .doc-header,
+.cobuyer-card .doc-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    
+    width: 100% !important;
+    margin: 0 0 3px 0 !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+}
+
+/* Esconder ícone do header */
+.main-signer-card .doc-header .doc-icon,
+.cobuyer-card .doc-header .doc-icon {
+    display: none !important;
+}
+
+.main-signer-card .doc-header .doc-info,
+.cobuyer-card .doc-header .doc-info {
+    width: 100% !important;
+    text-align: center !important;
+}
+
+/* Títulos - Texto ultra compacto */
+.main-signer-card .doc-header .doc-info h4,
+.cobuyer-card .doc-header .doc-info h4 {
+    font-size: 9px !important;
+    font-weight: 600 !important;
+    color: #374151 !important;
+    margin: 0 0 1px 0 !important;
+    line-height: 1.1 !important;
+    text-align: center !important;
+    letter-spacing: 0.1px !important;
+}
+
+.main-signer-card .doc-header .doc-info p,
+.cobuyer-card .doc-header .doc-info p {
+    font-size: 7px !important;
+    color: #9ca3af !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+}
+
+/* ÁREA DE PREVIEW - Ultra compacta */
+.main-signer-card .doc-preview-box,
+.cobuyer-card .doc-preview-box {
+    width: 65px !important;
+    height: 65px !important;
+    
+    background: #fef3c7 !important;
+    border: 1px solid #f59e0b !important;
+    border-radius: 5px !important;
+    
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    
+    margin: 0 !important;
+    flex: 1 !important;
+    
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.main-signer-card .doc-preview-box:hover,
+.cobuyer-card .doc-preview-box:hover {
+    background: #fde68a !important;
+    transform: scale(1.03) !important;
+}
+
+/* ÍCONE - Tamanho proporcional */
+.main-signer-card .doc-preview-box .preview-icon i,
+.cobuyer-card .doc-preview-box .preview-icon i {
+    font-size: 26px !important;
+    color: #f59e0b !important;
+    margin-bottom: 2px !important;
+    display: block !important;
+}
+
+/* TEXTO - Ultra clean */
+.main-signer-card .doc-preview-box .preview-text,
+.cobuyer-card .doc-preview-box .preview-text {
+    font-size: 8px !important;
+    font-weight: 600 !important;
+    color: #f59e0b !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.4px !important;
+    margin: 0 !important;
+}
+
+/* BOTÃO - Ultra compacto */
+.main-signer-card .doc-actions,
+.cobuyer-card .doc-actions {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+}
+
+.main-signer-card .doc-actions button,
+.main-signer-card .btn-status,
+.cobuyer-card .doc-actions button,
+.cobuyer-card .btn-status {
+    width: 100% !important;
+    height: 23px !important;
+    
+    background: #f59e0b !important;
+    border: none !important;
+    border-radius: 4px !important;
+    
+    font-size: 8px !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+    
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08) !important;
+}
+
+.main-signer-card .doc-actions button:hover,
+.main-signer-card .btn-status:hover:not(:disabled),
+.cobuyer-card .doc-actions button:hover,
+.cobuyer-card .btn-status:hover:not(:disabled) {
+    background: #d97706 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12) !important;
+}
+
+.main-signer-card .doc-actions button i,
+.main-signer-card .btn-status i,
+.cobuyer-card .doc-actions button i,
+.cobuyer-card .btn-status i {
+    font-size: 7px !important;
+    margin-right: 1px !important;
+}
+
+/* ESTADOS DOS DOCUMENTOS - Clean */
+.main-signer-card .doc-preview-box.uploaded,
+.cobuyer-card .doc-preview-box.uploaded {
+    background: #d1fae5 !important;
+    border-color: #10b981 !important;
+}
+
+.main-signer-card .doc-preview-box.uploaded .preview-icon i,
+.cobuyer-card .doc-preview-box.uploaded .preview-icon i {
+    color: #10b981 !important;
+}
+
+.main-signer-card .doc-preview-box.uploaded .preview-text,
+.cobuyer-card .doc-preview-box.uploaded .preview-text {
+    color: #10b981 !important;
+}
+
+.main-signer-card .btn-status.uploaded,
+.cobuyer-card .btn-status.uploaded {
+    background: #10b981 !important;
+}
+
+.main-signer-card .btn-status.uploaded:hover,
+.cobuyer-card .btn-status.uploaded:hover {
+    background: #059669 !important;
+}
+
+/* Preview box em processamento */
+.main-signer-card .doc-preview-box.processing,
+.cobuyer-card .doc-preview-box.processing {
+    background: #e0e7ff !important;
+    border-color: #6366f1 !important;
+}
+
+/* RESPONSIVIDADE - Design ultra clean mantido */
+@media (max-width: 1200px) {
+    .main-signer-card .cobuyer-documents-grid,
+    .main-signer-card #signerDocuments,
+    .cobuyer-card .cobuyer-documents-grid {
+        grid-template-columns: repeat(4, 110px) !important;
+        gap: 7px !important;
+        max-width: 461px !important; /* 4 × 110px + 3 × 7px */
+    }
+    
+    .main-signer-card .cobuyer-document-card,
+    .cobuyer-card .cobuyer-document-card {
+        width: 110px !important;
+        height: 135px !important;
+        min-height: 135px !important;
+        max-height: 135px !important;
+    }
+}
+
+@media (max-width: 900px) {
+    .main-signer-card .cobuyer-documents-grid,
+    .main-signer-card #signerDocuments,
+    .cobuyer-card .cobuyer-documents-grid {
+        grid-template-columns: repeat(2, 130px) !important;
+        gap: 10px !important;
+        justify-content: center !important;
+        max-width: 100% !important;
+    }
+    
+    .main-signer-card .cobuyer-document-card,
+    .cobuyer-card .cobuyer-document-card {
+        width: 130px !important;
+        height: 145px !important;
+        min-height: 145px !important;
+        max-height: 145px !important;
+    }
+    
+    .main-signer-card .doc-preview-box,
+    .cobuyer-card .doc-preview-box {
+        width: 70px !important;
+        height: 70px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-signer-card .cobuyer-documents-grid,
+    .main-signer-card #signerDocuments,
+    .cobuyer-card .cobuyer-documents-grid {
+        grid-template-columns: repeat(2, 115px) !important;
+        gap: 8px !important;
+    }
+    
+    .main-signer-card .cobuyer-document-card,
+    .cobuyer-card .cobuyer-document-card {
+        width: 115px !important;
+        height: 135px !important;
+        min-height: 135px !important;
+        max-height: 135px !important;
+    }
+    
+    .main-signer-card .doc-preview-box,
+    .cobuyer-card .doc-preview-box {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    
+    .main-signer-card .doc-preview-box .preview-icon i,
+    .cobuyer-card .doc-preview-box .preview-icon i {
+        font-size: 22px !important;
+    }
+    
+    .main-signer-card .doc-header .doc-info h4,
+    .cobuyer-card .doc-header .doc-info h4 {
+        font-size: 8px !important;
+    }
+    
+    .main-signer-card .doc-header .doc-info p,
+    .cobuyer-card .doc-header .doc-info p {
+        font-size: 6.5px !important;
+    }
+    
+    .main-signer-card .doc-actions button,
+    .cobuyer-card .doc-actions button {
+        height: 21px !important;
+        font-size: 7px !important;
+    }
+}
+
+/* AJUSTES FINAIS - Clean e polido */
+
+/* Garantir que textos não quebrem */
+.main-signer-card .doc-header .doc-info h4,
+.main-signer-card .doc-header .doc-info p,
+.cobuyer-card .doc-header .doc-info h4,
+.cobuyer-card .doc-header .doc-info p {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+}
+
+/* Centralização perfeita */
+.main-signer-card .cobuyer-document-card,
+.cobuyer-card .cobuyer-document-card {
+    text-align: center !important;
+}
+
+/* Espaçamento uniforme */
+.main-signer-card .doc-preview-box,
+.cobuyer-card .doc-preview-box {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
+
+/* Garantir visibilidade dos ícones */
+.main-signer-card .preview-icon,
+.cobuyer-card .preview-icon {
+    line-height: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Smooth transitions em todos os elementos interativos */
+.main-signer-card .cobuyer-document-card *,
+.cobuyer-card .cobuyer-document-card * {
+    transition: all 0.2s ease !important;
+}
+
+/* Melhorar legibilidade em telas pequenas */
+@media (max-width: 400px) {
+    .main-signer-card .cobuyer-documents-grid,
+    .main-signer-card #signerDocuments,
+    .cobuyer-card .cobuyer-documents-grid {
+        grid-template-columns: repeat(2, 105px) !important;
+        gap: 6px !important;
+        padding: 0 4px !important;
+    }
+    
+    .main-signer-card .cobuyer-document-card,
+    .cobuyer-card .cobuyer-document-card {
+        width: 105px !important;
+        height: 130px !important;
+    }
+    
+    .main-signer-card .doc-preview-box,
+    .cobuyer-card .doc-preview-box {
+        width: 55px !important;
+        height: 55px !important;
+    }
+    
+    .main-signer-card .doc-preview-box .preview-icon i,
+    .cobuyer-card .doc-preview-box .preview-icon i {
+        font-size: 20px !important;
+    }
+    
+    .main-signer-card .doc-actions button,
+    .cobuyer-card .doc-actions button {
+        height: 20px !important;
+        font-size: 7px !important;
+    }
+}

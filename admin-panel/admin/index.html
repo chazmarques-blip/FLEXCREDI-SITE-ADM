@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlexCredi Admin - Redirecting...</title>
+    <link rel="icon" type="image/png" href="/images/flexcredi-logo-official.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #2ECC71 0%, #27ae60 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .loading-container {
+            text-align: center;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <h1>FlexCredi Admin</h1>
+        <p>Redirecting...</p>
+    </div>
+    
+    <script>
+        console.log('[Admin Index] Checking authentication...');
+        
+        // Check if user is authenticated
+        const token = localStorage.getItem('adminToken');
+        const userStr = localStorage.getItem('adminUser');
+        
+        // Detect if we're on admin subdomain or main site
+        const isAdminSubdomain = window.location.hostname === 'admin.flexcredi.com';
+        const basePath = isAdminSubdomain ? '' : '/admin-panel/admin';
+        
+        if (token && userStr) {
+            // User is logged in, redirect to dashboard
+            console.log('[Admin Index] User authenticated, redirecting to dashboard');
+            window.location.href = basePath + '/dashboard.html';
+        } else {
+            // User is not logged in, redirect to login
+            console.log('[Admin Index] User not authenticated, redirecting to login');
+            window.location.href = basePath + '/login.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,454 @@
+/* ============ MODAL E CONTRATO FLEXCREDI - VERSÃO CORRIGIDA ============ */
+
+/* Modal Container */
+.flexcredi-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Backdrop */
+.flexcredi-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(3px);
+}
+
+/* Container do Modal */
+.flexcredi-modal-container {
+    position: relative;
+    width: 95%;
+    max-width: 1000px;
+    max-height: 90vh;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    animation: modalSlideIn 0.3s ease-out;
+    overflow: hidden;
+}
+
+@keyframes modalSlideIn {
+    from { 
+        transform: scale(0.9) translateY(-50px); 
+        opacity: 0; 
+    }
+    to { 
+        transform: scale(1) translateY(0); 
+        opacity: 1; 
+    }
+}
+
+/* Header do Modal */
+.flexcredi-modal-header {
+    background: linear-gradient(135deg, #2ECC71, #1E8449);
+    color: white;
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flexcredi-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 22px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* Body do Modal */
+.flexcredi-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 25px;
+    max-height: calc(90vh - 140px);
+}
+
+/* Footer do Modal */
+.flexcredi-modal-footer {
+    background: #f8f9fa;
+    padding: 15px 25px;
+    border-top: 1px solid #dee2e6;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+/* Botões */
+.flexcredi-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    min-width: fit-content;
+}
+
+.flexcredi-btn-primary {
+    background: #2ECC71;
+    color: white;
+}
+
+.flexcredi-btn-primary:hover {
+    background: #1E8449;
+}
+
+.flexcredi-btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.flexcredi-btn-secondary:hover {
+    background: #545b62;
+}
+
+.flexcredi-btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.flexcredi-btn-success:hover {
+    background: #218838;
+}
+
+.flexcredi-btn-outline {
+    background: transparent;
+    color: #6c757d;
+    border: 2px solid #dee2e6;
+}
+
+.flexcredi-btn-outline:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+/* ============ DOCUMENTO DO CONTRATO ============ */
+
+.flexcredi-contract-document {
+    font-family: 'Times New Roman', serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fff;
+}
+
+/* Cabeçalho da Empresa */
+.contract-company-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+}
+
+.company-branding {
+    flex: 1;
+}
+
+.flexcredi-brand {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2ECC71;
+    margin: 0 0 5px 0;
+    font-family: Arial, sans-serif;
+}
+
+.brand-tagline {
+    font-size: 12px;
+    color: #1E8449;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-family: Arial, sans-serif;
+}
+
+.company-details {
+    flex: 1;
+    text-align: right;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* Divisor */
+.contract-divider {
+    height: 3px;
+    background: linear-gradient(to right, #2ECC71, #1E8449);
+    border: none;
+    margin: 20px 0;
+    border-radius: 2px;
+}
+
+/* Título Principal */
+.contract-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1E8449;
+    margin: 20px 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contract-number {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+/* Introdução */
+.contract-introduction {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 4px solid #2ECC71;
+    margin: 20px 0;
+    text-align: justify;
+}
+
+/* Títulos de Seção */
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1E8449;
+    margin: 25px 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #2ECC71;
+    padding-bottom: 5px;
+}
+
+.subsection-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin: 20px 0 10px 0;
+}
+
+/* Seções das Partes */
+.party-section {
+    margin: 15px 0;
+    padding: 10px 0;
+}
+
+.party-heading {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1E8449;
+    margin: 10px 0 5px 0;
+}
+
+.party-info {
+    margin: 5px 0 15px 20px;
+    text-align: justify;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Termos do Empréstimo */
+.loan-terms-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 15px 0;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.loan-term {
+    background: #fff;
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.loan-term strong {
+    color: #1E8449;
+    margin-right: 10px;
+}
+
+/* Texto do Contrato */
+.contract-text {
+    text-align: justify;
+    margin: 10px 0;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* Seção de Assinaturas */
+.signatures-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #e9ecef;
+}
+
+.signature-blocks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin: 30px 0;
+}
+
+.signature-block {
+    text-align: center;
+}
+
+.signature-line {
+    border-bottom: 2px solid #333;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.signature-info {
+    font-size: 12px;
+    text-align: left;
+    line-height: 1.4;
+}
+
+/* Footer Legal */
+.legal-footer {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #e74c3c;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.contract-metadata {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+    color: #666;
+    font-size: 10px;
+}
+
+/* Scrollbar Personalizada */
+.flexcredi-modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.flexcredi-modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.flexcredi-modal-body::-webkit-scrollbar-thumb {
+    background: #2ECC71;
+    border-radius: 4px;
+}
+
+.flexcredi-modal-body::-webkit-scrollbar-thumb:hover {
+    background: #1E8449;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .flexcredi-modal-container {
+        width: 98%;
+        max-height: 95vh;
+    }
+    
+    .contract-company-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .company-details {
+        text-align: center;
+        margin-top: 15px;
+    }
+    
+    .loan-terms-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .signature-blocks {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .flexcredi-modal-footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .flexcredi-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .flexcredi-modal-body {
+        padding: 15px;
+    }
+    
+    .flexcredi-brand {
+        font-size: 24px;
+    }
+    
+    .contract-title {
+        font-size: 20px;
+    }
+    
+    .loan-term {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        padding: 8px 12px;
+    }
+}
+
+/* Prevenir scroll do body */
+body:has(.flexcredi-modal) {
+    overflow: hidden;
+}

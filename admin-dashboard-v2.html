@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FLEXCREDI - Admin Dashboard. Gestão completa de aplicações, clientes e parceiros.">
+    <meta name="keywords" content="admin, dashboard, FLEXCREDI, gestão, crédito">
+    <title>Admin Dashboard - FLEXCREDI | Easy, Simple, Fast</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/flexcredi-logo-official.png">
+    
+    <!-- CSS Base (do dashboard cliente) -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout-adjustments.css">
+    <link rel="stylesheet" href="css/perfect-alignment.css">
+    <link rel="stylesheet" href="css/client-functions.css">
+    
+    <!-- CSS Admin-específico -->
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="admin-page">
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+    
+    <!-- Header Dashboard (IGUAL AO CLIENTE) -->
+    <header class="dashboard-header" role="banner">
+        <nav class="navbar container" role="navigation">
+            <!-- Logo -->
+            <a href="index.html" class="navbar-brand">
+                <img src="images/flexcredi-logo-official.png" alt="FLEXCREDI - Easy, Simple, Fast" class="logo-img">
+            </a>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- User Menu -->
+            <div class="user-menu">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=2ECC71&color=fff" 
+                         alt="Avatar" 
+                         class="user-avatar" 
+                         id="userAvatar">
+                    <span class="user-name" id="userName">Admin</span>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" type="button" id="userDropdown">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#profile" class="dropdown-item">
+                            <i class="fas fa-user"></i> Meu Perfil
+                        </a>
+                        <a href="#settings" class="dropdown-item">
+                            <i class="fas fa-cog"></i> Configurações
+                        </a>
+                        <a href="#help" class="dropdown-item">
+                            <i class="fas fa-question-circle"></i> Ajuda
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="login.html" class="dropdown-item logout-btn">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sidebar Admin -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <nav class="sidebar-nav">
+            <a href="admin-dashboard-v2.html" class="nav-item active">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="admin-aplicacoes.html" class="nav-item">
+                <i class="fas fa-file-invoice"></i>
+                <span>Aplicações</span>
+            </a>
+            <a href="admin-clientes.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Clientes</span>
+            </a>
+            <a href="admin-parceiros.html" class="nav-item">
+                <i class="fas fa-handshake"></i>
+                <span>Parceiros</span>
+            </a>
+            <a href="admin-documentos.html" class="nav-item">
+                <i class="fas fa-folder"></i>
+                <span>Documentos</span>
+            </a>
+            <a href="admin-contratos.html" class="nav-item">
+                <i class="fas fa-file-contract"></i>
+                <span>Contratos</span>
+            </a>
+            <a href="admin-pagamentos.html" class="nav-item">
+                <i class="fas fa-credit-card"></i>
+                <span>Pagamentos ACH</span>
+            </a>
+            <a href="admin-recebiveis.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Recebíveis</span>
+            </a>
+            <a href="admin-agentes.html" class="nav-item">
+                <i class="fas fa-robot"></i>
+                <span>Agentes</span>
+            </a>
+            <a href="admin-configuracoes.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Configurações</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="main-content" class="admin-main-content">
+        <div class="container-fluid">
+            
+            <!-- Status Header -->
+            <section class="status-header">
+                <div class="status-card">
+                    <div class="status-info">
+                        <div class="user-header">
+                            <h1 class="user-greeting" id="userGreeting">Bem-vindo, Admin!</h1>
+                            
+                            <!-- Métricas inline -->
+                            <div class="financing-details" id="metricsDetails">
+                                <div class="financing-item">
+                                    <span class="financing-label">TOTAL:</span>
+                                    <span class="financing-value" id="totalApplications">142</span>
+                                </div>
+                                <div class="financing-item">
+                                    <span class="financing-label">PENDENTES:</span>
+                                    <span class="financing-value" id="pendingApplications">28</span>
+                                </div>
+                                <div class="financing-item">
+                                    <span class="financing-label">APROVADAS:</span>
+                                    <span class="financing-value" id="approvedApplications">98</span>
+                                </div>
+                                <div class="financing-item">
+                                    <span class="financing-label">VOLUME:</span>
+                                    <span class="financing-value" id="totalVolume">$2.4M</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Métricas Grid (4 cards) -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <div class="metric-details">
+                        <span class="metric-value" id="metricTotal">142</span>
+                        <span class="metric-label">Total de Aplicações</span>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="metric-details">
+                        <span class="metric-value" id="metricPending">28</span>
+                        <span class="metric-label">Aplicações Pendentes</span>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="metric-details">
+                        <span class="metric-value" id="metricApproved">98</span>
+                        <span class="metric-label">Aprovadas</span>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="metric-details">
+                        <span class="metric-value" id="metricVolume">$2.4M</span>
+                        <span class="metric-label">Volume Total</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráficos -->
+            <div class="charts-grid">
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-pie"></i> Aplicações por Status</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="applicationsChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-line"></i> Volume Mensal</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="volumeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela de Aplicações Recentes -->
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-file-invoice"></i> Aplicações Recentes</h2>
+                    <button class="btn-add" onclick="window.location.href='admin-aplicacoes.html'">
+                        <i class="fas fa-eye"></i> Ver Todas
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Parceiro</th>
+                                <th>Valor Solicitado</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                                <th>Data</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentApplicationsTable">
+                            <!-- Exemplo de linha -->
+                            <tr>
+                                <td>
+                                    <div class="table-user">
+                                        <img src="https://ui-avatars.com/api/?name=João+Silva&background=2ECC71&color=fff" 
+                                             alt="Avatar" 
+                                             class="table-avatar">
+                                        <div class="table-user-info">
+                                            <span class="table-user-name">João Silva</span>
+                                            <span class="table-user-email">joao@email.com</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="table-partner">AutoPeças Souza</span></td>
+                                <td><span class="table-amount">$25,000</span></td>
+                                <td><span class="table-score">720</span></td>
+                                <td>
+                                    <span class="status-badge status-approved">Aprovado</span>
+                                </td>
+                                <td><span class="table-date">21/02/2026</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-icon" title="Ver detalhes">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Mais linhas serão carregadas via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Ações Rápidas (estilo client-functions) -->
+            <section class="client-functions-horizontal">
+                <div class="section-header" style="margin-bottom: 16px;">
+                    <h2><i class="fas fa-bolt"></i> Ações Rápidas</h2>
+                </div>
+                <div class="functions-horizontal-grid">
+                    <div class="function-card-horizontal" onclick="window.location.href='admin-aplicacoes.html'">
+                        <div class="function-icon-horizontal">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="function-content-horizontal">
+                            <h4>Nova Aplicação</h4>
+                            <small>Criar aplicação manualmente</small>
+                        </div>
+                    </div>
+
+                    <div class="function-card-horizontal" onclick="window.location.href='admin-parceiros.html'">
+                        <div class="function-icon-horizontal">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="function-content-horizontal">
+                            <h4>Gerenciar Parceiros</h4>
+                            <small>Aprovar e configurar parceiros</small>
+                        </div>
+                    </div>
+
+                    <div class="function-card-horizontal" onclick="window.location.href='admin-documentos.html'">
+                        <div class="function-icon-horizontal">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <div class="function-content-horizontal">
+                            <h4>Revisar Documentos</h4>
+                            <small>Aprovar documentos pendentes</small>
+                        </div>
+                    </div>
+
+                    <div class="function-card-horizontal" onclick="window.location.href='admin-agentes.html'">
+                        <div class="function-icon-horizontal">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="function-content-horizontal">
+                            <h4>Agentes Autônomos</h4>
+                            <small>Monitorar e configurar agentes</small>
+                        </div>
+                    </div>
+
+                    <div class="function-card-horizontal" onclick="window.location.href='admin-configuracoes.html'">
+                        <div class="function-icon-horizontal">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div class="function-content-horizontal">
+                            <h4>Configurações</h4>
+                            <small>Taxas, regras e integrações</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer Simplified -->
+    <footer class="footer-simple">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 FLEXCREDI. Todos os direitos reservados.</p>
+                <div class="footer-links">
+                    <a href="politica-privacidade.html">Política de Privacidade</a>
+                    <a href="termos-uso.html">Termos de Uso</a>
+                    <a href="contato.html">Contato</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/admin-dashboard.js"></script>
+</body>
+</html>

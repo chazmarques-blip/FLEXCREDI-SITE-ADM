@@ -1,0 +1,719 @@
+// ═══════════════════════════════════════════════════════════
+// FLEXCREDI LLC - DATABASE SCHEMA V4.1 (US Market)
+// Credit Management System with Partners and Receivables
+// Florida-based company - Compliant with US regulations
+// ═══════════════════════════════════════════════════════════
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ═══════════════════════════════════════════════════════════
+// PARTNERS
+// ═══════════════════════════════════════════════════════════
+
+model Partner {
+  id                String   @id @default(uuid())
+  
+  // Company information
+  companyName       String
+  tradeName         String?
+  ein               String   @unique  // Employer Identification Number (XX-XXXXXXX)
+  email             String   @unique
+  phone             String
+  
+  // Address (US format)
+  address           String
+  city              String
+  state             String   // 2-letter state code (FL, CA, NY, etc.)
+  zipCode           String   // ZIP format (12345 or 12345-6789)
+  county            String?  // County (optional, e.g., Miami-Dade, Broward)
+  
+  // Legal representative
+  legalRepName      String
+  legalRepSsn       String   // Social Security Number
+  legalRepEmail     String
+  legalRepPhone     String
+  
+  // Bank information (US banking system)
+  bankName          String?
+  bankRoutingNumber String?  // 9-digit ABA routing number
+  bankAccount       String?
+  bankAccountType   String?  // checking, savings
+  
+  // Financial information
+  monthlyRevenue    Float?   // Average monthly revenue
+  monthlyReceivables Float?  // Average monthly receivables
+  creditLimit       Float?   // Total credit limit
+  
+  // Status and approval
+  status            PartnerStatus  @default(PENDING)
+  approvedAt        DateTime?
+  approvedBy        String?       // Admin user ID
+  rejectedAt        DateTime?
+  rejectionReason   String?
+  
+  // FlexCredi fee
+  flexCrediFeeRate  Float    @default(0.03)  // 3% default
+  
+  // Control
+  active            Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  // Relações
+  applications      Application[]
+  receivables       PartnerReceivable[]
+  payments          PartnerPayment[]
+  documents         PartnerDocument[]
+  
+  @@map("partners")
+}
+
+enum PartnerStatus {
+  PENDING           // Awaiting approval
+  APPROVED          // Approved and active
+  REJECTED          // Rejected
+  SUSPENDED         // Temporarily suspended
+  BLOCKED           // Permanently blocked
+}
+
+// ═══════════════════════════════════════════════════════════
+// PARTNER DOCUMENTS
+// ═══════════════════════════════════════════════════════════
+
+model PartnerDocument {
+  id                String   @id @default(uuid())
+  partnerId         String
+  
+  type              PartnerDocType
+  originalName      String
+  cloudinaryUrl     String
+  cloudinaryPublicId String
+  fileSize          Int
+  mimeType          String
+  
+  status            String   @default("pending")  // pending, approved, rejected
+  reviewedAt        DateTime?
+  reviewedBy        String?
+  reviewNotes       String?
+  
+  uploadedAt        DateTime @default(now())
+  
+  partner           Partner  @relation(fields: [partnerId], references: [id])
+  
+  @@map("partner_documents")
+}
+
+enum PartnerDocType {
+  ARTICLES_OF_INCORPORATION   // Articles of incorporation
+  EIN_DOCUMENT               // EIN confirmation letter (IRS)
+  PROOF_OF_ADDRESS           // Utility bill, lease
+  BANK_STATEMENT             // Bank account verification
+  BUSINESS_LICENSE           // State business license
+  FINANCIAL_STATEMENT        // Balance sheet, P&L
+  TAX_RETURN                 // Business tax return
+  ID_LEGAL_REP               // Driver's license or state ID
+  SSN_LEGAL_REP              // SSN card (legal representative)
+  POWER_OF_ATTORNEY          // POA document
+  VOIDED_CHECK               // Voided check for ACH
+  OTHER
+}
+
+// ═══════════════════════════════════════════════════════════
+// PARTNER RECEIVABLES (COMMITMENTS)
+// ═══════════════════════════════════════════════════════════
+
+model PartnerReceivable {
+  id                String   @id @default(uuid())
+  partnerId         String
+  applicationId     String?   // Vinculado a uma aplicação específica
+  
+  // Receivable period
+  referenceMonth    String    // "2026-03" format YYYY-MM
+  dueDate           DateTime  // Due date
+  
+  // Amounts
+  expectedAmount    Float     // Expected monthly receivable
+  discountAmount    Float     // FlexCredi discount scheduled
+  netAmount         Float     // Net amount for partner
+  
+  // Status
+  status            ReceivableStatus @default(SCHEDULED)
+  processedAt       DateTime?
+  
+  // Actual payment
+  actualAmount      Float?    // Amount actually received
+  paidAt            DateTime?
+  
+  // Controle
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  partner           Partner   @relation(fields: [partnerId], references: [id])
+  application       Application? @relation(fields: [applicationId], references: [id])
+  
+  @@map("partner_receivables")
+  @@index([partnerId, referenceMonth])
+  @@index([partnerId, status])
+}
+
+enum ReceivableStatus {
+  SCHEDULED         // Scheduled
+  PROCESSING        // Processing
+  COMPLETED         // Discount applied
+  PARTIAL           // Partially paid
+  FAILED            // Processing failed
+  CANCELLED         // Cancelled
+}
+
+// ═══════════════════════════════════════════════════════════
+// PARTNER PAYMENTS (DISBURSEMENTS)
+// ═══════════════════════════════════════════════════════════
+
+model PartnerPayment {
+  id                String   @id @default(uuid())
+  partnerId         String
+  applicationId     String   // Vinculado à aplicação
+  
+  // Amounts
+  grossAmount       Float    // Approved amount for client
+  feeAmount         Float    // FlexCredi fee (3%)
+  netAmount         Float    // Net amount paid to partner
+  
+  // Payment method
+  paymentMethod     String   // ACH, WIRE
+  
+  // Bank information (snapshot)
+  bankName          String
+  bankRoutingNumber String   // ABA routing number
+  bankAccount       String
+  bankAccountType   String   // checking, savings
+  
+  // Payment status
+  status            PaymentStatus @default(PENDING)
+  
+  // Tracking
+  initiatedAt       DateTime  @default(now())
+  processedAt       DateTime?
+  completedAt       DateTime?
+  failedAt          DateTime?
+  failureReason     String?
+  
+  // External IDs (PayBright, bank, etc.)
+  externalId        String?
+  transactionId     String?
+  
+  // Controle
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  partner           Partner     @relation(fields: [partnerId], references: [id])
+  application       Application @relation(fields: [applicationId], references: [id])
+  
+  @@map("partner_payments")
+  @@index([partnerId, status])
+}
+
+enum PaymentStatus {
+  PENDING           // Awaiting processing
+  PROCESSING        // Processing
+  COMPLETED         // Completed successfully
+  FAILED            // Failed
+  CANCELLED         // Cancelled
+  REFUNDED          // Refunded
+}
+
+// ═══════════════════════════════════════════════════════════
+// SYSTEM USERS (CLIENTS AND ADMINS)
+// ═══════════════════════════════════════════════════════════
+
+model User {
+  id                String   @id @default(uuid())
+  
+  email             String   @unique
+  phone             String?
+  password          String?  // Bcrypt hash
+  
+  // User type
+  role              UserRole @default(CLIENT)
+  
+  // Personal information (for clients)
+  name              String
+  ssn               String?  @unique  // Social Security Number
+  dateOfBirth       DateTime?
+  
+  // ID documents (US format)
+  driverLicenseNumber String?  // Driver's license number
+  driverLicenseState  String?  // State that issued license (FL, CA, etc.)
+  stateIdNumber       String?  // Alternative state ID
+  passportNumber      String?  // US or international passport
+  
+  // Address (US format)
+  address           String?
+  city              String?
+  state             String?  // 2-letter state code
+  zipCode           String?  // ZIP format (12345 or 12345-6789)
+  county            String?  // County (optional)
+  
+  // Financial information
+  monthlyIncome     Float?
+  employer          String?
+  occupation        String?
+  employmentStatus  String?
+  
+  // Bank information (for ACH)
+  bankName          String?
+  bankRoutingNumber String?  // 9-digit ABA routing number
+  bankAccount       String?
+  bankAccountType   String?  // checking, savings
+  
+  // Status
+  active            Boolean  @default(true)
+  emailVerified     Boolean  @default(false)
+  phoneVerified     Boolean  @default(false)
+  
+  // Controle
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  lastLoginAt       DateTime?
+  
+  // Relações
+  applications      Application[]
+  documents         Document[]
+  creditReports     CreditReport[]
+  
+  @@map("users")
+}
+
+enum UserRole {
+  CLIENT            // Client
+  ADMIN             // FlexCredi administrator
+  SUPER_ADMIN       // Super administrator (full access)
+  SUPPORT           // Support
+}
+
+// ═══════════════════════════════════════════════════════════
+// APPLICATIONS (CREDIT REQUESTS)
+// ═══════════════════════════════════════════════════════════
+
+model Application {
+  id                String   @id @default(uuid())
+  userId            String?  // Client (may not have account yet)
+  partnerId         String   // PARTNER SELECTED BY CLIENT
+  
+  // Client information (snapshot)
+  clientName        String
+  clientEmail       String
+  clientPhone       String
+  clientSsn         String   // Social Security Number
+  clientAddress     String?
+  clientCity        String?
+  clientState       String?  // 2-letter state code
+  clientZipCode     String?  // US ZIP format
+  
+  // Income and employment
+  monthlyIncome     Float
+  employmentStatus  String
+  employer          String?
+  occupation        String?
+  
+  // Credit request
+  desiredAmount     Float
+  purpose           String
+  
+  // Credit analysis (FICO score 300-850)
+  creditScore       Int?
+  creditTier        String?   // EXCELLENT, GOOD, FAIR, POOR, VERY_POOR
+  dti               Float?    // Debt-to-income ratio (US standard: max 43%)
+  
+  // Approval
+  status            ApplicationStatus @default(PENDING)
+  approvedAmount    Float?
+  interestRate      Float?    // Annual rate (APR)
+  termMonths        Int?
+  paymentFrequency  PaymentFrequency?
+  monthlyPayment    Float?    // or weeklyPayment, biweeklyPayment
+  totalAmount       Float?    // Total to pay
+  
+  // Important dates
+  submittedAt       DateTime  @default(now())
+  analyzedAt        DateTime?
+  approvedAt        DateTime?
+  rejectedAt        DateTime?
+  
+  // Manual approval
+  reviewedBy        String?   // Admin user ID
+  reviewNotes       String?
+  rejectionReason   String?
+  
+  // Risk assessment
+  riskLevel         String?   // LOW, MEDIUM, HIGH
+  fraudScore        Float?
+  
+  // Contract and payment
+  contractSigned    Boolean   @default(false)
+  contractSignedAt  DateTime?
+  achAuthorized     Boolean   @default(false)
+  achAuthorizedAt   DateTime?
+  
+  // Client ACH information (US banking)
+  achRoutingNumber  String?   // 9-digit ABA routing number
+  achAccountNumber  String?
+  achAccountType    String?   // checking, savings
+  achMandateId      String?   // Mandate ID in PayBright
+  
+  // Partner payment
+  partnerPaymentStatus String? // pending, completed, failed
+  partnerPaidAt        DateTime?
+  
+  // Controle
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  // Relações
+  user              User?       @relation(fields: [userId], references: [id])
+  partner           Partner     @relation(fields: [partnerId], references: [id])
+  documents         Document[]
+  contract          Contract?
+  receivables       PartnerReceivable[]
+  partnerPayments   PartnerPayment[]
+  achPayments       AchPayment[]
+  creditReport      CreditReport?
+  
+  @@map("applications")
+  @@index([userId])
+  @@index([partnerId])
+  @@index([status])
+  @@index([creditScore])
+}
+
+enum ApplicationStatus {
+  PENDING           // Awaiting analysis
+  ANALYZING         // In automatic analysis
+  MANUAL_REVIEW     // Requires manual review
+  APPROVED          // Approved
+  REJECTED          // Rejected
+  CONTRACT_PENDING  // Awaiting contract signature
+  ACH_PENDING       // Awaiting ACH authorization
+  ACTIVE            // Active (contract signed, payments started)
+  PAID_OFF          // Paid off
+  DEFAULTED         // Defaulted
+  CANCELLED         // Cancelled
+}
+
+enum PaymentFrequency {
+  WEEKLY            // Weekly
+  BIWEEKLY          // Bi-weekly (every 2 weeks)
+  MONTHLY           // Monthly
+}
+
+// ═══════════════════════════════════════════════════════════
+// CLIENT ACH PAYMENTS
+// ═══════════════════════════════════════════════════════════
+
+model AchPayment {
+  id                String   @id @default(uuid())
+  applicationId     String
+  
+  // Payment information
+  installmentNumber Int      // Installment number (1, 2, 3...)
+  dueDate           DateTime
+  amount            Float
+  
+  // Status
+  status            AchPaymentStatus @default(SCHEDULED)
+  
+  // Processamento
+  attemptCount      Int      @default(0)
+  lastAttemptAt     DateTime?
+  scheduledAt       DateTime
+  processedAt       DateTime?
+  completedAt       DateTime?
+  failedAt          DateTime?
+  
+  // Failure details (ACH return codes: R01, R02, R03, etc.)
+  failureCode       String?  // R01 = Insufficient Funds, R02 = Account Closed, etc.
+  failureReason     String?
+  
+  // External IDs
+  paybrightPaymentId String?
+  achTransactionId   String?
+  
+  // Controle
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  application       Application @relation(fields: [applicationId], references: [id])
+  
+  @@map("ach_payments")
+  @@index([applicationId, status])
+  @@index([dueDate])
+}
+
+enum AchPaymentStatus {
+  SCHEDULED         // Scheduled
+  PROCESSING        // Processing
+  COMPLETED         // Completed
+  FAILED            // Failed
+  RETRYING          // Retrying
+  CANCELLED         // Cancelled
+}
+
+// ═══════════════════════════════════════════════════════════
+// CREDIT REPORTS (EXPERIAN / EQUIFAX / TRANSUNION)
+// FICO Score: 300-850 (US standard)
+// ═══════════════════════════════════════════════════════════
+
+model CreditReport {
+  id                String   @id @default(uuid())
+  applicationId     String   @unique
+  userId            String?
+  
+  // Score (FICO: 300-850)
+  creditScore       Int
+  scoreModel        String   // FICO, VantageScore, etc.
+  
+  // Detailed information
+  fullReportJson    Json     // Complete report in JSON
+  
+  // Key metrics
+  totalAccounts     Int?
+  openAccounts      Int?
+  delinquentAccounts Int?
+  totalDebt         Float?
+  availableCredit   Float?
+  creditUtilization Float?   // % (recommended: below 30%)
+  oldestAccountAge  Int?     // months
+  recentInquiries   Int?     // hard inquiries (last 12 months)
+  publicRecords     Int?     // bankruptcies, judgments, liens
+  
+  // Query cost
+  cost              Float?
+  provider          String   @default("experian")  // experian, equifax, transunion
+  
+  // Control
+  pulledAt          DateTime @default(now())
+  expiresAt         DateTime // Reports expire in 30-90 days
+  
+  application       Application @relation(fields: [applicationId], references: [id])
+  user              User?       @relation(fields: [userId], references: [id])
+  
+  @@map("credit_reports")
+  @@index([applicationId])
+  @@index([userId])
+}
+
+// ═══════════════════════════════════════════════════════════
+// INTEREST RATE RULES (CONFIGURABLE)
+// US Market - Florida-based rates (compliant with FL Chapter 687)
+// ═══════════════════════════════════════════════════════════
+
+model InterestRateRule {
+  id                String   @id @default(uuid())
+  
+  // FICO score range (US standard: 300-850)
+  minScore          Int
+  maxScore          Int
+  tier              String   // EXCELLENT (800+), VERY_GOOD (740-799), GOOD (670-739), FAIR (580-669), POOR (300-579)
+  
+  // Interest rate (APR - Annual Percentage Rate)
+  interestRate      Float    // % annual (Florida max depends on loan amount)
+  
+  // Limits
+  maxAmount         Float    // Maximum approved amount
+  maxTermMonths     Int      // Maximum term in months
+  
+  // Allowed frequencies
+  allowWeekly       Boolean  @default(false)
+  allowBiweekly     Boolean  @default(true)
+  allowMonthly      Boolean  @default(true)
+  
+  // Income multiple
+  maxIncomeMultiple Float?   // e.g., 8x monthly income
+  minIncomeRequired Float?   // Minimum required income
+  
+  // Max DTI (US standard: 43% for qualified mortgages)
+  maxDti            Float?   // e.g., 0.43 (43%)
+  
+  // Status
+  active            Boolean  @default(true)
+  priority          Int      @default(0)  // Ordem de aplicação
+  
+  // Controle
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  createdBy         String?  // Admin user ID
+  
+  @@map("interest_rate_rules")
+  @@index([minScore, maxScore])
+  @@index([active, priority])
+}
+
+// ═══════════════════════════════════════════════════════════
+// CLIENT DOCUMENTS
+// US Document Types (ID, SSN, W-2, Tax Returns, etc.)
+// ═══════════════════════════════════════════════════════════
+
+model Document {
+  id                String   @id @default(uuid())
+  userId            String?
+  applicationId     String?
+  
+  type              DocumentType
+  originalName      String
+  
+  // Cloudinary storage
+  cloudinaryUrl     String
+  cloudinaryPublicId String
+  fileSize          Int
+  mimeType          String
+  
+  // Status
+  status            DocumentStatus @default(PENDING)
+  reviewedAt        DateTime?
+  reviewedBy        String?
+  reviewNotes       String?
+  
+  // Data extraction (OCR)
+  extractedData     Json?
+  confidence        Float?
+  
+  // Controle
+  uploadedAt        DateTime @default(now())
+  
+  user              User?       @relation(fields: [userId], references: [id])
+  application       Application? @relation(fields: [applicationId], references: [id])
+  
+  @@map("documents")
+}
+
+enum DocumentType {
+  ID_FRONT          // Driver's License or State ID (front)
+  ID_BACK           // Driver's License or State ID (back)
+  SSN_CARD          // Social Security Card
+  PROOF_OF_INCOME   // Pay stubs, W-2, 1099
+  BANK_STATEMENT    // Bank statements (last 3 months)
+  PROOF_OF_ADDRESS  // Utility bill, lease agreement
+  TAX_RETURN        // IRS Form 1040, 1099
+  W2_FORM           // W-2 Wage and Tax Statement
+  FORM_1099         // 1099 forms (various types)
+  EMPLOYMENT_LETTER // Employer verification letter
+  OTHER
+}
+
+enum DocumentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  EXPIRED
+}
+
+// ═══════════════════════════════════════════════════════════
+// CONTRACTS
+// US Personal Loan Agreement - Florida Law Compliance
+// ═══════════════════════════════════════════════════════════
+
+model Contract {
+  id                String   @id @default(uuid())
+  applicationId     String   @unique
+  
+  contractNumber    String   @unique  // Format: FL2026001234
+  
+  // Amounts
+  principalAmount   Float
+  interestRate      Float    // APR (Annual Percentage Rate)
+  termMonths        Int
+  paymentFrequency  PaymentFrequency
+  paymentAmount     Float    // Payment amount
+  totalAmount       Float    // Total to pay
+  
+  // Amortization schedule
+  amortizationJson  Json     // Complete amortization table
+  
+  // Status
+  status            ContractStatus @default(GENERATED)
+  
+  // Dates
+  generatedAt       DateTime @default(now())
+  signedAt          DateTime?
+  activatedAt       DateTime?
+  paidOffAt         DateTime?
+  defaultedAt       DateTime?
+  
+  // Digital signature
+  signatureHash     String?
+  signerIp          String?
+  docusignEnvelopeId String?  // DocuSign or SignRequest envelope ID
+  
+  // Document
+  documentUrl       String?
+  documentHash      String?  // SHA-256 hash for integrity
+  
+  // Controle
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  application       Application @relation(fields: [applicationId], references: [id])
+  
+  @@map("contracts")
+}
+
+enum ContractStatus {
+  GENERATED         // Generated, awaiting signature
+  SENT              // Sent for signature
+  SIGNED            // Signed by client
+  ACTIVE            // Active (payments started)
+  PAID_OFF          // Paid off
+  DEFAULTED         // Defaulted
+  CANCELLED         // Cancelled
+}
+
+// ═══════════════════════════════════════════════════════════
+// AUDIT LOG
+// ═══════════════════════════════════════════════════════════
+
+model AuditLog {
+  id                String   @id @default(uuid())
+  
+  userId            String?
+  action            String   // CREATE, UPDATE, DELETE, APPROVE, etc
+  entity            String   // Application, Partner, User, etc
+  entityId          String?
+  
+  // Dados
+  changes           Json?    // { before: {...}, after: {...} }
+  
+  // Contexto
+  ipAddress         String?
+  userAgent         String?
+  
+  timestamp         DateTime @default(now())
+  
+  @@map("audit_logs")
+  @@index([userId, timestamp])
+  @@index([entity, entityId])
+}
+
+// ═══════════════════════════════════════════════════════════
+// CONFIGURAÇÕES DO SISTEMA
+// ═══════════════════════════════════════════════════════════
+
+model SystemSetting {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  value       String
+  type        String
+  description String?
+  category    String   @default("general")
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("system_settings")
+}

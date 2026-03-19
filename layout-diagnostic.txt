@@ -1,0 +1,174 @@
+# Layout Diagnostic Report
+# Generated: 2026-02-23
+
+## Checking CSS Files
+=== css/admin-dashboard.css ===
+    margin-top: 70px;
+    min-height: calc(100vh - 70px);
+    min-height: 300px;
+    margin-top: 8px;
+    margin-top: 16px;
+    margin-top: 24px;
+=== css/admin-system-unified.css ===
+    margin-top: var(--header-height);
+    min-height: calc(100vh - var(--header-height));
+    margin-top: 4px;
+    min-height: 300px;
+    margin-top: 40px;
+.mt-1 { margin-top: 4px; }
+.mt-2 { margin-top: 8px; }
+.mt-3 { margin-top: 16px; }
+.mt-4 { margin-top: 24px; }
+.mt-5 { margin-top: 32px; }
+=== css/admin-system-v2.css ===
+    min-height: 100vh;
+    margin-top: var(--spacing-xs);
+    min-height: 100px;
+    margin-top: var(--spacing-xs);
+    margin-top: var(--spacing-xs);
+.mt-0 { margin-top: 0; }
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mt-xl { margin-top: var(--spacing-xl); }
+=== css/cache-buster.css ===
+=== css/carousel-fix.css ===
+.hero-carousel {
+.carousel-slide .hero-content {
+.slide-dark-text .hero-slogan,
+.slide-light-text .hero-slogan,
+.hero-slogan {
+.hero-buttons {
+.hero-buttons .btn {
+    .hero-carousel {
+    .carousel-slide .hero-content {
+    .hero-buttons {
+    .hero-buttons .btn {
+    .hero-carousel {
+    .hero-slogan {
+=== css/client-functions.css ===
+    margin-top: 32px;
+    padding-top: 24px;
+    min-height: 120px;
+        min-height: 100px;
+        min-height: auto;
+=== css/compact-horizontal-progress.css ===
+=== css/compact-layout.css ===
+.hero {
+    min-height: auto;
+.hero::after {
+.hero-content {
+.hero-content h1 {
+.hero-content p {
+    padding-top: 30px;
+.mt-2 { margin-top: 8px !important; }
+.mt-3 { margin-top: 12px !important; }
+.mt-4 { margin-top: 16px !important; }
+.mt-5 { margin-top: 20px !important; }
+.py-2 { padding-top: 8px !important; padding-bottom: 8px !important; }
+.py-3 { padding-top: 12px !important; padding-bottom: 12px !important; }
+.py-4 { padding-top: 16px !important; padding-bottom: 16px !important; }
+.py-5 { padding-top: 20px !important; padding-bottom: 20px !important; }
+    margin-top: 30px;
+    .hero {
+    .hero-content h1 {
+    .hero-content p {
+    margin-top: 20px;
+=== css/compact-login.css ===
+    min-height: 100vh;
+    padding-top: 60px; /* Reduzido de 80px */
+    min-height: calc(100vh - 80px);
+    margin-top: 20px;
+    margin-top: 8px;
+        padding-top: 60px;
+=== css/contract-modal-fixed.css ===
+    margin-top: 40px;
+    padding-top: 20px;
+    margin-top: 30px;
+    margin-top: 15px;
+    padding-top: 15px;
+        margin-top: 15px;
+=== css/contract-styling.css ===
+    margin-top: 40px;
+    padding-top: 20px;
+    margin-top: 30px;
+    margin-top: 15px;
+    padding-top: 15px;
+        margin-top: 15px;
+=== css/layout-adjustments.css ===
+    margin-top: 4px;
+    margin-top: -40px; /* Subir a calculadora significativamente */
+    margin-top: auto;
+    margin-top: auto;
+    margin-top: auto;
+    margin-top: 16px;
+    margin-top: 2px;
+.hero {
+.hero h1 {
+.hero p {
+.hero-slogan {
+    margin-top: 40px;
+    padding-top: 16px;
+    .hero {
+    .hero h1 {
+    .hero p {
+    .hero h1 {
+    .hero p {
+=== css/modal-system.css ===
+    margin-top: 2px;
+=== css/perfect-alignment.css ===
+    margin-top: 12px !important;
+        margin-top: 10px !important;
+        margin-top: 8px !important;
+=== css/progress-tracker-styles.css ===
+    margin-top: 4px;
+    margin-top: 20px;
+    padding-top: 15px;
+=== css/signer-cobuyer-match.css ===
+    margin-top: 12px !important;
+    min-height: 140px !important;
+        min-height: 120px !important;
+        min-height: 110px !important;
+=== css/signer-exact-match.css ===
+    margin-top: 16px !important;
+    min-height: 160px !important;
+        min-height: 140px !important;
+        min-height: 120px !important;
+    margin-top: auto !important;
+=== css/signer-horizontal-fix.css ===
+    min-height: 240px !important;
+    min-height: 120px !important;
+    margin-top: auto !important;
+=== css/signer-horizontal-force.css ===
+    min-height: 240px !important;
+    min-height: 120px !important;
+    margin-top: auto !important;
+        min-height: 200px !important;
+        min-height: 180px !important;
+=== css/signer-layout-unification.css ===
+    padding-top: 0 !important;
+    margin-top: 24px !important;
+    padding-top: 20px !important;
+        margin-top: 16px !important;
+        padding-top: 16px !important;
+=== css/style.css ===
+    margin-top: var(--spacing-xs);
+    margin-top: var(--spacing-xs);
+    margin-top: 2px;
+    margin-top: 3px;
+    margin-top: 0;
+    margin-top: 2px;
+    margin-top: var(--spacing-sm);
+    min-height: 38px;
+    margin-top: 3px;
+    margin-top: var(--spacing-sm);
+    min-height: 38px;
+    margin-top: var(--spacing-md);
+        min-height: 42px;
+        min-height: 42px;
+    margin-top: 4px;
+    margin-top: var(--spacing-xxl);
+    padding-top: var(--spacing-md);
+    scroll-margin-top: 140px;
+.hero-carousel {
+    min-height: 320px;

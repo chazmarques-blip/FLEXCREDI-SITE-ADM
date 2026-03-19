@@ -1,0 +1,20 @@
+{
+  "name": "flexcredi-frontend",
+  "version": "1.0.0",
+  "description": "FLEXCREDI - Frontend Static Site",
+  "scripts": {
+    "build": "echo 'Static site - no build required'",
+    "dev": "echo 'Use live server or open index.html'"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "keywords": [
+    "flexcredi",
+    "credit",
+    "frontend"
+  ],
+  "author": "FLEXCREDI",
+  "license": "ISC"
+}

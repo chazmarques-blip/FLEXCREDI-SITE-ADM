@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Force Sync Test Client - FLEXCREDI</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2ECC71;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        button {
+            background: #2ECC71;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background: #27ae60;
+        }
+        button.red {
+            background: #e74c3c;
+        }
+        button.red:hover {
+            background: #c0392b;
+        }
+        button.blue {
+            background: #3498db;
+        }
+        button.blue:hover {
+            background: #2980b9;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            border-left: 4px solid #2ECC71;
+        }
+        .status {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Force Sync Test Client</h1>
+        <p class="subtitle">Use this tool to fix the "Carlos Eduardo" issue and force load John Michael Smith data</p>
+        
+        <div id="status"></div>
+        
+        <div style="margin: 20px 0;">
+            <button onclick="diagnose()">🔍 1. Diagnose Issue</button>
+            <button onclick="createTestClient()" class="blue">➕ 2. Create Test Client</button>
+            <button onclick="forceFixUser()">🔧 3. Force Fix User Data</button>
+            <button onclick="clearAll()" class="red">🗑️ 4. Clear All & Reload</button>
+        </div>
+        
+        <button onclick="goToDashboard()" style="background: #9b59b6;">📊 Go to Dashboard</button>
+        <button onclick="goToLogin()" style="background: #e67e22;">🔐 Go to Login</button>
+        
+        <pre id="output">Click "1. Diagnose Issue" to start...</pre>
+    </div>
+    
+    <script>
+        function log(message) {
+            const output = document.getElementById('output');
+            output.textContent += message + '\n';
+            console.log(message);
+        }
+        
+        function showStatus(message, type = 'success') {
+            const status = document.getElementById('status');
+            status.className = `status ${type}`;
+            status.textContent = message;
+        }
+        
+        function diagnose() {
+            const output = document.getElementById('output');
+            output.textContent = '=== FLEXCREDI DIAGNOSTIC ===\n\n';
+            
+            // Check current user
+            const currentUser = JSON.parse(localStorage.getItem('flexcredi_user') || 'null');
+            log('1. CURRENT USER:');
+            if (currentUser) {
+                log(`   Name: ${currentUser.fullName}`);
+                log(`   Email: ${currentUser.email}`);
+                log(`   Credit Score: ${currentUser.creditScore}`);
+                
+                if (currentUser.fullName === 'Carlos Eduardo Silva') {
+                    showStatus('❌ PROBLEM DETECTED: Showing Carlos Eduardo instead of test client!', 'error');
+                } else {
+                    showStatus('✅ User data looks correct!', 'success');
+                }
+            } else {
+                log('   ❌ NO USER LOGGED IN');
+                showStatus('⚠️ No user logged in. Please login first.', 'warning');
+            }
+            
+            // Check test clients
+            const testClients = JSON.parse(localStorage.getItem('flexcredi_test_clients') || '[]');
+            log(`\n2. TEST CLIENTS: ${testClients.length} found`);
+            testClients.forEach((c, i) => {
+                log(`   ${i+1}. ${c.fullName} (${c.email})`);
+            });
+            
+            // Check session
+            const session = JSON.parse(localStorage.getItem('flexcredi_session') || '{}');
+            log(`\n3. SESSION: ${session.sessionId ? 'Active' : 'None'}`);
+            
+            // Recommendations
+            log('\n4. RECOMMENDATIONS:');
+            if (testClients.length === 0) {
+                log('   ➡️ Click "2. Create Test Client" to create John Michael Smith');
+            } else if (currentUser && currentUser.fullName === 'Carlos Eduardo Silva') {
+                log('   ➡️ Click "3. Force Fix User Data" to replace Carlos with test client');
+            } else if (!currentUser) {
+                log('   ➡️ Go to login page and use: john.smith@testmail.com / TestClient123!');
+            } else {
+                log('   ✅ Everything looks good!');
+            }
+        }
+        
+        function createTestClient() {
+            const output = document.getElementById('output');
+            output.textContent = '=== CREATING TEST CLIENT ===\n\n';
+            
+            const timestamp = Date.now();
+            const testClient = {
+                id: `test-client-${timestamp}`,
+                fullName: "John Michael Smith",
+                name: "John Michael Smith",
+                email: "john.smith@testmail.com",
+                password: "TestClient123!",
+                senha: "TestClient123!",
+                phone: "(555) 123-4567",
+                cellPhone: "(555) 123-4567",
+                homePhone: "(555) 123-4567",
+                ssn: "987-65-4321",
+                dateOfBirth: "1985-06-15",
+                dob: "1985-06-15",
+                driverLicense: "D1234567",
+                dlState: "IL",
+                address: "742 Evergreen Terrace",
+                city: "Springfield",
+                state: "IL",
+                zipCode: "12345",
+                residenceType: "own",
+                yearsAtAddress: 5,
+                monthsAtAddress: 3,
+                employmentStatus: "employed",
+                employer: "Springfield Nuclear Power Plant",
+                occupation: "Safety Inspector",
+                employerPhone: "(555) 555-0100",
+                yearsEmployed: 12,
+                monthsEmployed: 6,
+                monthlyIncome: 7500,
+                annualIncome: 90000,
+                additionalIncome: 1000,
+                additionalIncomeSource: "Consulting",
+                loanAmount: 35000,
+                desiredAmount: 35000,
+                loanPurpose: "Home Improvement",
+                purpose: "Kitchen Renovation",
+                creditScore: 742,
+                creditHistory: "good",
+                monthlyMortgage: 1200,
+                monthlyRent: 1200,
+                otherMonthlyDebts: 350,
+                bankName: "Springfield National Bank",
+                accountType: "checking",
+                routingNumber: "123456789",
+                accountNumber: "9876543210",
+                status: "pre-approved",
+                applicationDate: new Date().toISOString(),
+                applicationId: `APP-TEST-${timestamp}`,
+                clientId: `test-client-${timestamp}`,
+                preApproval: {
+                    amount: 35000,
+                    interestRate: 16.5,
+                    termMonths: 36,
+                    monthlyPayment: 1245,
+                    approvalDate: new Date().toISOString()
+                },
+                documents: {
+                    driverLicense: { uploaded: false },
+                    proofAddress: { uploaded: false },
+                    socialSecurity: { uploaded: false },
+                    bankCard: { uploaded: false }
+                },
+                references: [
+                    {
+                        name: "Homer Simpson",
+                        relationship: "Friend",
+                        phone: "(555) 123-4568",
+                        email: "homer@example.com"
+                    }
+                ]
+            };
+            
+            // Save to localStorage
+            const clients = JSON.parse(localStorage.getItem('flexcredi_test_clients') || '[]');
+            clients.push(testClient);
+            localStorage.setItem('flexcredi_test_clients', JSON.stringify(clients));
+            
+            const apps = JSON.parse(localStorage.getItem('flexcredi_test_applications') || '[]');
+            apps.push({...testClient, clientName: testClient.fullName, clientEmail: testClient.email, clientPhone: testClient.phone});
+            localStorage.setItem('flexcredi_test_applications', JSON.stringify(apps));
+            
+            log('✅ Test Client Created!');
+            log(`   ID: ${testClient.id}`);
+            log(`   Name: ${testClient.fullName}`);
+            log(`   Email: ${testClient.email}`);
+            log(`   Password: ${testClient.password}`);
+            log(`   Credit Score: ${testClient.creditScore}`);
+            log(`   Loan Amount: $${testClient.loanAmount.toLocaleString()}`);
+            
+            showStatus('✅ Test client created successfully! Now click "3. Force Fix User Data"', 'success');
+        }
+        
+        function forceFixUser() {
+            const output = document.getElementById('output');
+            output.textContent = '=== FORCE FIXING USER DATA ===\n\n';
+            
+            const testClients = JSON.parse(localStorage.getItem('flexcredi_test_clients') || '[]');
+            
+            if (testClients.length === 0) {
+                log('❌ No test clients found!');
+                log('   Click "2. Create Test Client" first');
+                showStatus('❌ No test clients found. Create one first!', 'error');
+                return;
+            }
+            
+            const testClient = testClients[0];
+            log(`Found test client: ${testClient.fullName}`);
+            
+            // Create proper userData structure
+            const userData = {
+                id: testClient.id || testClient.clientId,
+                email: testClient.email,
+                fullName: testClient.fullName || testClient.name,
+                phone: testClient.phone || testClient.cellPhone,
+                ssn: testClient.ssn || '***-**-****',
+                address: testClient.address || '',
+                zipCode: testClient.zipCode || testClient.cep,
+                city: testClient.city || testClient.cidade,
+                state: testClient.state || testClient.estado,
+                availableCredit: testClient.preApproval?.amount || testClient.loanAmount || 35000,
+                creditScore: testClient.creditScore || 742,
+                accountType: 'client',
+                memberSince: testClient.applicationDate || new Date().toISOString(),
+                totalApplications: 1,
+                approvedApplications: testClient.status === 'pre-approved' ? 1 : 0,
+                totalCreditUsed: 0,
+                currentBalance: 0,
+                averageRate: testClient.preApproval?.interestRate || 16.5,
+                loginTime: new Date().toISOString(),
+                applications: [{
+                    id: testClient.applicationId || testClient.id,
+                    amount: testClient.loanAmount || testClient.desiredAmount,
+                    purpose: testClient.loanPurpose || testClient.purpose,
+                    status: testClient.status === 'pre-approved' ? 'processing' : 'pending',
+                    date: testClient.applicationDate,
+                    rate: testClient.preApproval?.interestRate || 16.5,
+                    term: testClient.preApproval?.termMonths || 36
+                }],
+                applicationData: testClient,
+                preApproval: testClient.preApproval || {
+                    amount: testClient.loanAmount || 35000,
+                    interestRate: 16.5,
+                    termMonths: 36,
+                    monthlyPayment: 1245,
+                    approvalDate: new Date().toISOString()
+                },
+                documents: testClient.documents || {
+                    driverLicense: { uploaded: false },
+                    proofAddress: { uploaded: false },
+                    socialSecurity: { uploaded: false },
+                    bankCard: { uploaded: false }
+                },
+                recentActivity: [
+                    {
+                        title: 'Application Submitted',
+                        description: `Credit application of $${(testClient.loanAmount || 0).toLocaleString()} submitted`,
+                        time: 'Today',
+                        type: 'application'
+                    }
+                ]
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('flexcredi_user', JSON.stringify(userData));
+            
+            // Create session
+            localStorage.setItem('flexcredi_session', JSON.stringify({
+                userId: userData.id,
+                sessionId: Math.random().toString(36).substring(2, 15),
+                loginTime: userData.loginTime,
+                expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+            }));
+            
+            log('✅ USER DATA FIXED!');
+            log(`   Name: ${userData.fullName}`);
+            log(`   Email: ${userData.email}`);
+            log(`   Credit Score: ${userData.creditScore}`);
+            log(`   Pre-Approval: $${userData.preApproval.amount.toLocaleString()}`);
+            
+            showStatus('✅ User data fixed! Click "Go to Dashboard" to see John Michael Smith', 'success');
+        }
+        
+        function clearAll() {
+            if (confirm('This will clear ALL localStorage data. Continue?')) {
+                const output = document.getElementById('output');
+                output.textContent = '=== CLEARING ALL DATA ===\n\n';
+                
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                log('✅ All data cleared!');
+                log('   Reloading in 2 seconds...');
+                
+                showStatus('✅ All data cleared! Reloading...', 'success');
+                
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }
+        }
+        
+        function goToDashboard() {
+            window.location.href = '/dashboard-cliente.html';
+        }
+        
+        function goToLogin() {
+            window.location.href = '/login.html';
+        }
+        
+        // Auto-diagnose on load
+        window.addEventListener('load', diagnose);
+    </script>
+</body>
+</html>

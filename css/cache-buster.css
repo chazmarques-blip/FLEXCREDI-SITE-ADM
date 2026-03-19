@@ -1,0 +1,7 @@
+/* Cache Buster - Force Vercel Redeploy */
+/* Criado em: 2026-02-20 */
+/* Versão: 1.0.1 */
+
+body {
+    /* Força recarregamento de assets */
+}

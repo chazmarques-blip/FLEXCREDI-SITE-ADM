@@ -1,0 +1,17 @@
+===========================================
+INSTRUÇÕES PARA SUBSTITUIÇÃO COMPLETA
+===========================================
+
+1. Acesse: https://github.com/chazmarques-blip/FLEXCREDI-COMPLETO/blob/main/index.html
+2. Clique no ícone de LÁPIS (✏️) para editar
+3. Selecione TODO o conteúdo (Ctrl+A ou Cmd+A)
+4. Apague tudo (Delete)
+5. Copie TODO o conteúdo abaixo desta linha
+6. Cole no editor do GitHub
+7. Mensagem de commit: "fix: Replace entire index.html with correct working version"
+8. Clique em "Commit changes"
+
+===========================================
+COPIE DAQUI PARA BAIXO ⬇️
+===========================================
+

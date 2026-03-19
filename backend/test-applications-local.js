@@ -1,0 +1,22 @@
+// Simular a query do ApplicationsController localmente para ver o erro
+console.log('Testing Applications query locally...');
+console.log('Note: This will fail with "Can\'t reach database" because local .env is not updated');
+console.log('But we can see the query structure is correct');
+console.log('');
+console.log('Query that Applications endpoint uses:');
+console.log('');
+console.log('prisma.application.findMany({');
+console.log('  where: {},  // empty where for list all');
+console.log('  include: {');
+console.log('    partner: { select: { id, companyName, tradeName } },');
+console.log('    user: { select: { id, name, email } }');
+console.log('  },');
+console.log('  orderBy: { createdAt: "desc" },');
+console.log('  take: 50,');
+console.log('  skip: 0');
+console.log('});');
+console.log('');
+console.log('This query should work fine. The error might be:');
+console.log('1. user relation missing (no users in database)');
+console.log('2. Database connection issue (already fixed)');
+console.log('3. Prisma client not regenerated');

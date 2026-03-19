@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments ACH - FLEXCREDI Admin</title>
+    <link rel="icon" type="image/png" href="/images/flexcredi-logo-official.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/layout-adjustments.css">
+    <link rel="stylesheet" href="/css/perfect-alignment.css">
+    <link rel="stylesheet" href="/css/client-functions.css">
+    <link rel="stylesheet" href="/css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body class="admin-page">
+    <header class="dashboard-header">
+        <nav class="navbar container">
+            <a href="index.html" class="navbar-brand">
+                <img src="/images/flexcredi-logo-official.png" alt="FLEXCREDI" class="logo-img">
+            </a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
+            <div class="user-menu">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=2ECC71&color=fff" alt="Avatar" class="user-avatar">
+                    <span class="user-name">Admin</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="admin-sidebar" id="adminSidebar">
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item"><i class="fas fa-chart-line"></i><span>Dashboard</span></a>
+            <a href="admin-aplicacoes.html" class="nav-item"><i class="fas fa-file-invoice"></i><span>Applications</span></a>
+            <a href="admin-clientes.html" class="nav-item"><i class="fas fa-users"></i><span>Clients</span></a>
+            <a href="admin-parceiros.html" class="nav-item"><i class="fas fa-handshake"></i><span>Partners</span></a>
+            <a href="admin-documentos.html" class="nav-item"><i class="fas fa-folder"></i><span>Documents</span></a>
+            <a href="admin-contratos.html" class="nav-item"><i class="fas fa-file-contract"></i><span>Contracts</span></a>
+            <a href="admin-pagamentos.html" class="nav-item active"><i class="fas fa-credit-card"></i><span>ACH Payments</span></a>
+            <a href="admin-recebiveis.html" class="nav-item"><i class="fas fa-calendar-alt"></i><span>Receivables</span></a>
+            <a href="admin-agentes.html" class="nav-item"><i class="fas fa-robot"></i><span>Agents</span></a>
+            <a href="admin-configuracoes.html" class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></a>
+        </nav>
+    </aside>
+
+    <main class="admin-main-content">
+        <div class="container-fluid">
+            <div class="dashboard-section" style="margin-bottom: 20px;">
+                <div class="section-header">
+                    <h2><i class="fas fa-credit-card"></i> Gestão de Pagamentos ACH</h2>
+                    <button class="btn-add" onclick="alert('Iniciar novo pagamento')">
+                        <i class="fas fa-plus"></i> Novo Pagamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Parceiro</th>
+                                <th>Valor<gt;Amount</th>
+                                <th>Status<gt;Status</th>
+                                <th>Data Programada</th>
+                                <th>Ações<gt;Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="7" class="empty-state">
+                                    <i class="fas fa-credit-card"></i>
+                                    <p>Funcionalidade em desenvolvimento</p>
+                                    <small>Em breve: criação, aprovação e rastreamento de pagamentos ACH</small>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-simple">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 FLEXCREDI. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.getElementById('mobileMenuToggle')?.addEventListener('click', () => {
+        document.getElementById('adminSidebar').classList.toggle('open');
+    });
+    </script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>

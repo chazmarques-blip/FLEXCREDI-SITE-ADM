@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLEXCREDI Admin - Simple Login Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        h1 {
+            color: #2ECC71;
+            margin-bottom: 10px;
+            font-size: 28px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            color: #7F8C8D;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .test-section {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .test-section h3 {
+            color: #495057;
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status.pending {
+            background: #ffc107;
+            color: #000;
+        }
+        
+        .status.success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .status.error {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #495057;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 40px 12px 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #2ECC71;
+        }
+        
+        .toggle-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #6c757d;
+            padding: 8px;
+            z-index: 10;
+        }
+        
+        .toggle-btn:hover {
+            color: #2ECC71;
+        }
+        
+        button.btn {
+            width: 100%;
+            padding: 14px;
+            background: #2ECC71;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        button.btn:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+        
+        button.btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .console-output {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+        
+        .console-output .log {
+            margin: 4px 0;
+            padding: 4px;
+        }
+        
+        .console-output .log.info {
+            color: #4fc3f7;
+        }
+        
+        .console-output .log.success {
+            color: #81c784;
+        }
+        
+        .console-output .log.error {
+            color: #e57373;
+        }
+        
+        .console-output .log.warn {
+            color: #ffb74d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 FLEXCREDI Admin</h1>
+        <p class="subtitle">Sistema de Teste e Diagnóstico</p>
+        
+        <!-- TEST 1: PASSWORD TOGGLE -->
+        <div class="test-section">
+            <h3>
+                <span id="test1-status" class="status pending">⏳ TESTE 1</span>
+                Visualizar Senha
+            </h3>
+            <div class="form-group">
+                <label>Digite uma senha de teste:</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="password" 
+                        id="testPassword" 
+                        placeholder="Digite qualquer coisa..."
+                        value="teste123"
+                    >
+                    <button 
+                        class="toggle-btn" 
+                        id="toggleTestPassword"
+                        onclick="togglePassword()"
+                    >
+                        👁️
+                    </button>
+                </div>
+            </div>
+            <div class="console-output" id="console1"></div>
+        </div>
+        
+        <!-- TEST 2: MOCK LOGIN -->
+        <div class="test-section">
+            <h3>
+                <span id="test2-status" class="status pending">⏳ TESTE 2</span>
+                Login Mock
+            </h3>
+            <div class="form-group">
+                <label>Email:</label>
+                <input 
+                    type="email" 
+                    id="mockEmail" 
+                    placeholder="admin@flexcredi.com"
+                    value="admin@flexcredi.com"
+                >
+            </div>
+            <div class="form-group">
+                <label>Senha:</label>
+                <input 
+                    type="password" 
+                    id="mockPassword" 
+                    placeholder="admin123"
+                    value="admin123"
+                >
+            </div>
+            <button class="btn" onclick="testMockLogin()">
+                Testar Login Mock
+            </button>
+            <div class="console-output" id="console2"></div>
+        </div>
+        
+        <!-- TEST 3: AUTO-LOGIN -->
+        <div class="test-section">
+            <h3>
+                <span id="test3-status" class="status pending">⏳ TESTE 3</span>
+                Auto-Login
+            </h3>
+            <button class="btn" onclick="testAutoLogin()">
+                Executar Auto-Login
+            </button>
+            <div class="console-output" id="console3"></div>
+        </div>
+        
+        <!-- TEST 4: API CONNECTION -->
+        <div class="test-section">
+            <h3>
+                <span id="test4-status" class="status pending">⏳ TESTE 4</span>
+                Conexão com API
+            </h3>
+            <button class="btn" onclick="testAPIConnection()">
+                Testar API Railway
+            </button>
+            <div class="console-output" id="console4"></div>
+        </div>
+    </div>
+    
+    <script>
+        // ============================================
+        // UTILITIES
+        // ============================================
+        function addLog(consoleId, message, type = 'info') {
+            const console = document.getElementById(consoleId);
+            const log = document.createElement('div');
+            log.className = `log ${type}`;
+            log.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            console.appendChild(log);
+            console.scrollTop = console.scrollHeight;
+            
+            // Also log to browser console
+            const browserLog = {
+                'info': console.log,
+                'success': console.log,
+                'error': console.error,
+                'warn': console.warn
+            }[type] || console.log;
+            
+            browserLog(`[${consoleId}] ${message}`);
+        }
+        
+        function setStatus(testId, status) {
+            const statusEl = document.getElementById(`test${testId}-status`);
+            statusEl.className = `status ${status}`;
+            const emoji = {
+                'pending': '⏳',
+                'success': '✅',
+                'error': '❌'
+            }[status] || '⏳';
+            statusEl.textContent = `${emoji} TESTE ${testId}`;
+        }
+        
+        // ============================================
+        // TEST 1: PASSWORD TOGGLE
+        // ============================================
+        function togglePassword() {
+            const input = document.getElementById('testPassword');
+            const btn = document.getElementById('toggleTestPassword');
+            
+            addLog('console1', '🔍 Função togglePassword() chamada', 'info');
+            addLog('console1', `📊 Tipo atual do input: ${input.type}`, 'info');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';
+                addLog('console1', '✅ Senha agora VISÍVEL (type = text)', 'success');
+                addLog('console1', `📝 Valor do campo: "${input.value}"`, 'success');
+                setStatus(1, 'success');
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁️';
+                addLog('console1', '✅ Senha agora OCULTA (type = password)', 'success');
+                setStatus(1, 'pending');
+            }
+        }
+        
+        // ============================================
+        // TEST 2: MOCK LOGIN
+        // ============================================
+        function testMockLogin() {
+            const email = document.getElementById('mockEmail').value;
+            const password = document.getElementById('mockPassword').value;
+            
+            addLog('console2', '🚀 Iniciando teste de login mock...', 'info');
+            addLog('console2', `📧 Email: ${email}`, 'info');
+            addLog('console2', `🔒 Senha: ${password}`, 'info');
+            
+            // Mock credentials
+            const MOCK_EMAIL = 'admin@flexcredi.com';
+            const MOCK_PASSWORD = 'admin123';
+            
+            addLog('console2', '🔍 Verificando credenciais...', 'info');
+            
+            if (email === MOCK_EMAIL && password === MOCK_PASSWORD) {
+                addLog('console2', '✅ CREDENCIAIS CORRETAS!', 'success');
+                
+                // Simulate storing token
+                const mockToken = 'mock-jwt-token-' + Date.now();
+                const mockUser = {
+                    id: 1,
+                    name: 'Admin User',
+                    email: email,
+                    role: 'admin'
+                };
+                
+                localStorage.setItem('adminToken', mockToken);
+                localStorage.setItem('adminUser', JSON.stringify(mockUser));
+                
+                addLog('console2', `💾 Token salvo: ${mockToken}`, 'success');
+                addLog('console2', `👤 Usuário salvo: ${JSON.stringify(mockUser)}`, 'success');
+                addLog('console2', '🎉 LOGIN MOCK REALIZADO COM SUCESSO!', 'success');
+                
+                setStatus(2, 'success');
+                
+                // Offer to redirect
+                setTimeout(() => {
+                    if (confirm('Login mock bem-sucedido! Redirecionar para dashboard?')) {
+                        window.location.href = '/admin-panel/admin/dashboard.html';
+                    }
+                }, 1000);
+            } else {
+                addLog('console2', '❌ CREDENCIAIS INVÁLIDAS!', 'error');
+                addLog('console2', `❌ Esperado: ${MOCK_EMAIL} / ${MOCK_PASSWORD}`, 'error');
+                addLog('console2', `❌ Recebido: ${email} / ${password}`, 'error');
+                setStatus(2, 'error');
+            }
+        }
+        
+        // ============================================
+        // TEST 3: AUTO-LOGIN
+        // ============================================
+        function testAutoLogin() {
+            addLog('console3', '🚀 Executando auto-login...', 'info');
+            
+            // Fill fields
+            document.getElementById('mockEmail').value = 'admin@flexcredi.com';
+            document.getElementById('mockPassword').value = 'admin123';
+            
+            addLog('console3', '📝 Campos preenchidos automaticamente', 'success');
+            addLog('console3', '⏳ Aguardando 1 segundo...', 'info');
+            
+            setTimeout(() => {
+                addLog('console3', '🔐 Chamando testMockLogin()...', 'info');
+                testMockLogin();
+                setStatus(3, 'success');
+            }, 1000);
+        }
+        
+        // ============================================
+        // TEST 4: API CONNECTION
+        // ============================================
+        async function testAPIConnection() {
+            const API_URL = 'https://flexcredi-site-adm-production-b27d.up.railway.app';
+            
+            addLog('console4', '🌐 Testando conexão com API...', 'info');
+            addLog('console4', `📡 URL: ${API_URL}`, 'info');
+            
+            try {
+                addLog('console4', '⏳ Enviando requisição POST /api/admin/login...', 'info');
+                
+                const response = await fetch(`${API_URL}/api/admin/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        email: 'test@test.com',
+                        password: 'test123'
+                    })
+                });
+                
+                addLog('console4', `📊 Status HTTP: ${response.status}`, response.ok ? 'success' : 'warn');
+                
+                const data = await response.json();
+                addLog('console4', `📦 Resposta: ${JSON.stringify(data)}`, 'info');
+                
+                if (response.status === 401 || response.status === 400) {
+                    addLog('console4', '✅ API ESTÁ RESPONDENDO! (401/400 é esperado com credenciais inválidas)', 'success');
+                    setStatus(4, 'success');
+                } else if (response.ok) {
+                    addLog('console4', '✅ API ESTÁ FUNCIONANDO!', 'success');
+                    setStatus(4, 'success');
+                } else {
+                    addLog('console4', '⚠️ API retornou erro inesperado', 'warn');
+                    setStatus(4, 'error');
+                }
+                
+            } catch (error) {
+                addLog('console4', `❌ ERRO DE CONEXÃO: ${error.message}`, 'error');
+                addLog('console4', '❌ Possíveis causas:', 'error');
+                addLog('console4', '  - CORS bloqueado', 'error');
+                addLog('console4', '  - API offline', 'error');
+                addLog('console4', '  - Problema de rede', 'error');
+                setStatus(4, 'error');
+            }
+        }
+        
+        // ============================================
+        // INITIAL LOGS
+        // ============================================
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('='.repeat(50));
+            console.log('🔧 FLEXCREDI ADMIN - Sistema de Teste Iniciado');
+            console.log('='.repeat(50));
+            
+            addLog('console1', '✅ Sistema de toggle inicializado', 'success');
+            addLog('console2', '✅ Sistema de login mock inicializado', 'success');
+            addLog('console3', '✅ Sistema de auto-login inicializado', 'success');
+            addLog('console4', '✅ Sistema de teste de API inicializado', 'success');
+            
+            console.log('📌 Para testar:');
+            console.log('  1. Clique no botão 👁️ para ver/ocultar senha');
+            console.log('  2. Clique em "Testar Login Mock"');
+            console.log('  3. Clique em "Executar Auto-Login"');
+            console.log('  4. Clique em "Testar API Railway"');
+        });
+    </script>
+</body>
+</html>

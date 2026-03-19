@@ -1,0 +1,116 @@
+# 🌐 VERCEL - GUIA DE DEPLOY
+
+════════════════════════════════════════════════════════
+PASSO A PASSO COMPLETO PARA VERCEL:
+════════════════════════════════════════════════════════
+
+📍 URL: https://vercel.com
+
+════════════════════════════════════════════════════════
+ETAPA 1: LOGIN
+════════════════════════════════════════════════════════
+
+1. Abra https://vercel.com
+2. Clique em "Sign Up" ou "Login"
+3. Escolha "Continue with GitHub"
+4. Autorize o Vercel a acessar seu GitHub
+
+════════════════════════════════════════════════════════
+ETAPA 2: IMPORT REPOSITORY
+════════════════════════════════════════════════════════
+
+1. Clique em "Add New..." (canto superior direito)
+2. Selecione "Project"
+3. Na lista de repositórios, procure "flexcredi"
+4. Clique em "Import" ao lado do repositório FLEXCREDI
+
+════════════════════════════════════════════════════════
+ETAPA 3: CONFIGURAR PROJETO
+════════════════════════════════════════════════════════
+
+Configure estas opções EXATAMENTE assim:
+
+┌─────────────────────────────────────────────────────┐
+│ Framework Preset:        Other                      │
+│ Root Directory:          ./   (deixe como está)     │
+│ Build Command:           (deixe vazio)              │
+│ Output Directory:        ./   (deixe como está)     │
+│ Install Command:         (deixe vazio)              │
+└─────────────────────────────────────────────────────┘
+
+⚠️ IMPORTANTE: 
+- NÃO mude o Framework Preset (deixe "Other")
+- NÃO adicione comandos de build
+- É um site estático puro (HTML/CSS/JS)
+
+════════════════════════════════════════════════════════
+ETAPA 4: ENVIRONMENT VARIABLES (OPCIONAL)
+════════════════════════════════════════════════════════
+
+Pode pular esta seção! As URLs já estão configuradas em:
+- js/config.js (detecção automática de ambiente)
+
+Se quiser adicionar (opcional):
+Nome: NEXT_PUBLIC_API_URL
+Valor: [URL-DO-SEU-RAILWAY].railway.app
+
+════════════════════════════════════════════════════════
+ETAPA 5: DEPLOY
+════════════════════════════════════════════════════════
+
+1. Clique no botão "Deploy"
+2. Aguarde 1-2 minutos
+3. Vercel vai mostrar:
+   
+   🎉 Congratulations!
+   Your project is live at:
+   https://flexcredi-xyz123.vercel.app
+
+4. COPIE esta URL!
+
+════════════════════════════════════════════════════════
+ETAPA 6: TESTAR
+════════════════════════════════════════════════════════
+
+Abra a URL que o Vercel forneceu:
+https://[seu-projeto].vercel.app
+
+Deve carregar:
+✅ Landing page do FLEXCREDI
+✅ CSS aplicado (cores verde/branco)
+✅ Imagens carregando
+✅ Layout responsivo
+
+════════════════════════════════════════════════════════
+ETAPA 7: ATUALIZAR FRONTEND_URL NO RAILWAY
+════════════════════════════════════════════════════════
+
+Agora que você tem a URL do Vercel:
+
+1. Volte no Railway
+2. Vá em Settings → Variables
+3. Edite a variável FRONTEND_URL
+4. Coloque a URL REAL do Vercel:
+   https://[sua-url-vercel].vercel.app
+5. Salve (Railway faz redeploy automático)
+
+════════════════════════════════════════════════════════
+URLS FINAIS:
+════════════════════════════════════════════════════════
+
+BACKEND:  https://__________________.railway.app
+FRONTEND: https://__________________.vercel.app
+
+ANOTE ESTAS URLS!
+
+════════════════════════════════════════════════════════
+PRONTO! SISTEMA ONLINE! 🎉
+════════════════════════════════════════════════════════
+
+Próximos testes:
+1. Abrir frontend/admin-dashboard.html
+2. F12 → Console → verificar sem erros
+3. Ver dados carregando da API
+4. Testar navegação entre páginas
+
+════════════════════════════════════════════════════════

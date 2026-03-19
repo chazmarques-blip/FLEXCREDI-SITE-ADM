@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FLEXCREDI - Gestão de Aplicações de Crédito">
+    <title>Applications - FLEXCREDI Admin</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/flexcredi-logo-official.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/layout-adjustments.css">
+    <link rel="stylesheet" href="/css/perfect-alignment.css">
+    <link rel="stylesheet" href="/css/client-functions.css">
+    <link rel="stylesheet" href="/css/admin-dashboard.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body class="admin-page">
+    <!-- Header -->
+    <header class="dashboard-header">
+        <nav class="navbar container">
+            <a href="index.html" class="navbar-brand">
+                <img src="/images/flexcredi-logo-official.png" alt="FLEXCREDI" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="user-menu">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=2ECC71&color=fff" 
+                         alt="Avatar" class="user-avatar">
+                    <span class="user-name">Admin</span>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" id="userDropdown">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#profile" class="dropdown-item">
+                            <i class="fas fa-user"></i> Meu Perfil
+                        </a>
+                        <a href="admin-configuracoes.html" class="dropdown-item">
+                            <i class="fas fa-cog"></i> Configurações
+                        </a>
+                        <a href="#help" class="dropdown-item">
+                            <i class="fas fa-question-circle"></i> Ajuda
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="login.html" class="dropdown-item logout-btn">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="admin-aplicacoes.html" class="nav-item active">
+                <i class="fas fa-file-invoice"></i>
+                <span>Applications</span>
+            </a>
+            <a href="admin-clientes.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Clients</span>
+            </a>
+            <a href="admin-parceiros.html" class="nav-item">
+                <i class="fas fa-handshake"></i>
+                <span>Partners</span>
+            </a>
+            <a href="admin-documentos.html" class="nav-item">
+                <i class="fas fa-folder"></i>
+                <span>Documents</span>
+            </a>
+            <a href="admin-contratos.html" class="nav-item">
+                <i class="fas fa-file-contract"></i>
+                <span>Contracts</span>
+            </a>
+            <a href="admin-pagamentos.html" class="nav-item">
+                <i class="fas fa-credit-card"></i>
+                <span>ACH Payments</span>
+            </a>
+            <a href="admin-recebiveis.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Receivables</span>
+            </a>
+            <a href="admin-agentes.html" class="nav-item">
+                <i class="fas fa-robot"></i>
+                <span>Agents</span>
+            </a>
+            <a href="admin-configuracoes.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+        <div class="container-fluid">
+            <!-- Page Header -->
+            <div class="dashboard-section" style="margin-bottom: 20px;">
+                <div class="section-header">
+                    <h2><i class="fas fa-file-invoice"></i> Gestão de Aplicações de Crédito</h2>
+                    <button class="btn-add" onclick="alert('Funcionalidade em desenvolvimento')">
+                        <i class="fas fa-plus"></i> Nova Aplicação
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="dashboard-section" style="margin-bottom: 20px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                    <div>
+                        <label style="display: block; font-size: 12px; font-weight: 500; color: #6c757d; margin-bottom: 6px;">Buscar<gt;Search</label>
+                        <input type="text" id="searchInput" placeholder="Nome ou CPF..." 
+                               style="width: 100%; padding: 10px; border: 1px solid #e9ecef; border-radius: 6px; font-size: 14px;">
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 12px; font-weight: 500; color: #6c757d; margin-bottom: 6px;">Status<gt;Status</label>
+                        <select id="statusFilter" 
+                                style="width: 100%; padding: 10px; border: 1px solid #e9ecef; border-radius: 6px; font-size: 14px;">
+                            <option value="">Todos<gt;All</option>
+                            <option value="PENDING">Pendente<gt;Pending</option>
+                            <option value="APPROVED">Aprovado<gt;Approved</option>
+                            <option value="REJECTED">Rejeitado<gt;Rejected</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 12px; font-weight: 500; color: #6c757d; margin-bottom: 6px;">Ordenar por</label>
+                        <select id="sortBy" 
+                                style="width: 100%; padding: 10px; border: 1px solid #e9ecef; border-radius: 6px; font-size: 14px;">
+                            <option value="createdAt_desc">Mais recentes</option>
+                            <option value="createdAt_asc">Mais antigas</option>
+                            <option value="requestedAmount_desc">Maior valor</option>
+                            <option value="requestedAmount_asc">Menor valor</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: flex-end;">
+                        <button id="searchBtn" class="btn-add" style="width: 100%;">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela de Aplicações -->
+            <div class="dashboard-section">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Parceiro</th>
+                                <th>Valor<gt;Amount</th>
+                                <th>Score</th>
+                                <th>Status<gt;Status</th>
+                                <th>Data<gt;Date</th>
+                                <th>Ações<gt;Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applicationsTableBody">
+                            <tr>
+                                <td colspan="8" class="loading">Carregando aplicações...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Paginação -->
+                <div id="paginationContainer" style="margin-top: 20px; display: none; text-align: center;">
+                    <!-- Paginação será adicionada via JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-simple">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 FLEXCREDI. Todos os direitos reservados.</p>
+                <div class="footer-links">
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Contato</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // API Configuration
+    const API_URL = 'https://flexcredi-site-adm-production-b27d.up.railway.app';
+
+    // Load Applications
+    async function loadApplications() {
+        try {
+            const searchTerm = document.getElementById('searchInput').value;
+            const status = document.getElementById('statusFilter').value;
+            const sortBy = document.getElementById('sortBy').value;
+
+            let url = `${API_URL}/api/admin/applications?`;
+            if (searchTerm) url += `search=${searchTerm}&`;
+            if (status) url += `status=${status}&`;
+            if (sortBy) url += `sortBy=${sortBy}&`;
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            const tbody = document.getElementById('applicationsTableBody');
+            
+            if (!data.applications || data.applications.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <p>Nenhuma aplicação encontrada</p>
+                            <small>Tente ajustar os filtros de busca</small>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = data.applications.map(app => `
+                <tr>
+                    <td><strong>#${app.id}</strong></td>
+                    <td>
+                        <div class="table-user">
+                            <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(app.client?.name || 'Cliente')}&background=2ECC71&color=fff" 
+                                 alt="Avatar" class="table-avatar">
+                            <div class="table-user-info">
+                                <span class="table-user-name">${app.client?.name || 'N/A'}</span>
+                                <span class="table-user-email">${app.client?.email || 'N/A'}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="table-partner">${app.partner?.name || 'N/A'}</span></td>
+                    <td><span class="table-amount">R$ ${(app.requestedAmount || 0).toLocaleString('pt-BR')}</span></td>
+                    <td><span class="table-score">${app.creditScore || '-'}</span></td>
+                    <td>
+                        <span class="status-badge status-${app.status?.toLowerCase() || 'pending'}">
+                            ${app.status === 'APPROVED' ? 'Aprovado' : app.status === 'REJECTED' ? 'Rejeitado' : 'Pendente'}
+                        </span>
+                    </td>
+                    <td><span class="table-date">${new Date(app.createdAt).toLocaleDateString('pt-BR')}</span></td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="btn-icon" title="Ver detalhes" onclick="viewApplication(${app.id})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn-icon" title="Editar" onclick="editApplication(${app.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            ${app.status === 'PENDING' ? `
+                            <button class="btn-icon" title="Aprovar" onclick="updateStatus(${app.id}, 'APPROVED')" style="background: rgba(39, 174, 96, 0.1); color: var(--verde-sucesso);">
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn-icon" title="Rejeitar" onclick="updateStatus(${app.id}, 'REJECTED')" style="background: rgba(231, 76, 60, 0.1); color: var(--vermelho-erro);">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            ` : ''}
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (error) {
+            console.error('Erro ao carregar aplicações:', error);
+            document.getElementById('applicationsTableBody').innerHTML = `
+                <tr>
+                    <td colspan="8" class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Erro ao carregar aplicações</p>
+                        <small>${error.message}</small>
+                    </td>
+                </tr>
+            `;
+        }
+    }
+
+    function viewApplication(id) {
+        alert(`Ver detalhes da aplicação #${id}`);
+    }
+
+    function editApplication(id) {
+        alert(`Editar aplicação #${id}`);
+    }
+
+    async function updateStatus(id, newStatus) {
+        if (!confirm(`Confirma ${newStatus === 'APPROVED' ? 'aprovação' : 'rejeição'} da aplicação #${id}?`)) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}/api/admin/applications/${id}/status`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: newStatus })
+            });
+
+            if (response.ok) {
+                alert('Status atualizado com sucesso!');
+                loadApplications();
+            } else {
+                alert('Erro ao atualizar status');
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('Erro ao atualizar status');
+        }
+    }
+
+    // Event Listeners
+    document.getElementById('searchBtn').addEventListener('click', loadApplications);
+    document.getElementById('statusFilter').addEventListener('change', loadApplications);
+    document.getElementById('sortBy').addEventListener('change', loadApplications);
+    document.getElementById('searchInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') loadApplications();
+    });
+
+    // Mobile menu toggle
+    document.getElementById('mobileMenuToggle')?.addEventListener('click', () => {
+        document.getElementById('adminSidebar').classList.toggle('open');
+    });
+
+    // Load on page load
+    loadApplications();
+    </script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>

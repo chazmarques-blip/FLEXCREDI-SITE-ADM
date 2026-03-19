@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forçar Deploy no Vercel - FLEXCREDI</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #f5576c;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .alert {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .alert h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .alert p {
+            color: #856404;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            font-weight: 700;
+            margin: 10px 0;
+            text-transform: uppercase;
+        }
+        
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(245, 87, 108, 0.4);
+        }
+        
+        .btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .log {
+            background: #2c3e50;
+            color: #2ecc71;
+            padding: 25px;
+            border-radius: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .log-entry {
+            margin-bottom: 8px;
+        }
+        
+        .success { color: #2ecc71; font-weight: bold; }
+        .error { color: #e74c3c; font-weight: bold; }
+        .info { color: #3498db; }
+        .warning { color: #f39c12; font-weight: bold; }
+        
+        .progress {
+            width: 100%;
+            height: 40px;
+            background: #e9ecef;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+            width: 0%;
+            transition: width 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 FORÇAR DEPLOY NO VERCEL</h1>
+        
+        <div class="alert">
+            <h3>🚨 PROBLEMA IDENTIFICADO:</h3>
+            <p><strong>O Vercel NÃO detectou o novo commit!</strong></p>
+            <p>• Último deploy: 6 horas atrás</p>
+            <p>• Commit errado: "Change Hello World to Goodbye World"</p>
+            <p>• Commit correto no GitHub: "fix: Criar index.html completo..."</p>
+        </div>
+        
+        <div class="alert" style="background: #d1ecf1; border-color: #0c5460;">
+            <h3 style="color: #0c5460;">💡 SOLUÇÃO:</h3>
+            <p style="color: #0c5460;">Vamos fazer um commit "dummy" (vazio) no vercel.json para forçar o Vercel a fazer um novo deploy.</p>
+        </div>
+        
+        <button class="btn" onclick="forceDeploy()">
+            🚀 FORÇAR DEPLOY AGORA
+        </button>
+        
+        <div class="progress" id="progressContainer">
+            <div class="progress-bar" id="progress">0%</div>
+        </div>
+        
+        <div class="log" id="log"></div>
+    </div>
+
+    <script>
+        const TOKEN = "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";
+        const USER = "chazmarques-blip";
+        const REPO = "FLEXCREDI-COMPLETO";
+        const headers = {
+            "Authorization": `token ${TOKEN}`,
+            "Accept": "application/vnd.github.v3+json"
+        };
+
+        function log(message, type = 'info') {
+            const logEl = document.getElementById('log');
+            logEl.style.display = 'block';
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            const time = new Date().toLocaleTimeString();
+            entry.textContent = `[${time}] ${message}`;
+            logEl.appendChild(entry);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function updateProgress(percent, text) {
+            document.getElementById('progressContainer').style.display = 'block';
+            const progressBar = document.getElementById('progress');
+            progressBar.style.width = percent + '%';
+            progressBar.textContent = text || (percent + '%');
+        }
+
+        async function forceDeploy() {
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = '⏳ PROCESSANDO...';
+            
+            log('🚀 INICIANDO PROCESSO DE DEPLOY FORÇADO', 'success');
+            log('', 'info');
+            
+            updateProgress(10, '10% - Iniciando...');
+            
+            try {
+                // Passo 1: Obter o SHA atual do vercel.json
+                log('📥 Obtendo informações do vercel.json...', 'info');
+                updateProgress(25, '25% - Lendo arquivo...');
+                
+                const getResponse = await fetch(
+                    `https://api.github.com/repos/${USER}/${REPO}/contents/vercel.json`,
+                    { headers }
+                );
+                
+                if (!getResponse.ok) {
+                    throw new Error(`Erro ao ler vercel.json: ${getResponse.status}`);
+                }
+                
+                const fileData = await getResponse.json();
+                const currentContent = atob(fileData.content);
+                const sha = fileData.sha;
+                
+                log(`✅ Arquivo encontrado (SHA: ${sha.substring(0, 7)})`, 'success');
+                log('', 'info');
+                
+                // Passo 2: Adicionar comentário com timestamp
+                updateProgress(50, '50% - Preparando commit...');
+                log('📝 Adicionando timestamp para forçar deploy...', 'info');
+                
+                const timestamp = new Date().toISOString();
+                const newContent = currentContent.trim() + `\n// Deploy forçado em: ${timestamp}\n`;
+                const contentB64 = btoa(unescape(encodeURIComponent(newContent)));
+                
+                // Passo 3: Fazer commit
+                updateProgress(75, '75% - Enviando commit...');
+                log('📤 Fazendo commit no GitHub...', 'info');
+                
+                const commitData = {
+                    message: `deploy: Forçar redeploy no Vercel - ${timestamp}`,
+                    content: contentB64,
+                    sha: sha,
+                    branch: "main"
+                };
+                
+                const putResponse = await fetch(
+                    `https://api.github.com/repos/${USER}/${REPO}/contents/vercel.json`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            ...headers,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(commitData)
+                    }
+                );
+                
+                if (!putResponse.ok) {
+                    const error = await putResponse.text();
+                    throw new Error(`Erro no commit: ${putResponse.status} - ${error}`);
+                }
+                
+                const result = await putResponse.json();
+                updateProgress(100, '100% - Concluído!');
+                
+                log('', 'info');
+                log('✅ COMMIT REALIZADO COM SUCESSO!', 'success');
+                log(`📦 SHA do commit: ${result.commit.sha.substring(0, 7)}`, 'success');
+                log('🔗 URL: ' + result.content.html_url, 'info');
+                log('', 'info');
+                log('🎯 PRÓXIMOS PASSOS:', 'warning');
+                log('   1. O Vercel vai detectar o commit em ~30 segundos', 'info');
+                log('   2. Um novo deploy será iniciado automaticamente', 'info');
+                log('   3. Aguarde 3-5 minutos para o build completar', 'info');
+                log('   4. Acesse: https://flexcredi.vercel.app', 'info');
+                log('', 'info');
+                log('📊 VERIFICAR PROGRESSO:', 'warning');
+                log('   Painel Vercel: https://vercel.com/charles-marques-projects/flexcredi', 'info');
+                log('   Você verá um novo deploy com a mensagem:', 'info');
+                log('   "deploy: Forçar redeploy no Vercel"', 'info');
+                log('', 'info');
+                log('✅ Aguarde 5 minutos e teste o site!', 'success');
+                
+                btn.textContent = '✅ DEPLOY FORÇADO COM SUCESSO!';
+                btn.style.background = 'linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)';
+                
+            } catch (error) {
+                log('', 'info');
+                log(`❌ ERRO: ${error.message}`, 'error');
+                btn.disabled = false;
+                btn.textContent = '🔄 TENTAR NOVAMENTE';
+            }
+        }
+    </script>
+</body>
+</html>

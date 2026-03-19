@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FLEXCREDI - Gestão de Clientes">
+    <title>Clients - FLEXCREDI Admin</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/flexcredi-logo-official.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/layout-adjustments.css">
+    <link rel="stylesheet" href="/css/perfect-alignment.css">
+    <link rel="stylesheet" href="/css/client-functions.css">
+    <link rel="stylesheet" href="/css/admin-dashboard.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body class="admin-page">
+    <!-- Header -->
+    <header class="dashboard-header">
+        <nav class="navbar container">
+            <a href="index.html" class="navbar-brand">
+                <img src="/images/flexcredi-logo-official.png" alt="FLEXCREDI" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="user-menu">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=2ECC71&color=fff" 
+                         alt="Avatar" class="user-avatar">
+                    <span class="user-name">Admin</span>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" id="userDropdown">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#profile" class="dropdown-item">
+                            <i class="fas fa-user"></i> Meu Perfil
+                        </a>
+                        <a href="admin-configuracoes.html" class="dropdown-item">
+                            <i class="fas fa-cog"></i> Configurações
+                        </a>
+                        <a href="#help" class="dropdown-item">
+                            <i class="fas fa-question-circle"></i> Ajuda
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="login.html" class="dropdown-item logout-btn">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="admin-aplicacoes.html" class="nav-item">
+                <i class="fas fa-file-invoice"></i>
+                <span>Applications</span>
+            </a>
+            <a href="admin-clientes.html" class="nav-item active">
+                <i class="fas fa-users"></i>
+                <span>Clients</span>
+            </a>
+            <a href="admin-parceiros.html" class="nav-item">
+                <i class="fas fa-handshake"></i>
+                <span>Partners</span>
+            </a>
+            <a href="admin-documentos.html" class="nav-item">
+                <i class="fas fa-folder"></i>
+                <span>Documents</span>
+            </a>
+            <a href="admin-contratos.html" class="nav-item">
+                <i class="fas fa-file-contract"></i>
+                <span>Contracts</span>
+            </a>
+            <a href="admin-pagamentos.html" class="nav-item">
+                <i class="fas fa-credit-card"></i>
+                <span>ACH Payments</span>
+            </a>
+            <a href="admin-recebiveis.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Receivables</span>
+            </a>
+            <a href="admin-agentes.html" class="nav-item">
+                <i class="fas fa-robot"></i>
+                <span>Agents</span>
+            </a>
+            <a href="admin-configuracoes.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+        <div class="container-fluid">
+            <!-- Status Header -->
+            <div class="dashboard-section" style="margin-bottom: 20px;">
+                <div class="section-header" style="border: none;">
+                    <h2><i class="fas fa-users"></i> Gestão de Clientes</h2>
+                    <div style="display: flex; gap: 12px;">
+                        <span id="totalClients" style="padding: 8px 16px; background: rgba(46, 204, 113, 0.1); color: var(--verde-vibrante); border-radius: 6px; font-size: 14px; font-weight: 600;">
+                            <i class="fas fa-users"></i> Total: <strong>0</strong>
+                        </span>
+                        <span id="activeClients" style="padding: 8px 16px; background: rgba(52, 152, 219, 0.1); color: var(--azul-claro); border-radius: 6px; font-size: 14px; font-weight: 600;">
+                            <i class="fas fa-check-circle"></i> Ativos: <strong>0</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="dashboard-section" style="margin-bottom: 20px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                    <div>
+                        <label style="display: block; font-size: 12px; font-weight: 500; color: #6c757d; margin-bottom: 6px;">Buscar<gt;Search</label>
+                        <input type="text" id="searchInput" placeholder="Nome, CPF ou email..." 
+                               style="width: 100%; padding: 10px; border: 1px solid #e9ecef; border-radius: 6px; font-size: 14px;">
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 12px; font-weight: 500; color: #6c757d; margin-bottom: 6px;">Status<gt;Status</label>
+                        <select id="statusFilter" 
+                                style="width: 100%; padding: 10px; border: 1px solid #e9ecef; border-radius: 6px; font-size: 14px;">
+                            <option value="">Todos<gt;All</option>
+                            <option value="active">Ativos</option>
+                            <option value="inactive">Inativos</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 12px; font-weight: 500; color: #6c757d; margin-bottom: 6px;">Ordenar por</label>
+                        <select id="sortBy" 
+                                style="width: 100%; padding: 10px; border: 1px solid #e9ecef; border-radius: 6px; font-size: 14px;">
+                            <option value="createdAt_desc">Mais recentes</option>
+                            <option value="createdAt_asc">Mais antigos</option>
+                            <option value="name_asc">Nome (A-Z)</option>
+                            <option value="name_desc">Nome (Z-A)</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: flex-end;">
+                        <button id="searchBtn" class="btn-add" style="width: 100%;">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela de Clientes -->
+            <div class="dashboard-section">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>CPF</th>
+                                <th>Telefone<gt;Phone</th>
+                                <th>Aplicações</th>
+                                <th>Score</th>
+                                <th>Status<gt;Status</th>
+                                <th>Cadastro</th>
+                                <th>Ações<gt;Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientsTableBody">
+                            <tr>
+                                <td colspan="9" class="loading">Carregando clientes...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-simple">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 FLEXCREDI. Todos os direitos reservados.</p>
+                <div class="footer-links">
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Contato</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    const API_URL = 'https://flexcredi-site-adm-production-b27d.up.railway.app';
+
+    async function loadClients() {
+        try {
+            const response = await fetch(`${API_URL}/api/admin/clients`);
+            const data = await response.json();
+
+            // Update counters
+            document.getElementById('totalClients').innerHTML = `<i class="fas fa-users"></i> Total: <strong>${data.clients?.length || 0}</strong>`;
+            const activeCount = data.clients?.filter(c => c.status === 'ACTIVE').length || 0;
+            document.getElementById('activeClients').innerHTML = `<i class="fas fa-check-circle"></i> Ativos: <strong>${activeCount}</strong>`;
+
+            const tbody = document.getElementById('clientsTableBody');
+            
+            if (!data.clients || data.clients.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="9" class="empty-state">
+                            <i class="fas fa-user-slash"></i>
+                            <p>Nenhum cliente encontrado</p>
+                            <small>Os clientes cadastrados aparecerão aqui</small>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = data.clients.map(client => `
+                <tr>
+                    <td><strong>#${client.id}</strong></td>
+                    <td>
+                        <div class="table-user">
+                            <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(client.name || 'Cliente')}&background=2ECC71&color=fff" 
+                                 alt="Avatar" class="table-avatar">
+                            <div class="table-user-info">
+                                <span class="table-user-name">${client.name || 'N/A'}</span>
+                                <span class="table-user-email">${client.email || 'N/A'}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${formatCPF(client.cpf) || '-'}</td>
+                    <td>${formatPhone(client.phone) || '-'}</td>
+                    <td><strong>${client._count?.applications || 0}</strong> aplicações</td>
+                    <td><span class="table-score">${client.creditScore || '-'}</span></td>
+                    <td>
+                        <span class="status-badge ${client.status === 'ACTIVE' ? 'status-approved' : 'status-rejected'}">
+                            ${client.status === 'ACTIVE' ? 'Ativo' : 'Inativo'}
+                        </span>
+                    </td>
+                    <td><span class="table-date">${new Date(client.createdAt).toLocaleDateString('pt-BR')}</span></td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="btn-icon" title="Ver detalhes" onclick="viewClient(${client.id})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn-icon" title="Editar" onclick="editClient(${client.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-icon" title="${client.status === 'ACTIVE' ? 'Desativar' : 'Ativar'}" 
+                                    onclick="toggleClientStatus(${client.id}, '${client.status}')">
+                                <i class="fas fa-${client.status === 'ACTIVE' ? 'ban' : 'check'}"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (error) {
+            console.error('Erro ao carregar clientes:', error);
+            document.getElementById('clientsTableBody').innerHTML = `
+                <tr>
+                    <td colspan="9" class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Erro ao carregar clientes</p>
+                        <small>${error.message}</small>
+                    </td>
+                </tr>
+            `;
+        }
+    }
+
+    function formatCPF(cpf) {
+        if (!cpf) return '-';
+        return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    }
+
+    function formatPhone(phone) {
+        if (!phone) return '-';
+        return phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    }
+
+    function viewClient(id) {
+        alert(`Ver detalhes do cliente #${id}`);
+    }
+
+    function editClient(id) {
+        alert(`Editar cliente #${id}`);
+    }
+
+    function toggleClientStatus(id, currentStatus) {
+        const newStatus = currentStatus === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE';
+        if (confirm(`Confirma ${newStatus === 'ACTIVE' ? 'ativação' : 'desativação'} do cliente #${id}?`)) {
+            alert('Funcionalidade em desenvolvimento');
+        }
+    }
+
+    // Event Listeners
+    document.getElementById('searchBtn').addEventListener('click', loadClients);
+    document.getElementById('mobileMenuToggle')?.addEventListener('click', () => {
+        document.getElementById('adminSidebar').classList.toggle('open');
+    });
+
+    loadClients();
+    </script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>

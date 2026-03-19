@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Credit - FlexCredi LLC</title>
+    <link rel="icon" type="image/png" href="/images/flexcredi-logo-official.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .form-container {
+            padding: 40px;
+        }
+        
+        .form-section {
+            margin-bottom: 40px;
+        }
+        
+        .form-section h2 {
+            font-size: 1.5rem;
+            color: #2C3E50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2ECC71;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #2C3E50;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .form-group label .required {
+            color: #E74C3C;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E9ECEF;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2ECC71;
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
+        }
+        
+        .btn-submit:disabled {
+            background: #95A5A6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #2ECC71;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .success-message, .error-message {
+            display: none;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .success-message {
+            background: rgba(46, 204, 113, 0.1);
+            border: 2px solid #2ECC71;
+            color: #27AE60;
+        }
+        
+        .error-message {
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid #E74C3C;
+            color: #C0392B;
+        }
+        
+        .success-message.active, .error-message.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-credit-card"></i> Apply for Credit</h1>
+            <p>Fast, Simple, and Secure Credit Application</p>
+        </div>
+        
+        <div class="form-container">
+            <div class="success-message" id="successMessage">
+                <h3><i class="fas fa-check-circle"></i> Application Submitted Successfully!</h3>
+                <p>Your application ID is: <strong id="applicationId"></strong></p>
+                <p>We'll review your application and contact you within 24-48 hours.</p>
+            </div>
+            
+            <div class="error-message" id="errorMessage">
+                <h3><i class="fas fa-exclamation-circle"></i> Error Submitting Application</h3>
+                <p id="errorText"></p>
+            </div>
+            
+            <div class="loading" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Submitting your application...</p>
+            </div>
+            
+            <form id="applicationForm">
+                <!-- Personal Information -->
+                <div class="form-section">
+                    <h2><i class="fas fa-user"></i> Personal Information</h2>
+                    
+                    <div class="form-group">
+                        <label>Full Name <span class="required">*</span></label>
+                        <input type="text" name="clientName" required placeholder="John Doe">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email <span class="required">*</span></label>
+                            <input type="email" name="clientEmail" required placeholder="john@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Phone <span class="required">*</span></label>
+                            <input type="tel" name="clientPhone" required placeholder="(555) 123-4567">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Social Security Number (SSN) <span class="required">*</span></label>
+                        <input type="text" name="clientSsn" required placeholder="123-45-6789" maxlength="11">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" name="clientAddress" placeholder="123 Main Street">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" name="clientCity" placeholder="Miami">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>State</label>
+                            <select name="clientState">
+                                <option value="">Select State</option>
+                                <option value="FL">Florida</option>
+                                <option value="CA">California</option>
+                                <option value="NY">New York</option>
+                                <option value="TX">Texas</option>
+                                <!-- Add more states as needed -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>ZIP Code</label>
+                        <input type="text" name="clientZipCode" placeholder="12345" maxlength="10">
+                    </div>
+                </div>
+                
+                <!-- Employment & Income -->
+                <div class="form-section">
+                    <h2><i class="fas fa-briefcase"></i> Employment & Income</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Employment Status <span class="required">*</span></label>
+                            <select name="employmentStatus" required>
+                                <option value="">Select Status</option>
+                                <option value="FULL_TIME">Full-Time</option>
+                                <option value="PART_TIME">Part-Time</option>
+                                <option value="SELF_EMPLOYED">Self-Employed</option>
+                                <option value="UNEMPLOYED">Unemployed</option>
+                                <option value="RETIRED">Retired</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Monthly Income <span class="required">*</span></label>
+                            <input type="number" name="monthlyIncome" required placeholder="5000" min="0" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Employer</label>
+                            <input type="text" name="employer" placeholder="Company Name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Occupation</label>
+                            <input type="text" name="occupation" placeholder="Software Engineer">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Credit Request -->
+                <div class="form-section">
+                    <h2><i class="fas fa-dollar-sign"></i> Credit Request</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Desired Amount <span class="required">*</span></label>
+                            <input type="number" name="desiredAmount" required placeholder="10000" min="1000" step="100">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Select Partner <span class="required">*</span></label>
+                            <select name="partnerId" required id="partnerSelect">
+                                <option value="">Loading partners...</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Purpose <span class="required">*</span></label>
+                        <textarea name="purpose" required rows="4" placeholder="Please describe the purpose of this credit request..."></textarea>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> Submit Application
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="/js/flexcredi-api.js"></script>
+    <script>
+        const form = document.getElementById('applicationForm');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const partnerSelect = document.getElementById('partnerSelect');
+        
+        // Load partners on page load
+        async function loadPartners() {
+            try {
+                console.log('[Apply Form] Loading partners...');
+                const response = await FlexCrediAPI.getPartners();
+                partnerSelect.innerHTML = '<option value="">Select a Partner (Optional)</option>';
+                
+                if (response.data && response.data.length > 0) {
+                    response.data.forEach(partner => {
+                        const option = document.createElement('option');
+                        option.value = partner.id;
+                        option.textContent = `${partner.name} - ${partner.type || 'Partner'}`;
+                        partnerSelect.appendChild(option);
+                    });
+                    console.log(`[Apply Form] Loaded ${response.data.length} partners`);
+                } else {
+                    partnerSelect.innerHTML = '<option value="">No partners available (Optional)</option>';
+                }
+            } catch (error) {
+                console.error('[Apply Form] Error loading partners:', error);
+                partnerSelect.innerHTML = '<option value="">Partners unavailable (Optional)</option>';
+            }
+        }
+        
+        // Submit form
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Hide messages
+            successMessage.classList.remove('active');
+            errorMessage.classList.remove('active');
+            
+            // Show loading
+            loadingIndicator.classList.add('active');
+            form.style.display = 'none';
+            
+            try {
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
+                
+                // Convert numeric fields
+                data.monthlyIncome = parseFloat(data.monthlyIncome) || 0;
+                data.desiredAmount = parseFloat(data.desiredAmount);
+                
+                console.log('[Apply Form] Submitting application:', data);
+                
+                // Submit application
+                const response = await FlexCrediAPI.submitApplication(data);
+                
+                console.log('[Apply Form] Application submitted successfully:', response);
+                
+                // Show success
+                loadingIndicator.classList.remove('active');
+                successMessage.classList.add('active');
+                document.getElementById('applicationId').textContent = response.data.applicationId;
+                
+                // Reset form
+                form.reset();
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+            } catch (error) {
+                console.error('[Apply Form] Error submitting application:', error);
+                
+                // Show error
+                loadingIndicator.classList.remove('active');
+                errorMessage.classList.add('active');
+                document.getElementById('errorText').textContent = error.message || 'An error occurred. Please try again.';
+                form.style.display = 'block';
+                
+                // Scroll to error message
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+        
+        // Load partners when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPartners();
+        });
+    </script>
+</body>
+</html>

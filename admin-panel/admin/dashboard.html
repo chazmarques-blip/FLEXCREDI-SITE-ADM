@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FlexCredi Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/layout-adjustments.css">
+    <link rel="stylesheet" href="/css/perfect-alignment.css">
+    <link rel="stylesheet" href="/css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-page">
+    <!-- Header Dashboard -->
+    <header class="dashboard-header" role="banner">
+        <nav class="navbar container" role="navigation">
+            <a href="dashboard.html" class="navbar-brand">
+                <img src="/images/flexcredi-logo-official.png" alt="FLEXCREDI - Easy, Simple, Fast" class="logo-img">
+            </a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="user-menu">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=2ECC71&color=fff" alt="Avatar" class="user-avatar" id="userAvatar">
+                    <span class="user-name" id="userName">Admin</span>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" type="button" id="userDropdown">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#profile" class="dropdown-item"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="admin-configuracoes.html" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="/admin-panel/admin/login.html" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sidebar Admin -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item active">
+                <i class="fas fa-chart-line"></i><span>Dashboard</span>
+            </a>
+            <a href="aplicacoes.html" class="nav-item">
+                <i class="fas fa-file-invoice"></i><span>Applications</span>
+            </a>
+            <a href="clientes.html" class="nav-item">
+                <i class="fas fa-users"></i><span>Clients</span>
+            </a>
+            <a href="admin-parceiros.html" class="nav-item">
+                <i class="fas fa-handshake"></i><span>Partners</span>
+            </a>
+            <a href="admin-documentos.html" class="nav-item">
+                <i class="fas fa-folder"></i><span>Documents</span>
+            </a>
+            <a href="admin-contratos.html" class="nav-item">
+                <i class="fas fa-file-contract"></i><span>Contracts</span>
+            </a>
+            <a href="admin-pagamentos.html" class="nav-item">
+                <i class="fas fa-credit-card"></i><span>ACH Payments</span>
+            </a>
+            <a href="admin-recebiveis.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i><span>Receivables</span>
+            </a>
+            <a href="admin-agentes.html" class="nav-item">
+                <i class="fas fa-robot"></i><span>Agents</span>
+            </a>
+            <a href="admin-configuracoes.html" class="nav-item">
+                <i class="fas fa-cog"></i><span>Settings</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="main-content" class="admin-main-content">
+        <div class="container-fluid">
+            <!-- Page Header with Key Metrics -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 30px; flex-wrap: wrap;">
+                <!-- Title Section -->
+                <div>
+                    <h1 style="font-size: 28px; font-weight: 700; color: #343A40; margin-bottom: 8px;">
+                        <i class="fas fa-chart-line" style="color: #2ECC71;"></i> Dashboard
+                    </h1>
+                    <p style="color: #6C757D; font-size: 14px;">Overview of all system metrics and recent activities</p>
+                </div>
+                
+                <!-- Key Metrics - Inline -->
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <!-- Total Applications -->
+                    <div style="background: white; padding: 12px 20px; border-radius: 8px; border: 2px solid #343A40; display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 28px; font-weight: 700; color: #343A40;">142</div>
+                        <div style="font-size: 13px; color: #6C757D; font-weight: 600;">Total</div>
+                    </div>
+                    
+                    <!-- Approved -->
+                    <div style="background: white; padding: 12px 20px; border-radius: 8px; border: 2px solid #2ECC71; display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 28px; font-weight: 700; color: #2ECC71;">98</div>
+                        <div style="font-size: 13px; color: #6C757D; font-weight: 600;">Approved</div>
+                    </div>
+                    
+                    <!-- Pending -->
+                    <div style="background: white; padding: 12px 20px; border-radius: 8px; border: 2px solid #6C757D; display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 28px; font-weight: 700; color: #6C757D;">28</div>
+                        <div style="font-size: 13px; color: #6C757D; font-weight: 600;">Pending</div>
+                    </div>
+                    
+                    <!-- Rejected -->
+                    <div style="background: white; padding: 12px 20px; border-radius: 8px; border: 2px solid #343A40; display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 28px; font-weight: 700; color: #343A40;">16</div>
+                        <div style="font-size: 13px; color: #6C757D; font-weight: 600;">Rejected</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Overview -->
+            <div class="content-section" style="margin-bottom: 30px;">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-chart-pie"></i> System Overview
+                    </h2>
+                </div>
+                <div style="padding: 20px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                        <!-- Clients -->
+                        <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #E5E7EB; display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 56px; height: 56px; background: #343A40; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 24px; font-weight: 700; color: #343A40;">1,247</div>
+                                <div style="font-size: 13px; color: #6C757D; font-weight: 600;">Active Clients</div>
+                                <div style="font-size: 12px; color: #2ECC71;">+48 this month</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Partners -->
+                        <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #E5E7EB; display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 56px; height: 56px; background: #2ECC71; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 24px; font-weight: 700; color: #343A40;">34</div>
+                                <div style="font-size: 13px; color: #6C757D; font-weight: 600;">Active Partners</div>
+                                <div style="font-size: 12px; color: #6C757D;">12 pending approval</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Documents -->
+                        <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #E5E7EB; display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 56px; height: 56px; background: #6C757D; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 24px; font-weight: 700; color: #343A40;">3,892</div>
+                                <div style="font-size: 13px; color: #6C757D; font-weight: 600;">Documents</div>
+                                <div style="font-size: 12px; color: #6C757D;">156 pending review</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contracts -->
+                        <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #E5E7EB; display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 56px; height: 56px; background: #2ECC71; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 24px; font-weight: 700; color: #343A40;">892</div>
+                                <div style="font-size: 13px; color: #6C757D; font-weight: 600;">Active Contracts</div>
+                                <div style="font-size: 12px; color: #6C757D;">45 pending signature</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Payments -->
+                        <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #E5E7EB; display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 56px; height: 56px; background: #343A40; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 24px; font-weight: 700; color: #343A40;">$847K</div>
+                                <div style="font-size: 13px; color: #6C757D; font-weight: 600;">Monthly Payments</div>
+                                <div style="font-size: 12px; color: #6C757D;">234 transactions</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Receivables -->
+                        <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #E5E7EB; display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 56px; height: 56px; background: #6C757D; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 24px; font-weight: 700; color: #343A40;">$1.2M</div>
+                                <div style="font-size: 13px; color: #6C757D; font-weight: 600;">Receivables</div>
+                                <div style="font-size: 12px; color: #6C757D;">428 pending</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Agents -->
+                        <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #E5E7EB; display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 56px; height: 56px; background: #2ECC71; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 24px; font-weight: 700; color: #343A40;">8</div>
+                                <div style="font-size: 13px; color: #6C757D; font-weight: 600;">Active Agents</div>
+                                <div style="font-size: 12px; color: #2ECC71;">1,234 actions today</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Total Volume -->
+                        <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #E5E7EB; display: flex; align-items: center; gap: 16px;">
+                            <div style="width: 56px; height: 56px; background: #2ECC71; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 24px; font-weight: 700; color: #343A40;">$2.4M</div>
+                                <div style="font-size: 13px; color: #6C757D; font-weight: 600;">Total Volume</div>
+                                <div style="font-size: 12px; color: #2ECC71;">+18% vs last month</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Applications -->
+            <div class="content-section" style="margin-bottom: 30px;">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-file-invoice"></i> Recent Applications
+                    </h2>
+                    <button class="btn-primary" onclick="window.location.href='aplicacoes.html'">
+                        <i class="fas fa-arrow-right"></i> View All
+                    </button>
+                </div>
+                <div style="padding: 0;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead style="background: #F8F9FA;">
+                            <tr>
+                                <th style="padding: 14px 16px; text-align: left; font-size: 13px; font-weight: 600; color: #6C757D; text-transform: uppercase;">Client</th>
+                                <th style="padding: 14px 16px; text-align: left; font-size: 13px; font-weight: 600; color: #6C757D; text-transform: uppercase;">Partner</th>
+                                <th style="padding: 14px 16px; text-align: left; font-size: 13px; font-weight: 600; color: #6C757D; text-transform: uppercase;">Amount</th>
+                                <th style="padding: 14px 16px; text-align: left; font-size: 13px; font-weight: 600; color: #6C757D; text-transform: uppercase;">Score</th>
+                                <th style="padding: 14px 16px; text-align: left; font-size: 13px; font-weight: 600; color: #6C757D; text-transform: uppercase;">Status<gt;Status</th>
+                                <th style="padding: 14px 16px; text-align: left; font-size: 13px; font-weight: 600; color: #6C757D; text-transform: uppercase;">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #F1F3F5;">
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40; font-weight: 600;">John Silva</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #6C757D;">Partner A</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40;">$50,000</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40;">720</td>
+                                <td style="padding: 14px 16px;"><span style="display: inline-block; padding: 6px 12px; background: #d1fae5; color: #065f46; border-radius: 20px; font-size: 12px; font-weight: 600;">Approved</span></td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #6C757D;">03/04/2026</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #F1F3F5;">
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40; font-weight: 600;">Mary Santos</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #6C757D;">Partner B</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40;">$35,000</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40;">680</td>
+                                <td style="padding: 14px 16px;"><span style="display: inline-block; padding: 6px 12px; background: #fef3c7; color: #92400e; border-radius: 20px; font-size: 12px; font-weight: 600;">Pending</span></td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #6C757D;">03/04/2026</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #F1F3F5;">
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40; font-weight: 600;">Peter Costa</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #6C757D;">Partner C</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40;">$80,000</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40;">750</td>
+                                <td style="padding: 14px 16px;"><span style="display: inline-block; padding: 6px 12px; background: #dbeafe; color: #1e40af; border-radius: 20px; font-size: 12px; font-weight: 600;">Analyzing</span></td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #6C757D;">03/03/2026</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #F1F3F5;">
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40; font-weight: 600;">Anna Oliveira</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #6C757D;">Partner A</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40;">$25,000</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40;">640</td>
+                                <td style="padding: 14px 16px;"><span style="display: inline-block; padding: 6px 12px; background: #fef3c7; color: #92400e; border-radius: 20px; font-size: 12px; font-weight: 600;">Review</span></td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #6C757D;">03/03/2026</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40; font-weight: 600;">Charles Ferreira</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #6C757D;">Partner D</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40;">$120,000</td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #343A40;">800</td>
+                                <td style="padding: 14px 16px;"><span style="display: inline-block; padding: 6px 12px; background: #d1fae5; color: #065f46; border-radius: 20px; font-size: 12px; font-weight: 600;">Approved</span></td>
+                                <td style="padding: 14px 16px; font-size: 14px; color: #6C757D;">03/02/2026</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-bell"></i> Recent Activities
+                    </h2>
+                </div>
+                <div style="padding: 20px;">
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <!-- Activity 1 -->
+                        <div style="display: flex; align-items: flex-start; gap: 14px; padding: 16px; background: #F8F9FA; border-radius: 8px;">
+                            <div style="width: 40px; height: 40px; background: #2ECC71; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; flex-shrink: 0;">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 15px; font-weight: 600; color: #343A40; margin-bottom: 4px;">New application approved</div>
+                                <div style="font-size: 13px; color: #6C757D; margin-bottom: 4px;">John Silva - $50,000</div>
+                                <div style="font-size: 12px; color: #ADB5BD;">5 minutes ago</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity 2 -->
+                        <div style="display: flex; align-items: flex-start; gap: 14px; padding: 16px; background: #F8F9FA; border-radius: 8px;">
+                            <div style="width: 40px; height: 40px; background: #3b82f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; flex-shrink: 0;">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 15px; font-weight: 600; color: #343A40; margin-bottom: 4px;">New client registered</div>
+                                <div style="font-size: 13px; color: #6C757D; margin-bottom: 4px;">Mary Santos - client@email.com</div>
+                                <div style="font-size: 12px; color: #ADB5BD;">15 minutes ago</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity 3 -->
+                        <div style="display: flex; align-items: flex-start; gap: 14px; padding: 16px; background: #F8F9FA; border-radius: 8px;">
+                            <div style="width: 40px; height: 40px; background: #f59e0b; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; flex-shrink: 0;">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 15px; font-weight: 600; color: #343A40; margin-bottom: 4px;">Documents pending review</div>
+                                <div style="font-size: 13px; color: #6C757D; margin-bottom: 4px;">12 documents awaiting approval</div>
+                                <div style="font-size: 12px; color: #ADB5BD;">30 minutes ago</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity 4 -->
+                        <div style="display: flex; align-items: flex-start; gap: 14px; padding: 16px; background: #F8F9FA; border-radius: 8px;">
+                            <div style="width: 40px; height: 40px; background: #8b5cf6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; flex-shrink: 0;">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 15px; font-weight: 600; color: #343A40; margin-bottom: 4px;">New partner requested registration</div>
+                                <div style="font-size: 13px; color: #6C757D; margin-bottom: 4px;">FinTech Solutions Inc.</div>
+                                <div style="font-size: 12px; color: #ADB5BD;">1 hour ago</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity 5 -->
+                        <div style="display: flex; align-items: flex-start; gap: 14px; padding: 16px; background: #F8F9FA; border-radius: 8px;">
+                            <div style="width: 40px; height: 40px; background: #06b6d4; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; flex-shrink: 0;">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 15px; font-weight: 600; color: #343A40; margin-bottom: 4px;">Payment processed</div>
+                                <div style="font-size: 13px; color: #6C757D; margin-bottom: 4px;">$15,000 - Contract #892</div>
+                                <div style="font-size: 12px; color: #ADB5BD;">2 hours ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        // ============================================
+        // AUTHENTICATION CHECK
+        // ============================================
+        console.log('='.repeat(50));
+        console.log('FLEXCREDI Admin Dashboard');
+        console.log('='.repeat(50));
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[Dashboard] Checking authentication...');
+            
+            // Check if user is authenticated
+            const token = localStorage.getItem('adminToken');
+            const userStr = localStorage.getItem('adminUser');
+            
+            if (!token || !userStr) {
+                console.warn('[Dashboard] ⚠️ Not authenticated, redirecting to login');
+                window.location.href = '/admin-panel/admin/login.html';
+                return;
+            }
+            
+            console.log('[Dashboard] ✅ User authenticated');
+            
+            // Display user info
+            try {
+                const user = JSON.parse(userStr);
+                console.log('[Dashboard] Welcome:', user.email || user.name);
+                
+                // Update user name in header
+                const userNameEl = document.getElementById('userName');
+                if (userNameEl && user.name) {
+                    userNameEl.textContent = user.name;
+                }
+            } catch (e) {
+                console.error('[Dashboard] Error parsing user data:', e);
+            }
+            
+            // Initialize dropdowns
+            initializeDropdowns();
+            
+            console.log('[Dashboard] ✅ Dashboard loaded successfully');
+        });
+        
+        // ============================================
+        // DROPDOWN FUNCTIONALITY
+        // ============================================
+        function initializeDropdowns() {
+            const dropdownToggle = document.getElementById('userDropdown');
+            const dropdownMenu = dropdownToggle?.nextElementSibling;
+            
+            if (dropdownToggle && dropdownMenu) {
+                dropdownToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('show');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function() {
+                    dropdownMenu.classList.remove('show');
+                });
+            }
+        }
+        
+        // ============================================
+        // MOBILE MENU TOGGLE
+        // ============================================
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const adminSidebar = document.getElementById('adminSidebar');
+        
+        if (mobileMenuToggle && adminSidebar) {
+            mobileMenuToggle.addEventListener('click', function() {
+                adminSidebar.classList.toggle('open');
+            });
+        }
+        
+        // ============================================
+        // LOGOUT FUNCTIONALITY
+        // ============================================
+        function logout() {
+            console.log('[Dashboard] Logging out...');
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminUser');
+            window.location.href = '/admin-panel/admin/login.html';
+        }
+    </script>
+</body>
+</html>
+<!-- Updated: Thu Mar  5 17:51:44 UTC 2026 -->

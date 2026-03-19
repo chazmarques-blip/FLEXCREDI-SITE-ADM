@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Sync Test - FlexCredi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        pre {
+            background: #1e1e1e;
+            color: #dcdcdc;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+        }
+        .card h3 {
+            color: #495057;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .doc-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 2px;
+        }
+        .doc-status.uploaded {
+            background: #28a745;
+            color: white;
+        }
+        .doc-status.pending {
+            background: #ffc107;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Backend Sync Test - FlexCredi</h1>
+        
+        <div class="section">
+            <h2>1. Check LocalStorage (Client Side)</h2>
+            <button onclick="checkLocalStorage()">Check Client LocalStorage</button>
+            <div id="localStorageResult"></div>
+        </div>
+        
+        <div class="section">
+            <h2>2. Test Backend API</h2>
+            <button onclick="testBackendClients()">Fetch Clients from Backend</button>
+            <button onclick="testBackendApplications()">Fetch Applications from Backend</button>
+            <div id="backendResult"></div>
+        </div>
+        
+        <div class="section">
+            <h2>3. Upload Test Document</h2>
+            <input type="file" id="testFile" accept="image/*,application/pdf">
+            <button onclick="uploadTestDocument()">Upload & Sync to Backend</button>
+            <div id="uploadResult"></div>
+        </div>
+        
+        <div class="section">
+            <h2>4. Verify Cross-Domain Sync</h2>
+            <button onclick="verifyCrossDomainSync()">Check if Admin Can See Documents</button>
+            <div id="syncResult"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://flexcredi-site-adm-production-b27d.up.railway.app';
+        
+        function checkLocalStorage() {
+            const resultDiv = document.getElementById('localStorageResult');
+            resultDiv.innerHTML = '<div class="status info">Checking...</div>';
+            
+            try {
+                const user = JSON.parse(localStorage.getItem('flexcredi_user') || 'null');
+                const testClients = JSON.parse(localStorage.getItem('flexcredi_test_clients') || '[]');
+                const testApps = JSON.parse(localStorage.getItem('flexcredi_test_applications') || '[]');
+                
+                let html = '<div class="status success">✅ LocalStorage Check Complete</div>';
+                
+                if (user) {
+                    html += '<div class="card">';
+                    html += '<h3>Current User (flexcredi_user)</h3>';
+                    html += `<p><strong>Name:</strong> ${user.fullName || user.name}</p>`;
+                    html += `<p><strong>Email:</strong> ${user.email}</p>`;
+                    html += `<p><strong>ID:</strong> ${user.id || user.applicationId}</p>`;
+                    
+                    if (user.documents) {
+                        html += '<p><strong>Documents:</strong></p>';
+                        Object.entries(user.documents).forEach(([key, doc]) => {
+                            const status = doc.uploaded ? 'uploaded' : 'pending';
+                            html += `<span class="doc-status ${status}">${key}: ${doc.uploaded ? 'Uploaded' : 'Pending'}</span>`;
+                        });
+                    }
+                    
+                    html += '</div>';
+                } else {
+                    html += '<div class="status error">❌ No user found in flexcredi_user</div>';
+                }
+                
+                html += `<div class="card">`;
+                html += `<h3>Test Clients: ${testClients.length}</h3>`;
+                html += `<h3>Test Applications: ${testApps.length}</h3>`;
+                html += `</div>`;
+                
+                html += '<pre>' + JSON.stringify({user, testClients, testApps}, null, 2) + '</pre>';
+                
+                resultDiv.innerHTML = html;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="status error">❌ Error: ${error.message}</div>`;
+            }
+        }
+        
+        async function testBackendClients() {
+            const resultDiv = document.getElementById('backendResult');
+            resultDiv.innerHTML = '<div class="status info">Fetching from backend...</div>';
+            
+            try {
+                console.log('🌐 Fetching:', `${API_BASE}/api/test-data/clients`);
+                const response = await fetch(`${API_BASE}/api/test-data/clients`);
+                
+                console.log('📡 Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('📦 Data received:', data);
+                
+                const clients = data.data || data || [];
+                
+                let html = `<div class="status success">✅ Backend API Working - ${clients.length} clients found</div>`;
+                
+                html += '<div class="grid">';
+                clients.forEach((client, index) => {
+                    html += '<div class="card">';
+                    html += `<h3>Client ${index + 1}: ${client.fullName || client.name}</h3>`;
+                    html += `<p><strong>Email:</strong> ${client.email}</p>`;
+                    html += `<p><strong>ID:</strong> ${client.id || client.applicationId}</p>`;
+                    
+                    if (client.documents) {
+                        html += '<p><strong>Documents:</strong></p>';
+                        Object.entries(client.documents).forEach(([key, doc]) => {
+                            const status = doc.uploaded ? 'uploaded' : 'pending';
+                            html += `<span class="doc-status ${status}">${key}: ${doc.uploaded ? '✅' : '⏳'}</span>`;
+                        });
+                    }
+                    
+                    html += '</div>';
+                });
+                html += '</div>';
+                
+                html += '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                
+                resultDiv.innerHTML = html;
+            } catch (error) {
+                console.error('❌ Fetch error:', error);
+                resultDiv.innerHTML = `<div class="status error">❌ Backend Error: ${error.message}</div>`;
+            }
+        }
+        
+        async function testBackendApplications() {
+            const resultDiv = document.getElementById('backendResult');
+            resultDiv.innerHTML = '<div class="status info">Fetching applications from backend...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/test-data/applications`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                const apps = data.data || data || [];
+                
+                let html = `<div class="status success">✅ Backend API Working - ${apps.length} applications found</div>`;
+                html += '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                
+                resultDiv.innerHTML = html;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="status error">❌ Backend Error: ${error.message}</div>`;
+            }
+        }
+        
+        async function uploadTestDocument() {
+            const resultDiv = document.getElementById('uploadResult');
+            const fileInput = document.getElementById('testFile');
+            
+            if (!fileInput.files[0]) {
+                resultDiv.innerHTML = '<div class="status error">❌ Please select a file first</div>';
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            resultDiv.innerHTML = `<div class="status info">⏳ Uploading ${file.name}...</div>`;
+            
+            try {
+                // Get user data
+                const user = JSON.parse(localStorage.getItem('flexcredi_user') || 'null');
+                if (!user) {
+                    throw new Error('No user found. Please login first.');
+                }
+                
+                // Convert file to base64
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const fileData = e.target.result;
+                    
+                    // Update localStorage
+                    user.documents = user.documents || {};
+                    user.documents.driverLicense = {
+                        uploaded: true,
+                        approved: false,
+                        fileName: file.name,
+                        fileType: file.type,
+                        fileSize: file.size,
+                        previewData: fileData,
+                        uploadDate: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem('flexcredi_user', JSON.stringify(user));
+                    console.log('💾 Saved to localStorage');
+                    
+                    // Sync to backend
+                    const payload = {
+                        clientId: user.id || user.applicationId,
+                        email: user.email,
+                        fullName: user.fullName || user.name,
+                        documentType: 'driverLicense',
+                        document: user.documents.driverLicense,
+                        userData: user
+                    };
+                    
+                    console.log('📤 Syncing to backend:', payload.clientId);
+                    
+                    const response = await fetch(`${API_BASE}/api/test-data/clients`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    console.log('📡 Response:', response.status);
+                    
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(`Backend sync failed: ${response.status} - ${errorText}`);
+                    }
+                    
+                    const result = await response.json();
+                    console.log('✅ Sync result:', result);
+                    
+                    resultDiv.innerHTML = `
+                        <div class="status success">✅ Document uploaded and synced successfully!</div>
+                        <div class="card">
+                            <h3>Upload Details</h3>
+                            <p><strong>File:</strong> ${file.name}</p>
+                            <p><strong>Size:</strong> ${(file.size / 1024).toFixed(2)} KB</p>
+                            <p><strong>Type:</strong> ${file.type}</p>
+                            <p><strong>Preview Size:</strong> ${(fileData.length / 1024).toFixed(2)} KB</p>
+                            <p><strong>✅ Saved to localStorage</strong></p>
+                            <p><strong>✅ Synced to backend</strong></p>
+                        </div>
+                        <pre>${JSON.stringify(result, null, 2)}</pre>
+                    `;
+                };
+                
+                reader.readAsDataURL(file);
+            } catch (error) {
+                console.error('❌ Upload error:', error);
+                resultDiv.innerHTML = `<div class="status error">❌ Upload Error: ${error.message}</div>`;
+            }
+        }
+        
+        async function verifyCrossDomainSync() {
+            const resultDiv = document.getElementById('syncResult');
+            resultDiv.innerHTML = '<div class="status info">Checking cross-domain sync...</div>';
+            
+            try {
+                // Get current user
+                const user = JSON.parse(localStorage.getItem('flexcredi_user') || 'null');
+                if (!user) {
+                    throw new Error('No user found. Please login first.');
+                }
+                
+                // Fetch from backend (simulating admin panel)
+                const response = await fetch(`${API_BASE}/api/test-data/clients`);
+                const data = await response.json();
+                const clients = data.data || data || [];
+                
+                // Find matching client
+                const matchingClient = clients.find(c => 
+                    c.id === user.id || 
+                    c.email === user.email ||
+                    c.applicationId === user.applicationId
+                );
+                
+                let html = '';
+                
+                if (matchingClient) {
+                    html += '<div class="status success">✅ Client found in backend!</div>';
+                    html += '<div class="grid">';
+                    
+                    // Local documents
+                    html += '<div class="card">';
+                    html += '<h3>📱 Local (Client Side)</h3>';
+                    if (user.documents) {
+                        Object.entries(user.documents).forEach(([key, doc]) => {
+                            const status = doc.uploaded ? 'uploaded' : 'pending';
+                            html += `<span class="doc-status ${status}">${key}: ${doc.uploaded ? '✅ Uploaded' : '⏳ Pending'}</span><br>`;
+                        });
+                    } else {
+                        html += '<p>No documents</p>';
+                    }
+                    html += '</div>';
+                    
+                    // Backend documents
+                    html += '<div class="card">';
+                    html += '<h3>🌐 Backend (Admin Side)</h3>';
+                    if (matchingClient.documents) {
+                        Object.entries(matchingClient.documents).forEach(([key, doc]) => {
+                            const status = doc.uploaded ? 'uploaded' : 'pending';
+                            html += `<span class="doc-status ${status}">${key}: ${doc.uploaded ? '✅ Uploaded' : '⏳ Pending'}</span><br>`;
+                        });
+                    } else {
+                        html += '<p>No documents</p>';
+                    }
+                    html += '</div>';
+                    
+                    html += '</div>';
+                    
+                    // Compare
+                    const localUploaded = user.documents ? Object.values(user.documents).filter(d => d.uploaded).length : 0;
+                    const backendUploaded = matchingClient.documents ? Object.values(matchingClient.documents).filter(d => d.uploaded).length : 0;
+                    
+                    if (localUploaded === backendUploaded && localUploaded > 0) {
+                        html += '<div class="status success">✅ SYNC SUCCESSFUL: Local and Backend match!</div>';
+                    } else if (localUploaded > backendUploaded) {
+                        html += '<div class="status error">⚠️ SYNC ISSUE: Local has more documents than backend</div>';
+                    } else if (backendUploaded > localUploaded) {
+                        html += '<div class="status info">ℹ️ Backend has more documents than local</div>';
+                    } else {
+                        html += '<div class="status info">ℹ️ No documents uploaded yet</div>';
+                    }
+                    
+                    html += '<pre>' + JSON.stringify({local: user, backend: matchingClient}, null, 2) + '</pre>';
+                } else {
+                    html += '<div class="status error">❌ Client not found in backend!</div>';
+                    html += `<p>Looking for: ID=${user.id}, Email=${user.email}</p>`;
+                    html += '<pre>' + JSON.stringify(clients, null, 2) + '</pre>';
+                }
+                
+                resultDiv.innerHTML = html;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="status error">❌ Sync Check Error: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

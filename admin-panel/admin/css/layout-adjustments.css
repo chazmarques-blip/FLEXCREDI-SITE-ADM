@@ -1,0 +1,531 @@
+/* FLEXCREDI - Layout Adjustments for Cleaner Design */
+
+/* ========== GLOBAL FONT ADJUSTMENTS ========== */
+body {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Reduce heading sizes globally */
+h1 { font-size: 32px; font-weight: 600; }
+h2 { font-size: 26px; font-weight: 600; }
+h3 { font-size: 20px; font-weight: 600; }
+h4 { font-size: 16px; font-weight: 500; }
+h5 { font-size: 14px; font-weight: 500; }
+
+/* Adjust paragraph spacing */
+p {
+    font-size: 13px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+/* ========== SECTION SPACING ========== */
+.section {
+    padding: 32px 0;
+}
+
+.section-title {
+    margin-bottom: 24px;
+}
+
+.section-title h2,
+.section-title h3 {
+    margin-bottom: 8px;
+}
+
+.section-subtitle {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+/* ========== CARD IMPROVEMENTS ========== */
+.card {
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.card-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.card-subtitle {
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+/* ========== BUTTON REFINEMENTS ========== */
+.btn {
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.btn-large {
+    padding: 14px 28px;
+    font-size: 14px;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 12px;
+}
+
+/* ========== FORM IMPROVEMENTS ========== */
+.form-label {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.form-control {
+    padding: 10px 12px;
+    font-size: 13px;
+}
+
+.form-error {
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+.checkbox-label {
+    font-size: 12px;
+}
+
+/* ========== COMPACT FORM LAYOUT ========== */
+.simulacao-form .form-group {
+    margin-bottom: 16px;
+}
+
+.simulacao-form .row {
+    margin-bottom: 0;
+}
+
+.simulacao-form .row .form-group {
+    margin-bottom: 16px;
+}
+
+.simulacao-form .form-control {
+    height: 42px;
+}
+
+/* ========== CARDS SIDE BY SIDE STYLING ========== */
+.cards-side-by-side {
+    display: flex;
+    align-items: stretch; /* Igualar alturas */
+}
+
+.cards-side-by-side .card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* ========== BENEFITS CARD STYLING ========== */
+.benefits-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Garantir que a calculadora fique no final do card */
+.beneficios-lista {
+    flex-grow: 1;
+    margin-bottom: var(--spacing-sm); /* Reduzir espaço antes da calculadora */
+}
+
+.loan-calculator {
+    margin-top: -40px; /* Subir a calculadora significativamente */
+}
+
+/* ========== FORM CARD STYLING ========== */
+.animate-slide-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.animate-slide-left .simulacao-form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.submit-button-container {
+    margin-top: auto;
+    margin-bottom: var(--spacing-xs);
+}
+
+/* ========== ALINHAMENTO PERFEITO ========== */
+.calculator-result-compact {
+    margin-top: auto;
+    margin-bottom: 0;
+    display: flex;
+    align-items: flex-end;
+}
+
+.submit-button-container {
+    margin-bottom: 0;
+    margin-top: auto;
+    display: flex;
+    align-items: flex-end;
+}
+
+/* ========== AJUSTES DE ESPAÇAMENTO PARA ALINHAMENTO ========== */
+.benefits-card .card-header {
+    margin-bottom: var(--spacing-sm);
+}
+
+.benefits-card .card-title {
+    margin-bottom: var(--spacing-xs);
+}
+
+.benefits-card .card-subtitle {
+    margin-bottom: var(--spacing-sm);
+}
+
+/* ========== ALINHAMENTO PERFEITO DOS ELEMENTOS FINAIS ========== */
+.submit-button-container,
+.calculator-result-compact {
+    position: relative;
+}
+
+.btn-submit-styled,
+.result-box-compact {
+    position: relative;
+    top: 0;
+}
+
+.cards-side-by-side .col-6:first-child {
+    padding-right: 9.5px; /* Half of 19px spacing */
+}
+
+.cards-side-by-side .col-6:last-child {
+    padding-left: 9.5px; /* Half of 19px spacing */
+}
+
+.benefit-icon {
+    font-size: 18px;
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+}
+
+.beneficio-item {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.beneficio-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.beneficio-item h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cinza-escuro);
+}
+
+.beneficio-item p {
+    font-size: 12px;
+    color: var(--cinza-medio);
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+.customer-rating {
+    background: var(--cinza-claro);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-top: 16px;
+    text-align: center;
+}
+
+.rating-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.rating-score {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--verde-vibrante);
+    margin: 0;
+}
+
+.rating-text {
+    font-size: 11px;
+    color: var(--cinza-medio);
+    margin: 0;
+}
+
+/* ========== ORIGIN FLAG STYLING ========== */
+.origin-flag {
+    display: block;
+    font-size: 11px;
+    color: var(--cinza-medio);
+    font-style: italic;
+    margin-top: 2px;
+}
+
+/* ========== NAVIGATION ADJUSTMENTS ========== */
+.navbar {
+    height: 65px;
+    padding: 8px 0;
+}
+
+.navbar-brand {
+    font-size: 22px;
+}
+
+.logo-img {
+    height: 60px;
+}
+
+.nav-link {
+    font-size: 13px;
+    padding: 8px 16px;
+}
+
+/* ========== HERO SECTION CLEANUP ========== */
+.hero {
+    padding: 110px 0 35px 0;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 16px;
+}
+
+.hero p {
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.hero-slogan {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+/* ========== SUCCESS STORIES REFINEMENTS ========== */
+.story-card {
+    margin-bottom: 20px;
+}
+
+.story-content {
+    padding: 16px;
+}
+
+.story-header h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.story-business {
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.story-content p {
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.stat-tag {
+    font-size: 10px;
+    padding: 3px 8px;
+}
+
+/* ========== BENEFITS SECTION ========== */
+.benefit-card {
+    padding: 20px 16px;
+}
+
+.benefit-card h5 {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.benefit-card p {
+    font-size: 12px;
+    margin: 0;
+}
+
+/* ========== STATS CARDS ========== */
+.stat-card {
+    padding: 16px 12px;
+}
+
+.stat-number {
+    font-size: 20px;
+}
+
+.stat-label {
+    font-size: 11px;
+}
+
+/* ========== COMMUNITY IMPACT ========== */
+.community-impact-banner {
+    padding: 32px;
+}
+
+.impact-content h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.impact-content p {
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.impact-number {
+    font-size: 24px;
+}
+
+.impact-label {
+    font-size: 12px;
+}
+
+/* ========== FOOTER ADJUSTMENTS ========== */
+.footer {
+    padding: 40px 0 20px 0;
+    margin-top: 40px;
+}
+
+.footer-section h4 {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.footer-section p,
+.footer-section a {
+    font-size: 13px;
+}
+
+.footer-bottom {
+    font-size: 11px;
+    padding-top: 16px;
+}
+
+/* ========== RESPONSIVE IMPROVEMENTS ========== */
+@media (max-width: 768px) {
+    .hero {
+        padding: 70px 0 30px 0;
+    }
+    
+    .hero h1 {
+        font-size: 28px;
+    }
+    
+    .hero p {
+        font-size: 14px;
+    }
+    
+    .section {
+        padding: 24px 0;
+    }
+    
+    .story-image {
+        height: 160px;
+    }
+    
+    .benefit-card,
+    .story-card,
+    .card {
+        margin-bottom: 12px;
+    }
+    
+    .community-impact-banner {
+        padding: 20px;
+    }
+    
+    .impact-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        height: 60px;
+    }
+    
+    .navbar-brand {
+        font-size: 20px;
+    }
+    
+    .hero h1 {
+        font-size: 24px;
+    }
+    
+    .hero p {
+        font-size: 13px;
+    }
+    
+    .story-image {
+        height: 140px;
+    }
+    
+    .impact-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========== LOADING OPTIMIZATION ========== */
+.lazy-load {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lazy-load.loaded {
+    opacity: 1;
+}
+
+/* ========== ACCESSIBILITY IMPROVEMENTS ========== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .card,
+    .benefit-card,
+    .story-card {
+        border: 2px solid var(--cinza-escuro);
+    }
+    
+    .btn-primary {
+        border: 2px solid var(--verde-escuro);
+    }
+}
+
+/* ========== PRINT STYLES ========== */
+@media print {
+    .header,
+    .footer,
+    .btn,
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+    
+    .section {
+        padding: 20px 0;
+        page-break-inside: avoid;
+    }
+}

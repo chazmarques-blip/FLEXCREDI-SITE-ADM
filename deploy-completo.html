@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLEXCREDI - Deploy Completo para GitHub</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #2ecc71;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        .instructions h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            color: #856404;
+        }
+        
+        .instructions li {
+            margin-bottom: 5px;
+        }
+        
+        .file-selector {
+            background: #f8f9fa;
+            border: 2px dashed #ced4da;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .file-selector:hover {
+            border-color: #2ecc71;
+            background: #e8f5e9;
+        }
+        
+        .file-selector.active {
+            border-color: #2ecc71;
+            background: #d4edda;
+        }
+        
+        #fileInput {
+            display: none;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+        }
+        
+        .btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .progress {
+            width: 100%;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #2ecc71 0%, #27ae60 100%);
+            width: 0%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .log {
+            background: #2c3e50;
+            color: #2ecc71;
+            padding: 20px;
+            border-radius: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .log-entry {
+            margin-bottom: 6px;
+        }
+        
+        .success { color: #2ecc71; }
+        .error { color: #e74c3c; }
+        .info { color: #3498db; }
+        
+        .links {
+            margin-top: 30px;
+            padding: 20px;
+            background: #d4edda;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .links h3 {
+            color: #155724;
+            margin-bottom: 15px;
+        }
+        
+        .links a {
+            display: block;
+            color: #155724;
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .links a:hover {
+            text-decoration: underline;
+        }
+        
+        .file-info {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .file-info h4 {
+            color: #155724;
+            margin-bottom: 10px;
+        }
+        
+        .file-info p {
+            color: #155724;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 FLEXCREDI Deploy Completo</h1>
+        <p class="subtitle">Upload do index.html para o GitHub</p>
+        
+        <div class="instructions">
+            <h3>📋 Instruções</h3>
+            <ol>
+                <li>Baixe o arquivo <strong>index-para-upload.html</strong> do GenSpark</li>
+                <li>Clique na área abaixo e selecione o arquivo baixado</li>
+                <li>Clique em "FAZER UPLOAD PARA GITHUB"</li>
+                <li>Aguarde a confirmação e teste o site!</li>
+            </ol>
+        </div>
+        
+        <div class="file-selector" id="fileSelector" onclick="document.getElementById('fileInput').click()">
+            <div>
+                <h3 style="color: #6c757d; margin-bottom: 10px;">📁 Clique aqui para selecionar o arquivo</h3>
+                <p style="color: #adb5bd;">index-para-upload.html</p>
+            </div>
+        </div>
+        
+        <input type="file" id="fileInput" accept=".html">
+        
+        <div class="file-info" id="fileInfo">
+            <h4>✅ Arquivo Selecionado</h4>
+            <p id="fileName"></p>
+            <p id="fileSize"></p>
+        </div>
+        
+        <button class="btn" id="uploadBtn" onclick="startUpload()" disabled>
+            SELECIONE O ARQUIVO PRIMEIRO
+        </button>
+        
+        <div class="progress" id="progressContainer">
+            <div class="progress-bar" id="progress">0%</div>
+        </div>
+        
+        <div class="log" id="log"></div>
+        
+        <div class="links" id="links">
+            <h3>🎉 DEPLOY CONCLUÍDO!</h3>
+            <a href="https://github.com/chazmarques-blip/FLEXCREDI-COMPLETO" target="_blank">📦 Ver Repositório no GitHub →</a>
+            <a href="https://vercel.com/charles-marques-projects/flexcredi" target="_blank">🚀 Painel Vercel (Build em andamento) →</a>
+            <a href="https://flexcredi.vercel.app" target="_blank">🌐 Testar Site (aguarde 3-5 min) →</a>
+        </div>
+    </div>
+
+    <script>
+        const TOKEN = "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";
+        const USER = "chazmarques-blip";
+        const REPO = "FLEXCREDI-COMPLETO";
+        const headers = {
+            "Authorization": `token ${TOKEN}`,
+            "Accept": "application/vnd.github.v3+json"
+        };
+
+        let fileContent = null;
+
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                fileContent = event.target.result;
+                
+                document.getElementById('fileSelector').classList.add('active');
+                document.getElementById('fileInfo').style.display = 'block';
+                document.getElementById('fileName').textContent = `Nome: ${file.name}`;
+                document.getElementById('fileSize').textContent = `Tamanho: ${(file.size / 1024).toFixed(1)} KB`;
+                
+                const btn = document.getElementById('uploadBtn');
+                btn.disabled = false;
+                btn.textContent = 'FAZER UPLOAD PARA GITHUB';
+            };
+            reader.readAsText(file);
+        });
+
+        function log(message, type = 'info') {
+            const logEl = document.getElementById('log');
+            logEl.style.display = 'block';
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            const time = new Date().toLocaleTimeString();
+            entry.textContent = `[${time}] ${message}`;
+            logEl.appendChild(entry);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function updateProgress(percent, text) {
+            document.getElementById('progressContainer').style.display = 'block';
+            const progressBar = document.getElementById('progress');
+            progressBar.style.width = percent + '%';
+            progressBar.textContent = percent + '%';
+        }
+
+        async function getFileSha(path) {
+            try {
+                const response = await fetch(
+                    `https://api.github.com/repos/${USER}/${REPO}/contents/${path}`,
+                    { headers }
+                );
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.sha;
+                }
+            } catch (e) {}
+            return null;
+        }
+
+        async function uploadFile(path, content) {
+            log(`📤 Fazendo upload do ${path}...`, 'info');
+            
+            updateProgress(25, 'Obtendo informações do arquivo...');
+            const sha = await getFileSha(path);
+            
+            updateProgress(50, 'Preparando upload...');
+            const contentB64 = btoa(unescape(encodeURIComponent(content)));
+            
+            const data = {
+                message: `fix: Deploy completo do index.html com carousel de 6 slides`,
+                content: contentB64,
+                branch: "main"
+            };
+            
+            if (sha) {
+                data.sha = sha;
+                log(`📦 Substituindo arquivo existente (SHA: ${sha.substring(0, 7)})`, 'info');
+            } else {
+                log(`📦 Criando novo arquivo`, 'info');
+            }
+            
+            try {
+                updateProgress(75, 'Enviando para o GitHub...');
+                
+                const response = await fetch(
+                    `https://api.github.com/repos/${USER}/${REPO}/contents/${path}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            ...headers,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    }
+                );
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    updateProgress(100, 'Upload concluído!');
+                    log(`✅ ${path} enviado com sucesso!`, 'success');
+                    log(`📦 Commit: ${result.commit.sha.substring(0, 7)}`, 'success');
+                    log(`🔗 GitHub: https://github.com/${USER}/${REPO}`, 'success');
+                    return true;
+                } else {
+                    const error = await response.text();
+                    log(`❌ Erro ${response.status}: ${error}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                log(`❌ Erro: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        async function startUpload() {
+            if (!fileContent) {
+                alert('Por favor, selecione o arquivo primeiro!');
+                return;
+            }
+            
+            const btn = document.getElementById('uploadBtn');
+            btn.disabled = true;
+            btn.textContent = 'UPLOAD EM PROGRESSO...';
+            
+            log('🚀 Iniciando deploy do FLEXCREDI...', 'info');
+            log(`📊 Tamanho do arquivo: ${(fileContent.length / 1024).toFixed(1)} KB`, 'info');
+            
+            const success = await uploadFile('index.html', fileContent);
+            
+            if (success) {
+                log('', 'info');
+                log('🎉 DEPLOY CONCLUÍDO COM SUCESSO!', 'success');
+                log('⏱️  O Vercel detectará as mudanças em ~30 segundos', 'info');
+                log('🔨 Build no Vercel levará ~3-5 minutos', 'info');
+                log('✅ Depois teste: https://flexcredi.vercel.app', 'success');
+                log('🎯 Verifique se o carousel tem 6 slides!', 'success');
+                
+                btn.textContent = 'DEPLOY CONCLUÍDO ✓';
+                btn.style.background = '#27ae60';
+                
+                document.getElementById('links').style.display = 'block';
+            } else {
+                btn.disabled = false;
+                btn.textContent = 'TENTAR NOVAMENTE';
+                log('❌ Falha no upload. Tente novamente.', 'error');
+            }
+        }
+    </script>
+</body>
+</html>

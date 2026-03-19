@@ -1,0 +1,55 @@
+# 🔧 RAILWAY - VARIÁVEIS DE AMBIENTE
+
+Copie e cole estas variáveis no Railway (Settings → Variables):
+
+════════════════════════════════════════════════════════
+VARIÁVEIS OBRIGATÓRIAS PARA O RAILWAY:
+════════════════════════════════════════════════════════
+
+NODE_ENV=production
+
+JWT_SECRET=FlexCredi2024$ProductionKey!SuperSecure#Railway@2024
+
+DEFAULT_ADMIN_EMAIL=admin@flexcredi.com
+
+DEFAULT_ADMIN_PASSWORD=FlexCredi@Admin2024!Secure
+
+MAX_FILE_SIZE=10485760
+
+ALLOWED_FILE_TYPES=image/jpeg,image/png,application/pdf
+
+FRONTEND_URL=https://flexcredi.vercel.app
+
+════════════════════════════════════════════════════════
+INSTRUÇÕES:
+════════════════════════════════════════════════════════
+
+1. No Railway, clique no seu projeto
+2. Vá em "Settings" (engrenagem)
+3. Clique em "Variables"
+4. Clique em "RAW Editor"
+5. COPIE e COLE todo o conteúdo acima
+6. Clique em "Add" ou "Save"
+7. Railway vai fazer redeploy automático
+
+════════════════════════════════════════════════════════
+APÓS CONFIGURAR:
+════════════════════════════════════════════════════════
+
+✅ Aguarde 2-3 minutos para o redeploy
+✅ Vá em "Deployments" para ver o progresso
+✅ Quando terminar, copie a URL do seu projeto
+✅ A URL será algo como: https://seu-projeto.railway.app
+
+════════════════════════════════════════════════════════
+⚠️ IMPORTANTE - ALTERAR EM PRODUÇÃO REAL:
+════════════════════════════════════════════════════════
+
+Para produção real, você DEVE alterar:
+- JWT_SECRET → Usar gerador de chaves fortes
+- DEFAULT_ADMIN_PASSWORD → Senha forte personalizada
+
+Como gerar JWT_SECRET seguro (no terminal):
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+════════════════════════════════════════════════════════

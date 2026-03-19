@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Teste Backend FLEXCREDI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+        }
+        .test-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        .test-btn:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+            text-align: left;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .success {
+            border-left: 4px solid #4CAF50;
+        }
+        .error {
+            border-left: 4px solid #f44336;
+        }
+        h1 {
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .online { background: #4CAF50; }
+        .offline { background: #f44336; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 TESTE BACKEND FLEXCREDI</h1>
+        
+        <p><strong>Backend Status:</strong> <span id="status" class="status offline">Testando...</span></p>
+        
+        <button class="test-btn" onclick="testarBackend()">🔄 Testar Backend</button>
+        <button class="test-btn" onclick="testarDashboard()">📊 Testar Dashboard API</button>
+        <button class="test-btn" onclick="criarAplicacao()">➕ Criar Aplicação Teste</button>
+        <br><br>
+        <button class="test-btn" onclick="abrirDashboard()" style="background: #2196F3;">🎛️ Abrir Dashboard Admin</button>
+        
+        <div id="resultado" class="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3001';
+        
+        async function testarBackend() {
+            const statusEl = document.getElementById('status');
+            const resultEl = document.getElementById('resultado');
+            
+            statusEl.textContent = 'Testando...';
+            statusEl.className = 'status offline';
+            resultEl.style.display = 'block';
+            
+            try {
+                const response = await fetch(`${API_BASE}/`);
+                const data = await response.json();
+                
+                statusEl.textContent = 'Online ✅';
+                statusEl.className = 'status online';
+                resultEl.className = 'result success';
+                resultEl.textContent = `✅ BACKEND FUNCIONANDO!
+                
+Status: ${data.status}
+Mensagem: ${data.message}
+Timestamp: ${data.timestamp}`;
+                
+            } catch (error) {
+                statusEl.textContent = 'Offline ❌';
+                statusEl.className = 'status offline';
+                resultEl.className = 'result error';
+                resultEl.textContent = `❌ ERRO: ${error.message}
+
+Verifique se o backend está rodando:
+1. cd backend
+2. npm start
+
+Deve mostrar: "🚀 FLEXCREDI BACKEND INICIADO!"`;
+            }
+        }
+        
+        async function testarDashboard() {
+            const resultEl = document.getElementById('resultado');
+            resultEl.style.display = 'block';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/dashboard`);
+                const data = await response.json();
+                
+                resultEl.className = 'result success';
+                resultEl.textContent = `✅ API DASHBOARD FUNCIONANDO!
+                
+Estatísticas:
+- Total Aplicações: ${data.stats.totalApplications}
+- Pendentes: ${data.stats.pendingApplications}
+- Aprovadas: ${data.stats.approvedApplications}
+- Total Usuários: ${data.stats.totalUsers}
+
+${JSON.stringify(data, null, 2)}`;
+                
+            } catch (error) {
+                resultEl.className = 'result error';
+                resultEl.textContent = `❌ ERRO API DASHBOARD: ${error.message}`;
+            }
+        }
+        
+        async function criarAplicacao() {
+            const resultEl = document.getElementById('resultado');
+            resultEl.style.display = 'block';
+            
+            const dadosTeste = {
+                name: "João Silva Teste",
+                email: "joao.teste@flexcredi.com",
+                phone: "(11) 99999-9999",
+                cpf: "123.456.789-00",
+                desiredAmount: 15000,
+                purpose: "Teste do sistema"
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/applications`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dadosTeste)
+                });
+                
+                const data = await response.json();
+                
+                resultEl.className = 'result success';
+                resultEl.textContent = `✅ APLICAÇÃO CRIADA COM SUCESSO!
+                
+ID: ${data.application.id}
+Nome: ${data.application.name}
+Valor: R$ ${data.application.desiredAmount.toLocaleString()}
+Status: ${data.application.status}
+
+${JSON.stringify(data.application, null, 2)}`;
+                
+            } catch (error) {
+                resultEl.className = 'result error';
+                resultEl.textContent = `❌ ERRO AO CRIAR: ${error.message}`;
+            }
+        }
+        
+        function abrirDashboard() {
+            window.open('admin-dashboard.html', '_blank');
+        }
+        
+        // Testar automaticamente ao carregar
+        window.onload = () => {
+            setTimeout(testarBackend, 1000);
+        };
+    </script>
+</body>
+</html>

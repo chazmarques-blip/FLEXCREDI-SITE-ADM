@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Login - FLEXCREDI">
+    <title>Admin Login - FLEXCREDI</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/flexcredi-logo-official.png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #F5F7FA;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 360px;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out;
+            border: 1px solid #E9ECEF;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-logo {
+            width: 100px;
+            height: auto;
+            display: block;
+        }
+        
+        .login-body {
+            padding: 24px 22px;
+        }
+        
+        .form-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2C3E50;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+        
+        .form-subtitle {
+            font-size: 12px;
+            color: #7F8C8D;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 14px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 500;
+            color: #2C3E50;
+            margin-bottom: 8px;
+        }
+        
+        .form-label i {
+            color: #2ECC71;
+            margin-right: 4px;
+            font-size: 10px;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px 12px 10px 34px;
+            border: 1.5px solid #E9ECEF;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: #F8F9FA;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #2ECC71;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.1);
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #95A5A6;
+            font-size: 12px;
+            transition: color 0.3s ease;
+        }
+        
+        .form-input:focus + .input-icon {
+            color: #2ECC71;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #95A5A6;
+            cursor: pointer;
+            font-size: 12px;
+            padding: 8px; /* Increased click area */
+            transition: color 0.3s ease;
+            z-index: 10; /* Ensure it's above other elements */
+            pointer-events: auto; /* Ensure it's clickable */
+            outline: none;
+        }
+        
+        .password-toggle:hover {
+            color: #2ECC71;
+        }
+        
+        .password-toggle:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+        
+        .password-toggle i {
+            pointer-events: none; /* Let clicks pass through to button */
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 11px;
+        }
+        
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 14px;
+            height: 14px;
+            cursor: pointer;
+            accent-color: #2ECC71;
+        }
+        
+        .checkbox-wrapper label {
+            color: #5D6D7E;
+            cursor: pointer;
+        }
+        
+        .forgot-password {
+            color: #2ECC71;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .forgot-password:hover {
+            color: #27AE60;
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 11px;
+            background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 12px rgba(46, 204, 113, 0.3);
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+        }
+        
+        .btn-login:active {
+            transform: translateY(0);
+        }
+        
+        .btn-login:disabled {
+            background: #BDC3C7;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+        
+        .btn-login .spinner {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-right: 6px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .alert {
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            font-size: 11px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .alert.show {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .alert-error {
+            background: #FADBD8;
+            color: #C0392B;
+            border: 1px solid #E74C3C;
+        }
+        
+        .alert-success {
+            background: #D5F4E6;
+            color: #0E6F3F;
+            border: 1px solid #2ECC71;
+        }
+        
+        .alert i {
+            font-size: 13px;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 16px 0;
+            color: #95A5A6;
+            font-size: 11px;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #E9ECEF;
+        }
+        
+        .divider span {
+            padding: 0 12px;
+        }
+        
+        .create-account {
+            text-align: center;
+            font-size: 12px;
+            color: #5D6D7E;
+        }
+        
+        .create-account a {
+            color: #2ECC71;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .create-account a:hover {
+            color: #27AE60;
+            text-decoration: underline;
+        }
+        
+        .quick-test {
+            margin-top: 14px;
+            padding: 10px;
+            background: #FFF9E6;
+            border: 1px dashed #F39C12;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        .quick-test-title {
+            font-size: 9px;
+            color: #E67E22;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        
+        .quick-test button {
+            padding: 7px 14px;
+            background: linear-gradient(135deg, #F39C12, #E67E22);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .quick-test button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
+        }
+        
+        .login-footer {
+            padding: 12px 22px;
+            background: #F8F9FA;
+            text-align: center;
+            font-size: 10px;
+            color: #5D6D7E;
+        }
+        
+        .login-footer a {
+            color: #2ECC71;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .modal-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 380px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+            animation: modalSlideUp 0.4s ease-out;
+        }
+        
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
+            padding: 18px;
+            color: white;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        
+        .modal-subtitle {
+            font-size: 12px;
+            opacity: 0.95;
+        }
+        
+        .modal-body {
+            padding: 22px;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #95A5A6, #7F8C8D);
+            margin-top: 10px;
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(149, 165, 166, 0.4);
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-container {
+                border-radius: 12px;
+            }
+            
+            .login-header {
+                padding: 32px 16px;
+            }
+            
+            .login-logo {
+                width: 100px;
+            }
+            
+            .login-body {
+                padding: 24px 20px;
+            }
+            
+            .modal-content {
+                margin: 10px;
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Header with Logo Only -->
+        <div class="login-header">
+            <img src="/images/flexcredi-logo-official.png" alt="FLEXCREDI" class="login-logo">
+        </div>
+        
+        <!-- Body -->
+        <div class="login-body">
+            <h2 class="form-title">Admin Panel</h2>
+            <p class="form-subtitle">Sign in to access your dashboard</p>
+            
+            <!-- Development Mode Banner -->
+            <div id="devModeBanner" style="display: none; background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 12px; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <i class="fas fa-code" style="color: #ff6b00;"></i>
+                    <strong style="color: #856404;">Development Mode Active</strong>
+                </div>
+                <p style="margin: 0; font-size: 13px; color: #856404; line-height: 1.4;">
+                    Using mock authentication for testing.<br>
+                    <strong>Email:</strong> admin@flexcredi.com<br>
+                    <strong>Password:</strong> admin123
+                </p>
+            </div>
+            
+            <!-- Alert Messages -->
+            <div id="alertError" class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorMessage">Login error</span>
+            </div>
+            
+            <div id="alertSuccess" class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                <span id="successMessage">Login successful!</span>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email" class="form-label">
+                        <i class="fas fa-envelope"></i>
+                        Email Address
+                    </label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            class="form-input" 
+                            placeholder="your@email.com"
+                            required
+                            autocomplete="email"
+                        >
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">
+                        <i class="fas fa-lock"></i>
+                        Password
+                    </label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password"
+                            class="form-input" 
+                            placeholder="••••••••"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <i class="fas fa-lock input-icon"></i>
+                        <button 
+                            type="button" 
+                            class="password-toggle" 
+                            id="togglePassword"
+                            onclick="console.log('[INLINE] Button clicked!'); window.testToggle();"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-options">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="btn-login" id="btnLogin">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </button>
+            </form>
+            
+            <div class="divider">
+                <span>or</span>
+            </div>
+            
+            <!-- Create Account Link -->
+            <div class="create-account">
+                <p>Don't have an account? <a href="#" id="createAccountLink">Create Account</a></p>
+            </div>
+            
+            <!-- Quick Test Access -->
+            <div class="quick-test">
+                <div class="quick-test-title">
+                    <i class="fas fa-flask"></i> Quick Test Access
+                </div>
+                <button type="button" id="quickTestBtn">
+                    <i class="fas fa-bolt"></i> Auto-Login (Test)
+                </button>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="login-footer">
+            <p>
+                <i class="fas fa-shield-alt"></i>
+                Secure & encrypted access
+            </p>
+            <p style="margin-top: 8px;">
+                © 2026 FLEXCREDI. All rights reserved. | 
+                <a href="/">Back to Website</a>
+            </p>
+        </div>
+    </div>
+    
+    <!-- Create Account Modal -->
+    <div class="modal-overlay" id="signupModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h2 class="modal-title">Create Account</h2>
+                <p class="modal-subtitle">Join the FLEXCREDI admin team</p>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Alert Messages -->
+                <div id="alertErrorSignup" class="alert alert-error">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorMessageSignup">Registration error</span>
+                </div>
+                
+                <div id="alertSuccessSignup" class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="successMessageSignup">Account created successfully!</span>
+                </div>
+                
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="signupName" class="form-label">
+                            <i class="fas fa-user"></i>
+                            Full Name
+                        </label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="signupName" 
+                                name="name"
+                                class="form-input" 
+                                placeholder="John Doe"
+                                required
+                            >
+                            <i class="fas fa-user input-icon"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupEmail" class="form-label">
+                            <i class="fas fa-envelope"></i>
+                            Email Address
+                        </label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="email" 
+                                id="signupEmail" 
+                                name="email"
+                                class="form-input" 
+                                placeholder="your@email.com"
+                                required
+                            >
+                            <i class="fas fa-envelope input-icon"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPassword" class="form-label">
+                            <i class="fas fa-lock"></i>
+                            Password
+                        </label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="signupPassword" 
+                                name="password"
+                                class="form-input" 
+                                placeholder="••••••••"
+                                required
+                                minlength="8"
+                            >
+                            <i class="fas fa-lock input-icon"></i>
+                            <button type="button" class="password-toggle" id="togglePasswordSignup">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPasswordConfirm" class="form-label">
+                            <i class="fas fa-lock"></i>
+                            Confirm Password
+                        </label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="signupPasswordConfirm" 
+                                name="passwordConfirm"
+                                class="form-input" 
+                                placeholder="••••••••"
+                                required
+                                minlength="8"
+                            >
+                            <i class="fas fa-lock input-icon"></i>
+                            <button type="button" class="password-toggle" id="togglePasswordConfirm">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-login" id="btnSignup">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </button>
+                    
+                    <button type="button" class="btn-login btn-secondary" id="btnCancelSignup">
+                        <i class="fas fa-times"></i>
+                        Cancel
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- ADMIN AUTHENTICATION - INLINE COMPLETE CODE -->
+    <!-- Version: 2.0 - Cache Buster -->
+    <!-- ============================================ -->
+    <script>
+        // ========================================
+        // API Configuration & Development Mode
+        // ========================================
+        // Use window.API_BASE_URL to avoid "already declared" error
+        window.API_BASE_URL = window.API_BASE_URL || 'https://flexcredi-site-adm-production-b27d.up.railway.app';
+        
+        // DEVELOPMENT MODE: Set to true to bypass API and use mock authentication
+        // Set to false for production with real API
+        window.DEV_MODE = true; // Change to false when API is ready
+        
+        // Mock credentials for development testing
+        window.MOCK_CREDENTIALS = {
+            email: 'admin@flexcredi.com',
+            password: 'admin123',
+            token: 'mock-jwt-token-' + Date.now(),
+            user: {
+                id: 1,
+                name: 'Admin User',
+                email: 'admin@flexcredi.com',
+                role: 'admin'
+            }
+        };
+        
+        // ========================================
+        // Authentication Service
+        // ========================================
+        window.AuthService = {
+            /**
+             * Login user with email and password
+             */
+            async login(email, password) {
+                try {
+                    console.log('[AUTH] Login attempt:', email);
+                    console.log('[AUTH] Development Mode:', window.DEV_MODE);
+                    
+                    // DEVELOPMENT MODE: Use mock authentication
+                    if (window.DEV_MODE) {
+                        console.log('[AUTH] Using MOCK authentication');
+                        
+                        // Simulate network delay
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                        
+                        // Check mock credentials
+                        if (email === window.MOCK_CREDENTIALS.email && password === window.MOCK_CREDENTIALS.password) {
+                            console.log('[AUTH] Mock login successful');
+                            
+                            // Store mock token and user
+                            localStorage.setItem('adminToken', window.MOCK_CREDENTIALS.token);
+                            localStorage.setItem('adminUser', JSON.stringify(window.MOCK_CREDENTIALS.user));
+                            
+                            return {
+                                success: true,
+                                token: window.MOCK_CREDENTIALS.token,
+                                user: window.MOCK_CREDENTIALS.user
+                            };
+                        } else {
+                            throw new Error('Invalid mock credentials. Use: admin@flexcredi.com / admin123');
+                        }
+                    }
+                    
+                    // PRODUCTION MODE: Use real API
+                    const response = await fetch(`${window.API_BASE_URL}/api/admin/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({ email, password })
+                    });
+                    
+                    console.log('[AUTH] Response status:', response.status);
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.message || 'Login failed');
+                    }
+                    
+                    const data = await response.json();
+                    console.log('[AUTH] Login successful:', data);
+                    
+                    // Store token and user data
+                    if (data.token) {
+                        localStorage.setItem('adminToken', data.token);
+                        localStorage.setItem('adminUser', JSON.stringify(data.user || {}));
+                        console.log('[AUTH] Token stored successfully');
+                    }
+                    
+                    return data;
+                } catch (error) {
+                    console.error('[AUTH] Login error:', error);
+                    throw error;
+                }
+            },
+            
+            /**
+             * Signup new user
+             */
+            async signup(userData) {
+                try {
+                    console.log('[AUTH] Signup attempt:', userData.email);
+                    
+                    const response = await fetch(`${window.API_BASE_URL}/api/admin/signup`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify(userData)
+                    });
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.message || 'Signup failed');
+                    }
+                    
+                    const data = await response.json();
+                    console.log('[AUTH] Signup successful:', data);
+                    
+                    return data;
+                } catch (error) {
+                    console.error('[AUTH] Signup error:', error);
+                    throw error;
+                }
+            },
+            
+            /**
+             * Logout user
+             */
+            logout() {
+                localStorage.removeItem('adminToken');
+                localStorage.removeItem('adminUser');
+                console.log('[AUTH] Logged out successfully');
+                window.location.href = '/admin-panel/admin/login.html';
+            },
+            
+            /**
+             * Check if user is authenticated
+             */
+            isAuthenticated() {
+                const token = localStorage.getItem('adminToken');
+                return !!token;
+            },
+            
+            /**
+             * Get current user
+             */
+            getCurrentUser() {
+                const userStr = localStorage.getItem('adminUser');
+                return userStr ? JSON.parse(userStr) : null;
+            },
+            
+            /**
+             * Get auth token
+             */
+            getToken() {
+                return localStorage.getItem('adminToken');
+            },
+            
+            /**
+             * Protect page (redirect if not authenticated)
+             */
+            protectPage() {
+                if (!this.isAuthenticated()) {
+                    console.log('[AUTH] Not authenticated, redirecting to login');
+                    window.location.href = '/admin-panel/admin/login.html';
+                }
+            }
+        };
+        
+        // ========================================
+        // TEST FUNCTION (for inline onclick)
+        // ========================================
+        window.testToggle = function() {
+            console.log('[TEST] testToggle function called');
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = document.getElementById('togglePassword');
+            const icon = toggleBtn?.querySelector('i');
+            
+            console.log('[TEST] Elements found:', {
+                passwordInput: passwordInput,
+                toggleBtn: toggleBtn,
+                icon: icon,
+                passwordType: passwordInput?.type
+            });
+            
+            if (passwordInput && icon) {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                    console.log('[TEST] ✅ Password now VISIBLE');
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                    console.log('[TEST] ✅ Password now HIDDEN');
+                }
+            } else {
+                console.error('[TEST] ❌ Elements not found!');
+            }
+        };
+        
+        // ========================================
+        // Login Form Handler
+        // ========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('[AUTH] Page loaded, initializing login form');
+            console.log('[AUTH] Development Mode:', window.DEV_MODE);
+            
+            // ========================================
+            // IMMEDIATE ELEMENT CHECK
+            // ========================================
+            console.log('[DEBUG] Checking elements...');
+            console.log('[DEBUG] togglePassword button:', document.getElementById('togglePassword'));
+            console.log('[DEBUG] password input:', document.getElementById('password'));
+            
+            // Show development mode banner if DEV_MODE is enabled
+            if (window.DEV_MODE) {
+                const devBanner = document.getElementById('devModeBanner');
+                if (devBanner) {
+                    devBanner.style.display = 'block';
+                    console.log('[DEV] Mock credentials: admin@flexcredi.com / admin123');
+                }
+            }
+            
+            const loginForm = document.getElementById('loginForm');
+            const btnLogin = document.getElementById('btnLogin');
+            const alertError = document.getElementById('alertError');
+            const alertSuccess = document.getElementById('alertSuccess');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Check if already logged in
+            if (window.AuthService.isAuthenticated()) {
+                console.log('[AUTH] Already authenticated, redirecting to dashboard');
+                successMessage.textContent = 'Already logged in! Redirecting...';
+                alertSuccess.classList.add('show');
+                setTimeout(() => {
+                    window.location.href = '/admin-panel/admin/dashboard.html';
+                }, 1000);
+                return;
+            }
+            
+            // Handle login form submission
+            loginForm?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const rememberMe = document.getElementById('rememberMe').checked;
+                
+                console.log('[LOGIN] Form submitted:', { email, rememberMe });
+                
+                // Hide previous messages
+                alertError.classList.remove('show');
+                alertSuccess.classList.remove('show');
+                
+                // Validation
+                if (!email || !password) {
+                    errorMessage.textContent = 'Please enter email and password';
+                    alertError.classList.add('show');
+                    return;
+                }
+                
+                // Show loading state
+                btnLogin.disabled = true;
+                btnLogin.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+                
+                try {
+                    // Attempt login
+                    const result = await window.AuthService.login(email, password);
+                    
+                    // Show success message
+                    successMessage.textContent = 'Login successful! Redirecting...';
+                    alertSuccess.classList.add('show');
+                    
+                    // Redirect to dashboard after 1 second
+                    setTimeout(() => {
+                        window.location.href = '/admin-panel/admin/dashboard.html';
+                    }, 1000);
+                    
+                } catch (error) {
+                    console.error('[LOGIN] Login failed:', error);
+                    
+                    // Show error message
+                    errorMessage.textContent = error.message || 'Invalid credentials. Please try again.';
+                    alertError.classList.add('show');
+                    
+                    // Reset button
+                    btnLogin.disabled = false;
+                    btnLogin.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+                }
+            });
+            
+            // ========================================
+            // Password Toggle Functionality
+            // ========================================
+            const togglePassword = document.getElementById('togglePassword');
+            if (togglePassword) {
+                togglePassword.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent any default button behavior
+                    console.log('[TOGGLE] Password toggle clicked');
+                    
+                    const passwordInput = document.getElementById('password');
+                    const icon = this.querySelector('i');
+                    
+                    if (!passwordInput || !icon) {
+                        console.error('[TOGGLE] Elements not found', { passwordInput, icon });
+                        return;
+                    }
+                    
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                        console.log('[TOGGLE] Password now visible');
+                    } else {
+                        passwordInput.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                        console.log('[TOGGLE] Password now hidden');
+                    }
+                });
+                console.log('[TOGGLE] Password toggle initialized');
+            } else {
+                console.error('[TOGGLE] togglePassword button not found');
+            }
+            
+            const togglePasswordSignup = document.getElementById('togglePasswordSignup');
+            if (togglePasswordSignup) {
+                togglePasswordSignup.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const passwordInput = document.getElementById('signupPassword');
+                    const icon = this.querySelector('i');
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        passwordInput.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+            }
+            
+            const togglePasswordConfirm = document.getElementById('togglePasswordConfirm');
+            if (togglePasswordConfirm) {
+                togglePasswordConfirm.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const passwordInput = document.getElementById('signupPasswordConfirm');
+                    const icon = this.querySelector('i');
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        passwordInput.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+            }
+            
+            // ========================================
+            // Create Account Modal
+            // ========================================
+            const signupModal = document.getElementById('signupModal');
+            const createAccountLink = document.getElementById('createAccountLink');
+            const closeModal = document.getElementById('closeModal');
+            const btnCancelSignup = document.getElementById('btnCancelSignup');
+            
+            createAccountLink?.addEventListener('click', (e) => {
+                e.preventDefault();
+                signupModal.classList.add('show');
+            });
+            
+            closeModal?.addEventListener('click', () => {
+                signupModal.classList.remove('show');
+            });
+            
+            btnCancelSignup?.addEventListener('click', () => {
+                signupModal.classList.remove('show');
+            });
+            
+            signupModal?.addEventListener('click', (e) => {
+                if (e.target === signupModal) {
+                    signupModal.classList.remove('show');
+                }
+            });
+            
+            // ========================================
+            // Signup Form Handler
+            // ========================================
+            const signupForm = document.getElementById('signupForm');
+            signupForm?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('signupName').value;
+                const email = document.getElementById('signupEmail').value;
+                const password = document.getElementById('signupPassword').value;
+                const passwordConfirm = document.getElementById('signupPasswordConfirm').value;
+                
+                const alertError = document.getElementById('alertErrorSignup');
+                const alertSuccess = document.getElementById('alertSuccessSignup');
+                const errorMessage = document.getElementById('errorMessageSignup');
+                const successMessage = document.getElementById('successMessageSignup');
+                
+                alertError.classList.remove('show');
+                alertSuccess.classList.remove('show');
+                
+                // Validation
+                if (password !== passwordConfirm) {
+                    errorMessage.textContent = 'Passwords do not match';
+                    alertError.classList.add('show');
+                    return;
+                }
+                
+                if (password.length < 8) {
+                    errorMessage.textContent = 'Password must be at least 8 characters';
+                    alertError.classList.add('show');
+                    return;
+                }
+                
+                // Show success message (in real implementation, this would be an API call)
+                successMessage.textContent = 'Account created successfully! Redirecting to login...';
+                alertSuccess.classList.add('show');
+                
+                setTimeout(() => {
+                    signupModal.classList.remove('show');
+                    signupForm.reset();
+                    alertSuccess.classList.remove('show');
+                }, 2000);
+            });
+            
+            // ========================================
+            // Quick Test Access
+            // ========================================
+            document.getElementById('quickTestBtn')?.addEventListener('click', () => {
+                document.getElementById('email').value = 'admin@flexcredi.com';
+                document.getElementById('password').value = 'admin123';
+                
+                // Show alert
+                const alertSuccess = document.getElementById('alertSuccess');
+                const successMessage = document.getElementById('successMessage');
+                successMessage.textContent = 'Test credentials loaded! Click "Sign In" to continue.';
+                alertSuccess.classList.add('show');
+                
+                setTimeout(() => {
+                    alertSuccess.classList.remove('show');
+                }, 3000);
+            });
+        });
+        
+        console.log('[AUTH] Authentication system initialized');
+    </script>
+</body>
+</html>

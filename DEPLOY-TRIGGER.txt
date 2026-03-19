@@ -1,0 +1,6 @@
+<!-- FORCE REDEPLOY -->
+<!-- Timestamp: 2026-02-20 17:30:00 -->
+<!-- Este arquivo força o Vercel a fazer um novo deploy -->
+Deploy forçado em: Wed Feb 20 2026 17:30:00 GMT-0500
+Versão: 2.0.1
+Status: Corrigindo vercel.json que bloqueava index.html

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Barra Horizontal Compacta - FLEXCREDI</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/compact-layout.css">
+    <link rel="stylesheet" href="css/compact-horizontal-progress.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background: #f5f7fa;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .demo-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .flexcredi-title {
+            color: #2ECC71;
+            font-size: 36px;
+            font-weight: bold;
+            margin: 0 0 10px;
+        }
+        
+        .demo-tagline {
+            color: #1E8449;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-description {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Replicar exatamente o header verde */
+        .demo-status-card {
+            background: linear-gradient(135deg, #2ECC71 0%, #1E8449 100%);
+            padding: 10px 14px;
+            border-radius: 6px;
+            box-shadow: 0 2px 12px rgba(46, 204, 113, 0.2);
+            color: #FFFFFF;
+            margin-bottom: 18px;
+            max-width: 100%;
+        }
+        
+        .demo-status-info {
+            margin-bottom: 0;
+        }
+        
+        /* Header com nome, valores e score na mesma linha */
+        .demo-user-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 4px;
+        }
+        
+        .demo-user-greeting {
+            font-size: 17px;
+            font-weight: 400;
+            margin: 0;
+            line-height: 1.1;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            min-width: fit-content;
+        }
+        
+        /* Detalhes financeiros inline na mesma linha */
+        .demo-financing-details {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 0;
+            padding: 4px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            flex: 1;
+        }
+        
+        .demo-financing-item {
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .demo-financing-label {
+            display: block;
+            font-size: 7px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 1px;
+        }
+        
+        .demo-financing-value {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            color: #FFFFFF;
+            line-height: 1;
+        }
+        
+        .demo-user-score {
+            display: flex;
+            align-items: baseline;
+            gap: 3px;
+            flex-shrink: 0;
+        }
+        
+        .demo-score-value {
+            font-size: 15px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1;
+        }
+        
+        .demo-score-label {
+            font-size: 9px;
+            font-weight: 200;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .demo-application-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+        }
+        
+        .demo-status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 8px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin: 0;
+            white-space: nowrap;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        
+        .demo-status-description {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+            line-height: 1.1;
+            font-weight: 200;
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .instructions h4 {
+            color: #856404;
+            margin: 0 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .instructions ul {
+            color: #856404;
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        
+        .instructions li {
+            margin-bottom: 5px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #2ECC71;
+        }
+        
+        .feature-card h4 {
+            color: #1E8449;
+            margin: 0 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .feature-card p {
+            color: #666;
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .demo-container {
+                padding: 20px;
+            }
+            
+            .flexcredi-title {
+                font-size: 28px;
+            }
+            
+            .demo-user-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .demo-financing-details {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .demo-user-score {
+                align-self: flex-end;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .demo-container {
+                padding: 15px;
+            }
+            
+            .demo-user-header {
+                gap: 6px;
+            }
+            
+            .demo-financing-details {
+                gap: 8px;
+                padding: 3px 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1 class="flexcredi-title">FleXcredi</h1>
+            <div class="demo-tagline">EASY, SIMPLE, FAST</div>
+            <p class="demo-description">
+                Demonstração da Barra de Progresso Horizontal Ultra-Compacta.
+                Integrada perfeitamente ao header verde existente, mantendo o mesmo tamanho e proporções.
+            </p>
+        </div>
+        
+        <div class="instructions">
+            <h4><i class="fas fa-info-circle"></i> Como Testar</h4>
+            <ul>
+                <li><strong>Botão Flutuante:</strong> Use o botão verde no canto inferior direito</li>
+                <li><strong>Console:</strong> <code>compactProgress.simulateProgress()</code> para simular processo completo</li>
+                <li><strong>Reset:</strong> <code>compactProgress.resetProgress()</code> para reiniciar</li>
+                <li><strong>Etapas:</strong> Os nomes das etapas aparecem escritos abaixo da barra</li>
+            </ul>
+        </div>
+        
+        <!-- Réplica exata do header com a barra integrada -->
+        <div class="demo-status-card">
+            <div class="demo-status-info">
+                <div class="demo-user-header">
+                    <h1 class="demo-user-greeting" id="userGreeting">Bem-vindo, Carlos Eduardo Silva!</h1>
+                    
+                    <div class="demo-financing-details" id="financingDetails">
+                        <div class="demo-financing-item">
+                            <span class="demo-financing-label">VALOR:</span>
+                            <span class="demo-financing-value" id="financingAmount">$25,000</span>
+                        </div>
+                        <div class="demo-financing-item">
+                            <span class="demo-financing-label">TAXA:</span>
+                            <span class="demo-financing-value" id="financingRate">18.5% a.a.</span>
+                        </div>
+                        <div class="demo-financing-item">
+                            <span class="demo-financing-label">PRAZO:</span>
+                            <span class="demo-financing-value" id="financingTerm">24 meses</span>
+                        </div>
+                        <div class="demo-financing-item">
+                            <span class="demo-financing-label">PARCELA:</span>
+                            <span class="demo-financing-value" id="financingPayment">$1,287/mês</span>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-user-score">
+                        <span class="demo-score-value" id="creditScore">785</span>
+                        <span class="demo-score-label">SCORE</span>
+                    </div>
+                </div>
+                
+                <!-- A barra de progresso será inserida aqui pelo JavaScript -->
+                
+                <div class="demo-application-status" id="applicationStatus">
+                    <span class="demo-status-badge status-badge status-pre-approved">PRÉ-APROVADO</span>
+                    <span class="demo-status-description">Sua pré-aprovação está em fase de análise, submeta a documentação necessária para finalizar o processo.</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <h4><i class="fas fa-compress-arrows-alt"></i> Ultra-Compacto</h4>
+                <p>Barra de apenas 6px de altura com indicadores de 10px, ocupando mínimo espaço vertical no header.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4><i class="fas fa-palette"></i> Design Integrado</h4>
+                <p>Cores e estilos harmonizados com o fundo verde, usando transparências e gradientes sutis.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4><i class="fas fa-mobile-alt"></i> Totalmente Responsivo</h4>
+                <p>Adapta-se automaticamente a diferentes tamanhos de tela, mantendo funcionalidade e legibilidade.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4><i class="fas fa-bolt"></i> Animações Suaves</h4>
+                <p>Transições fluidas entre estados, com efeito de pulso para a etapa atual e animações de preenchimento.</p>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h4><i class="fas fa-list-ol"></i> Etapas do Processo</h4>
+            <ul>
+                <li><strong>Cadastro:</strong> ✅ Concluído - Informações básicas validadas</li>
+                <li><strong>Análise:</strong> ✅ Concluído - Score verificado e aprovado</li>
+                <li><strong>Pré-Aprv:</strong> 🟡 Atual - Aguardando documentação</li>
+                <li><strong>Docs:</strong> ⏳ Pendente - Upload de documentos</li>
+                <li><strong>Revisão:</strong> ⏳ Pendente - Análise detalhada</li>
+                <li><strong>Final:</strong> ⏳ Pendente - Decisão final</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/compact-horizontal-progress.js"></script>
+    <script src="js/compact-progress-controls.js"></script>
+    <script src="js/compact-progress-alignment-fix.js"></script>
+    <script src="js/compact-progress-alignment-fix.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📊 Demo da barra horizontal compacta iniciada!');
+            
+            // Instruções específicas
+            setTimeout(() => {
+                console.log('%c🎯 BARRA HORIZONTAL COMPACTA CARREGADA!', 'color: #2ECC71; font-weight: bold; font-size: 18px;');
+                console.log('%c• Use o botão flutuante no canto inferior direito', 'color: #666; font-size: 14px;');
+                console.log('%c• Comandos disponíveis:', 'color: #333; font-weight: bold;');
+                console.log('%c  compactProgress.simulateProgress() - Simular processo completo', 'color: #666;');
+                console.log('%c  compactProgress.advanceStep() - Avançar uma etapa', 'color: #666;');
+                console.log('%c  compactProgress.resetProgress() - Resetar para pré-aprovação', 'color: #666;');
+                console.log('%c  compactProgress.finalizeWithStatus("approved") - Finalizar aprovado', 'color: #666;');
+                console.log('%c• Os nomes das etapas aparecem escritos abaixo da barra', 'color: #666;');
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

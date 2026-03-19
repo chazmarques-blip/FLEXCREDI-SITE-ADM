@@ -1,0 +1,375 @@
+/* ============ ESTILOS COMPLETOS PARA CONTRATO FLEXCREDI ============ */
+
+/* Container principal do documento */
+.contract-document-full {
+    font-family: 'Times New Roman', serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fff;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Cabeçalho da empresa */
+.contract-header-company {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+}
+
+.company-logo-section {
+    flex: 1;
+}
+
+.company-brand {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--verde-vibrante, #2ECC71);
+    margin: 0 0 5px 0;
+    font-family: Arial, sans-serif;
+}
+
+.company-tagline {
+    font-size: 12px;
+    color: var(--verde-escuro, #1E8449);
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-family: Arial, sans-serif;
+}
+
+.company-info {
+    flex: 1;
+    text-align: right;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.company-info div {
+    margin-bottom: 3px;
+}
+
+/* Divisor */
+.contract-divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, var(--verde-vibrante, #2ECC71), var(--verde-escuro, #1E8449));
+    margin: 20px 0;
+}
+
+/* Títulos principais */
+.contract-main-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--verde-escuro, #1E8449);
+    margin: 20px 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contract-subtitle {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+/* Parágrafo introdutório */
+.contract-intro {
+    text-align: justify;
+    margin: 20px 0;
+    font-size: 14px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    border-left: 4px solid var(--verde-vibrante, #2ECC71);
+}
+
+/* Títulos de seção */
+.contract-section-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--verde-escuro, #1E8449);
+    margin: 25px 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--verde-vibrante, #2ECC71);
+    padding-bottom: 5px;
+}
+
+/* Subtítulos */
+.contract-subsection-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin: 20px 0 10px 0;
+}
+
+/* Seções das partes */
+.contract-party-section {
+    margin: 15px 0;
+    padding: 10px 0;
+}
+
+.party-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--verde-escuro, #1E8449);
+    margin: 10px 0 5px 0;
+}
+
+.party-details {
+    margin: 5px 0 15px 20px;
+    text-align: justify;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Grid de termos do empréstimo */
+.loan-terms-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.loan-term-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+    font-size: 13px;
+}
+
+.loan-term-item strong {
+    color: var(--verde-escuro, #1E8449);
+    margin-right: 10px;
+}
+
+/* Parágrafos */
+.contract-document-full p {
+    text-align: justify;
+    margin: 10px 0;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* Seção de assinaturas */
+.contract-signatures-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #e9ecef;
+}
+
+.signature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin: 30px 0;
+}
+
+.signature-block {
+    text-align: center;
+}
+
+.signature-line {
+    border-bottom: 2px solid #333;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.signature-label {
+    font-size: 12px;
+    text-align: left;
+    line-height: 1.4;
+}
+
+/* Rodapé legal */
+.contract-footer-legal {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid var(--orange, #e74c3c);
+}
+
+.contract-footer-legal p {
+    font-size: 11px;
+    margin: 8px 0;
+    line-height: 1.4;
+}
+
+.contract-reference {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #dee2e6;
+    font-size: 10px;
+    color: #666;
+    text-align: center;
+}
+
+/* Responsividade para o contrato */
+@media (max-width: 768px) {
+    .contract-document-full {
+        padding: 15px;
+    }
+    
+    .contract-header-company {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .company-info {
+        text-align: center;
+        margin-top: 15px;
+    }
+    
+    .loan-terms-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .signature-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .contract-main-title {
+        font-size: 20px;
+    }
+    
+    .contract-section-title {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contract-document-full {
+        padding: 10px;
+    }
+    
+    .company-brand {
+        font-size: 24px;
+    }
+    
+    .contract-main-title {
+        font-size: 18px;
+    }
+    
+    .contract-section-title {
+        font-size: 14px;
+    }
+    
+    .loan-term-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
+
+/* Melhorias para impressão */
+@media print {
+    .contract-document-full {
+        font-size: 12px;
+        line-height: 1.4;
+        color: #000;
+        background: #fff;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        max-width: none;
+    }
+    
+    .contract-header-company {
+        page-break-inside: avoid;
+    }
+    
+    .contract-signatures-section {
+        page-break-before: auto;
+        page-break-inside: avoid;
+    }
+    
+    .loan-terms-grid {
+        page-break-inside: avoid;
+    }
+    
+    .signature-grid {
+        page-break-inside: avoid;
+    }
+}
+
+/* Animações sutis */
+.contract-document-full {
+    animation: fadeInContract 0.5s ease-in;
+}
+
+@keyframes fadeInContract {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estados de destaque */
+.loan-term-item:hover {
+    background: #e8f5e8;
+    transition: background 0.3s ease;
+}
+
+/* Estilos para campos preenchidos dinamicamente */
+.contract-document-full strong {
+    color: var(--verde-escuro, #1E8449);
+    font-weight: 600;
+}
+
+/* Melhorar legibilidade de valores monetários */
+.loan-term-item:has-text("$") {
+    font-weight: 500;
+}
+
+/* Container do modal ajustado para o contrato completo */
+.contract-modal .modal-content {
+    max-width: 900px;
+    width: 95vw;
+    max-height: 90vh;
+}
+
+.contract-modal .contract-viewer {
+    max-height: 75vh;
+    padding: 10px;
+}
+
+/* Scrollbar personalizada para melhor UX */
+.contract-viewer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.contract-viewer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.contract-viewer::-webkit-scrollbar-thumb {
+    background: var(--verde-vibrante, #2ECC71);
+    border-radius: 4px;
+}
+
+.contract-viewer::-webkit-scrollbar-thumb:hover {
+    background: var(--verde-escuro, #1E8449);
+}

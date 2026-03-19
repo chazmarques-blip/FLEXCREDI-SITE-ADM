@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients - FlexCredi Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/layout-adjustments.css">
+    <link rel="stylesheet" href="/css/perfect-alignment.css">
+    <link rel="stylesheet" href="/css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-page">
+    <!-- Header Dashboard -->
+    <header class="dashboard-header" role="banner">
+        <nav class="navbar container" role="navigation">
+            <a href="index.html" class="navbar-brand">
+                <img src="/images/flexcredi-logo-official.png" alt="FLEXCREDI" class="logo-img">
+            </a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="user-menu">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=2ECC71&color=fff" alt="Avatar" class="user-avatar">
+                    <span class="user-name">Admin</span>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" type="button">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#profile" class="dropdown-item"><i class="fas fa-user"></i> Meu Perfil</a>
+                        <a href="admin-configuracoes.html" class="dropdown-item"><i class="fas fa-cog"></i> Configurações</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="/login.html" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sidebar Admin -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-chart-line"></i><span>Dashboard</span>
+            </a>
+            <a href="aplicacoes.html" class="nav-item">
+                <i class="fas fa-file-invoice"></i><span>Applications</span>
+            </a>
+            <a href="clientes.html" class="nav-item active">
+                <i class="fas fa-users"></i><span>Clients</span>
+            </a>
+            <a href="admin-parceiros.html" class="nav-item">
+                <i class="fas fa-handshake"></i><span>Partners</span>
+            </a>
+            <a href="admin-documentos.html" class="nav-item">
+                <i class="fas fa-folder"></i><span>Documents</span>
+            </a>
+            <a href="admin-contratos.html" class="nav-item">
+                <i class="fas fa-file-contract"></i><span>Contracts</span>
+            </a>
+            <a href="admin-pagamentos.html" class="nav-item">
+                <i class="fas fa-credit-card"></i><span>ACH Payments</span>
+            </a>
+            <a href="admin-recebiveis.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i><span>Receivables</span>
+            </a>
+            <a href="admin-agentes.html" class="nav-item">
+                <i class="fas fa-robot"></i><span>Agents</span>
+            </a>
+            <a href="admin-configuracoes.html" class="nav-item">
+                <i class="fas fa-cog"></i><span>Settings</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+        <div class="container-fluid">
+            <!-- Page Header -->
+            <div class="page-header" style="margin-bottom: 30px;">
+                <h1 style="font-size: 28px; font-weight: 700; color: #343A40; margin-bottom: 8px;">
+                    <i class="fas fa-users" style="color: #2ECC71;"></i> Gestão de Clientes
+                </h1>
+                <p style="color: #6C757D; font-size: 14px;">Visualize e gerencie todos os clientes cadastrados no sistema</p>
+            </div>
+
+            <!-- Estatísticas -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div style="width: 50px; height: 50px; background: #2ECC71; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-users" style="font-size: 24px; color: white;"></i>
+                        </div>
+                        <div>
+                            <div style="font-size: 26px; font-weight: 700; color: #343A40;" id="totalClients">0</div>
+                            <div style="font-size: 13px; color: #6C757D;">Total de Clientes</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div style="width: 50px; height: 50px; background: #0066CC; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-user-check" style="font-size: 24px; color: white;"></i>
+                        </div>
+                        <div>
+                            <div style="font-size: 26px; font-weight: 700; color: #343A40;" id="activeClients">0</div>
+                            <div style="font-size: 13px; color: #6C757D;">Clientes Ativos</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div style="width: 50px; height: 50px; background: #F59E0B; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-user-plus" style="font-size: 24px; color: white;"></i>
+                        </div>
+                        <div>
+                            <div style="font-size: 26px; font-weight: 700; color: #343A40;" id="newClients">0</div>
+                            <div style="font-size: 13px; color: #6C757D;">Novos (Este Mês)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="content-section" style="margin-bottom: 30px;">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fas fa-filter"></i> Filtros de Busca</h2>
+                </div>
+                <div style="padding: 20px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div>
+                            <label style="display: block; font-size: 13px; font-weight: 600; color: #6C757D; margin-bottom: 6px;">Buscar<gt;Search</label>
+                            <input type="text" id="searchInput" placeholder="Nome ou email..." style="width: 100%; padding: 10px 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 13px; font-weight: 600; color: #6C757D; margin-bottom: 6px;">Status<gt;Status</label>
+                            <select id="statusFilter" style="width: 100%; padding: 10px 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px;">
+                                <option value="">Todos<gt;All</option>
+                                <option value="active">Ativo<gt;Active</option>
+                                <option value="inactive">Inativo<gt;Inactive</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; align-items: flex-end;">
+                            <button onclick="applyFilters()" style="width: 100%; padding: 10px 16px; background: #2ECC71; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de Clientes -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fas fa-list"></i> Lista de Clientes (<span id="totalCount">0</span>)</h2>
+                    <button class="btn-primary" onclick="refreshData()"><i class="fas fa-sync-alt"></i> Atualizar</button>
+                </div>
+                
+                <div id="clientsContainer">
+                    <div class="loading" style="text-align: center; padding: 60px; color: #6C757D;">
+                        <div class="spinner" style="display: inline-block; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #2ECC71; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                        <p style="margin-top: 20px; font-size: 16px;">Carregando clientes...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Client Modal -->
+    <div id="editClientModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; overflow-y: auto;">
+        <div style="min-height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px;">
+            <div style="background: white; border-radius: 12px; max-width: 600px; width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+                <!-- Modal Header -->
+                <div style="padding: 24px; border-bottom: 1px solid #E5E7EB; display: flex; justify-content: space-between; align-items: center;">
+                    <h2 style="font-size: 20px; font-weight: 600; color: #343A40; margin: 0;">
+                        <i class="fas fa-user-edit"></i> Edit Client
+                    </h2>
+                    <button onclick="closeEditModal()" style="background: none; border: none; font-size: 24px; color: #6C757D; cursor: pointer; padding: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.2s;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Modal Body -->
+                <div style="padding: 24px; max-height: 60vh; overflow-y: auto;">
+                    <form id="editClientForm">
+                        <input type="hidden" id="editClientId">
+                        
+                        <!-- Personal Information -->
+                        <div style="margin-bottom: 24px;">
+                            <h3 style="font-size: 16px; font-weight: 600; color: #343A40; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-user" style="color: #2ECC71;"></i> Personal Information
+                            </h3>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+                                <div>
+                                    <label style="display: block; font-size: 13px; font-weight: 600; color: #6C757D; margin-bottom: 6px;">Full Name</label>
+                                    <input type="text" id="editFullName" required style="width: 100%; padding: 10px 12px; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 14px; transition: all 0.2s;">
+                                </div>
+                                
+                                <div>
+                                    <label style="display: block; font-size: 13px; font-weight: 600; color: #6C757D; margin-bottom: 6px;">Email</label>
+                                    <input type="email" id="editEmail" required style="width: 100%; padding: 10px 12px; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 14px;">
+                                </div>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                                    <div>
+                                        <label style="display: block; font-size: 13px; font-weight: 600; color: #6C757D; margin-bottom: 6px;">Phone</label>
+                                        <input type="tel" id="editPhone" style="width: 100%; padding: 10px 12px; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 14px;">
+                                    </div>
+                                    <div>
+                                        <label style="display: block; font-size: 13px; font-weight: 600; color: #6C757D; margin-bottom: 6px;">Status</label>
+                                        <select id="editStatus" style="width: 100%; padding: 10px 12px; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 14px;">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Additional Information -->
+                        <div style="margin-bottom: 24px;">
+                            <h3 style="font-size: 16px; font-weight: 600; color: #343A40; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-info-circle" style="color: #0066CC;"></i> Additional Information
+                            </h3>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <div>
+                                    <label style="display: block; font-size: 13px; font-weight: 600; color: #6C757D; margin-bottom: 6px;">Credit Score</label>
+                                    <input type="number" id="editCreditScore" min="300" max="850" style="width: 100%; padding: 10px 12px; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 14px;">
+                                </div>
+                                <div>
+                                    <label style="display: block; font-size: 13px; font-weight: 600; color: #6C757D; margin-bottom: 6px;">Applications</label>
+                                    <input type="number" id="editApplicationsCount" min="0" disabled style="width: 100%; padding: 10px 12px; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 14px; background: #F8FAFC; color: #6C757D;">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div style="padding: 20px 24px; border-top: 1px solid #E5E7EB; display: flex; justify-content: flex-end; gap: 12px;">
+                    <button onclick="closeEditModal()" style="padding: 10px 20px; background: #F8FAFC; color: #6C757D; border: 1px solid #E5E7EB; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                    <button onclick="saveClient()" style="padding: 10px 20px; background: #2ECC71; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/config.js"></script>
+    <script src="/admin-panel/admin/js/cross-domain-sync.js"></script>
+    <script>
+        const API_BASE = 'https://flexcredi-site-adm-production-b27d.up.railway.app';
+        let allClients = [];
+
+        async function loadClients() {
+            try {
+                // Try to fetch from API first
+                const response = await fetch(`${API_BASE}/api/admin/clients`);
+                const data = await response.json();
+                
+                if (data.success && data.clients) {
+                    allClients = data.clients;
+                } else {
+                    allClients = [];
+                }
+            } catch (error) {
+                console.error('Erro ao carregar clientes da API:', error);
+                allClients = [];
+            }
+            
+            // Load test clients from API
+            try {
+                console.log('📡 Fetching test clients from API...');
+                const testResponse = await fetch(`${API_BASE}/api/test-data/clients`);
+                const testData = await testResponse.json();
+                
+                if (testData.success && testData.data) {
+                    console.log(`✅ Loaded ${testData.data.length} test clients from API`);
+                    
+                    // Transform test clients to match admin format
+                    const transformedTestClients = testData.data.map(client => ({
+                        id: client.id,
+                        name: client.fullName,
+                        email: client.email,
+                        phone: client.phone,
+                        status: client.status === 'pre-approved' ? 'active' : client.status,
+                        applicationsCount: 1,
+                        createdAt: client.applicationDate,
+                        creditScore: client.creditScore,
+                        preApproval: client.preApproval,
+                        documents: client.documents,
+                        isTestClient: true
+                    }));
+                    
+                    allClients = [...allClients, ...transformedTestClients];
+                } else {
+                    console.log('⚠️ No test clients from API');
+                }
+            } catch (error) {
+                console.log('⚠️ Test data API not available:', error.message);
+            }
+            
+            // Also load test clients from localStorage (fallback)
+            try {
+                const testClients = JSON.parse(localStorage.getItem('flexcredi_test_clients') || '[]');
+                
+                // Only add localStorage clients if not already from API
+                const apiClientIds = new Set(allClients.map(client => client.id));
+                const uniqueLocalClients = testClients.filter(client => !apiClientIds.has(client.id));
+                
+                if (uniqueLocalClients.length > 0) {
+                    // Transform test clients to match admin format
+                    const transformedTestClients = uniqueLocalClients.map(client => ({
+                        id: client.id,
+                        name: client.fullName,
+                        email: client.email,
+                        phone: client.phone,
+                        status: client.status === 'pre-approved' ? 'active' : client.status,
+                        applicationsCount: 1,
+                        createdAt: client.applicationDate,
+                        creditScore: client.creditScore,
+                        preApproval: client.preApproval,
+                        documents: client.documents,
+                        isTestClient: true
+                    }));
+                    
+                    console.log(`➕ Adding ${transformedTestClients.length} unique clients from localStorage`);
+                    allClients = [...allClients, ...transformedTestClients];
+                }
+                
+                console.log(`✅ Total: ${allClients.length} clients`);
+            } catch (error) {
+                console.error('Error loading test clients:', error);
+            }
+            
+            // Render all clients
+            if (allClients.length > 0) {
+                renderClients(allClients);
+                updateStats(allClients);
+                document.getElementById('totalCount').textContent = allClients.length;
+            } else {
+                showEmptyState();
+            }
+        }
+
+        function updateStats(clients) {
+            document.getElementById('totalClients').textContent = clients.length;
+            const active = clients.filter(c => c.status === 'active').length;
+            document.getElementById('activeClients').textContent = active;
+            
+            const thisMonth = new Date();
+            thisMonth.setDate(1);
+            const newClients = clients.filter(c => new Date(c.createdAt) >= thisMonth).length;
+            document.getElementById('newClients').textContent = newClients;
+        }
+
+        function renderClients(clients) {
+            const container = document.getElementById('clientsContainer');
+            
+            if (clients.length === 0) {
+                showEmptyState();
+                return;
+            }
+
+            const tableHTML = `
+                <table class="applications-table" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #F8FAFC; border-bottom: 2px solid #E5E7EB;">
+                            <th style="padding: 12px 20px; text-align: left; font-size: 12px; font-weight: 600; color: #6C757D; text-transform: uppercase;">Cliente</th>
+                            <th style="padding: 12px 20px; text-align: left; font-size: 12px; font-weight: 600; color: #6C757D; text-transform: uppercase;">Email<gt;Email</th>
+                            <th style="padding: 12px 20px; text-align: left; font-size: 12px; font-weight: 600; color: #6C757D; text-transform: uppercase;">Telefone<gt;Phone</th>
+                            <th style="padding: 12px 20px; text-align: left; font-size: 12px; font-weight: 600; color: #6C757D; text-transform: uppercase;">Aplicações</th>
+                            <th style="padding: 12px 20px; text-align: left; font-size: 12px; font-weight: 600; color: #6C757D; text-transform: uppercase;">Status<gt;Status</th>
+                            <th style="padding: 12px 20px; text-align: left; font-size: 12px; font-weight: 600; color: #6C757D; text-transform: uppercase;">Cadastro</th>
+                            <th style="padding: 12px 20px; text-align: left; font-size: 12px; font-weight: 600; color: #6C757D; text-transform: uppercase;">Ações<gt;Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${clients.map(client => `
+                            <tr style="border-bottom: 1px solid #F1F3F4;">
+                                <td style="padding: 14px 20px;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(client.name)}&background=2ECC71&color=fff&size=40" 
+                                             style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid #E5E7EB;">
+                                        <div>
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <span style="font-weight: 600; color: #343A40;">${client.name || 'N/A'}</span>
+                                                ${client.isTestClient ? '<span style="background: #667eea; color: white; font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px;">TEST</span>' : ''}
+                                            </div>
+                                            <div style="font-size: 12px; color: #6C757D;">ID: ${client.id.substring(0, 20)}${client.id.length > 20 ? '...' : ''}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="padding: 14px 20px; font-size: 14px; color: #343A40;">${client.email || 'N/A'}</td>
+                                <td style="padding: 14px 20px; font-size: 14px; color: #343A40;">${client.phone || 'N/A'}</td>
+                                <td style="padding: 14px 20px; font-size: 15px; font-weight: 600; color: #2ECC71;">${client.applicationsCount || 0}</td>
+                                <td style="padding: 14px 20px;">${getStatusBadge(client.status)}</td>
+                                <td style="padding: 14px 20px; font-size: 13px; color: #6C757D;">${formatDate(client.createdAt)}</td>
+                                <td style="padding: 14px 20px;">
+                                    <div style="display: flex; gap: 8px;">
+                                        <button onclick="window.open('view-application.html?id=${client.applicationId || client.id}&source=clientes', '_blank')" style="padding: 6px 12px; background: #0066CC; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;" title="View Application">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button onclick="editClient('${client.id}')" style="padding: 6px 12px; background: #2ECC71; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;" title="Edit Client">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = tableHTML;
+        }
+
+        function getStatusBadge(status) {
+            const statusMap = {
+                'active': { color: '#2ECC71', bg: 'rgba(46, 204, 113, 0.1)', label: 'Ativo' },
+                'inactive': { color: '#DC3545', bg: 'rgba(220, 53, 69, 0.1)', label: 'Inativo' }
+            };
+            const s = statusMap[status] || statusMap['active'];
+            return `<span style="display: inline-block; padding: 6px 12px; background: ${s.bg}; color: ${s.color}; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase;">${s.label}</span>`;
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('pt-BR');
+        }
+
+        function showEmptyState() {
+            document.getElementById('clientsContainer').innerHTML = `
+                <div style="text-align: center; padding: 60px; color: #6C757D;">
+                    <i class="fas fa-users" style="font-size: 64px; color: #E5E7EB; margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 20px; color: #343A40; margin-bottom: 10px;">Nenhum cliente encontrado</h3>
+                    <p style="font-size: 14px; margin-bottom: 20px;">Os clientes aparecerão aqui quando forem cadastrados.</p>
+                    
+                    <div style="background: #FEF3C7; border: 2px solid #F59E0B; border-radius: 8px; padding: 20px; margin: 20px auto; max-width: 500px; text-align: left;">
+                        <div style="font-weight: 600; color: #92400E; margin-bottom: 12px;">
+                            <i class="fas fa-info-circle"></i> Para testar o sistema:
+                        </div>
+                        <ol style="color: #78350F; font-size: 13px; margin: 0; padding-left: 20px;">
+                            <li style="margin-bottom: 8px;">Clique no botão abaixo para criar um cliente de teste</li>
+                            <li style="margin-bottom: 8px;">Após criar, volte para esta página</li>
+                            <li>O cliente aparecerá nesta lista</li>
+                        </ol>
+                        <a href="create-test-client.html" 
+                           style="display: inline-block; margin-top: 16px; background: #F59E0B; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: all 0.2s;">
+                            <i class="fas fa-plus-circle"></i> Criar Cliente de Teste
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showError() {
+            document.getElementById('clientsContainer').innerHTML = `
+                <div style="text-align: center; padding: 60px; color: #DC3545;">
+                    <i class="fas fa-exclamation-circle" style="font-size: 64px; margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 20px; margin-bottom: 10px;">Erro ao carregar dados</h3>
+                    <p style="font-size: 14px;">Não foi possível conectar à API.</p>
+                    <button onclick="loadClients()" style="margin-top: 20px; padding: 10px 20px; background: #2ECC71; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                        <i class="fas fa-redo"></i> Tentar Novamente
+                    </button>
+                </div>
+            `;
+        }
+
+        function applyFilters() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const status = document.getElementById('statusFilter').value;
+            
+            let filtered = allClients.filter(client => {
+                const matchSearch = !search || (client.name && client.name.toLowerCase().includes(search)) || (client.email && client.email.toLowerCase().includes(search));
+                const matchStatus = !status || client.status === status;
+                return matchSearch && matchStatus;
+            });
+            
+            renderClients(filtered);
+            document.getElementById('totalCount').textContent = filtered.length;
+        }
+
+        function viewClient(id) {
+            alert(`Ver detalhes do cliente #${id} - Funcionalidade em desenvolvimento`);
+        }
+
+        function editClient(id) {
+            // Redirect to full edit page with source parameter
+            window.location.href = `edit-application.html?id=${id}&source=clientes`;
+        }
+        
+        function closeEditModal() {
+            document.getElementById('editClientModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        async function saveClient() {
+            const clientId = document.getElementById('editClientId').value;
+            const updatedData = {
+                id: clientId,
+                name: document.getElementById('editFullName').value,
+                email: document.getElementById('editEmail').value,
+                phone: document.getElementById('editPhone').value,
+                status: document.getElementById('editStatus').value,
+                creditScore: parseInt(document.getElementById('editCreditScore').value) || null
+            };
+            
+            try {
+                // Check if it's a test client
+                const isTestClient = clientId.startsWith('test-client-');
+                
+                if (isTestClient) {
+                    // Update in localStorage
+                    let testClients = JSON.parse(localStorage.getItem('flexcredi_test_clients') || '[]');
+                    const index = testClients.findIndex(c => c.id === clientId);
+                    
+                    if (index >= 0) {
+                        // Update the client data
+                        testClients[index] = {
+                            ...testClients[index],
+                            fullName: updatedData.name,
+                            email: updatedData.email,
+                            phone: updatedData.phone,
+                            status: updatedData.status,
+                            creditScore: updatedData.creditScore
+                        };
+                        
+                        localStorage.setItem('flexcredi_test_clients', JSON.stringify(testClients));
+                        
+                        // Also update in API if available
+                        try {
+                            await fetch(`${API_BASE}/api/test-data/clients`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(testClients[index])
+                            });
+                        } catch (e) {
+                            console.warn('API not available, data saved locally only');
+                        }
+                        
+                        // Show success message
+                        showNotification('✅ Client updated successfully!', 'success');
+                        
+                        // Close modal and reload
+                        closeEditModal();
+                        setTimeout(() => loadClients(), 500);
+                    }
+                } else {
+                    // Update via API for real clients
+                    const response = await fetch(`${API_BASE}/api/admin/clients/${clientId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(updatedData)
+                    });
+                    
+                    if (response.ok) {
+                        showNotification('✅ Client updated successfully!', 'success');
+                        closeEditModal();
+                        setTimeout(() => loadClients(), 500);
+                    } else {
+                        throw new Error('Failed to update client');
+                    }
+                }
+            } catch (error) {
+                console.error('Error updating client:', error);
+                showNotification('❌ Error updating client', 'error');
+            }
+        }
+        
+        function showNotification(message, type = 'info') {
+            const colors = {
+                success: { bg: '#D1FAE5', border: '#10B981', text: '#065F46' },
+                error: { bg: '#FEE2E2', border: '#EF4444', text: '#991B1B' },
+                warning: { bg: '#FEF3C7', border: '#F59E0B', text: '#92400E' },
+                info: { bg: '#E0E7FF', border: '#6366F1', text: '#3730A3' }
+            };
+            
+            const color = colors[type] || colors.info;
+            
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${color.bg};
+                border: 2px solid ${color.border};
+                color: ${color.text};
+                padding: 16px 24px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                font-size: 14px;
+                font-weight: 600;
+                max-width: 400px;
+            `;
+            notification.innerHTML = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transition = 'all 0.3s';
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Close modal on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeEditModal();
+            }
+        });
+        
+        // Close modal on backdrop click
+        document.getElementById('editClientModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'editClientModal') {
+                closeEditModal();
+            }
+        });
+
+        function refreshData() {
+            loadClients();
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            loadClients();
+        });
+    </script>
+    
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</body>
+</html>

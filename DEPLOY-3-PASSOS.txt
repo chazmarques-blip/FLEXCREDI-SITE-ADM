@@ -1,0 +1,78 @@
+════════════════════════════════════════════════════════════════
+  🚀 FLEXCREDI - DEPLOY EM 3 COMANDOS
+════════════════════════════════════════════════════════════════
+
+TUDO JÁ ESTÁ CONFIGURADO! SÓ SEGUIR OS PASSOS:
+
+════════════════════════════════════════════════════════════════
+  PASSO 1: COMMIT (EXECUTE NO TERMINAL)
+════════════════════════════════════════════════════════════════
+
+git add .
+git commit -m "feat: deploy Railway + Vercel"
+git push origin main
+
+⏱️  Tempo: 1 minuto
+
+════════════════════════════════════════════════════════════════
+  PASSO 2: RAILWAY (NO NAVEGADOR)
+════════════════════════════════════════════════════════════════
+
+1. https://railway.app
+2. New Project → GitHub
+3. Selecione FLEXCREDI
+4. Settings → Variables → RAW Editor
+5. Copie de: 2-railway-variables.txt
+6. Cole e salve
+
+⏱️  Tempo: 5 minutos
+
+ANOTAR: https://______________.railway.app
+
+════════════════════════════════════════════════════════════════
+  PASSO 3: VERCEL (NO NAVEGADOR)
+════════════════════════════════════════════════════════════════
+
+1. https://vercel.com
+2. New Project → GitHub
+3. Selecione FLEXCREDI
+4. Framework: Other
+5. Deploy
+6. Volte Railway → Atualize FRONTEND_URL
+
+⏱️  Tempo: 5 minutos
+
+ANOTAR: https://______________.vercel.app
+
+════════════════════════════════════════════════════════════════
+  ✅ PRONTO! SISTEMA ONLINE EM 11 MINUTOS!
+════════════════════════════════════════════════════════════════
+
+TESTAR:
+- Backend: https://[railway].railway.app/
+- Frontend: https://[vercel].vercel.app/
+- Admin: https://[vercel].vercel.app/admin-dashboard.html
+
+════════════════════════════════════════════════════════════════
+  📚 ARQUIVOS DE AJUDA CRIADOS:
+════════════════════════════════════════════════════════════════
+
+✅ COMECE-AQUI.txt .............. LEIA ESTE PRIMEIRO
+✅ 1-commit-deploy.sh ........... Script de commit
+✅ 2-railway-variables.txt ...... Copie e cole no Railway
+✅ 3-vercel-deploy.txt .......... Guia visual Vercel
+✅ 4-testes-completos.txt ....... Checklist de testes
+
+════════════════════════════════════════════════════════════════
+  🎯 COMECE AGORA!
+════════════════════════════════════════════════════════════════
+
+Execute no terminal:
+
+git add .
+git commit -m "feat: deploy"
+git push origin main
+
+Depois abra: https://railway.app
+
+════════════════════════════════════════════════════════════════

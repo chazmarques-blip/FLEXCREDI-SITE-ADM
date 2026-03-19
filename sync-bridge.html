@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlexCredi - Sync Bridge</title>
+</head>
+<body>
+    <script>
+        // This page runs in an iframe on admin.flexcredi.com
+        // It reads localStorage from flexcredi.com and sends it via postMessage
+        
+        (function() {
+            'use strict';
+            
+            console.log('🌉 Sync bridge loaded');
+            
+            // Keys to sync
+            const KEYS_TO_SYNC = [
+                'flexcredi_user',
+                'flexcredi_test_clients',
+                'flexcredi_test_applications',
+                'flexcredi_session'
+            ];
+            
+            // Collect data
+            const syncData = {};
+            let hasData = false;
+            
+            KEYS_TO_SYNC.forEach(key => {
+                const value = localStorage.getItem(key);
+                if (value) {
+                    try {
+                        syncData[key] = JSON.parse(value);
+                        hasData = true;
+                        console.log(`✅ Found ${key}`);
+                    } catch (error) {
+                        syncData[key] = value;
+                    }
+                }
+            });
+            
+            // Send data to parent
+            if (hasData) {
+                console.log('📤 Sending sync data to parent:', syncData);
+                window.parent.postMessage({
+                    type: 'SYNC_DATA',
+                    data: syncData
+                }, '*');
+            } else {
+                console.log('⚠️ No data to sync');
+                window.parent.postMessage({
+                    type: 'SYNC_ERROR',
+                    error: 'No test data found'
+                }, '*');
+            }
+        })();
+    </script>
+</body>
+</html>

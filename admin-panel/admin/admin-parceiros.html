@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partners - FLEXCREDI Admin</title>
+    <link rel="icon" type="image/png" href="/images/flexcredi-logo-official.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/layout-adjustments.css">
+    <link rel="stylesheet" href="/css/perfect-alignment.css">
+    <link rel="stylesheet" href="/css/client-functions.css">
+    <link rel="stylesheet" href="/css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body class="admin-page">
+    <header class="dashboard-header">
+        <nav class="navbar container">
+            <a href="index.html" class="navbar-brand">
+                <img src="/images/flexcredi-logo-official.png" alt="FLEXCREDI" class="logo-img">
+            </a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
+            <div class="user-menu">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=2ECC71&color=fff" alt="Avatar" class="user-avatar">
+                    <span class="user-name">Admin</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="admin-sidebar" id="adminSidebar">
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item"><i class="fas fa-chart-line"></i><span>Dashboard</span></a>
+            <a href="admin-aplicacoes.html" class="nav-item"><i class="fas fa-file-invoice"></i><span>Applications</span></a>
+            <a href="admin-clientes.html" class="nav-item"><i class="fas fa-users"></i><span>Clients</span></a>
+            <a href="admin-parceiros.html" class="nav-item active"><i class="fas fa-handshake"></i><span>Partners</span></a>
+            <a href="admin-documentos.html" class="nav-item"><i class="fas fa-folder"></i><span>Documents</span></a>
+            <a href="admin-contratos.html" class="nav-item"><i class="fas fa-file-contract"></i><span>Contracts</span></a>
+            <a href="admin-pagamentos.html" class="nav-item"><i class="fas fa-credit-card"></i><span>ACH Payments</span></a>
+            <a href="admin-recebiveis.html" class="nav-item"><i class="fas fa-calendar-alt"></i><span>Receivables</span></a>
+            <a href="admin-agentes.html" class="nav-item"><i class="fas fa-robot"></i><span>Agents</span></a>
+            <a href="admin-configuracoes.html" class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></a>
+        </nav>
+    </aside>
+
+    <main class="admin-main-content">
+        <div class="container-fluid">
+            <div class="dashboard-section" style="margin-bottom: 20px;">
+                <div class="section-header">
+                    <h2><i class="fas fa-handshake"></i> Gestão de Parceiros</h2>
+                    <button class="btn-add" onclick="alert('Adicionar novo parceiro')">
+                        <i class="fas fa-plus"></i> Novo Parceiro
+                    </button>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Parceiro</th>
+                                <th>CNPJ</th>
+                                <th>Aplicações</th>
+                                <th>Volume Total</th>
+                                <th>Status<gt;Status</th>
+                                <th>Cadastro</th>
+                                <th>Ações<gt;Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="partnersTableBody">
+                            <tr><td colspan="8" class="loading">Carregando parceiros...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-simple">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 FLEXCREDI. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    const API_URL = 'https://flexcredi-site-adm-production-b27d.up.railway.app';
+
+    async function loadPartners() {
+        try {
+            const response = await fetch(`${API_URL}/api/admin/partners`);
+            const data = await response.json();
+            const tbody = document.getElementById('partnersTableBody');
+            
+            if (!data.partners || data.partners.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><i class="fas fa-handshake"></i><p>Nenhum parceiro encontrado</p></td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = data.partners.map(p => `
+                <tr>
+                    <td><strong>#${p.id}</strong></td>
+                    <td>
+                        <div class="table-user">
+                            <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(p.name || 'P')}&background=2ECC71&color=fff" class="table-avatar">
+                            <div class="table-user-info">
+                                <span class="table-user-name">${p.name || 'N/A'}</span>
+                                <span class="table-user-email">${p.email || 'N/A'}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${p.cnpj || '-'}</td>
+                    <td><strong>${p._count?.applications || 0}</strong></td>
+                    <td><span class="table-amount">R$ ${(p.totalVolume || 0).toLocaleString('pt-BR')}</span></td>
+                    <td><span class="status-badge ${p.status === 'APPROVED' ? 'status-approved' : p.status === 'PENDING' ? 'status-pending' : 'status-rejected'}">${p.status === 'APPROVED' ? 'Aprovado' : p.status === 'PENDING' ? 'Pendente' : 'Rejeitado'}</span></td>
+                    <td>${new Date(p.createdAt).toLocaleDateString('pt-BR')}</td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="btn-icon" title="Ver" onclick="alert('Ver #${p.id}')"><i class="fas fa-eye"></i></button>
+                            <button class="btn-icon" title="Editar" onclick="alert('Editar #${p.id}')"><i class="fas fa-edit"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (error) {
+            document.getElementById('partnersTableBody').innerHTML = `<tr><td colspan="8" class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Erro: ${error.message}</p></td></tr>`;
+        }
+    }
+
+    document.getElementById('mobileMenuToggle')?.addEventListener('click', () => {
+        document.getElementById('adminSidebar').classList.toggle('open');
+    });
+
+    loadPartners();
+    </script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,636 @@
+/* ============ BARRA DE PROGRESSO LATERAL FLEXCREDI ============ */
+
+/* Container principal da barra lateral */
+.flexcredi-progress-sidebar {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 20px rgba(46, 204, 113, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.flexcredi-progress-sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2ECC71, #1E8449, #27AE60);
+    background-size: 200% 100%;
+    animation: progressGradient 3s ease-in-out infinite;
+}
+
+@keyframes progressGradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Header da barra de progresso */
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.progress-header h4 {
+    margin: 0;
+    color: #1E8449;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-header h4 i {
+    color: #2ECC71;
+    font-size: 18px;
+}
+
+.progress-percentage {
+    background: linear-gradient(135deg, #2ECC71, #1E8449);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+}
+
+/* Timeline das etapas */
+.progress-timeline {
+    margin: 20px 0;
+}
+
+.progress-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    position: relative;
+    opacity: 0;
+    animation: stepFadeIn 0.5s ease-out forwards;
+}
+
+.progress-step:nth-child(1) { animation-delay: 0.1s; }
+.progress-step:nth-child(2) { animation-delay: 0.2s; }
+.progress-step:nth-child(3) { animation-delay: 0.3s; }
+.progress-step:nth-child(4) { animation-delay: 0.4s; }
+.progress-step:nth-child(5) { animation-delay: 0.5s; }
+.progress-step:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes stepFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Indicador da etapa */
+.step-indicator {
+    position: relative;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.step-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+/* Connector entre etapas */
+.step-connector {
+    width: 2px;
+    height: 40px;
+    margin-top: 4px;
+    transition: all 0.3s ease;
+}
+
+.step-connector.last {
+    display: none;
+}
+
+/* Estados das etapas */
+
+/* Etapa concluída */
+.step-completed .step-number {
+    background: linear-gradient(135deg, #2ECC71, #1E8449);
+    color: white;
+    box-shadow: 0 2px 8px rgba(46, 204, 113, 0.4);
+}
+
+.step-completed .step-connector {
+    background: linear-gradient(to bottom, #2ECC71, #1E8449);
+}
+
+.step-completed .step-title {
+    color: #1E8449;
+    font-weight: 600;
+}
+
+.step-completed .step-description {
+    color: #28a745;
+}
+
+/* Etapa atual */
+.step-current .step-number {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+    color: white;
+    box-shadow: 0 2px 12px rgba(255, 193, 7, 0.4);
+    animation: currentStepPulse 2s ease-in-out infinite;
+}
+
+@keyframes currentStepPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 12px rgba(255, 193, 7, 0.4);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 4px 20px rgba(255, 193, 7, 0.6);
+    }
+}
+
+.step-current .step-connector {
+    background: linear-gradient(to bottom, #ffc107, #dee2e6);
+}
+
+.step-current .step-title {
+    color: #e0a800;
+    font-weight: 600;
+    position: relative;
+}
+
+.step-current .step-title::after {
+    content: '● Em andamento';
+    position: absolute;
+    left: 0;
+    top: 100%;
+    font-size: 10px;
+    color: #ffc107;
+    font-weight: 500;
+    animation: blinkText 1.5s ease-in-out infinite;
+}
+
+@keyframes blinkText {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.5; }
+}
+
+/* Etapa pendente */
+.step-pending .step-number {
+    background: #f8f9fa;
+    color: #6c757d;
+    border: 2px solid #dee2e6;
+}
+
+.step-pending .step-connector {
+    background: #dee2e6;
+}
+
+.step-pending .step-title {
+    color: #6c757d;
+}
+
+.step-pending .step-description {
+    color: #adb5bd;
+}
+
+/* Conteúdo da etapa */
+.step-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.step-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 4px 0;
+    line-height: 1.2;
+}
+
+.step-description {
+    font-size: 12px;
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+}
+
+.step-timestamp {
+    font-size: 10px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Ações da barra de progresso */
+.progress-actions {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+}
+
+.btn-progress-info {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-progress-info:hover {
+    background: linear-gradient(135deg, #138496, #117a8b);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
+}
+
+/* Notificações de progresso */
+.progress-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    background: linear-gradient(135deg, #2ECC71, #1E8449);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    animation: slideInNotification 0.5s ease-out;
+    max-width: 350px;
+}
+
+.progress-notification i {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+@keyframes slideInNotification {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Notificação de status final */
+.final-status-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10001;
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 450px;
+    animation: finalNotificationAppear 0.5s ease-out;
+}
+
+.final-status-notification.success {
+    border-left: 6px solid #28a745;
+}
+
+.final-status-notification.error {
+    border-left: 6px solid #dc3545;
+}
+
+.final-status-notification.warning {
+    border-left: 6px solid #ffc107;
+}
+
+.final-status-notification i {
+    font-size: 40px;
+}
+
+.final-status-notification.success i {
+    color: #28a745;
+}
+
+.final-status-notification.error i {
+    color: #dc3545;
+}
+
+.final-status-notification.warning i {
+    color: #ffc107;
+}
+
+.notification-content h4 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.notification-content p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.notification-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: color 0.2s ease;
+}
+
+.notification-close:hover {
+    color: #333;
+}
+
+@keyframes finalNotificationAppear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Modal de detalhes do progresso */
+.progress-details-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+.progress-details-modal .modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+}
+
+.progress-details-modal .modal-container {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.progress-details-modal .modal-header {
+    background: linear-gradient(135deg, #2ECC71, #1E8449);
+    color: white;
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-details-modal .modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-details-modal .modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.progress-details-modal .modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-details-modal .modal-body {
+    padding: 25px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.progress-overview {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.overview-item {
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.overview-item:last-child {
+    margin-bottom: 0;
+}
+
+.overview-item strong {
+    color: #1E8449;
+}
+
+.detailed-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.detailed-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.detailed-step:hover {
+    background: #f8f9fa;
+}
+
+.detailed-step .step-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.detailed-step.completed .step-icon {
+    background: linear-gradient(135deg, #2ECC71, #1E8449);
+    color: white;
+}
+
+.detailed-step.current .step-icon {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+    color: white;
+}
+
+.detailed-step.pending .step-icon {
+    background: #f8f9fa;
+    color: #6c757d;
+    border: 2px solid #dee2e6;
+}
+
+.detailed-step .step-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.detailed-step .step-info p {
+    margin: 0 0 8px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.step-status {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-completed {
+    color: #28a745;
+}
+
+.status-current {
+    color: #ffc107;
+}
+
+.status-pending {
+    color: #6c757d;
+}
+
+.progress-details-modal .modal-footer {
+    background: #f8f9fa;
+    padding: 15px 25px;
+    border-top: 1px solid #dee2e6;
+    text-align: right;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .flexcredi-progress-sidebar {
+        margin: 15px 0;
+        padding: 15px;
+    }
+    
+    .progress-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .step-number {
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+    }
+    
+    .step-title {
+        font-size: 13px;
+    }
+    
+    .step-description {
+        font-size: 11px;
+    }
+    
+    .final-status-notification {
+        width: 90%;
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .final-status-notification i {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .progress-notification {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+        font-size: 13px;
+    }
+    
+    .step-connector {
+        height: 30px;
+    }
+    
+    .progress-details-modal .modal-container {
+        width: 95%;
+    }
+    
+    .detailed-step {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .detailed-step .step-icon {
+        align-self: center;
+        margin-bottom: 10px;
+    }
+}

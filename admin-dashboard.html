@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLEXCREDI - Painel Administrativo</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --verde-vibrante: #2ECC71;
+            --verde-escuro: #1E8449;
+            --branco: #FFFFFF;
+            --cinza-claro: #F8F9FA;
+            --cinza-medio: #6C757D;
+            --cinza-escuro: #343A40;
+            --laranja: #F59E0B;
+            --vermelho: #DC3545;
+            --azul: #0066CC;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cinza-claro);
+            color: var(--cinza-escuro);
+            line-height: 1.6;
+        }
+        
+        /* LAYOUT PRINCIPAL */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            grid-template-rows: 60px 1fr;
+            grid-template-areas: 
+                "sidebar header"
+                "sidebar main";
+            min-height: 100vh;
+        }
+        
+        /* HEADER */
+        .admin-header {
+            grid-area: header;
+            background: var(--branco);
+            border-bottom: 1px solid #E5E7EB;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--cinza-escuro);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--verde-vibrante);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* SIDEBAR */
+        .admin-sidebar {
+            grid-area: sidebar;
+            background: var(--cinza-escuro);
+            color: white;
+            padding: 20px 0;
+        }
+        
+        .sidebar-logo {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .sidebar-logo h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--verde-vibrante);
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 25px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: rgba(46, 204, 113, 0.1);
+            color: white;
+            border-left-color: var(--verde-vibrante);
+        }
+        
+        .sidebar-nav i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* MAIN CONTENT */
+        .admin-main {
+            grid-area: main;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        
+        /* DASHBOARD STATS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: var(--branco);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.2s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .stat-icon.applications { background: var(--verde-vibrante); }
+        .stat-icon.pending { background: var(--laranja); }
+        .stat-icon.users { background: var(--azul); }
+        .stat-icon.approved { background: var(--verde-escuro); }
+        
+        .stat-info h3 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--cinza-escuro);
+            margin-bottom: 5px;
+        }
+        
+        .stat-info p {
+            color: var(--cinza-medio);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* CONTENT SECTIONS */
+        .content-section {
+            background: var(--branco);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid #E5E7EB;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--cinza-escuro);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: var(--verde-vibrante);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--verde-escuro);
+        }
+        
+        /* APPLICATIONS TABLE */
+        .applications-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .applications-table th,
+        .applications-table td {
+            padding: 15px 30px;
+            text-align: left;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        
+        .applications-table th {
+            background: #F8FAFC;
+            font-weight: 600;
+            color: var(--cinza-escuro);
+            font-size: 14px;
+        }
+        
+        .applications-table td {
+            font-size: 14px;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-badge.pending {
+            background: rgba(245, 158, 11, 0.1);
+            color: #F59E0B;
+        }
+        
+        .status-badge.approved {
+            background: rgba(46, 204, 113, 0.1);
+            color: #2ECC71;
+        }
+        
+        .status-badge.denied {
+            background: rgba(220, 53, 69, 0.1);
+            color: #DC3545;
+        }
+        
+        .actions-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-small {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-approve {
+            background: var(--verde-vibrante);
+            color: white;
+        }
+        
+        .btn-deny {
+            background: var(--vermelho);
+            color: white;
+        }
+        
+        .btn-view {
+            background: var(--azul);
+            color: white;
+        }
+        
+        /* LOADING STATE */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--cinza-medio);
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--verde-vibrante);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "header"
+                    "main";
+            }
+            
+            .admin-sidebar {
+                display: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-logo">
+                <h2>FLEXCREDI</h2>
+                <p style="font-size: 12px; color: rgba(255,255,255,0.6);">Admin Panel</p>
+            </div>
+            
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><a href="#dashboard" class="nav-link active" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a></li>
+                    <li><a href="#applications" class="nav-link" data-section="applications">
+                        <i class="fas fa-file-invoice-dollar"></i> Aplicações
+                    </a></li>
+                    <li><a href="#users" class="nav-link" data-section="users">
+                        <i class="fas fa-users"></i> Clientes
+                    </a></li>
+                    <li><a href="#documents" class="nav-link" data-section="documents">
+                        <i class="fas fa-folder-open"></i> Documentos
+                    </a></li>
+                    <li><a href="#reports" class="nav-link" data-section="reports">
+                        <i class="fas fa-chart-bar"></i> Relatórios
+                    </a></li>
+                    <li><a href="#settings" class="nav-link" data-section="settings">
+                        <i class="fas fa-cogs"></i> Configurações
+                    </a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- HEADER -->
+        <header class="admin-header">
+            <div class="header-title">Painel Administrativo</div>
+            
+            <div class="header-actions">
+                <div class="user-info">
+                    <div class="user-avatar">A</div>
+                    <div>
+                        <div style="font-weight: 600; font-size: 14px;">Admin</div>
+                        <div style="font-size: 12px; color: var(--cinza-medio);">admin@flexcredi.com</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- MAIN CONTENT -->
+        <main class="admin-main">
+            <!-- DASHBOARD SECTION -->
+            <div id="dashboard-section" class="content-view">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon applications">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-applications">-</h3>
+                            <p>Total de Aplicações</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="pending-applications">-</h3>
+                            <p>Aguardando Análise</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon users">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-users">-</h3>
+                            <p>Total de Clientes</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon approved">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="approved-count">-</h3>
+                            <p>Aprovações Hoje</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- RECENT APPLICATIONS -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-clock"></i>
+                            Aplicações Recentes
+                        </h2>
+                        <button class="btn-primary" onclick="showAllApplications()">
+                            Ver Todas
+                        </button>
+                    </div>
+                    
+                    <div id="recent-applications-content">
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            <p>Carregando aplicações...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- APPLICATIONS SECTION -->
+            <div id="applications-section" class="content-view" style="display: none;">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            Todas as Aplicações
+                        </h2>
+                        <button class="btn-primary" onclick="createTestApplication()">
+                            <i class="fas fa-plus"></i> Criar Teste
+                        </button>
+                    </div>
+                    
+                    <div id="all-applications-content">
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            <p>Carregando todas as aplicações...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- OTHER SECTIONS (placeholder) -->
+            <div id="users-section" class="content-view" style="display: none;">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-users"></i>
+                            Gestão de Clientes
+                        </h2>
+                    </div>
+                    <div style="padding: 30px; text-align: center; color: var(--cinza-medio);">
+                        <i class="fas fa-users" style="font-size: 48px; margin-bottom: 20px;"></i>
+                        <h3>Gestão de Clientes</h3>
+                        <p>Funcionalidade em desenvolvimento</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="documents-section" class="content-view" style="display: none;">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-folder-open"></i>
+                            Gestão de Documentos
+                        </h2>
+                    </div>
+                    <div style="padding: 30px; text-align: center; color: var(--cinza-medio);">
+                        <i class="fas fa-folder-open" style="font-size: 48px; margin-bottom: 20px;"></i>
+                        <h3>Gestão de Documentos</h3>
+                        <p>Funcionalidade em desenvolvimento</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="reports-section" class="content-view" style="display: none;">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-chart-bar"></i>
+                            Relatórios e Analytics
+                        </h2>
+                    </div>
+                    <div style="padding: 30px; text-align: center; color: var(--cinza-medio);">
+                        <i class="fas fa-chart-bar" style="font-size: 48px; margin-bottom: 20px;"></i>
+                        <h3>Relatórios</h3>
+                        <p>Funcionalidade em desenvolvimento</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="settings-section" class="content-view" style="display: none;">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-cogs"></i>
+                            Configurações do Sistema
+                        </h2>
+                    </div>
+                    <div style="padding: 30px; text-align: center; color: var(--cinza-medio);">
+                        <i class="fas fa-cogs" style="font-size: 48px; margin-bottom: 20px;"></i>
+                        <h3>Configurações</h3>
+                        <p>Funcionalidade em desenvolvimento</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // CONFIGURAÇÃO DA API
+        const API_BASE = window.location.origin.replace(/:\d+/, ':3001');
+        
+        // NAVEGAÇÃO
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = e.target.closest('a').dataset.section;
+                showSection(section);
+                
+                // Update active state
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                e.target.closest('a').classList.add('active');
+            });
+        });
+        
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.content-view').forEach(view => {
+                view.style.display = 'none';
+            });
+            
+            // Show selected section
+            document.getElementById(section + '-section').style.display = 'block';
+            
+            // Load data for specific sections
+            if (section === 'dashboard') {
+                loadDashboardData();
+            } else if (section === 'applications') {
+                loadAllApplications();
+            }
+        }
+        
+        // DASHBOARD DATA
+        async function loadDashboardData() {
+            try {
+                // Load stats
+                const statsResponse = await fetch(`${API_BASE}/api/dashboard`);
+                const statsData = await statsResponse.json();
+                
+                if (statsData.success) {
+                    document.getElementById('total-applications').textContent = statsData.stats.totalApplications;
+                    document.getElementById('pending-applications').textContent = statsData.stats.pendingApplications;
+                    document.getElementById('total-users').textContent = statsData.stats.totalUsers;
+                    document.getElementById('approved-count').textContent = '0'; // Will implement later
+                }
+                
+                // Load recent applications
+                const appsResponse = await fetch(`${API_BASE}/api/applications`);
+                const appsData = await appsResponse.json();
+                
+                if (appsData.success) {
+                    displayRecentApplications(appsData.data.slice(0, 5)); // Only first 5
+                }
+                
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                showError('Erro ao carregar dados do dashboard');
+            }
+        }
+        
+        // APPLICATIONS DATA
+        async function loadAllApplications() {
+            try {
+                const response = await fetch(`${API_BASE}/api/applications`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayAllApplications(data.data);
+                }
+                
+            } catch (error) {
+                console.error('Error loading applications:', error);
+                showError('Erro ao carregar aplicações');
+            }
+        }
+        
+        function displayRecentApplications(applications) {
+            const container = document.getElementById('recent-applications-content');
+            
+            if (applications.length === 0) {
+                container.innerHTML = `
+                    <div style="padding: 40px; text-align: center; color: var(--cinza-medio);">
+                        <i class="fas fa-inbox" style="font-size: 48px; margin-bottom: 15px;"></i>
+                        <h3>Nenhuma aplicação encontrada</h3>
+                        <p>As aplicações aparecerão aqui conforme forem criadas.</p>
+                        <button class="btn-primary" onclick="createTestApplication()" style="margin-top: 20px;">
+                            <i class="fas fa-plus"></i> Criar Aplicação Teste
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            const tableHTML = `
+                <table class="applications-table">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Valor Solicitado</th>
+                            <th>Finalidade</th>
+                            <th>Status</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${applications.map(app => `
+                            <tr>
+                                <td>
+                                    <div style="font-weight: 600;">${app.user.name}</div>
+                                    <div style="font-size: 12px; color: var(--cinza-medio);">${app.user.email}</div>
+                                </td>
+                                <td>R$ ${app.desiredAmount.toLocaleString('pt-BR')}</td>
+                                <td>${app.purpose}</td>
+                                <td><span class="status-badge ${app.status}">${getStatusText(app.status)}</span></td>
+                                <td>${new Date(app.createdAt).toLocaleDateString('pt-BR')}</td>
+                                <td>
+                                    <div class="actions-buttons">
+                                        <button class="btn-small btn-view">Ver</button>
+                                        ${app.status === 'pending' ? `
+                                            <button class="btn-small btn-approve" onclick="approveApplication('${app.id}')">Aprovar</button>
+                                            <button class="btn-small btn-deny" onclick="denyApplication('${app.id}')">Negar</button>
+                                        ` : ''}
+                                    </div>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = tableHTML;
+        }
+        
+        function displayAllApplications(applications) {
+            const container = document.getElementById('all-applications-content');
+            displayRecentApplications(applications); // Same display logic
+        }
+        
+        function getStatusText(status) {
+            const statusMap = {
+                pending: 'Pendente',
+                approved: 'Aprovado',
+                denied: 'Negado',
+                processing: 'Processando'
+            };
+            return statusMap[status] || status;
+        }
+        
+        // CREATE TEST APPLICATION
+        async function createTestApplication() {
+            try {
+                const testData = {
+                    userName: 'João Silva',
+                    userEmail: `teste${Date.now()}@exemplo.com`,
+                    desiredAmount: Math.floor(Math.random() * 50000) + 5000,
+                    purpose: 'Equipamentos para empresa'
+                };
+                
+                const response = await fetch(`${API_BASE}/api/applications`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showSuccess('Aplicação teste criada com sucesso!');
+                    loadDashboardData(); // Refresh data
+                    loadAllApplications();
+                } else {
+                    showError('Erro ao criar aplicação teste');
+                }
+                
+            } catch (error) {
+                console.error('Error creating test application:', error);
+                showError('Erro ao criar aplicação teste');
+            }
+        }
+        
+        function showAllApplications() {
+            showSection('applications');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.querySelector('[data-section="applications"]').classList.add('active');
+        }
+        
+        // UTILITY FUNCTIONS
+        function showError(message) {
+            alert('ERRO: ' + message); // Will implement proper notifications later
+        }
+        
+        function showSuccess(message) {
+            alert('SUCESSO: ' + message); // Will implement proper notifications later
+        }
+        
+        async function approveApplication(id) {
+            // Will implement later
+            alert('Funcionalidade de aprovação em desenvolvimento');
+        }
+        
+        async function denyApplication(id) {
+            // Will implement later  
+            alert('Funcionalidade de negação em desenvolvimento');
+        }
+        
+        // INITIALIZE
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDashboardData();
+        });
+    </script>
+</body>
+</html>

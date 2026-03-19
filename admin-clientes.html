@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FLEXCREDI - Gestão de Clientes.">
+    <title>Clientes - Admin Dashboard - FLEXCREDI</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/flexcredi-logo-official.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout-adjustments.css">
+    <link rel="stylesheet" href="css/perfect-alignment.css">
+    <link rel="stylesheet" href="css/client-functions.css">
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body class="admin-page">
+    
+    <!-- Header Dashboard -->
+    <header class="dashboard-header" role="banner">
+        <nav class="navbar container" role="navigation">
+            <a href="index.html" class="navbar-brand">
+                <img src="images/flexcredi-logo-official.png" alt="FLEXCREDI" class="logo-img">
+            </a>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="user-menu">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=2ECC71&color=fff" 
+                         alt="Avatar" class="user-avatar">
+                    <span class="user-name">Admin</span>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" id="userDropdown">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#profile" class="dropdown-item"><i class="fas fa-user"></i> Meu Perfil</a>
+                        <a href="#settings" class="dropdown-item"><i class="fas fa-cog"></i> Configurações</a>
+                        <a href="#help" class="dropdown-item"><i class="fas fa-question-circle"></i> Ajuda</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="login.html" class="dropdown-item logout-btn"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <nav class="sidebar-nav">
+            <a href="admin-dashboard-v2.html" class="nav-item">
+                <i class="fas fa-chart-line"></i><span>Dashboard</span>
+            </a>
+            <a href="admin-aplicacoes.html" class="nav-item">
+                <i class="fas fa-file-invoice"></i><span>Aplicações</span>
+            </a>
+            <a href="admin-clientes.html" class="nav-item active">
+                <i class="fas fa-users"></i><span>Clientes</span>
+            </a>
+            <a href="admin-parceiros.html" class="nav-item">
+                <i class="fas fa-handshake"></i><span>Parceiros</span>
+            </a>
+            <a href="admin-documentos.html" class="nav-item">
+                <i class="fas fa-folder"></i><span>Documentos</span>
+            </a>
+            <a href="admin-contratos.html" class="nav-item">
+                <i class="fas fa-file-contract"></i><span>Contratos</span>
+            </a>
+            <a href="admin-pagamentos.html" class="nav-item">
+                <i class="fas fa-credit-card"></i><span>Pagamentos ACH</span>
+            </a>
+            <a href="admin-recebiveis.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i><span>Recebíveis</span>
+            </a>
+            <a href="admin-agentes.html" class="nav-item">
+                <i class="fas fa-robot"></i><span>Agentes</span>
+            </a>
+            <a href="admin-configuracoes.html" class="nav-item">
+                <i class="fas fa-cog"></i><span>Configurações</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+        <div class="container-fluid">
+            
+            <!-- Page Header -->
+            <div class="status-header">
+                <div class="status-card">
+                    <div class="status-info">
+                        <div class="user-header">
+                            <h1 class="user-greeting">Gestão de Clientes</h1>
+                            <div class="financing-details">
+                                <div class="financing-item">
+                                    <span class="financing-label">TOTAL:</span>
+                                    <span class="financing-value" id="totalClients">0</span>
+                                </div>
+                                <div class="financing-item">
+                                    <span class="financing-label">ATIVOS:</span>
+                                    <span class="financing-value" id="activeClients">0</span>
+                                </div>
+                                <div class="financing-item">
+                                    <span class="financing-label">NOVOS (MÊS):</span>
+                                    <span class="financing-value" id="newClients">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtros e Busca -->
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-filter"></i> Filtros e Busca</h2>
+                </div>
+                <div class="filters-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                    <div class="form-group">
+                        <label for="searchInput" style="display: block; font-size: 12px; font-weight: 500; color: #6c757d; margin-bottom: 4px;">Buscar Cliente</label>
+                        <input type="text" 
+                               id="searchInput" 
+                               placeholder="Nome, email ou CPF..." 
+                               style="width: 100%; padding: 10px 12px; border: 1px solid #e9ecef; border-radius: 6px; font-size: 14px; font-family: Poppins;">
+                    </div>
+                    <div class="form-group">
+                        <label for="statusFilter" style="display: block; font-size: 12px; font-weight: 500; color: #6c757d; margin-bottom: 4px;">Status</label>
+                        <select id="statusFilter" 
+                                style="width: 100%; padding: 10px 12px; border: 1px solid #e9ecef; border-radius: 6px; font-size: 14px; font-family: Poppins;">
+                            <option value="">Todos</option>
+                            <option value="active">Ativo</option>
+                            <option value="inactive">Inativo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sortBy" style="display: block; font-size: 12px; font-weight: 500; color: #6c757d; margin-bottom: 4px;">Ordenar por</label>
+                        <select id="sortBy" 
+                                style="width: 100%; padding: 10px 12px; border: 1px solid #e9ecef; border-radius: 6px; font-size: 14px; font-family: Poppins;">
+                            <option value="recent">Mais Recentes</option>
+                            <option value="name">Nome A-Z</option>
+                            <option value="applications">Mais Aplicações</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="display: flex; align-items: flex-end;">
+                        <button class="btn-add" onclick="applyFilters()" style="width: 100%;">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lista de Clientes -->
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Lista de Clientes</h2>
+                    <button class="btn-add" onclick="addNewClient()">
+                        <i class="fas fa-plus"></i> Novo Cliente
+                    </button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>CPF</th>
+                                <th>Telefone</th>
+                                <th>Aplicações</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                                <th>Cadastro</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientsTableBody">
+                            <!-- Exemplo de linha -->
+                            <tr>
+                                <td>
+                                    <div class="table-user">
+                                        <img src="https://ui-avatars.com/api/?name=João+Silva&background=2ECC71&color=fff" 
+                                             alt="Avatar" class="table-avatar">
+                                        <div class="table-user-info">
+                                            <span class="table-user-name">João Silva</span>
+                                            <span class="table-user-email">joao.silva@email.com</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="table-date">123.456.789-00</span></td>
+                                <td><span class="table-date">(11) 98765-4321</span></td>
+                                <td><span class="table-score">3</span></td>
+                                <td><span class="table-score">720</span></td>
+                                <td><span class="status-badge status-approved">Ativo</span></td>
+                                <td><span class="table-date">15/01/2026</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-icon" title="Ver perfil" onclick="viewClient('1')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon" title="Editar" onclick="editClient('1')">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon btn-icon-danger" title="Desativar" onclick="deleteClient('1')">
+                                            <i class="fas fa-ban"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Mais linhas serão carregadas via JS -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Loading State -->
+                <div id="loadingState" class="loading" style="display: none;">
+                    Carregando clientes...
+                </div>
+                
+                <!-- Empty State -->
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <i class="fas fa-users"></i>
+                    <p>Nenhum cliente encontrado</p>
+                    <small>Tente ajustar os filtros ou adicionar um novo cliente</small>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-simple">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 FLEXCREDI. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/admin-dashboard.js"></script>
+    <script src="js/admin-clientes.js"></script>
+</body>
+</html>

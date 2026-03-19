@@ -1,0 +1,969 @@
+/* ============ LAYOUT COMPACTO E ALINHADO ============ */
+
+/* ========== NOTIFICATION STYLES ========== */
+.approval-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    background: var(--branco);
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid var(--verde-vibrante);
+    min-width: 400px;
+    animation: slideInRight 0.3s ease-out;
+}
+
+.notification-content {
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.notification-content i {
+    color: var(--verde-vibrante);
+    font-size: 24px;
+    margin-top: 2px;
+}
+
+.notification-content div {
+    flex: 1;
+}
+
+.notification-content h4 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cinza-escuro);
+}
+
+.notification-content p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--cinza-medio);
+    line-height: 1.4;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: var(--cinza-medio);
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+}
+
+.notification-close:hover {
+    color: var(--cinza-escuro);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .application-status {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .status-description {
+        min-width: auto;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .approval-notification {
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+    }
+    
+    .status-badge {
+        font-size: 10px;
+        padding: 5px 12px;
+    }
+}
+
+/* ========== STATUS SECTION ========== */
+.application-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.status-badge.status-pre-approved {
+    background: rgba(46, 204, 113, 0.25);
+    color: #fff;
+    border: 1px solid rgba(46, 204, 113, 0.4);
+    box-shadow: 0 2px 8px rgba(46, 204, 113, 0.15);
+}
+
+.status-badge.status-approved {
+    background: rgba(40, 167, 69, 0.3);
+    color: #fff;
+    border: 1px solid rgba(40, 167, 69, 0.5);
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.15);
+}
+
+.status-badge.status-denied {
+    background: rgba(220, 53, 69, 0.25);
+    color: #fff;
+    border: 1px solid rgba(220, 53, 69, 0.4);
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.15);
+}
+
+.status-badge.status-adjusted {
+    background: rgba(255, 193, 7, 0.25);
+    color: #fff;
+    border: 1px solid rgba(255, 193, 7, 0.4);
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.15);
+}
+
+.status-badge.status-pending {
+    background: rgba(108, 117, 125, 0.25);
+    color: #fff;
+    border: 1px solid rgba(108, 117, 125, 0.4);
+    box-shadow: 0 2px 8px rgba(108, 117, 125, 0.15);
+}
+
+.status-description {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+    line-height: 1.4;
+    flex: 1;
+    min-width: 300px;
+}
+
+/* ========== ULTRA CLEAN & SLIM STATUS HEADER ========== */
+
+/* Caixa principal ultra-estreita e slim */
+.status-card {
+    background: linear-gradient(135deg, var(--verde-vibrante) 0%, var(--verde-escuro) 100%);
+    padding: 10px 14px;
+    border-radius: 6px;
+    box-shadow: 0 2px 12px rgba(46, 204, 113, 0.2);
+    color: var(--branco);
+    margin-bottom: 18px;
+    max-width: 100%;
+}
+
+/* Área de informações principais */
+.status-info {
+    margin-bottom: 0;
+}
+
+/* Header com nome, valores e score - tudo na mesma linha */
+.user-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 4px;
+}
+
+.user-greeting {
+    font-size: 17px;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    min-width: fit-content;
+}
+
+/* Score ultra-compacto inline */
+.user-score {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.user-score .score-value {
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1;
+}
+
+.user-score .score-label {
+    font-size: 9px;
+    font-weight: 200;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* Detalhes financeiros inline na mesma linha */
+.financing-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    flex: 1;
+}
+
+.financing-item {
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.financing-label {
+    display: block;
+    font-size: 7px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 1px;
+}
+
+.financing-value {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--branco);
+    line-height: 1;
+}
+
+/* Status ultra-slim */
+.application-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 8px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.status-description {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    line-height: 1.1;
+    font-weight: 200;
+}
+
+
+
+/* Responsividade Ultra-Clean */
+
+@media (max-width: 1024px) {
+    .financing-inline {
+        gap: 8px;
+        margin-left: 16px;
+    }
+    
+    .financing-item-inline .financing-value {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 768px) {
+    .status-card {
+        padding: 10px 14px;
+    }
+    
+    .user-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .user-greeting {
+        font-size: 16px;
+    }
+    
+    .financing-details {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .user-score {
+        align-self: flex-end;
+    }
+    
+    .user-score .score-value {
+        font-size: 14px;
+    }
+    
+    .user-score .score-label {
+        font-size: 9px;
+    }
+    
+    .application-status {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .status-card {
+        padding: 8px 12px;
+        margin-bottom: 16px;
+    }
+    
+    .user-header {
+        gap: 6px;
+    }
+    
+    .financing-details {
+        gap: 8px;
+        padding: 3px 6px;
+    }
+    
+    .financing-item {
+        min-width: 50px;
+    }
+    
+    .financing-label {
+        font-size: 6px !important;
+    }
+    
+    .financing-value {
+        font-size: 9px !important;
+    }
+    
+    .user-greeting {
+        font-size: 14px;
+    }
+    
+    .user-score .score-value {
+        font-size: 12px;
+    }
+    
+    .status-badge {
+        font-size: 8px;
+        padding: 2px 6px;
+    }
+    
+    .status-description {
+        font-size: 10px;
+    }
+}
+
+/* ========== CONTRACT MODAL STYLES ========== */
+.contract-modal {
+    max-width: 900px;
+    max-height: 90vh;
+}
+
+.contract-viewer {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 0 20px;
+}
+
+.contract-language-notice {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 24px;
+    color: #856404;
+}
+
+.contract-language-notice strong {
+    color: #533f03;
+}
+
+.contract-content {
+    background: var(--branco);
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 24px;
+    font-family: 'Times New Roman', serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.contract-content h1 {
+    color: var(--verde-escuro);
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 24px;
+}
+
+.contract-content h2 {
+    color: var(--verde-escuro);
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.contract-content h3 {
+    color: var(--cinza-escuro);
+    margin: 24px 0 12px 0;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contract-content h4 {
+    color: var(--cinza-escuro);
+    margin: 16px 0 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.contract-content p {
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.contract-content strong {
+    color: var(--cinza-escuro);
+}
+
+.contract-content ul, .contract-content li {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+
+.contract-content hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, var(--verde-vibrante), var(--verde-escuro));
+    margin: 24px 0;
+    border-radius: 1px;
+}
+
+.contract-footer {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 24px;
+    font-style: italic;
+    color: var(--cinza-medio);
+    text-align: center;
+}
+
+/* Scrollbar personalizada para o contrato */
+.contract-viewer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.contract-viewer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.contract-viewer::-webkit-scrollbar-thumb {
+    background: var(--verde-vibrante);
+    border-radius: 4px;
+}
+
+.contract-viewer::-webkit-scrollbar-thumb:hover {
+    background: var(--verde-escuro);
+}
+
+/* ========== LAYOUT COMPACTO ========== */
+
+/* Reduzir padding geral do card */
+.main-signer-card.cobuyer-card {
+    padding: 16px !important;
+    margin-bottom: 12px !important;
+}
+
+/* Header mais compacto */
+.main-signer-card .cobuyer-header {
+    margin-bottom: 12px !important;
+    padding-bottom: 8px !important;
+}
+
+/* Conteúdo com gap reduzido */
+.main-signer-card .cobuyer-content {
+    gap: 16px !important;
+}
+
+/* Seções de informação mais compactas */
+.main-signer-card .cobuyer-info-section {
+    gap: 12px !important;
+}
+
+/* Títulos das seções menores */
+.main-signer-card .cobuyer-section-title {
+    font-size: 11px !important;
+    margin-bottom: 6px !important;
+}
+
+/* Grid de perfil mais compacto */
+.main-signer-card .cobuyer-profile-grid {
+    gap: 6px 10px !important;
+}
+
+/* Items do perfil mais compactos */
+.main-signer-card .profile-item {
+    gap: 2px !important;
+}
+
+.main-signer-card .profile-label {
+    font-size: 10px !important;
+    margin-bottom: 2px !important;
+}
+
+.main-signer-card .profile-value {
+    font-size: 12px !important;
+    padding: 4px 6px !important;
+    line-height: 1.3 !important;
+}
+
+/* Grid de documentos mais compacto */
+.main-signer-card .cobuyer-documents-grid {
+    gap: 10px !important;
+}
+
+/* Cards de documento com altura reduzida */
+.main-signer-card .cobuyer-document-card {
+    height: 200px !important;
+}
+
+/* Header do documento mais compacto */
+.main-signer-card .cobuyer-document-card .doc-header {
+    padding: 8px !important;
+    margin-bottom: 6px !important;
+}
+
+.main-signer-card .cobuyer-document-card .doc-info h4 {
+    font-size: 11px !important;
+    margin-bottom: 2px !important;
+    line-height: 1.2 !important;
+}
+
+.main-signer-card .cobuyer-document-card .doc-info p {
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+}
+
+/* Preview box mais compacto */
+.main-signer-card .doc-preview-box {
+    height: 100px !important;
+    margin: 6px 0 !important;
+}
+
+/* Ações do documento mais compactas */
+.main-signer-card .doc-actions {
+    padding: 6px 8px !important;
+}
+
+.main-signer-card .doc-actions button {
+    font-size: 9px !important;
+    padding: 3px 6px !important;
+}
+
+/* Seção de contrato mais compacta - LAYOUT INLINE */
+.signer-contract-section {
+    margin-top: 16px !important;
+    padding-top: 12px !important;
+}
+
+.contract-title {
+    margin-bottom: 10px !important;
+    font-size: 11px !important;
+}
+
+.contract-content-inline {
+    padding: 12px !important;
+}
+
+.contract-header-inline h4 {
+    font-size: 13px !important;
+    margin: 0 0 8px 0 !important;
+}
+
+/* Layout inline compacto */
+.contract-inline-layout {
+    gap: 16px !important;
+}
+
+.contract-values-inline {
+    gap: 16px !important;
+}
+
+.value-item {
+    min-width: 70px !important;
+}
+
+.value-item .label {
+    font-size: 9px !important;
+}
+
+.value-item .value {
+    font-size: 12px !important;
+}
+
+/* Botões do contrato inline mais compactos */
+.contract-buttons-inline {
+    gap: 8px !important;
+}
+
+.contract-btn-review-inline,
+.contract-btn-sign-inline {
+    padding: 6px 10px !important;
+    font-size: 10px !important;
+}
+
+/* ============ FUNCTIONS HORIZONTAL LAYOUT ============ */
+
+.client-functions-horizontal {
+    margin-top: 24px !important;
+    padding-top: 16px !important;
+}
+
+.functions-horizontal-grid {
+    gap: 8px !important;
+}
+
+.function-card-horizontal {
+    padding: 12px 8px !important;
+    min-height: 100px !important;
+}
+
+.function-icon-horizontal {
+    width: 32px !important;
+    height: 32px !important;
+}
+
+.function-content-horizontal h4 {
+    font-size: 11px !important;
+}
+
+.function-content-horizontal small {
+    font-size: 9px !important;
+}
+
+/* ============ RESPONSIVIDADE COMPACTA ============ */
+
+@media (max-width: 1200px) {
+    .main-signer-card .cobuyer-content {
+        gap: 12px !important;
+    }
+    
+    .main-signer-card .cobuyer-documents-grid {
+        gap: 8px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-signer-card.cobuyer-card {
+        padding: 12px !important;
+    }
+    
+    .main-signer-card .cobuyer-content {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    
+    .main-signer-card .cobuyer-documents-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px !important;
+    }
+    
+    .main-signer-card .cobuyer-document-card {
+        height: 180px !important;
+    }
+    
+    .main-signer-card .doc-preview-box {
+        height: 80px !important;
+    }
+    
+    .contract-summary-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px !important;
+    }
+    
+    .contract-actions-integrated {
+        flex-direction: column !important;
+        gap: 6px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-signer-card .cobuyer-profile-grid {
+        grid-template-columns: 1fr !important;
+        gap: 4px !important;
+    }
+    
+    .main-signer-card .cobuyer-documents-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .main-signer-card .cobuyer-document-card {
+        height: 160px !important;
+    }
+    
+    .main-signer-card .doc-preview-box {
+        height: 70px !important;
+    }
+    
+    .contract-summary-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ============ MELHORIAS DE ALINHAMENTO ============ */
+
+/* Centralização perfeita de ícones e textos */
+.main-signer-card .doc-icon {
+    width: 24px !important;
+    height: 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 6px !important;
+}
+
+.main-signer-card .doc-icon i {
+    font-size: 12px !important;
+}
+
+/* Alinhamento do preview */
+.main-signer-card .doc-preview-box {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+}
+
+.main-signer-card .preview-icon i {
+    font-size: 24px !important;
+    color: #9ca3af !important;
+    margin-bottom: 4px !important;
+}
+
+.main-signer-card .preview-text {
+    font-size: 10px !important;
+    color: #6b7280 !important;
+    text-align: center !important;
+}
+
+/* Botões de status alinhados */
+.main-signer-card .btn-status {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+}
+
+/* Header do card mais equilibrado */
+.main-signer-card .cobuyer-title i {
+    color: var(--verde-vibrante) !important;
+}
+
+.main-signer-card .cobuyer-status i {
+    font-size: 10px !important;
+}
+
+/* Espaçamento uniforme entre elementos */
+.main-signer-card * + * {
+    margin-top: 0 !important;
+}
+
+/* Garantir que não haja overflow */
+.main-signer-card {
+    overflow: hidden !important;
+}
+
+.main-signer-card .cobuyer-content {
+    width: 100% !important;
+}
+
+/* Melhorar legibilidade em espaço reduzido */
+.main-signer-card .profile-value:not(.editing) {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.main-signer-card .doc-info h4,
+.main-signer-card .doc-info p {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* ============ STATUS HEADER COMPACTO ============ */
+
+.status-header {
+    margin-bottom: 16px !important;
+}
+
+.status-card {
+    padding: 16px 20px !important;
+    border-radius: 8px !important;
+}
+
+.status-info h1 {
+    font-size: 20px !important;
+    margin-bottom: 8px !important;
+}
+
+.application-status {
+    gap: 8px !important;
+}
+
+.status-badge {
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+}
+
+.status-description {
+    font-size: 12px !important;
+}
+
+.credit-summary {
+    gap: 20px !important;
+}
+
+.credit-amount,
+.credit-score {
+    text-align: center !important;
+    min-width: 80px !important;
+}
+
+.amount-value,
+.score-value {
+    font-size: 18px !important;
+    display: block !important;
+}
+
+.amount-label,
+.score-label {
+    font-size: 10px !important;
+    margin-top: 2px !important;
+}
+
+/* ============ SEÇÃO DASHBOARD MAIS COMPACTA ============ */
+
+.dashboard-sections {
+    gap: 12px !important;
+}
+
+.dashboard-section {
+    margin-bottom: 12px !important;
+}
+
+.section-header {
+    margin-bottom: 12px !important;
+    padding: 12px 16px !important;
+}
+
+.section-header h2 {
+    font-size: 16px !important;
+}
+
+/* ============ CO-SIGNATÁRIOS MAIS COMPACTOS ============ */
+
+.cobuyers-list .cobuyer-card {
+    margin-bottom: 12px !important;
+    padding: 16px !important;
+}
+
+.cobuyer-header {
+    margin-bottom: 12px !important;
+    padding-bottom: 8px !important;
+}
+
+.cobuyer-content {
+    gap: 16px !important;
+}
+
+.cobuyer-info-section {
+    gap: 12px !important;
+}
+
+.cobuyer-section-title {
+    font-size: 11px !important;
+    margin-bottom: 6px !important;
+}
+
+.cobuyer-profile-grid {
+    gap: 6px 10px !important;
+}
+
+.cobuyer-documents-grid {
+    gap: 10px !important;
+}
+
+.cobuyer-document-card {
+    height: 200px !important;
+}
+
+.empty-state {
+    padding: 20px !important;
+}
+
+.empty-state i {
+    font-size: 32px !important;
+    margin-bottom: 8px !important;
+}
+
+.empty-state p {
+    font-size: 14px !important;
+    margin-bottom: 4px !important;
+}
+
+.empty-state small {
+    font-size: 11px !important;
+}
+
+/* ============ BOTÃO ADICIONAR CO-SIGNATÁRIO ============ */
+
+.btn-add {
+    padding: 6px 12px !important;
+    font-size: 11px !important;
+}
+
+.completion-indicator {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+}
