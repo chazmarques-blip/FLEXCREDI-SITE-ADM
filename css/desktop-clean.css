@@ -957,72 +957,112 @@ body {
     }
     
     /* =====================================================
-       6. WHY CHOOSE SECTION - CLEAN E COMPACTO
+       6. WHY CHOOSE SECTION - COMPACTO COM ÍCONES
        ===================================================== */
     
     section:has(h2[data-translate*="Why Choose"]),
     .why-choose-section {
-        padding: 64px 0;
-        background: white;
+        padding: 32px 0;
+        background: #f8fafc;
     }
     
     .section-title h2,
     h2[data-translate*="Why Choose"] {
-        font-size: 28px;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 20px;
         font-weight: 700;
         color: #1f2937;
-        margin-bottom: 8px;
+        margin-bottom: 4px;
         letter-spacing: -0.02em;
     }
     
     .section-subtitle {
-        font-size: 15px;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 12px;
         font-weight: 400;
         color: #6b7280;
-        margin-bottom: 40px;
+        margin-bottom: 24px;
     }
     
     /* Benefit Cards Grid - COMPACTO */
+    .row.g-4 {
+        gap: 12px !important;
+        margin: 0 !important;
+    }
+    
+    .row.g-4 > [class*="col"] {
+        padding: 6px !important;
+    }
+    
     .benefit-card,
     .feature-card {
-        background: #fafafa;
-        border: 1px solid #f3f4f6;
-        border-radius: 16px;
-        padding: 28px 24px;
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 16px 14px;
         text-align: center;
         transition: all 0.3s ease;
         height: 100%;
     }
     
     .benefit-card:hover {
-        background: white;
-        border-color: #e5e7eb;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-        transform: translateY(-4px);
+        border-color: #d1fae5;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        transform: translateY(-2px);
     }
     
+    /* Ícones nos cards - ESTILO CONSISTENTE */
     .benefit-card i,
-    .feature-card i {
-        font-size: 28px;
-        color: #16a34a;
-        margin-bottom: 16px;
-        display: block;
+    .feature-card i,
+    .benefit-card i.fas,
+    .benefit-card i.far,
+    .benefit-card i.fab {
+        width: 36px !important;
+        height: 36px !important;
+        background: #f0fdf4 !important;
+        border: 1px solid #d1fae5 !important;
+        border-radius: 8px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 16px !important;
+        color: #16a34a !important;
+        margin: 0 auto 10px auto !important;
+        font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome !important;
+        font-weight: 900 !important;
+        font-style: normal !important;
     }
+    
+    .benefit-card i::before,
+    .feature-card i::before {
+        font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome !important;
+        font-weight: 900 !important;
+    }
+    
+    /* Forçar ícones específicos */
+    .benefit-card i.fa-rocket::before { content: "\f135" !important; }
+    .benefit-card i.fa-clock::before { content: "\f017" !important; }
+    .benefit-card i.fa-hand-holding-dollar::before { content: "\f4c0" !important; }
+    .benefit-card i.fa-lock::before { content: "\f023" !important; }
+    .benefit-card i.fa-users::before { content: "\f0c0" !important; }
+    .benefit-card i.fa-coins::before { content: "\f51e" !important; }
     
     .benefit-card h5,
     .feature-card h5 {
-        font-size: 15px;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 13px;
         font-weight: 600;
         color: #1f2937;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
     
     .benefit-card p,
     .feature-card p {
-        font-size: 13px;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 11px;
         font-weight: 400;
         color: #6b7280;
-        line-height: 1.6;
+        line-height: 1.5;
         margin: 0;
     }
     
