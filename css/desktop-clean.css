@@ -705,43 +705,151 @@ body {
         margin: 0;
     }
     
-    /* Loan Calculator - ULTRA COMPACTO */
+    /* Loan Calculator - MESMO PADRÃO DO SLIDER */
     .loan-calculator {
         background: white;
         border: 1px solid #e5e7eb;
-        border-radius: 10px;
-        padding: 14px;
-        margin-top: 12px;
+        border-radius: 8px;
+        padding: 12px;
+        margin-top: 10px;
     }
     
     .calculator-title,
     .loan-calculator h4 {
-        font-size: 12px;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 11px;
         font-weight: 600;
         color: #16a34a;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
     
-    .calculator-label {
+    .calculator-label,
+    .loan-calculator label {
+        font-family: 'Inter', sans-serif !important;
         font-size: 10px;
-        font-weight: 500;
-        color: #4b5563;
+        font-weight: 600;
+        color: #374151;
         margin-bottom: 4px;
+        display: block;
     }
     
+    /* Slider rows no calculator - MESMO PADRÃO */
+    .loan-calculator .slider-row,
+    .calculator-slider-row {
+        background: #f0fdf4;
+        border: 1px solid #d1fae5;
+        border-radius: 6px;
+        padding: 8px 10px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .loan-calculator .slider-min,
+    .loan-calculator .min-label {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 10px;
+        font-weight: 600;
+        color: #6b7280;
+        min-width: 28px;
+    }
+    
+    .loan-calculator .slider-max,
+    .loan-calculator .max-label {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 10px;
+        font-weight: 600;
+        color: #6b7280;
+        min-width: 28px;
+        text-align: right;
+    }
+    
+    .loan-calculator .custom-slider,
+    .loan-calculator input[type="range"] {
+        flex: 1;
+        height: 16px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: transparent;
+    }
+    
+    .loan-calculator input[type="range"]::-webkit-slider-track {
+        height: 4px;
+        border-radius: 2px;
+        background: #d1d5db;
+    }
+    
+    .loan-calculator input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #16a34a;
+        border: 2px solid white;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        margin-top: -5px;
+        cursor: pointer;
+    }
+    
+    .loan-calculator .slider-track {
+        height: 4px !important;
+        border-radius: 2px;
+        background: #d1d5db;
+    }
+    
+    .loan-calculator .slider-fill {
+        height: 100% !important;
+        background: #16a34a;
+        border-radius: 2px;
+    }
+    
+    .loan-calculator .slider-thumb {
+        width: 14px !important;
+        height: 14px !important;
+        border: 2px solid white;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        background: #16a34a;
+        border-radius: 50%;
+    }
+    
+    /* Value display boxes - MESMO PADRÃO */
+    .loan-calculator .value-display,
+    .loan-calculator .slider-value {
+        width: 50px !important;
+        height: 24px !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        color: #16a34a !important;
+        text-align: center;
+        border: 1.5px solid #16a34a;
+        border-radius: 4px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    /* Frequency selector - PADRONIZADO */
     .frequency-selector {
         display: flex;
         gap: 4px;
+        margin-bottom: 8px;
     }
     
     .frequency-btn {
         flex: 1;
-        padding: 6px 8px;
-        font-size: 10px;
-        font-weight: 500;
+        padding: 6px 6px;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 9px !important;
+        font-weight: 600;
         border: 1px solid #e5e7eb;
-        border-radius: 5px;
+        border-radius: 4px;
         background: white;
         color: #6b7280;
         cursor: pointer;
@@ -751,6 +859,7 @@ body {
     .frequency-btn:hover {
         border-color: #16a34a;
         color: #16a34a;
+        background: #f0fdf4;
     }
     
     .frequency-btn.active {
@@ -759,31 +868,51 @@ body {
         color: white;
     }
     
-    .result-box-compact {
+    /* Result box - PADRONIZADO */
+    .result-box-compact,
+    .loan-calculator .result-box {
         background: #16a34a;
-        border-radius: 8px;
-        padding: 10px 12px;
+        border-radius: 6px;
+        padding: 8px 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 12px;
+        margin-top: 8px;
     }
     
-    .result-installments-compact {
-        font-size: 10px;
+    .result-installments-compact,
+    .loan-calculator .result-label {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 9px;
         font-weight: 500;
         color: rgba(255,255,255,0.9);
     }
     
-    .result-value-compact {
+    .result-value-compact,
+    .loan-calculator .result-value {
+        font-family: 'Inter', sans-serif !important;
         font-size: 14px;
         font-weight: 700;
         color: white;
     }
     
-    .interest-rate-compact {
-        font-size: 9px;
+    .interest-rate-compact,
+    .loan-calculator .interest-rate {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 8px;
         color: rgba(255,255,255,0.8);
+    }
+    
+    /* Note text */
+    .loan-calculator .note,
+    .loan-calculator small {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 8px;
+        color: #9ca3af;
+        font-style: italic;
+        display: block;
+        margin-top: 2px;
+        margin-bottom: 6px;
     }
     
     /* =====================================================
