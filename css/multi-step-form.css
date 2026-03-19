@@ -817,11 +817,16 @@ select.form-control {
     position: relative;
     background: #f8f9fa;
     border: 2px dashed #dee2e6;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: 8px;
+    padding: 12px;
     text-align: center;
     transition: all 0.3s ease;
-    margin-bottom: 3px;
+    margin-bottom: 8px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .upload-area:hover {
@@ -847,15 +852,17 @@ select.form-control {
 }
 
 .upload-label {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     cursor: pointer;
-    padding: 8px;
+    padding: 4px;
 }
 
 .upload-label i {
-    font-size: 28px;
+    font-size: 24px;
     color: #6c757d;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 .upload-text {
@@ -863,7 +870,7 @@ select.form-control {
     font-size: 11px;
     font-weight: 600;
     color: #2c3e50;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
 }
 
 .upload-subtext {
@@ -899,16 +906,64 @@ select.form-control {
 
 /* Show camera button on mobile devices */
 @media (max-width: 768px) {
+    /* Hide the separate camera button - area will open camera directly */
     .btn-camera {
-        display: inline-block;
+        display: none !important;
+    }
+    
+    /* Make upload area look like a camera button on mobile */
+    .upload-area {
+        min-height: 70px;
+        padding: 10px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border: 2px solid #28a745;
+        border-style: solid;
+        cursor: pointer;
+    }
+    
+    .upload-area:active {
+        transform: scale(0.98);
+        background: #e8f5e9;
+    }
+    
+    .upload-label {
+        padding: 2px;
     }
     
     .upload-label i {
-        font-size: 22px;
+        font-size: 28px;
+        color: #28a745;
     }
     
     .upload-text {
-        font-size: 10px;
+        font-size: 12px;
+        color: #28a745;
+        font-weight: 700;
+    }
+    
+    .upload-subtext {
+        font-size: 9px;
+        color: #6c757d;
+    }
+    
+    /* Document upload groups more compact */
+    .document-upload-group {
+        margin-bottom: 12px;
+        padding: 10px;
+    }
+    
+    .document-label {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+    
+    .card-upload-section {
+        margin-bottom: 10px;
+    }
+    
+    .sub-label {
+        font-size: 11px;
+        margin-bottom: 4px;
     }
 }
 

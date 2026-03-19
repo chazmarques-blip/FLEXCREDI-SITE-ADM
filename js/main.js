@@ -2037,7 +2037,16 @@ const translations = {
         'Address *': 'Address *',
         'ZIP Code *': 'ZIP Code *',
         'City *': 'City *',
-        'State *': 'State *'
+        'State *': 'State *',
+        
+        // Document Upload
+        'Tap to take photo': 'Tap to take photo',
+        'or choose from gallery': 'or choose from gallery',
+        '1. ID Document': '1. ID Document',
+        '2. Proof of Residence': '2. Proof of Residence',
+        '3. Debit Card': '3. Debit Card',
+        'Card Front': 'Card Front',
+        'Card Back': 'Card Back'
     },
     es: {
         // Navigation
@@ -2465,7 +2474,16 @@ const translations = {
         'Address *': 'Dirección *',
         'ZIP Code *': 'Código Postal *',
         'City *': 'Ciudad *',
-        'State *': 'Estado *'
+        'State *': 'Estado *',
+        
+        // Document Upload
+        'Tap to take photo': 'Toque para tomar foto',
+        'or choose from gallery': 'o elegir de la galería',
+        '1. ID Document': '1. Documento de Identidad',
+        '2. Proof of Residence': '2. Comprobante de Domicilio',
+        '3. Debit Card': '3. Tarjeta de Débito',
+        'Card Front': 'Frente de la Tarjeta',
+        'Card Back': 'Reverso de la Tarjeta'
     },
     pt: {
         // Navigation
@@ -2895,7 +2913,16 @@ const translations = {
         'Address *': 'Endereço *',
         'ZIP Code *': 'CEP / Código Postal *',
         'City *': 'Cidade *',
-        'State *': 'Estado *'
+        'State *': 'Estado *',
+        
+        // Document Upload
+        'Tap to take photo': 'Toque para tirar foto',
+        'or choose from gallery': 'ou escolha da galeria',
+        '1. ID Document': '1. Documento de Identidade',
+        '2. Proof of Residence': '2. Comprovante de Residência',
+        '3. Debit Card': '3. Cartão de Débito',
+        'Card Front': 'Frente do Cartão',
+        'Card Back': 'Verso do Cartão'
     }
 };
 

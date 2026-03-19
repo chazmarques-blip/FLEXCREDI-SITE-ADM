@@ -11,6 +11,31 @@
 
 ## O que foi Implementado
 
+### 19/03/2026 - Áreas de Upload Compactas com Câmera Direta no Mobile
+
+**Contexto**: As áreas de upload de documentos (ID, Comprovante de Residência, Cartão de Débito) estavam muito grandes e no mobile não abriam a câmera diretamente.
+
+**Arquivos Modificados**:
+- `/app/index.html` - Atualizado inputs com `capture="environment"` e novos textos
+- `/app/css/multi-step-form.css` - CSS compacto para áreas de upload mobile
+- `/app/js/document-upload.js` - Detecção de mobile para configurar câmera automática
+- `/app/js/main.js` - Traduções adicionadas para novos textos
+
+**Solução Implementada**:
+1. Reduzi significativamente o tamanho das áreas de upload
+2. Adicionei `capture="environment"` nos inputs para abrir câmera traseira no mobile
+3. Substituí ícone de nuvem por ícone de câmera (mais intuitivo para mobile)
+4. Texto atualizado: "Tap to take photo" / "or choose from gallery"
+5. Borda verde sólida para indicar área clicável
+6. Traduções em EN/ES/PT
+
+**Verificação**:
+- ✅ Áreas de upload 50% menores
+- ✅ Ícone de câmera verde em todas as áreas
+- ✅ Atributo capture configurado para abrir câmera no mobile
+
+---
+
 ### 19/03/2026 - Correção Global de Ícones FontAwesome
 
 **Contexto**: Ícones FontAwesome estavam aparecendo como linhas horizontais (≡) ou quadrados em várias áreas do site (formulário multi-step, seções de benefícios, área de upload, botões).

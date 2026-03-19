@@ -54,6 +54,15 @@
             return;
         }
         
+        // Check if mobile device
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // On mobile, set capture attribute to open camera directly
+        if (isMobile) {
+            input.setAttribute('capture', 'environment');
+            input.setAttribute('accept', 'image/*');
+        }
+        
         input.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
