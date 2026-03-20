@@ -373,6 +373,101 @@
             color: var(--verde-principal);
         }
         
+        /* ========== Tab Navigation ========== */
+        .form-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid var(--cinza-claro);
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 14px 16px;
+            background: var(--branco);
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--cinza-medio);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .tab-btn:first-child {
+            border-right: 1px solid var(--cinza-claro);
+        }
+        
+        .tab-btn.active {
+            background: var(--verde-principal);
+            color: var(--branco);
+        }
+        
+        .tab-btn:hover:not(.active) {
+            background: var(--verde-claro);
+            color: var(--verde-principal);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* ========== Test Access Button ========== */
+        .test-access {
+            margin-top: 20px;
+        }
+        
+        .btn-test {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: var(--branco);
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-test:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #1a5276 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .test-note {
+            text-align: center;
+            font-size: 12px;
+            color: var(--cinza-medio);
+            margin-top: 10px;
+        }
+        
+        /* ========== Form Row ========== */
+        .form-row {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
         /* ========== Error/Success Messages ========== */
         .alert {
             padding: 14px 16px;
@@ -512,64 +607,151 @@
             </div>
         </div>
         
-        <!-- Right Panel - Login Form -->
+        <!-- Right Panel - Login/Register Forms -->
         <div class="login-panel">
-            <div class="login-header">
-                <h2>Sign In to Your Account</h2>
-                <p>Enter your credentials to access your dashboard</p>
-            </div>
-            
-            <div class="alert alert-error" id="error-message">
-                <i class="fas fa-exclamation-circle"></i>
-                <span>Invalid email or password. Please try again.</span>
-            </div>
-            
-            <div class="alert alert-success" id="success-message">
-                <i class="fas fa-check-circle"></i>
-                <span>Login successful! Redirecting...</span>
-            </div>
-            
-            <form id="login-form" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                    </div>
-                </div>
-                
-                <div class="form-options">
-                    <label class="remember-me">
-                        <input type="checkbox" name="remember">
-                        Remember me
-                    </label>
-                    <a href="recuperar-senha.html" class="forgot-password">Forgot Password?</a>
-                </div>
-                
-                <button type="submit" class="btn-login" id="btn-submit">
-                    <span>Sign In</span>
-                    <i class="fas fa-arrow-right"></i>
+            <!-- Tab Navigation -->
+            <div class="form-tabs">
+                <button class="tab-btn active" data-tab="login" onclick="switchTab('login')">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
                 </button>
-            </form>
-            
-            <div class="login-divider">
-                <span>New to FLEXCREDI?</span>
+                <button class="tab-btn" data-tab="register" onclick="switchTab('register')">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
             </div>
             
-            <div class="signup-section">
-                <p>Start your credit application today</p>
-                <a href="index.html#simulacao-rapida" class="btn-signup">
-                    <i class="fas fa-rocket"></i>
-                    Apply for Credit
-                </a>
+            <!-- Login Form -->
+            <div id="login-tab" class="tab-content active">
+                <div class="login-header">
+                    <h2>Sign In to Your Account</h2>
+                    <p>Enter your credentials to access your dashboard</p>
+                </div>
+                
+                <div class="alert alert-error" id="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>Invalid email or password. Please try again.</span>
+                </div>
+                
+                <div class="alert alert-success" id="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Login successful! Redirecting...</span>
+                </div>
+                
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="remember">
+                            Remember me
+                        </label>
+                        <a href="recuperar-senha.html" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn-login" id="btn-submit">
+                        <span>Sign In</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+                
+                <!-- Test Access -->
+                <div class="test-access">
+                    <div class="login-divider">
+                        <span>Quick Access</span>
+                    </div>
+                    <button class="btn-test" onclick="testAccess()">
+                        <i class="fas fa-flask"></i>
+                        Enter Demo Dashboard
+                    </button>
+                    <p class="test-note">Access a demo account to explore the dashboard</p>
+                </div>
+            </div>
+            
+            <!-- Register Form -->
+            <div id="register-tab" class="tab-content">
+                <div class="login-header">
+                    <h2>Create Your Account</h2>
+                    <p>Fill in your details to get started</p>
+                </div>
+                
+                <div class="alert alert-error" id="register-error">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>Please fill all required fields correctly.</span>
+                </div>
+                
+                <div class="alert alert-success" id="register-success">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Account created! Please check your email.</span>
+                </div>
+                
+                <form id="register-form" onsubmit="handleRegister(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reg-name">Full Name</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="reg-name" name="name" placeholder="Your full name" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-email">Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="reg-email" name="email" placeholder="Your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-phone">Phone Number</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="reg-phone" name="phone" placeholder="(000) 000-0000" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="reg-password" name="password" placeholder="Create a password" required minlength="6">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-confirm">Confirm Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="reg-confirm" name="confirm" placeholder="Confirm your password" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="terms" required>
+                            I agree to the <a href="termos-uso.html">Terms of Use</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-login" id="btn-register">
+                        <span>Create Account</span>
+                        <i class="fas fa-user-plus"></i>
+                    </button>
+                </form>
             </div>
             
             <a href="index.html" class="back-home">
@@ -580,6 +762,24 @@
     </div>
     
     <script>
+        // Tab switching function
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.tab === tabName) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName + '-tab').classList.add('active');
+        }
+        
+        // Login handler
         function handleLogin(event) {
             event.preventDefault();
             
@@ -599,9 +799,6 @@
             
             // Simulate API call (replace with actual API)
             setTimeout(() => {
-                // Demo: accept any login for now
-                // In production, this would call your backend API
-                
                 if (email && password) {
                     successMsg.style.display = 'flex';
                     
@@ -617,9 +814,84 @@
             }, 1500);
         }
         
-        // Toggle password visibility
-        document.querySelector('.form-group input[type="password"]').addEventListener('dblclick', function() {
-            this.type = this.type === 'password' ? 'text' : 'password';
+        // Register handler
+        function handleRegister(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const phone = document.getElementById('reg-phone').value;
+            const password = document.getElementById('reg-password').value;
+            const confirm = document.getElementById('reg-confirm').value;
+            const submitBtn = document.getElementById('btn-register');
+            const errorMsg = document.getElementById('register-error');
+            const successMsg = document.getElementById('register-success');
+            
+            // Hide any existing messages
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+            
+            // Validate passwords match
+            if (password !== confirm) {
+                errorMsg.querySelector('span').textContent = 'Passwords do not match.';
+                errorMsg.style.display = 'flex';
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+            
+            // Simulate API call (replace with actual API)
+            setTimeout(() => {
+                if (name && email && phone && password) {
+                    successMsg.style.display = 'flex';
+                    
+                    // Switch to login tab after success
+                    setTimeout(() => {
+                        switchTab('login');
+                        document.getElementById('email').value = email;
+                    }, 2000);
+                } else {
+                    errorMsg.style.display = 'flex';
+                }
+                
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>Create Account</span><i class="fas fa-user-plus"></i>';
+            }, 1500);
+        }
+        
+        // Test access - go directly to dashboard
+        function testAccess() {
+            const btn = event.target.closest('.btn-test');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading demo...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                window.location.href = 'dashboard-cliente.html';
+            }, 1000);
+        }
+        
+        // Toggle password visibility on double click
+        document.querySelectorAll('input[type="password"]').forEach(input => {
+            input.addEventListener('dblclick', function() {
+                this.type = this.type === 'password' ? 'text' : 'password';
+            });
+        });
+        
+        // Phone mask
+        document.getElementById('reg-phone')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value.length <= 3) {
+                    value = '(' + value;
+                } else if (value.length <= 6) {
+                    value = '(' + value.slice(0, 3) + ') ' + value.slice(3);
+                } else {
+                    value = '(' + value.slice(0, 3) + ') ' + value.slice(3, 6) + '-' + value.slice(6, 10);
+                }
+            }
+            e.target.value = value;
         });
     </script>
 </body>
