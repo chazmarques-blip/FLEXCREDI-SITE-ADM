@@ -27,6 +27,7 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
 
 if __name__ == "__main__":
+    socketserver.TCPServer.allow_reuse_address = True
     with socketserver.TCPServer(("0.0.0.0", PORT), CustomHandler) as httpd:
         print(f"FLEXCREDI Frontend Server running on http://0.0.0.0:{PORT}")
         print(f"Serving files from: {DIRECTORY}")
