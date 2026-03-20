@@ -164,40 +164,40 @@
         /* ========== Right Panel - Login Form ========== */
         .login-panel {
             flex: 1;
-            max-width: 500px;
+            max-width: 440px;
             background: var(--branco);
-            padding: 60px 50px;
+            padding: 40px 36px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
         
         .login-header {
-            margin-bottom: 40px;
+            margin-bottom: 24px;
         }
         
         .login-header h2 {
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--cinza-escuro);
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
         
         .login-header p {
             color: var(--cinza-medio);
-            font-size: 15px;
+            font-size: 13px;
         }
         
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--cinza-escuro);
             font-weight: 500;
-            font-size: 14px;
+            font-size: 13px;
         }
         
         .input-wrapper {
@@ -206,19 +206,19 @@
         
         .input-wrapper i {
             position: absolute;
-            left: 16px;
+            left: 14px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--cinza-medio);
-            font-size: 16px;
+            font-size: 14px;
         }
         
         .form-group input {
             width: 100%;
-            padding: 14px 16px 14px 48px;
-            border: 2px solid var(--cinza-claro);
-            border-radius: 10px;
-            font-size: 15px;
+            padding: 11px 14px 11px 40px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
             font-family: inherit;
             transition: all 0.3s ease;
             background: var(--branco);
@@ -227,7 +227,7 @@
         .form-group input:focus {
             outline: none;
             border-color: var(--verde-principal);
-            box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.1);
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1);
         }
         
         .form-group input::placeholder {
@@ -238,21 +238,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         
         .remember-me {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 14px;
+            gap: 6px;
+            font-size: 13px;
             color: var(--cinza-medio);
             cursor: pointer;
         }
         
         .remember-me input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             accent-color: var(--verde-principal);
             cursor: pointer;
         }
@@ -260,7 +260,7 @@
         .forgot-password {
             color: var(--verde-principal);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             transition: color 0.3s;
         }
@@ -272,12 +272,12 @@
         
         .btn-login {
             width: 100%;
-            padding: 16px;
+            padding: 12px;
             background: var(--verde-principal);
             color: var(--branco);
             border: none;
-            border-radius: 10px;
-            font-size: 16px;
+            border-radius: 8px;
+            font-size: 14px;
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
@@ -285,13 +285,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
         }
         
         .btn-login:hover {
             background: var(--verde-escuro);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.25);
         }
         
         .btn-login:active {
@@ -308,9 +308,9 @@
         .login-divider {
             display: flex;
             align-items: center;
-            margin: 30px 0;
+            margin: 20px 0;
             color: var(--cinza-medio);
-            font-size: 13px;
+            font-size: 12px;
         }
         
         .login-divider::before,
@@ -322,7 +322,7 @@
         }
         
         .login-divider span {
-            padding: 0 16px;
+            padding: 0 12px;
         }
         
         .signup-section {
@@ -331,8 +331,8 @@
         
         .signup-section p {
             color: var(--cinza-medio);
-            font-size: 14px;
-            margin-bottom: 16px;
+            font-size: 12px;
+            margin-bottom: 12px;
         }
         
         .btn-signup {
@@ -341,12 +341,12 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 14px;
+            padding: 10px;
             background: var(--branco);
             color: var(--verde-principal);
-            border: 2px solid var(--verde-principal);
-            border-radius: 10px;
-            font-size: 15px;
+            border: 1px solid var(--verde-principal);
+            border-radius: 8px;
+            font-size: 13px;
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
@@ -362,10 +362,10 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            margin-top: 30px;
+            margin-top: 20px;
             color: var(--cinza-medio);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             transition: color 0.3s;
         }
         
@@ -377,18 +377,18 @@
         .form-tabs {
             display: flex;
             gap: 0;
-            margin-bottom: 30px;
-            border-radius: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
             overflow: hidden;
-            border: 2px solid var(--cinza-claro);
+            border: 1px solid var(--cinza-claro);
         }
         
         .tab-btn {
             flex: 1;
-            padding: 14px 16px;
+            padding: 10px 14px;
             background: var(--branco);
             border: none;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
@@ -397,7 +397,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
         }
         
         .tab-btn:first-child {
@@ -424,17 +424,17 @@
         
         /* ========== Test Access Button ========== */
         .test-access {
-            margin-top: 20px;
+            margin-top: 16px;
         }
         
         .btn-test {
             width: 100%;
-            padding: 14px;
+            padding: 10px;
             background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
             color: var(--branco);
             border: none;
-            border-radius: 10px;
-            font-size: 15px;
+            border-radius: 8px;
+            font-size: 13px;
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
@@ -442,26 +442,26 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
         }
         
         .btn-test:hover {
             background: linear-gradient(135deg, #2980b9 0%, #1a5276 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.25);
         }
         
         .test-note {
             text-align: center;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--cinza-medio);
-            margin-top: 10px;
+            margin-top: 8px;
         }
         
         /* ========== Form Row ========== */
         .form-row {
             display: flex;
-            gap: 16px;
+            gap: 12px;
         }
         
         .form-row .form-group {
@@ -470,13 +470,13 @@
         
         /* ========== Error/Success Messages ========== */
         .alert {
-            padding: 14px 16px;
-            border-radius: 10px;
-            margin-bottom: 24px;
-            font-size: 14px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 13px;
             display: none;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
         .alert-error {
