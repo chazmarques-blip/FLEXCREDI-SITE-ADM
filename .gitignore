@@ -51,3 +51,7 @@ temp/
 # Vercel
 .vercel/
 .vercel
+-e 
+# Environment files
+*.env
+*.env.*
