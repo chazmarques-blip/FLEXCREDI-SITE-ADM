@@ -326,32 +326,132 @@ section h2 {
 }
 
 /* =====================================================
-   7. VALORES (Our Values)
+   7. VALORES (Our Values) - GRID CORRIGIDO
    ===================================================== */
 
-.values-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 15px;
+.valores-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
 }
 
-.value-item,
-.value-card {
-    padding: 20px 15px !important;
+/* Override default row behavior inside valores-grid */
+.valores-grid .row {
+    display: contents !important;
 }
 
-.value-item h4,
-.value-card h4 {
-    font-size: 14px !important;
+.valores-grid .col-6 {
+    flex: none !important;
+    max-width: none !important;
+    width: 100% !important;
+}
+
+.valor-card {
+    background: #fff !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    padding: 28px !important;
+    height: 100% !important;
+    min-height: 220px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+}
+
+.valor-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;
+    border-color: #28a745 !important;
+}
+
+.valor-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    margin-bottom: 16px !important;
+}
+
+.valor-icon {
+    width: 48px !important;
+    height: 48px !important;
+    background: #e8f5e9 !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+}
+
+.valor-icon i {
+    font-size: 22px !important;
+    color: #28a745 !important;
+}
+
+.valor-card h4 {
+    font-size: 18px !important;
     font-weight: 600 !important;
     color: #333 !important;
-    margin: 10px 0 8px !important;
+    margin: 0 !important;
 }
 
-.value-item p,
-.value-card > p {
-    font-size: 12px !important;
-    color: #888 !important;
+.valor-card p {
+    font-size: 14px !important;
+    color: #666 !important;
+    line-height: 1.7 !important;
+    margin: 0 !important;
+    flex-grow: 1 !important;
+}
+
+/* 3 colunas para desktop grande */
+@media (min-width: 1200px) {
+    .valores-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    
+    .valor-card {
+        min-height: 250px !important;
+    }
+}
+
+/* 2 colunas para tablet e desktop médio */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .valores-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* 1 coluna para mobile */
+@media (max-width: 767px) {
+    .valores-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    
+    .valor-card {
+        min-height: auto !important;
+        padding: 20px !important;
+    }
+    
+    .valor-header {
+        gap: 12px !important;
+        margin-bottom: 12px !important;
+    }
+    
+    .valor-icon {
+        width: 44px !important;
+        height: 44px !important;
+    }
+    
+    .valor-card h4 {
+        font-size: 16px !important;
+    }
+    
+    .valor-card p {
+        font-size: 13px !important;
+    }
 }
 
 /* =====================================================
