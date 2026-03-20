@@ -867,18 +867,79 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading demo...';
             btn.disabled = true;
             
-            // Create demo user in localStorage so dashboard doesn't redirect back
+            // Create complete demo user with all data
             const demoUser = {
-                id: 'demo-user-001',
-                email: 'demo@flexcredi.com',
-                fullName: 'Demo User',
+                id: 'USR-2026-001',
+                email: 'maria.santos@email.com',
+                fullName: 'Maria Santos',
                 phone: '(305) 555-1234',
-                status: 'active',
-                createdAt: new Date().toISOString()
+                ssn: '***-**-4567',
+                address: '1234 Ocean Drive',
+                city: 'Miami',
+                state: 'FL',
+                zipCode: '33139',
+                status: 'in_analysis',
+                createdAt: '2026-03-15T10:30:00Z',
+                creditScore: 785,
+                requestedAmount: 10000,
+                approvedAmount: 10000,
+                interestRate: 18.5,
+                term: 24,
+                monthlyPayment: 508,
+                applicationProgress: 42,
+                applicationStep: 'pre-approval'
             };
             
+            // Create demo documents
+            const demoDocuments = {
+                driverLicense: {
+                    name: 'Driver License',
+                    status: 'approved',
+                    uploadDate: '2026-03-15T11:00:00Z',
+                    url: 'https://static.prod-images.emergentagent.com/jobs/33a34787-6ccd-42e1-b399-554d36ecc3b7/images/0225543ab0d33b5e06e47f3f00be3e39ddc1490c61407d3c430239a07cd960f2.png',
+                    type: 'image/png'
+                },
+                proofOfAddress: {
+                    name: 'Proof of Address',
+                    status: 'approved',
+                    uploadDate: '2026-03-15T11:05:00Z',
+                    url: 'https://static.prod-images.emergentagent.com/jobs/33a34787-6ccd-42e1-b399-554d36ecc3b7/images/306bed9df76edfbc2eca05a6c4429373cd61a2576e07641e2f3e30b222e4079c.png',
+                    type: 'image/png'
+                },
+                socialSecurityCard: {
+                    name: 'Social Security Card',
+                    status: 'approved',
+                    uploadDate: '2026-03-15T11:10:00Z',
+                    url: 'https://static.prod-images.emergentagent.com/jobs/33a34787-6ccd-42e1-b399-554d36ecc3b7/images/6ecf89da3edd57e36852c3f9a68c57a60bc87688df0efcbaae6ee18673ad0ad0.png',
+                    type: 'image/png'
+                },
+                bankCard: {
+                    name: 'Bank Card',
+                    status: 'approved',
+                    uploadDate: '2026-03-15T11:15:00Z',
+                    url: 'https://static.prod-images.emergentagent.com/jobs/33a34787-6ccd-42e1-b399-554d36ecc3b7/images/4219c6706fe5722fa5c070fcad420a094791ab3f7eda4b2be023228b68902777.png',
+                    type: 'image/png'
+                }
+            };
+            
+            // Save to localStorage
             localStorage.setItem('flexcredi_user', JSON.stringify(demoUser));
+            localStorage.setItem('flexcredi_documents', JSON.stringify(demoDocuments));
             localStorage.setItem('flexcredi_logged_in', 'true');
+            
+            // Also save to admin clients list
+            const existingClients = JSON.parse(localStorage.getItem('flexcredi_admin_clients') || '[]');
+            const clientExists = existingClients.find(c => c.id === demoUser.id);
+            
+            if (!clientExists) {
+                existingClients.push({
+                    ...demoUser,
+                    documents: demoDocuments,
+                    documentsCount: 4,
+                    documentsStatus: 'complete'
+                });
+                localStorage.setItem('flexcredi_admin_clients', JSON.stringify(existingClients));
+            }
             
             setTimeout(() => {
                 window.location.href = 'dashboard-cliente.html';
