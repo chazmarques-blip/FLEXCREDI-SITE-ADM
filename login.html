@@ -867,6 +867,19 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading demo...';
             btn.disabled = true;
             
+            // Create demo user in localStorage so dashboard doesn't redirect back
+            const demoUser = {
+                id: 'demo-user-001',
+                email: 'demo@flexcredi.com',
+                fullName: 'Demo User',
+                phone: '(305) 555-1234',
+                status: 'active',
+                createdAt: new Date().toISOString()
+            };
+            
+            localStorage.setItem('flexcredi_user', JSON.stringify(demoUser));
+            localStorage.setItem('flexcredi_logged_in', 'true');
+            
             setTimeout(() => {
                 window.location.href = 'dashboard-cliente.html';
             }, 1000);
