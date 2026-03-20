@@ -56,23 +56,51 @@
             </a>
             
             <!-- User Menu -->
-            <div class="user-menu">
-                <div class="user-info">
-                    <img src="https://ui-avatars.com/api/?name=Cliente&background=2ECC71&color=fff" alt="Avatar" class="user-avatar" id="userAvatar">
-                    <span class="user-name" id="userName" data-translate="Welcome">Welcome</span>
+            <div class="user-menu-container">
+                <div class="user-profile" onclick="toggleUserMenu()">
+                    <img src="https://ui-avatars.com/api/?name=Demo+User&background=2ECC71&color=fff&size=40" alt="Avatar" class="user-avatar" id="userAvatar">
+                    <div class="user-info-text">
+                        <span class="user-welcome">Welcome</span>
+                        <span class="user-name" id="userName">Demo User</span>
+                    </div>
+                    <i class="fas fa-chevron-down menu-arrow"></i>
                 </div>
-                <div class="dropdown">
-                    <button class="dropdown-toggle" type="button" id="userDropdown">
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="#profile" class="dropdown-item" data-translate="My Profile">My Profile</a>
-                        <a href="#settings" class="dropdown-item" data-translate="Settings">Settings</a>
-                        <a href="#help" class="dropdown-item" data-translate="Help">Help</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item logout-btn" data-translate="Logout">Logout</a>
+                
+                <!-- Dropdown Menu -->
+                <div class="user-dropdown" id="userDropdown">
+                    <div class="dropdown-header">
+                        <img src="https://ui-avatars.com/api/?name=Demo+User&background=2ECC71&color=fff&size=60" alt="Avatar">
+                        <div>
+                            <strong id="dropdownUserName">Demo User</strong>
+                            <span id="dropdownUserEmail">demo@flexcredi.com</span>
+                        </div>
+                    </div>
+                    <div class="dropdown-body">
+                        <a href="#profile" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+                        <a href="#settings" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#help" class="dropdown-item">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Help & Support</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-footer">
+                        <button class="btn-logout" onclick="handleLogout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sign Out</span>
+                        </button>
                     </div>
                 </div>
+                
+                <!-- Logout Button (Always Visible) -->
+                <button class="btn-logout-visible" onclick="handleLogout()" title="Sign Out">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
             </div>
         </nav>
     </header>
@@ -305,9 +333,286 @@
             </div>
         </div>
     </footer>
+    
+    <!-- User Menu Styles -->
+    <style>
+        /* User Menu Container */
+        .user-menu-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .user-profile:hover {
+            background: #e9ecef;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .user-info-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        
+        .user-welcome {
+            font-size: 11px;
+            color: #7F8C8D;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .user-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        
+        .menu-arrow {
+            font-size: 12px;
+            color: #7F8C8D;
+            transition: transform 0.3s ease;
+        }
+        
+        .user-profile.active .menu-arrow {
+            transform: rotate(180deg);
+        }
+        
+        /* Dropdown Menu */
+        .user-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 280px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        
+        .user-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px;
+            background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
+            color: white;
+        }
+        
+        .dropdown-header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .dropdown-header strong {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+        
+        .dropdown-header span {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .dropdown-body {
+            padding: 12px 0;
+        }
+        
+        .dropdown-body .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            color: #2C3E50;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .dropdown-body .dropdown-item:hover {
+            background: #f8f9fa;
+            color: #2ECC71;
+        }
+        
+        .dropdown-body .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            color: #7F8C8D;
+        }
+        
+        .dropdown-body .dropdown-item:hover i {
+            color: #2ECC71;
+        }
+        
+        .dropdown-footer {
+            padding: 12px 20px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .btn-logout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            background: #fff;
+            color: #E74C3C;
+            border: 2px solid #E74C3C;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+            background: #E74C3C;
+            color: white;
+        }
+        
+        /* Logout Button Always Visible */
+        .btn-logout-visible {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: #fff;
+            color: #E74C3C;
+            border: 2px solid #E74C3C;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-logout-visible:hover {
+            background: #E74C3C;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        /* Navbar positioning */
+        .dashboard-header .navbar {
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .user-info-text {
+                display: none;
+            }
+            
+            .user-profile {
+                padding: 8px;
+            }
+            
+            .menu-arrow {
+                display: none;
+            }
+            
+            .user-dropdown {
+                width: calc(100vw - 40px);
+                right: -10px;
+            }
+        }
+    </style>
 
     <!-- JavaScript -->
     <script src="js/main.js?v=3.0.0"></script>
     <script src="js/dashboard.js?v=3.0.0"></script>
+    
+    <!-- User Menu Script -->
+    <script>
+        // Toggle user dropdown menu
+        function toggleUserMenu() {
+            const profile = document.querySelector('.user-profile');
+            const dropdown = document.getElementById('userDropdown');
+            
+            profile.classList.toggle('active');
+            dropdown.classList.toggle('show');
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const profile = document.querySelector('.user-profile');
+            const dropdown = document.getElementById('userDropdown');
+            
+            if (!e.target.closest('.user-menu-container')) {
+                profile?.classList.remove('active');
+                dropdown?.classList.remove('show');
+            }
+        });
+        
+        // Handle logout
+        function handleLogout() {
+            // Clear user data from localStorage
+            localStorage.removeItem('flexcredi_user');
+            localStorage.removeItem('flexcredi_logged_in');
+            localStorage.removeItem('flexcredi_test_clients');
+            
+            // Show brief message
+            alert('You have been signed out successfully.');
+            
+            // Redirect to login page
+            window.location.href = 'login.html';
+        }
+        
+        // Update user info on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('flexcredi_user') || '{}');
+            
+            if (userData.fullName) {
+                // Update avatar
+                const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.fullName)}&background=2ECC71&color=fff&size=40`;
+                document.getElementById('userAvatar').src = avatarUrl;
+                
+                // Update names
+                document.getElementById('userName').textContent = userData.fullName;
+                document.getElementById('dropdownUserName').textContent = userData.fullName;
+                
+                // Update email if exists
+                if (userData.email) {
+                    document.getElementById('dropdownUserEmail').textContent = userData.email;
+                }
+                
+                // Update larger avatar in dropdown
+                const dropdownAvatar = document.querySelector('.dropdown-header img');
+                if (dropdownAvatar) {
+                    dropdownAvatar.src = avatarUrl.replace('size=40', 'size=60');
+                }
+            }
+        });
+    </script>
 </body>
 </html>
