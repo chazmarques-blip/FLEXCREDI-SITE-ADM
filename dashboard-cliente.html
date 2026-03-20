@@ -109,44 +109,79 @@
     <main id="main-content" class="dashboard-main">
         <div class="container">
             
-            <!-- Status Header -->
-            <section class="status-header">
-                <div class="status-card">
-                    <div class="status-info">
-                        <div class="user-header">
-                            <h1 class="user-greeting" id="userGreeting">Welcome, Carlos Eduardo Silva!</h1>
-                            
-                            <!-- Detalhes do Financiamento inline na mesma linha -->
-                            <div class="financing-details" id="financingDetails">
-                                <div class="financing-item">
-                                    <span class="financing-label">AMOUNT:</span>
-                                    <span class="financing-value" id="financingAmount">$25,000</span>
-                                </div>
-                                <div class="financing-item">
-                                    <span class="financing-label">RATE:</span>
-                                    <span class="financing-value" id="financingRate">18.5% APR</span>
-                                </div>
-                                <div class="financing-item">
-                                    <span class="financing-label">TERM:</span>
-                                    <span class="financing-value" id="financingTerm">24 months</span>
-                                </div>
-                                <div class="financing-item">
-                                    <span class="financing-label">PAYMENT:</span>
-                                    <span class="financing-value" id="financingPayment">$1,287/mo</span>
-                                </div>
-                            </div>
-                            
-                            <div class="user-score">
-                                <span class="score-value" id="creditScore">785</span>
-                                <span class="score-label">SCORE</span>
-                            </div>
-                        </div>
-                        
-                        <div class="application-status" id="applicationStatus">
-                            <span class="status-badge status-pre-approved">PRE-APPROVED</span>
-                            <span class="status-description">Your pre-approval is under review, submit the required documentation to finalize the process.</span>
+            <!-- Compact Status Bar -->
+            <section class="status-bar-compact">
+                <div class="status-bar-content">
+                    <!-- Left: Welcome & Score -->
+                    <div class="status-left">
+                        <h1 class="welcome-text" id="userGreeting">Welcome, Demo User!</h1>
+                        <div class="score-badge">
+                            <span class="score-number" id="creditScore">785</span>
+                            <span class="score-label">SCORE</span>
                         </div>
                     </div>
+                    
+                    <!-- Center: Financing Details -->
+                    <div class="status-center">
+                        <div class="finance-item">
+                            <span class="finance-value" id="financingAmount">$25,000</span>
+                            <span class="finance-label">Amount</span>
+                        </div>
+                        <div class="finance-divider"></div>
+                        <div class="finance-item">
+                            <span class="finance-value" id="financingRate">18.5%</span>
+                            <span class="finance-label">APR</span>
+                        </div>
+                        <div class="finance-divider"></div>
+                        <div class="finance-item">
+                            <span class="finance-value" id="financingTerm">24</span>
+                            <span class="finance-label">Months</span>
+                        </div>
+                        <div class="finance-divider"></div>
+                        <div class="finance-item">
+                            <span class="finance-value" id="financingPayment">$1,287</span>
+                            <span class="finance-label">/month</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Status Badge -->
+                    <div class="status-right">
+                        <div class="status-indicator" id="applicationStatus">
+                            <span class="status-badge-compact status-in-analysis">IN ANALYSIS</span>
+                            <span class="status-text">Awaiting documents</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="progress-bar-horizontal">
+                    <div class="progress-steps">
+                        <div class="progress-step completed">
+                            <div class="step-dot"></div>
+                            <span>Register</span>
+                        </div>
+                        <div class="progress-line completed"></div>
+                        <div class="progress-step active">
+                            <div class="step-dot"></div>
+                            <span>Pre-Approval</span>
+                        </div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step">
+                            <div class="step-dot"></div>
+                            <span>Documents</span>
+                        </div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step">
+                            <div class="step-dot"></div>
+                            <span>Review</span>
+                        </div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step">
+                            <div class="step-dot"></div>
+                            <span>Approved</span>
+                        </div>
+                    </div>
+                    <div class="progress-percentage">42%</div>
                 </div>
             </section>
 
@@ -336,6 +371,251 @@
     
     <!-- User Menu Styles -->
     <style>
+        /* ========== Compact Status Bar ========== */
+        .status-bar-compact {
+            background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
+            border-radius: 16px;
+            padding: 20px 30px;
+            margin-bottom: 24px;
+            color: white;
+        }
+        
+        .status-bar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        /* Left Section */
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .welcome-text {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+            white-space: nowrap;
+        }
+        
+        .score-badge {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 30px;
+        }
+        
+        .score-number {
+            font-size: 28px;
+            font-weight: 800;
+        }
+        
+        .score-label {
+            font-size: 11px;
+            font-weight: 600;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Center Section */
+        .status-center {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .finance-item {
+            text-align: center;
+        }
+        
+        .finance-value {
+            display: block;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .finance-label {
+            font-size: 11px;
+            opacity: 0.85;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .finance-divider {
+            width: 1px;
+            height: 40px;
+            background: rgba(255,255,255,0.3);
+        }
+        
+        /* Right Section */
+        .status-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .status-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+        
+        .status-badge-compact {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-badge-compact.status-in-analysis {
+            background: #FFF3CD;
+            color: #856404;
+        }
+        
+        .status-badge-compact.status-approved {
+            background: #D4EDDA;
+            color: #155724;
+        }
+        
+        .status-badge-compact.status-pending {
+            background: #F8D7DA;
+            color: #721C24;
+        }
+        
+        .status-text {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        /* Progress Bar Horizontal */
+        .progress-bar-horizontal {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 16px 20px;
+        }
+        
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            gap: 0;
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        
+        .progress-step .step-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            border: 2px solid rgba(255,255,255,0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .progress-step.completed .step-dot {
+            background: white;
+            border-color: white;
+        }
+        
+        .progress-step.active .step-dot {
+            background: #FFD700;
+            border-color: #FFD700;
+            box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.3);
+        }
+        
+        .progress-step span {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        
+        .progress-line {
+            flex: 1;
+            height: 3px;
+            background: rgba(255,255,255,0.3);
+            margin: 0 8px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        
+        .progress-line.completed {
+            background: white;
+        }
+        
+        .progress-percentage {
+            font-size: 18px;
+            font-weight: 800;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .status-bar-content {
+                flex-wrap: wrap;
+            }
+            
+            .status-left {
+                width: 100%;
+                justify-content: space-between;
+                margin-bottom: 16px;
+            }
+            
+            .status-center {
+                width: 100%;
+                justify-content: space-around;
+            }
+            
+            .status-right {
+                width: 100%;
+                justify-content: center;
+                margin-top: 16px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .status-bar-compact {
+                padding: 16px 20px;
+            }
+            
+            .welcome-text {
+                font-size: 18px;
+            }
+            
+            .finance-value {
+                font-size: 16px;
+            }
+            
+            .progress-step span {
+                font-size: 8px;
+            }
+        }
+        
         /* User Menu Container */
         .user-menu-container {
             display: flex;
