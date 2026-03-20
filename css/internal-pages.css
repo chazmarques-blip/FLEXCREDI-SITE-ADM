@@ -1,16 +1,15 @@
 /* =====================================================
    FLEXCREDI - INTERNAL PAGES OPTIMIZATION
    Estilos consistentes para páginas internas
+   Mesmas cores e fontes da página principal
    ===================================================== */
 
 /* =====================================================
    1. TIPOGRAFIA GLOBAL - FONTE INTER
-   (COM EXCEÇÃO PARA FONTAWESOME)
    ===================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Aplicar Inter a todos os elementos EXCETO ícones FontAwesome */
 *:not(i):not([class*="fa-"]):not(.fas):not(.far):not(.fab):not(.fal):not(.fad) {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
 }
@@ -19,10 +18,12 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #fff;
+    color: #333;
 }
 
 /* =====================================================
-   2. CORREÇÃO GLOBAL DE ÍCONES FONTAWESOME
+   2. CORREÇÃO FONTAWESOME
    ===================================================== */
 
 i.fas, i.far, i.fab, i.fal, i.fad,
@@ -31,331 +32,669 @@ i.fas, i.far, i.fab, i.fal, i.fad,
     font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome !important;
     font-style: normal !important;
     font-weight: 900 !important;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     display: inline-block;
     line-height: 1;
 }
 
-i.far, .far {
-    font-weight: 400 !important;
-}
-
-i.fab, .fab {
+i.far, .far { font-weight: 400 !important; }
+i.fab, .fab { 
     font-family: "Font Awesome 6 Brands", "Font Awesome 5 Brands", FontAwesome !important;
-    font-weight: 400 !important;
-}
-
-/* Ícones em títulos, cards, seções */
-h1 i, h2 i, h3 i, h4 i, h5 i, h6 i,
-.card i, .card-title i,
-.section-title i,
-.feature-icon i,
-.value-icon i,
-.contact-icon i,
-.step-icon i,
-button i, .btn i, a i {
-    font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome !important;
-    font-style: normal !important;
-    font-weight: 900 !important;
-    display: inline-block !important;
+    font-weight: 400 !important; 
 }
 
 /* =====================================================
-   3. HEADER COMPACTO
+   3. HEADER - IGUAL À HOMEPAGE
    ===================================================== */
 
 .top-bar {
     display: none !important;
 }
 
-.main-header {
-    padding: 8px 0 !important;
-    min-height: auto !important;
+.header,
+header {
+    background: #fff !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08) !important;
+    padding: 10px 0 !important;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.header-content {
-    padding: 0 20px !important;
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logo img {
-    height: 50px !important;
-    max-height: 50px !important;
+    height: 45px !important;
+    max-height: 45px !important;
 }
 
-/* Menu Navigation */
-.nav-menu {
-    gap: 8px !important;
+/* Menu */
+.nav-menu,
+.navbar-nav {
+    display: flex;
+    gap: 5px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-link {
-    padding: 6px 12px !important;
+    color: #333 !important;
     font-size: 13px !important;
     font-weight: 500 !important;
+    padding: 8px 14px !important;
+    border-radius: 6px !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
 }
 
-/* Esconder ícones do menu de navegação */
+.nav-link:hover,
+.nav-link.active {
+    background: #f0f0f0 !important;
+    color: #28a745 !important;
+}
+
 .nav-link i {
     display: none !important;
 }
 
 /* Botões do Header */
+.navbar-buttons,
 .header-buttons {
-    gap: 8px !important;
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
-.btn-login, .btn-apply {
+.btn-secondary,
+.btn-login {
+    background: #28a745 !important;
+    color: #fff !important;
     padding: 8px 16px !important;
     font-size: 12px !important;
     font-weight: 600 !important;
+    border-radius: 6px !important;
+    border: none !important;
+    text-decoration: none !important;
+}
+
+.btn-primary,
+.btn-apply {
+    background: #fff !important;
+    color: #28a745 !important;
+    border: 2px solid #28a745 !important;
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+    text-decoration: none !important;
+}
+
+.btn-primary:hover,
+.btn-apply:hover {
+    background: #28a745 !important;
+    color: #fff !important;
+}
+
+/* Language Selector */
+.language-selector {
+    display: flex;
+    gap: 4px;
+}
+
+.language-btn {
+    padding: 4px 8px !important;
+    font-size: 16px !important;
+    background: transparent !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    cursor: pointer;
+}
+
+.language-btn.active {
+    border-color: #28a745 !important;
+    background: #f0fff4 !important;
 }
 
 /* =====================================================
-   4. HERO/BANNER INTERNO COMPACTO
+   4. HERO BANNER - VERDE COM IMAGEM
    ===================================================== */
 
+.hero,
 .page-hero,
-.hero-section,
-.internal-hero {
-    padding: 40px 0 !important;
+.hero-section {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 50%, #28a745 100%) !important;
+    padding: 50px 0 !important;
     min-height: auto !important;
+    position: relative;
 }
 
-.page-hero h1,
-.hero-section h1,
-.internal-hero h1 {
-    font-size: 28px !important;
-    margin-bottom: 12px !important;
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../images/pattern-bg.png') repeat;
+    opacity: 0.1;
 }
 
-.page-hero p,
-.hero-section p,
-.internal-hero p {
-    font-size: 14px !important;
+.hero .container,
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.hero h1,
+.hero-content h1 {
+    color: #fff !important;
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    margin-bottom: 15px !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.hero p,
+.hero-content p {
+    color: rgba(255,255,255,0.95) !important;
+    font-size: 16px !important;
     max-width: 700px;
     margin: 0 auto;
+    line-height: 1.6;
 }
 
 /* =====================================================
    5. SEÇÕES DE CONTEÚDO
    ===================================================== */
 
-section {
-    padding: 40px 0 !important;
+section,
+.section {
+    padding: 50px 0 !important;
+    background: #fff;
+}
+
+section:nth-child(even),
+.section:nth-child(even) {
+    background: #f9fafb;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .section-title,
-.section-header h2 {
-    font-size: 24px !important;
-    margin-bottom: 16px !important;
+.section h2,
+section h2 {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #333 !important;
+    text-align: center;
+    margin-bottom: 10px !important;
 }
 
-.section-subtitle {
-    font-size: 14px !important;
-    color: #666;
+.section-subtitle,
+.section > p:first-of-type {
+    font-size: 15px !important;
+    color: #666 !important;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 30px;
 }
 
 /* =====================================================
-   6. CARDS E COMPONENTES
+   6. CARDS - ESTILO CONSISTENTE
    ===================================================== */
 
 .card,
 .feature-card,
 .value-card,
-.service-card,
-.process-card {
-    padding: 20px !important;
-    border-radius: 8px !important;
-    margin-bottom: 16px !important;
+.service-card {
+    background: #fff !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    padding: 25px !important;
+    text-align: center;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+}
+
+.card:hover,
+.feature-card:hover,
+.value-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;
+    border-color: #28a745 !important;
+}
+
+.card-icon,
+.card-icon i,
+.text-verde {
+    color: #28a745 !important;
+}
+
+.card-icon {
+    font-size: 48px !important;
+    margin-bottom: 15px !important;
 }
 
 .card h3,
 .feature-card h3,
 .value-card h3 {
-    font-size: 16px !important;
-    margin-bottom: 8px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #28a745 !important;
+    margin-bottom: 10px !important;
 }
 
 .card p,
 .feature-card p,
 .value-card p {
-    font-size: 13px !important;
-    line-height: 1.5 !important;
+    font-size: 14px !important;
     color: #666 !important;
+    line-height: 1.6 !important;
+    margin: 0;
 }
 
-/* Ícones grandes em cards */
-.card-icon,
-.feature-icon,
-.value-icon {
-    font-size: 36px !important;
-    margin-bottom: 12px !important;
+/* Grid de Cards */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 }
 
-.card-icon i,
-.feature-icon i,
-.value-icon i {
-    font-size: inherit !important;
-    color: #28a745 !important;
+.col-4,
+.col-md-4 {
+    flex: 0 0 calc(33.333% - 14px);
+    max-width: calc(33.333% - 14px);
+}
+
+.col-3,
+.col-md-3 {
+    flex: 0 0 calc(25% - 15px);
+    max-width: calc(25% - 15px);
 }
 
 /* =====================================================
-   7. FORMULÁRIOS
+   7. VALORES (Our Values)
    ===================================================== */
 
-.form-group {
-    margin-bottom: 12px !important;
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
 }
 
-.form-group label {
-    font-size: 12px !important;
-    font-weight: 600 !important;
-    margin-bottom: 4px !important;
+.value-item,
+.value-card {
+    padding: 20px 15px !important;
 }
 
-.form-control,
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="number"],
-textarea,
-select {
-    padding: 10px 12px !important;
+.value-item h4,
+.value-card h4 {
     font-size: 14px !important;
-    border-radius: 6px !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+    margin: 10px 0 8px !important;
+}
+
+.value-item p,
+.value-card > p {
+    font-size: 12px !important;
+    color: #888 !important;
 }
 
 /* =====================================================
    8. FAQ ACCORDION
    ===================================================== */
 
+.faq-category {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.faq-category button,
+.category-btn {
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    background: #f5f5f5 !important;
+    border: 1px solid #ddd !important;
+    border-radius: 20px !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.faq-category button.active,
+.category-btn.active {
+    background: #28a745 !important;
+    color: #fff !important;
+    border-color: #28a745 !important;
+}
+
 .faq-item,
 .accordion-item {
-    margin-bottom: 8px !important;
-    border-radius: 6px !important;
+    background: #fff !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 8px !important;
+    margin-bottom: 10px !important;
+    overflow: hidden;
 }
 
 .faq-question,
 .accordion-header {
-    padding: 12px 16px !important;
-    font-size: 14px !important;
+    padding: 15px 20px !important;
+    font-size: 15px !important;
     font-weight: 600 !important;
+    color: #333 !important;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .faq-answer,
 .accordion-body {
-    padding: 12px 16px !important;
-    font-size: 13px !important;
+    padding: 0 20px 15px !important;
+    font-size: 14px !important;
+    color: #666 !important;
+    line-height: 1.6;
 }
 
 /* =====================================================
-   9. PROCESSO/STEPS
+   9. COMO FUNCIONA (Steps)
    ===================================================== */
 
 .process-step,
 .step-item {
-    padding: 16px !important;
-    margin-bottom: 12px !important;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
 }
 
 .step-number {
-    width: 36px !important;
-    height: 36px !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: #e8f5e9 !important;
+    color: #28a745 !important;
+    border-radius: 50% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 16px !important;
-    line-height: 36px !important;
+    font-weight: 700 !important;
+    flex-shrink: 0;
 }
 
+.step-content h3,
 .step-title {
-    font-size: 16px !important;
-    margin-bottom: 6px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+    margin-bottom: 8px !important;
 }
 
+.step-content p,
 .step-description {
+    font-size: 14px !important;
+    color: #666 !important;
+    margin-bottom: 10px;
+}
+
+.step-content ul,
+.step-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.step-content li {
     font-size: 13px !important;
     color: #666 !important;
+    padding: 3px 0;
+}
+
+.step-content li::before {
+    content: '✓';
+    color: #28a745;
+    margin-right: 8px;
+    font-weight: bold;
 }
 
 /* =====================================================
    10. CONTATO
    ===================================================== */
 
-.contact-card,
-.contact-method {
-    padding: 20px !important;
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.contact-card {
+    background: #fff !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    padding: 30px 20px !important;
     text-align: center;
 }
 
 .contact-icon {
-    font-size: 28px !important;
+    font-size: 36px !important;
     color: #28a745 !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 15px !important;
 }
 
 .contact-title {
-    font-size: 16px !important;
+    font-size: 18px !important;
     font-weight: 600 !important;
+    color: #333 !important;
     margin-bottom: 8px !important;
 }
 
 .contact-info {
-    font-size: 13px !important;
+    font-size: 14px !important;
     color: #666 !important;
+    line-height: 1.6;
+}
+
+.contact-info a {
+    color: #28a745 !important;
+    text-decoration: none;
+}
+
+/* Formulário de Contato */
+.contact-form {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-control,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 15px !important;
+    font-size: 14px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    background: #fff !important;
+    transition: border-color 0.2s ease;
+}
+
+.form-control:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #28a745 !important;
 }
 
 /* =====================================================
-   11. FOOTER COMPACTO
+   11. SERVIÇOS (Credit Products)
+   ===================================================== */
+
+.service-card {
+    border-radius: 12px !important;
+    overflow: hidden;
+}
+
+.service-header {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+    padding: 25px !important;
+    color: #fff !important;
+}
+
+.service-header h3 {
+    color: #fff !important;
+    font-size: 20px !important;
+    margin-bottom: 5px !important;
+}
+
+.service-header p {
+    color: rgba(255,255,255,0.9) !important;
+    font-size: 13px !important;
+}
+
+.service-body {
+    padding: 25px !important;
+}
+
+.service-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+}
+
+.service-features li {
+    font-size: 13px !important;
+    padding: 6px 0;
+    color: #666;
+}
+
+.service-features li::before {
+    content: '✓';
+    color: #28a745;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* =====================================================
+   12. FOOTER
    ===================================================== */
 
 footer,
 .site-footer {
-    padding: 30px 0 20px !important;
+    background: #1a1a1a !important;
+    color: #fff !important;
+    padding: 40px 0 20px !important;
 }
 
 .footer-content {
-    font-size: 13px !important;
+    font-size: 14px !important;
+    color: #999 !important;
 }
 
 .footer-links a {
-    font-size: 12px !important;
+    color: #999 !important;
+    font-size: 13px !important;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #28a745 !important;
 }
 
 /* =====================================================
-   12. RESPONSIVO MOBILE
+   13. RESPONSIVO MOBILE
    ===================================================== */
 
-@media (max-width: 768px) {
-    .page-hero h1,
-    .hero-section h1 {
-        font-size: 22px !important;
+@media (max-width: 992px) {
+    .col-4, .col-md-4 {
+        flex: 0 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
     }
     
-    .page-hero p,
-    .hero-section p {
-        font-size: 13px !important;
+    .col-3, .col-md-3 {
+        flex: 0 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .values-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 24px !important;
+    }
+    
+    .hero p {
+        font-size: 14px !important;
     }
     
     section {
-        padding: 30px 15px !important;
+        padding: 35px 15px !important;
     }
     
     .section-title,
-    .section-header h2 {
-        font-size: 20px !important;
+    section h2 {
+        font-size: 22px !important;
     }
     
-    .card,
-    .feature-card,
-    .value-card {
-        padding: 16px !important;
+    .col-4, .col-md-4,
+    .col-3, .col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
     }
     
-    .card h3,
-    .feature-card h3 {
-        font-size: 15px !important;
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
     
-    .card p,
-    .feature-card p {
-        font-size: 12px !important;
+    .card {
+        padding: 20px !important;
+    }
+    
+    .nav-menu {
+        display: none;
     }
 }
+
