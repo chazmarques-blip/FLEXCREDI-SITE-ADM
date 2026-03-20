@@ -1,0 +1,361 @@
+/* =====================================================
+   FLEXCREDI - INTERNAL PAGES OPTIMIZATION
+   Estilos consistentes para páginas internas
+   ===================================================== */
+
+/* =====================================================
+   1. TIPOGRAFIA GLOBAL - FONTE INTER
+   (COM EXCEÇÃO PARA FONTAWESOME)
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Aplicar Inter a todos os elementos EXCETO ícones FontAwesome */
+*:not(i):not([class*="fa-"]):not(.fas):not(.far):not(.fab):not(.fal):not(.fad) {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* =====================================================
+   2. CORREÇÃO GLOBAL DE ÍCONES FONTAWESOME
+   ===================================================== */
+
+i.fas, i.far, i.fab, i.fal, i.fad,
+.fas, .far, .fab, .fal, .fad,
+[class*="fa-"] {
+    font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome !important;
+    font-style: normal !important;
+    font-weight: 900 !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    line-height: 1;
+}
+
+i.far, .far {
+    font-weight: 400 !important;
+}
+
+i.fab, .fab {
+    font-family: "Font Awesome 6 Brands", "Font Awesome 5 Brands", FontAwesome !important;
+    font-weight: 400 !important;
+}
+
+/* Ícones em títulos, cards, seções */
+h1 i, h2 i, h3 i, h4 i, h5 i, h6 i,
+.card i, .card-title i,
+.section-title i,
+.feature-icon i,
+.value-icon i,
+.contact-icon i,
+.step-icon i,
+button i, .btn i, a i {
+    font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", FontAwesome !important;
+    font-style: normal !important;
+    font-weight: 900 !important;
+    display: inline-block !important;
+}
+
+/* =====================================================
+   3. HEADER COMPACTO
+   ===================================================== */
+
+.top-bar {
+    display: none !important;
+}
+
+.main-header {
+    padding: 8px 0 !important;
+    min-height: auto !important;
+}
+
+.header-content {
+    padding: 0 20px !important;
+}
+
+.logo img {
+    height: 50px !important;
+    max-height: 50px !important;
+}
+
+/* Menu Navigation */
+.nav-menu {
+    gap: 8px !important;
+}
+
+.nav-link {
+    padding: 6px 12px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+}
+
+/* Esconder ícones do menu de navegação */
+.nav-link i {
+    display: none !important;
+}
+
+/* Botões do Header */
+.header-buttons {
+    gap: 8px !important;
+}
+
+.btn-login, .btn-apply {
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+
+/* =====================================================
+   4. HERO/BANNER INTERNO COMPACTO
+   ===================================================== */
+
+.page-hero,
+.hero-section,
+.internal-hero {
+    padding: 40px 0 !important;
+    min-height: auto !important;
+}
+
+.page-hero h1,
+.hero-section h1,
+.internal-hero h1 {
+    font-size: 28px !important;
+    margin-bottom: 12px !important;
+}
+
+.page-hero p,
+.hero-section p,
+.internal-hero p {
+    font-size: 14px !important;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* =====================================================
+   5. SEÇÕES DE CONTEÚDO
+   ===================================================== */
+
+section {
+    padding: 40px 0 !important;
+}
+
+.section-title,
+.section-header h2 {
+    font-size: 24px !important;
+    margin-bottom: 16px !important;
+}
+
+.section-subtitle {
+    font-size: 14px !important;
+    color: #666;
+}
+
+/* =====================================================
+   6. CARDS E COMPONENTES
+   ===================================================== */
+
+.card,
+.feature-card,
+.value-card,
+.service-card,
+.process-card {
+    padding: 20px !important;
+    border-radius: 8px !important;
+    margin-bottom: 16px !important;
+}
+
+.card h3,
+.feature-card h3,
+.value-card h3 {
+    font-size: 16px !important;
+    margin-bottom: 8px !important;
+}
+
+.card p,
+.feature-card p,
+.value-card p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    color: #666 !important;
+}
+
+/* Ícones grandes em cards */
+.card-icon,
+.feature-icon,
+.value-icon {
+    font-size: 36px !important;
+    margin-bottom: 12px !important;
+}
+
+.card-icon i,
+.feature-icon i,
+.value-icon i {
+    font-size: inherit !important;
+    color: #28a745 !important;
+}
+
+/* =====================================================
+   7. FORMULÁRIOS
+   ===================================================== */
+
+.form-group {
+    margin-bottom: 12px !important;
+}
+
+.form-group label {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    margin-bottom: 4px !important;
+}
+
+.form-control,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+textarea,
+select {
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+    border-radius: 6px !important;
+}
+
+/* =====================================================
+   8. FAQ ACCORDION
+   ===================================================== */
+
+.faq-item,
+.accordion-item {
+    margin-bottom: 8px !important;
+    border-radius: 6px !important;
+}
+
+.faq-question,
+.accordion-header {
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+.faq-answer,
+.accordion-body {
+    padding: 12px 16px !important;
+    font-size: 13px !important;
+}
+
+/* =====================================================
+   9. PROCESSO/STEPS
+   ===================================================== */
+
+.process-step,
+.step-item {
+    padding: 16px !important;
+    margin-bottom: 12px !important;
+}
+
+.step-number {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 16px !important;
+    line-height: 36px !important;
+}
+
+.step-title {
+    font-size: 16px !important;
+    margin-bottom: 6px !important;
+}
+
+.step-description {
+    font-size: 13px !important;
+    color: #666 !important;
+}
+
+/* =====================================================
+   10. CONTATO
+   ===================================================== */
+
+.contact-card,
+.contact-method {
+    padding: 20px !important;
+    text-align: center;
+}
+
+.contact-icon {
+    font-size: 28px !important;
+    color: #28a745 !important;
+    margin-bottom: 12px !important;
+}
+
+.contact-title {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    margin-bottom: 8px !important;
+}
+
+.contact-info {
+    font-size: 13px !important;
+    color: #666 !important;
+}
+
+/* =====================================================
+   11. FOOTER COMPACTO
+   ===================================================== */
+
+footer,
+.site-footer {
+    padding: 30px 0 20px !important;
+}
+
+.footer-content {
+    font-size: 13px !important;
+}
+
+.footer-links a {
+    font-size: 12px !important;
+}
+
+/* =====================================================
+   12. RESPONSIVO MOBILE
+   ===================================================== */
+
+@media (max-width: 768px) {
+    .page-hero h1,
+    .hero-section h1 {
+        font-size: 22px !important;
+    }
+    
+    .page-hero p,
+    .hero-section p {
+        font-size: 13px !important;
+    }
+    
+    section {
+        padding: 30px 15px !important;
+    }
+    
+    .section-title,
+    .section-header h2 {
+        font-size: 20px !important;
+    }
+    
+    .card,
+    .feature-card,
+    .value-card {
+        padding: 16px !important;
+    }
+    
+    .card h3,
+    .feature-card h3 {
+        font-size: 15px !important;
+    }
+    
+    .card p,
+    .feature-card p {
+        font-size: 12px !important;
+    }
+}
