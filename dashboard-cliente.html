@@ -238,19 +238,19 @@
                                     <div class="contract-values-inline">
                                         <div class="value-item">
                                             <span class="label">AMOUNT:</span>
-                                            <span class="value">$25,000</span>
+                                            <span class="value" id="contract-amount">$10,000</span>
                                         </div>
                                         <div class="value-item">
                                             <span class="label">RATE:</span>
-                                            <span class="value">18.5% APR</span>
+                                            <span class="value" id="contract-rate">18.5% APR</span>
                                         </div>
                                         <div class="value-item">
                                             <span class="label">TERM:</span>
-                                            <span class="value">24 months</span>
+                                            <span class="value" id="contract-term">24 months</span>
                                         </div>
                                         <div class="value-item">
                                             <span class="label">PAYMENT:</span>
-                                            <span class="value">$1,287/mo</span>
+                                            <span class="value" id="contract-payment">$508/mo</span>
                                         </div>
                                     </div>
                                     <div class="contract-buttons-inline">
@@ -870,6 +870,25 @@
                 }
                 if (userData.creditScore) {
                     document.getElementById('creditScore').textContent = userData.creditScore;
+                }
+                
+                // Update contract values to match header
+                const contractAmount = document.getElementById('contract-amount');
+                const contractRate = document.getElementById('contract-rate');
+                const contractTerm = document.getElementById('contract-term');
+                const contractPayment = document.getElementById('contract-payment');
+                
+                if (contractAmount && userData.requestedAmount) {
+                    contractAmount.textContent = '$' + userData.requestedAmount.toLocaleString();
+                }
+                if (contractRate && userData.interestRate) {
+                    contractRate.textContent = userData.interestRate + '% APR';
+                }
+                if (contractTerm && userData.term) {
+                    contractTerm.textContent = userData.term + ' months';
+                }
+                if (contractPayment && userData.monthlyPayment) {
+                    contractPayment.textContent = '$' + userData.monthlyPayment + '/mo';
                 }
                 
                 // Update signer name
