@@ -193,7 +193,7 @@
   "illegal-activities": "Usar fondos para actividades ilegales",
   "gambling-speculation": "Usar fondos para juegos de azar o especulación",
   "unauthorized-access": "Intentar acceso no autorizado a nuestros sistemas",
-  "Application Process": "Proceso de Aplicación",
+  "Application Process": "Proceso de Solicitud",
   "Application Steps": "Pasos de la Aplicación",
   "online-form": "Completar el formulario en línea",
   "document-verification": "Verificación de documentos e identidad",
@@ -528,5 +528,15 @@
   "Amounts up to $10,000": "Montos hasta $10,000",
   "Flexible terms": "Plazos flexibles",
   "Competitive rates": "Tasas competitivas",
-  "Get Your Money": "Recibe tu Dinero"
+  "Get Your Money": "Recibe tu Dinero",
+  "Frequently Asked Questions": "Preguntas Frecuentes",
+  "Find quick answers to the most common questions about FLEXCREDI's credit services and application process.": "Encuentra respuestas rápidas a las preguntas más comunes sobre los servicios de crédito y el proceso de solicitud de FLEXCREDI.",
+  "Search for answers...": "Buscar respuestas...",
+  "Can't find what you're looking for?": "¿No encuentras lo que buscas?",
+  "Contact our support team": "Contacta a nuestro equipo de soporte",
+  "All Questions": "Todas las Preguntas",
+  "Approval & Rates": "Aprobación y Tasas",
+  "Payments & Terms": "Pagos y Plazos",
+  "Account Management": "Gestión de Cuenta",
+  "Once approved, funds transfer to your bank within 24-48 hours.": "Una vez aprobado, los fondos se transfieren a tu banco en 24-48 horas."
 }

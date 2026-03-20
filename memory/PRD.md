@@ -227,6 +227,10 @@
 - ~~Correção de ícones/estrelas na seção Success Stories~~ ✅ CONCLUÍDO
 - ~~Otimização mobile-first~~ ✅ CONCLUÍDO
 - ~~Auditoria completa de traduções~~ ✅ CONCLUÍDO (20/03/2026)
+- ~~Migração para arquivos JSON~~ ✅ CONCLUÍDO (20/03/2026)
+- ~~Página Serviços - Card único $10.000~~ ✅ CONCLUÍDO (20/03/2026)
+- ~~Página Como Funciona - 4 passos compactos~~ ✅ CONCLUÍDO (20/03/2026)
+- ~~Verificação de traduções em todas as páginas~~ ✅ CONCLUÍDO (20/03/2026)
 
 ### P1 (Alta Prioridade)
 - **Ajustes no dashboard admin** (próxima fase - usuário solicitou)
