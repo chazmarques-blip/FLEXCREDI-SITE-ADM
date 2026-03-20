@@ -2073,7 +2073,31 @@ const translations = {
         
         // About Page - Our Story
         'Our Story': 'Our Story',
-        'See My Offer': 'See My Offer'
+        'See My Offer': 'See My Offer',
+        
+        // About Page - Our Values
+        'Our Values': 'Our Values',
+        'The principles that guide every decision and action at FLEXCREDI': 'The principles that guide every decision and action at FLEXCREDI',
+        'Transparency': 'Transparency',
+        'We believe trust is built through total clarity. That is why all our rates, terms and conditions are presented clearly, without fine print or tricks. Our clients always know exactly what they are contracting.': 'We believe trust is built through total clarity. That is why all our rates, terms and conditions are presented clearly, without fine print or tricks. Our clients always know exactly what they are contracting.',
+        'Integrity': 'Integrity',
+        'We act with honesty and ethics in all our relationships. Our word is our commitment, and we always seek to do what is right, even when no one is watching. Integrity is the foundation of everything we do.': 'We act with honesty and ethics in all our relationships. Our word is our commitment, and we always seek to do what is right, even when no one is watching. Integrity is the foundation of everything we do.',
+        'Customer Focus': 'Customer Focus',
+        'We put our customers at the center of everything we do. Every decision is made thinking about how we can improve their experience and help them achieve their financial goals responsibly and sustainably.': 'We put our customers at the center of everything we do. Every decision is made thinking about how we can improve their experience and help them achieve their financial goals responsibly and sustainably.',
+        'Innovation': 'Innovation',
+        'We are always looking for better and more efficient ways to serve our customers. We use cutting-edge technology to simplify processes and create solutions that truly make a difference in peoples lives.': 'We are always looking for better and more efficient ways to serve our customers. We use cutting-edge technology to simplify processes and create solutions that truly make a difference in peoples lives.',
+        'Agility': 'Agility',
+        'We know time is money, especially when it comes to credit. Our processes are designed to be fast and efficient, without sacrificing quality or security. We want you to have access to credit when you need it.': 'We know time is money, especially when it comes to credit. Our processes are designed to be fast and efficient, without sacrificing quality or security. We want you to have access to credit when you need it.',
+        'Social Responsibility': 'Social Responsibility',
+        'We understand our role in community development. In addition to offering fair credit, we invest in financial education and support initiatives that promote social and economic inclusion.': 'We understand our role in community development. In addition to offering fair credit, we invest in financial education and support initiatives that promote social and economic inclusion.',
+        
+        // About Page - Mission, Vision, Purpose
+        'Our Mission': 'Our Mission',
+        'Our Vision': 'Our Vision',
+        'Our Purpose': 'Our Purpose',
+        'Democratize access to credit in the United States, offering fair and transparent financial solutions to the Hispanic community, with speed and respect.': 'Democratize access to credit in the United States, offering fair and transparent financial solutions to the Hispanic community, with speed and respect.',
+        'To be the most trusted financial partner for families and businesses in the Hispanic community, recognized for our commitment to transparency and positive social impact.': 'To be the most trusted financial partner for families and businesses in the Hispanic community, recognized for our commitment to transparency and positive social impact.',
+        'Every person deserves access to fair credit opportunities. We exist to remove barriers and create paths to financial success for our clients.': 'Every person deserves access to fair credit opportunities. We exist to remove barriers and create paths to financial success for our clients.'
     },
     es: {
         // Navigation
@@ -2537,7 +2561,31 @@ const translations = {
         
         // About Page - Our Story
         'Our Story': 'Nuestra Historia',
-        'See My Offer': 'Ver Mi Oferta'
+        'See My Offer': 'Ver Mi Oferta',
+        
+        // About Page - Our Values
+        'Our Values': 'Nuestros Valores',
+        'The principles that guide every decision and action at FLEXCREDI': 'Los principios que guían cada decisión y acción en FLEXCREDI',
+        'Transparency': 'Transparencia',
+        'We believe trust is built through total clarity. That is why all our rates, terms and conditions are presented clearly, without fine print or tricks. Our clients always know exactly what they are contracting.': 'Creemos que la confianza se construye a través de claridad total. Por eso, todas nuestras tasas, plazos y condiciones se presentan claramente, sin letra pequeña ni trucos. Nuestros clientes siempre saben exactamente lo que están contratando.',
+        'Integrity': 'Integridad',
+        'We act with honesty and ethics in all our relationships. Our word is our commitment, and we always seek to do what is right, even when no one is watching. Integrity is the foundation of everything we do.': 'Actuamos con honestidad y ética en todas nuestras relaciones. Nuestra palabra es nuestro compromiso, y siempre buscamos hacer lo correcto, incluso cuando nadie está mirando. La integridad es la base de todo lo que hacemos.',
+        'Customer Focus': 'Orientación al Cliente',
+        'We put our customers at the center of everything we do. Every decision is made thinking about how we can improve their experience and help them achieve their financial goals responsibly and sustainably.': 'Ponemos a nuestros clientes en el centro de todo lo que hacemos. Cada decisión se toma pensando en cómo podemos mejorar su experiencia y ayudarlos a alcanzar sus objetivos financieros de manera responsable y sostenible.',
+        'Innovation': 'Innovación',
+        'We are always looking for better and more efficient ways to serve our customers. We use cutting-edge technology to simplify processes and create solutions that truly make a difference in peoples lives.': 'Siempre buscamos formas mejores y más eficientes de servir a nuestros clientes. Usamos tecnología de vanguardia para simplificar procesos y crear soluciones que realmente marcan la diferencia en la vida de las personas.',
+        'Agility': 'Agilidad',
+        'We know time is money, especially when it comes to credit. Our processes are designed to be fast and efficient, without sacrificing quality or security. We want you to have access to credit when you need it.': 'Sabemos que el tiempo es dinero, especialmente cuando se trata de crédito. Nuestros procesos están diseñados para ser rápidos y eficientes, sin sacrificar calidad o seguridad. Queremos que tengas acceso al crédito cuando lo necesites.',
+        'Social Responsibility': 'Responsabilidad Social',
+        'We understand our role in community development. In addition to offering fair credit, we invest in financial education and support initiatives that promote social and economic inclusion.': 'Entendemos nuestro papel en el desarrollo comunitario. Además de ofrecer crédito justo, invertimos en educación financiera y apoyamos iniciativas que promueven la inclusión social y económica.',
+        
+        // About Page - Mission, Vision, Purpose
+        'Our Mission': 'Nuestra Misión',
+        'Our Vision': 'Nuestra Visión',
+        'Our Purpose': 'Nuestro Propósito',
+        'Democratize access to credit in the United States, offering fair and transparent financial solutions to the Hispanic community, with speed and respect.': 'Democratizar el acceso al crédito en Estados Unidos, ofreciendo soluciones financieras justas y transparentes a la comunidad hispana, con rapidez y respeto.',
+        'To be the most trusted financial partner for families and businesses in the Hispanic community, recognized for our commitment to transparency and positive social impact.': 'Ser el socio financiero más confiable para familias y empresas en la comunidad hispana, reconocidos por nuestro compromiso con la transparencia y el impacto social positivo.',
+        'Every person deserves access to fair credit opportunities. We exist to remove barriers and create paths to financial success for our clients.': 'Toda persona merece acceso a oportunidades de crédito justas. Existimos para eliminar barreras y crear caminos hacia el éxito financiero para nuestros clientes.'
     },
     pt: {
         // Navigation
