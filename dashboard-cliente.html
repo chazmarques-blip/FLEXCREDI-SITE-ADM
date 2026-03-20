@@ -58,9 +58,8 @@
             <!-- User Menu -->
             <div class="user-menu-container">
                 <div class="user-profile" onclick="toggleUserMenu()">
-                    <img src="https://ui-avatars.com/api/?name=Demo+User&background=2ECC71&color=fff&size=40" alt="Avatar" class="user-avatar" id="userAvatar">
+                    <img src="https://ui-avatars.com/api/?name=Demo+User&background=2ECC71&color=fff&size=32" alt="Avatar" class="user-avatar" id="userAvatar">
                     <div class="user-info-text">
-                        <span class="user-welcome">Welcome</span>
                         <span class="user-name" id="userName">Demo User</span>
                     </div>
                     <i class="fas fa-chevron-down menu-arrow"></i>
@@ -69,7 +68,7 @@
                 <!-- Dropdown Menu -->
                 <div class="user-dropdown" id="userDropdown">
                     <div class="dropdown-header">
-                        <img src="https://ui-avatars.com/api/?name=Demo+User&background=2ECC71&color=fff&size=60" alt="Avatar">
+                        <img src="https://ui-avatars.com/api/?name=Demo+User&background=2ECC71&color=fff&size=50" alt="Avatar">
                         <div>
                             <strong id="dropdownUserName">Demo User</strong>
                             <span id="dropdownUserEmail">demo@flexcredi.com</span>
@@ -96,11 +95,6 @@
                         </button>
                     </div>
                 </div>
-                
-                <!-- Logout Button (Always Visible) -->
-                <button class="btn-logout-visible" onclick="handleLogout()" title="Sign Out">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
             </div>
         </nav>
     </header>
@@ -627,16 +621,15 @@
         .user-menu-container {
             display: flex;
             align-items: center;
-            gap: 12px;
         }
         
         .user-profile {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 8px 16px;
+            gap: 10px;
+            padding: 6px 12px 6px 6px;
             background: #f8f9fa;
-            border-radius: 50px;
+            border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s ease;
             border: 1px solid #e9ecef;
@@ -647,8 +640,8 @@
         }
         
         .user-avatar {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             object-fit: cover;
         }
@@ -659,21 +652,14 @@
             line-height: 1.2;
         }
         
-        .user-welcome {
-            font-size: 11px;
-            color: #7F8C8D;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
         .user-name {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: #2C3E50;
         }
         
         .menu-arrow {
-            font-size: 12px;
+            font-size: 10px;
             color: #7F8C8D;
             transition: transform 0.3s ease;
         }
@@ -685,12 +671,12 @@
         /* Dropdown Menu */
         .user-dropdown {
             position: absolute;
-            top: calc(100% + 10px);
+            top: calc(100% + 8px);
             right: 0;
-            width: 280px;
+            width: 240px;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
             opacity: 0;
             visibility: hidden;
             transform: translateY(-10px);
@@ -708,41 +694,42 @@
         .dropdown-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 20px;
+            gap: 10px;
+            padding: 16px;
             background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
             color: white;
         }
         
         .dropdown-header img {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             border: 2px solid rgba(255,255,255,0.3);
         }
         
         .dropdown-header strong {
             display: block;
-            font-size: 15px;
-            margin-bottom: 2px;
+            font-size: 14px;
+            margin-bottom: 1px;
         }
         
         .dropdown-header span {
-            font-size: 12px;
+            font-size: 11px;
             opacity: 0.9;
         }
         
         .dropdown-body {
-            padding: 12px 0;
+            padding: 8px 0;
         }
         
         .dropdown-body .dropdown-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 20px;
+            gap: 10px;
+            padding: 10px 16px;
             color: #2C3E50;
             text-decoration: none;
+            font-size: 13px;
             transition: all 0.2s ease;
         }
         
@@ -752,9 +739,10 @@
         }
         
         .dropdown-body .dropdown-item i {
-            width: 20px;
+            width: 18px;
             text-align: center;
             color: #7F8C8D;
+            font-size: 13px;
         }
         
         .dropdown-body .dropdown-item:hover i {
@@ -762,7 +750,7 @@
         }
         
         .dropdown-footer {
-            padding: 12px 20px;
+            padding: 10px 16px;
             border-top: 1px solid #e9ecef;
         }
         
@@ -772,12 +760,12 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: #fff;
             color: #E74C3C;
-            border: 2px solid #E74C3C;
-            border-radius: 8px;
-            font-size: 14px;
+            border: 1px solid #E74C3C;
+            border-radius: 6px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -788,46 +776,12 @@
             color: white;
         }
         
-        /* Logout Button Always Visible */
-        .btn-logout-visible {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            background: #fff;
-            color: #E74C3C;
-            border: 2px solid #E74C3C;
-            border-radius: 50%;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-logout-visible:hover {
-            background: #E74C3C;
-            color: white;
-            transform: scale(1.05);
-        }
-        
         /* Navbar positioning */
         .dashboard-header .navbar {
             position: relative;
         }
         
         @media (max-width: 768px) {
-            .user-info-text {
-                display: none;
-            }
-            
-            .user-profile {
-                padding: 8px;
-            }
-            
-            .menu-arrow {
-                display: none;
-            }
-            
             .user-dropdown {
                 width: calc(100vw - 40px);
                 right: -10px;
