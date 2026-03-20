@@ -567,20 +567,170 @@ section h2 {
 }
 
 /* =====================================================
-   9. NOSSA HISTÓRIA SECTION
+   9. NOSSA HISTÓRIA SECTION - COMPACTA
    ===================================================== */
 
+section[aria-labelledby="historia-titulo"] {
+    padding: 50px 0 !important;
+    background: #f9fafb !important;
+}
+
+section[aria-labelledby="historia-titulo"] .row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 30px !important;
+}
+
+section[aria-labelledby="historia-titulo"] .col-6 {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+}
+
+section[aria-labelledby="historia-titulo"] h2 {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #333 !important;
+    text-align: center !important;
+    margin-bottom: 20px !important;
+}
+
+.historia-content {
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+}
+
 .historia-content p {
-    font-size: 15px !important;
+    font-size: 14px !important;
     color: #666 !important;
     line-height: 1.7 !important;
-    margin-bottom: 16px !important;
+    margin-bottom: 12px !important;
 }
 
 .historia-content .text-large {
-    font-size: 17px !important;
+    font-size: 16px !important;
     color: #333 !important;
     font-weight: 500 !important;
+}
+
+.historia-cta {
+    text-align: center !important;
+    margin-top: 20px !important;
+}
+
+/* TIMELINE HORIZONTAL */
+.timeline {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 15px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: relative !important;
+}
+
+.timeline::before {
+    display: none !important;
+}
+
+.timeline-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-left: none !important;
+    position: relative !important;
+}
+
+.timeline-item::before,
+.timeline-item::after {
+    display: none !important;
+}
+
+.timeline-marker {
+    width: 50px !important;
+    height: 50px !important;
+    background: #28a745 !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 12px !important;
+    position: relative !important;
+    left: auto !important;
+    transform: none !important;
+}
+
+.timeline-marker i {
+    font-size: 20px !important;
+    color: #fff !important;
+}
+
+.timeline-content {
+    background: #fff !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 10px !important;
+    padding: 15px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.timeline-content h4 {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #28a745 !important;
+    margin-bottom: 6px !important;
+}
+
+.timeline-content p {
+    font-size: 12px !important;
+    color: #666 !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+}
+
+/* Timeline Responsivo - Tablet */
+@media (max-width: 1200px) {
+    .timeline {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+/* Timeline Responsivo - Mobile */
+@media (max-width: 768px) {
+    .timeline {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    
+    .timeline-marker {
+        width: 40px !important;
+        height: 40px !important;
+    }
+    
+    .timeline-marker i {
+        font-size: 16px !important;
+    }
+    
+    .timeline-content {
+        padding: 12px !important;
+    }
+    
+    .timeline-content h4 {
+        font-size: 13px !important;
+    }
+    
+    .timeline-content p {
+        font-size: 11px !important;
+    }
+    
+    .historia-content p {
+        font-size: 13px !important;
+        text-align: left !important;
+    }
 }
 
 .faq-category {
