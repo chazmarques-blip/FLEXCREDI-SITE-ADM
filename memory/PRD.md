@@ -11,6 +11,35 @@
 
 ## O que foi Implementado
 
+### 20/03/2026 - Migração do Sistema de Traduções para JSON
+
+**Contexto**: O sistema de traduções estava inline no arquivo `main.js`, tornando-o muito grande e difícil de manter. O usuário solicitou a migração para arquivos JSON separados por idioma.
+
+**Arquivos Criados**:
+- `/app/locales/en.json` - 434 chaves de tradução em inglês
+- `/app/locales/es.json` - 522 chaves de tradução em espanhol  
+- `/app/locales/pt.json` - 522 chaves de tradução em português
+
+**Arquivos Modificados**:
+- `/app/js/main.js` - Novo sistema de carregamento dinâmico de traduções:
+  - Função `loadTranslation(lang)` - Carrega JSON de um idioma específico
+  - Função `loadAllTranslations()` - Carrega todos os idiomas
+  - Sistema de cache para evitar recarregamento
+  - Removido o grande objeto `translations` inline (~140KB)
+
+**Benefícios**:
+1. **Manutenção**: Mais fácil editar traduções em arquivos JSON separados
+2. **Performance**: Possibilidade futura de carregar apenas o idioma necessário
+3. **Organização**: Código JS mais limpo e focado na lógica
+4. **Colaboração**: Tradutores podem editar JSONs sem conhecer JavaScript
+
+**Verificação**:
+- ✅ Traduções EN/ES/PT funcionando corretamente
+- ✅ Troca de idioma instantânea
+- ✅ Sistema de cache funcionando
+
+---
+
 ### 20/03/2026 - Auditoria Completa de Traduções
 
 **Contexto**: O usuário solicitou uma auditoria e correção completa de todas as traduções em todas as páginas do site para os três idiomas suportados: Inglês (EN), Espanhol (ES) e Português (PT).
