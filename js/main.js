@@ -2045,7 +2045,35 @@ const translations = {
         '2. Proof of Residence': '2. Proof of Residence',
         '3. Debit Card': '3. Debit Card',
         'Card Front': 'Card Front',
-        'Card Back': 'Card Back'
+        'Card Back': 'Card Back',
+        
+        // About Page - Our Commitment
+        'Our Commitment to You': 'Our Commitment to You',
+        'Promises we make and keep every day': 'Promises we make and keep every day',
+        'Total Transparency': 'Total Transparency',
+        'All information about rates, terms and conditions is presented clearly from the first contact.': 'All information about rates, terms and conditions is presented clearly from the first contact.',
+        'Humanized Service': 'Humanized Service',
+        'Our team is always ready to answer your questions and support you at every step of the process.': 'Our team is always ready to answer your questions and support you at every step of the process.',
+        'Guaranteed Security': 'Guaranteed Security',
+        'Your personal and financial data is protected with the highest digital security standards.': 'Your personal and financial data is protected with the highest digital security standards.',
+        'Agile Processes': 'Agile Processes',
+        'We keep our processes simple and fast, always respecting the quality of the analysis.': 'We keep our processes simple and fast, always respecting the quality of the analysis.',
+        
+        // About Page - Statistics
+        'FLEXCREDI in Numbers': 'FLEXCREDI in Numbers',
+        'Our results reflect the positive impact we generate': 'Our results reflect the positive impact we generate',
+        'Clients Served': 'Clients Served',
+        'People and companies who trusted our services': 'People and companies who trusted our services',
+        'Credit Released': 'Credit Released',
+        'Total volume of credit made available': 'Total volume of credit made available',
+        'Customer Rating': 'Customer Rating',
+        'Average rating based on thousands of reviews': 'Average rating based on thousands of reviews',
+        'Average Release Time': 'Average Release Time',
+        'Speed that makes the difference when you need it': 'Speed that makes the difference when you need it',
+        
+        // About Page - Our Story
+        'Our Story': 'Our Story',
+        'See My Offer': 'See My Offer'
     },
     es: {
         // Navigation
@@ -2481,7 +2509,35 @@ const translations = {
         '2. Proof of Residence': '2. Comprobante de Domicilio',
         '3. Debit Card': '3. Tarjeta de Débito',
         'Card Front': 'Frente de la Tarjeta',
-        'Card Back': 'Reverso de la Tarjeta'
+        'Card Back': 'Reverso de la Tarjeta',
+        
+        // About Page - Our Commitment
+        'Our Commitment to You': 'Nuestro Compromiso Contigo',
+        'Promises we make and keep every day': 'Promesas que hacemos y cumplimos todos los días',
+        'Total Transparency': 'Transparencia Total',
+        'All information about rates, terms and conditions is presented clearly from the first contact.': 'Toda la información sobre tasas, plazos y condiciones se presenta claramente desde el primer contacto.',
+        'Humanized Service': 'Atención Humanizada',
+        'Our team is always ready to answer your questions and support you at every step of the process.': 'Nuestro equipo siempre está listo para responder sus preguntas y apoyarlo en cada paso del proceso.',
+        'Guaranteed Security': 'Seguridad Garantizada',
+        'Your personal and financial data is protected with the highest digital security standards.': 'Sus datos personales y financieros están protegidos con los más altos estándares de seguridad digital.',
+        'Agile Processes': 'Procesos Ágiles',
+        'We keep our processes simple and fast, always respecting the quality of the analysis.': 'Mantenemos nuestros procesos simples y rápidos, siempre respetando la calidad del análisis.',
+        
+        // About Page - Statistics
+        'FLEXCREDI in Numbers': 'FLEXCREDI en Números',
+        'Our results reflect the positive impact we generate': 'Nuestros resultados reflejan el impacto positivo que generamos',
+        'Clients Served': 'Clientes Atendidos',
+        'People and companies who trusted our services': 'Personas y empresas que confiaron en nuestros servicios',
+        'Credit Released': 'Crédito Liberado',
+        'Total volume of credit made available': 'Volumen total de crédito disponible',
+        'Customer Rating': 'Calificación del Cliente',
+        'Average rating based on thousands of reviews': 'Calificación promedio basada en miles de reseñas',
+        'Average Release Time': 'Tiempo Promedio de Liberación',
+        'Speed that makes the difference when you need it': 'Velocidad que hace la diferencia cuando la necesitas',
+        
+        // About Page - Our Story
+        'Our Story': 'Nuestra Historia',
+        'See My Offer': 'Ver Mi Oferta'
     },
     pt: {
         // Navigation
@@ -2919,7 +2975,35 @@ const translations = {
         '2. Proof of Residence': '2. Comprovante de Residência',
         '3. Debit Card': '3. Cartão de Débito',
         'Card Front': 'Frente do Cartão',
-        'Card Back': 'Verso do Cartão'
+        'Card Back': 'Verso do Cartão',
+        
+        // About Page - Our Commitment
+        'Our Commitment to You': 'Nosso Compromisso com Você',
+        'Promises we make and keep every day': 'Promessas que fazemos e cumprimos todos os dias',
+        'Total Transparency': 'Transparência Total',
+        'All information about rates, terms and conditions is presented clearly from the first contact.': 'Todas as informações sobre taxas, prazos e condições são apresentadas de forma clara desde o primeiro contato.',
+        'Humanized Service': 'Atendimento Humanizado',
+        'Our team is always ready to answer your questions and support you at every step of the process.': 'Nossa equipe está sempre pronta para esclarecer suas dúvidas e apoiá-lo em cada etapa do processo.',
+        'Guaranteed Security': 'Segurança Garantida',
+        'Your personal and financial data is protected with the highest digital security standards.': 'Seus dados pessoais e financeiros são protegidos com os mais altos padrões de segurança digital.',
+        'Agile Processes': 'Processos Ágeis',
+        'We keep our processes simple and fast, always respecting the quality of the analysis.': 'Mantemos nossos processos simples e rápidos, respeitando sempre a qualidade da análise.',
+        
+        // About Page - Statistics
+        'FLEXCREDI in Numbers': 'FLEXCREDI em Números',
+        'Our results reflect the positive impact we generate': 'Nossos resultados refletem o impacto positivo que geramos',
+        'Clients Served': 'Clientes Atendidos',
+        'People and companies who trusted our services': 'Pessoas e empresas que confiaram em nossos serviços',
+        'Credit Released': 'Crédito Liberado',
+        'Total volume of credit made available': 'Volume total de crédito disponibilizado',
+        'Customer Rating': 'Avaliação do Cliente',
+        'Average rating based on thousands of reviews': 'Avaliação média baseada em milhares de avaliações',
+        'Average Release Time': 'Tempo Médio de Liberação',
+        'Speed that makes the difference when you need it': 'Velocidade que faz a diferença quando você precisa',
+        
+        // About Page - Our Story
+        'Our Story': 'Nossa História',
+        'See My Offer': 'Ver Minha Oferta'
     }
 };
 
