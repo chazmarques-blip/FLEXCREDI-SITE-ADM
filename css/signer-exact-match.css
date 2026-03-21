@@ -1,103 +1,142 @@
-/* ULTRA CLEAN & COMPACT DESIGN - Professional document cards */
+/* ULTRA CLEAN & COMPACT DESIGN - Professional document cards with REAL IMAGES */
 
-/* Container principal - 4 colunas ultra compactas */
+/* Container principal - 4 colunas com cards de imagem */
 .main-signer-card .cobuyer-documents-grid,
 .main-signer-card #signerDocuments,
-.cobuyer-card .cobuyer-documents-grid {
+.cobuyer-card .cobuyer-documents-grid,
+#signerDocuments {
     display: grid !important;
-    grid-template-columns: repeat(4, 115px) !important;
-    gap: 8px !important;
-    margin-top: 10px !important;
-    width: auto !important;
-    max-width: 488px !important; /* 4 × 115px + 3 × 8px = 488px */
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 12px !important;
+    margin-top: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
     justify-content: start !important;
 }
 
-/* CARDS - Design ultra clean e compacto */
-.main-signer-card .cobuyer-document-card,
+/* CARDS - Design profissional com imagens reais */
 .main-signer-card .document-card,
-.cobuyer-card .cobuyer-document-card,
-.cobuyer-card .document-card {
-    width: 115px !important;
-    height: 140px !important;
-    min-height: 140px !important;
-    max-height: 140px !important;
+.cobuyer-card .document-card,
+#signerDocuments .document-card {
+    width: 100% !important;
+    height: auto !important;
+    min-height: unset !important;
+    max-height: unset !important;
     
     background: #ffffff !important;
-    border: 1.5px dashed #f59e0b !important;
-    border-radius: 6px !important;
+    border: 2px solid #e5e7eb !important;
+    border-radius: 10px !important;
     
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
-    justify-content: space-between !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
     
-    padding: 6px 4px 5px 4px !important;
+    padding: 0 !important;
     box-sizing: border-box !important;
     
     position: relative !important;
     overflow: hidden !important;
-    transition: all 0.2s ease !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05) !important;
 }
 
-.main-signer-card .cobuyer-document-card:hover,
-.cobuyer-card .cobuyer-document-card:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 3px 6px rgba(245, 158, 11, 0.12) !important;
+.document-card.status-approved {
+    border-color: #2ECC71 !important;
 }
 
-/* TÍTULO - Ultra compacto */
-.main-signer-card .doc-header,
-.cobuyer-card .doc-header {
+.document-card.status-pending {
+    border-color: #f59e0b !important;
+}
+
+.document-card:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1) !important;
+    border-color: #2ECC71 !important;
+}
+
+/* Imagem do documento */
+.doc-image-container {
+    width: 100% !important;
+    height: 90px !important;
+    overflow: hidden !important;
+    background: #f3f4f6 !important;
+    position: relative !important;
+    cursor: pointer !important;
+}
+
+.doc-image-container img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transition: transform 0.3s ease !important;
+}
+
+.document-card:hover .doc-image-container img {
+    transform: scale(1.08) !important;
+}
+
+.doc-image-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0,0,0,0.5) !important;
     display: flex !important;
-    flex-direction: column !important;
     align-items: center !important;
+    justify-content: center !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+}
+
+.document-card:hover .doc-image-overlay {
+    opacity: 1 !important;
+}
+
+.doc-image-overlay i {
+    color: white !important;
+    font-size: 20px !important;
+}
+
+/* Footer do card */
+.doc-card-footer {
+    padding: 10px 8px !important;
     text-align: center !important;
-    
-    width: 100% !important;
-    margin: 0 0 3px 0 !important;
-    padding: 0 !important;
-    flex-shrink: 0 !important;
+    background: #fafbfc !important;
+    border-top: 1px solid #f0f0f0 !important;
 }
 
-/* Esconder ícone do header */
-.main-signer-card .doc-header .doc-icon,
-.cobuyer-card .doc-header .doc-icon {
-    display: none !important;
-}
-
-.main-signer-card .doc-header .doc-info,
-.cobuyer-card .doc-header .doc-info {
-    width: 100% !important;
-    text-align: center !important;
-}
-
-/* Títulos - Texto ultra compacto */
-.main-signer-card .doc-header .doc-info h4,
-.cobuyer-card .doc-header .doc-info h4 {
-    font-size: 9px !important;
+.doc-card-name {
     font-weight: 600 !important;
-    color: #374151 !important;
-    margin: 0 0 1px 0 !important;
-    line-height: 1.1 !important;
-    text-align: center !important;
-    letter-spacing: 0.1px !important;
+    font-size: 11px !important;
+    color: #1f2937 !important;
+    margin-bottom: 6px !important;
+    line-height: 1.2 !important;
 }
 
-.main-signer-card .doc-header .doc-info p,
-.cobuyer-card .doc-header .doc-info p {
-    font-size: 7px !important;
-    color: #9ca3af !important;
-    margin: 0 !important;
-    line-height: 1 !important;
-    text-align: center !important;
+.doc-card-status {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    padding: 3px 8px !important;
+    border-radius: 12px !important;
+    background: #dcfce7 !important;
+    color: #16a34a !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
 }
 
-/* ÁREA DE PREVIEW - Ultra compacta */
-.main-signer-card .doc-preview-box,
-.cobuyer-card .doc-preview-box {
-    width: 65px !important;
-    height: 65px !important;
+.doc-card-status.pending {
+    background: #fef3c7 !important;
+    color: #d97706 !important;
+}
+
+.doc-card-status i {
+    font-size: 8px !important;
+}
     
     background: #fef3c7 !important;
     border: 1px solid #f59e0b !important;

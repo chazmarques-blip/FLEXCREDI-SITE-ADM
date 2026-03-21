@@ -953,18 +953,24 @@
                         if (doc) {
                             const statusClass = doc.status === 'approved' ? 'status-approved' : 'status-pending';
                             const statusIcon = doc.status === 'approved' ? 'fa-check-circle' : 'fa-clock';
-                            const statusText = doc.status === 'approved' ? 'Approved' : 'Pending';
+                            const statusText = doc.status === 'approved' ? 'APPROVED' : 'PENDING';
+                            const statusBadgeClass = doc.status === 'approved' ? '' : 'pending';
                             
                             if (doc.status === 'approved') approvedCount++;
                             
                             docsHtml += `
-                                <div class="document-item ${statusClass}">
-                                    <div class="doc-thumbnail">
-                                        <img src="${doc.url}" alt="${doc.name}" onclick="viewDocument('${doc.url}', '${doc.name}')">
+                                <div class="document-card ${statusClass}">
+                                    <div class="doc-image-container" onclick="viewDocument('${doc.url}', '${doc.name}')">
+                                        <img src="${doc.url}" alt="${doc.name}" loading="lazy">
+                                        <div class="doc-image-overlay">
+                                            <i class="fas fa-search-plus"></i>
+                                        </div>
                                     </div>
-                                    <div class="doc-info">
-                                        <span class="doc-name">${doc.name}</span>
-                                        <span class="doc-status"><i class="fas ${statusIcon}"></i> ${statusText}</span>
+                                    <div class="doc-card-footer">
+                                        <div class="doc-card-name">${doc.name}</div>
+                                        <span class="doc-card-status ${statusBadgeClass}">
+                                            <i class="fas ${statusIcon}"></i> ${statusText}
+                                        </span>
                                     </div>
                                 </div>
                             `;
@@ -1012,71 +1018,129 @@
     </script>
     
     <style>
-        /* Document Items */
-        .document-item {
-            display: flex;
-            gap: 12px;
-            padding: 12px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            transition: all 0.2s;
+        /* Document Cards - Professional Design with Images */
+        #signerDocuments.cobuyer-documents-grid {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 16px !important;
+            margin-top: 16px !important;
+            width: 100% !important;
+            max-width: 100% !important;
         }
         
-        .document-item:hover {
+        .document-card {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .document-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
             border-color: #2ECC71;
         }
         
-        .document-item.status-approved {
-            border-left: 3px solid #2ECC71;
+        .document-card.status-approved {
+            border-color: #2ECC71;
         }
         
-        .document-item.status-pending {
-            border-left: 3px solid #f39c12;
+        .document-card.status-pending {
+            border-color: #f39c12;
         }
         
-        .doc-thumbnail {
-            width: 60px;
-            height: 60px;
-            border-radius: 6px;
+        .doc-image-container {
+            width: 100%;
+            height: 120px;
             overflow: hidden;
+            background: #f8f9fa;
+            position: relative;
             cursor: pointer;
         }
         
-        .doc-thumbnail img {
+        .doc-image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
         
-        .doc-info {
+        .document-card:hover .doc-image-container img {
+            transform: scale(1.05);
+        }
+        
+        .doc-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
             display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
-        .doc-name {
+        .document-card:hover .doc-image-overlay {
+            opacity: 1;
+        }
+        
+        .doc-image-overlay i {
+            color: white;
+            font-size: 24px;
+        }
+        
+        .doc-card-footer {
+            padding: 12px;
+            text-align: center;
+            background: #fafafa;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .doc-card-name {
             font-weight: 600;
-            font-size: 13px;
-            color: #2C3E50;
-        }
-        
-        .doc-status {
             font-size: 12px;
-            color: #7F8C8D;
+            color: #2C3E50;
+            margin-bottom: 6px;
+            line-height: 1.3;
         }
         
-        .doc-status i {
-            margin-right: 4px;
-        }
-        
-        .status-approved .doc-status {
+        .doc-card-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: #e8f5e9;
             color: #27AE60;
         }
         
-        .status-pending .doc-status {
+        .doc-card-status.pending {
+            background: #fff3e0;
             color: #f39c12;
+        }
+        
+        .doc-card-status i {
+            font-size: 10px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #signerDocuments.cobuyer-documents-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #signerDocuments.cobuyer-documents-grid {
+                grid-template-columns: 1fr !important;
+            }
         }
         
         /* Profile Items */
