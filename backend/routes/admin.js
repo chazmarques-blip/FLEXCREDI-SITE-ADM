@@ -358,4 +358,63 @@ router.get('/applications', async (req, res) => {
   }
 });
 
+// POST /api/admin/clients/seed - Create test client for development
+router.post('/clients/seed', async (req, res) => {
+  try {
+    console.log('[AdminRoutes] Creating seed test client...');
+    
+    // Check if test client already exists
+    const existingClient = await prisma.user.findFirst({
+      where: { email: 'maria.santos@flexcredi.test' }
+    });
+    
+    if (existingClient) {
+      console.log('[AdminRoutes] Test client already exists');
+      return res.json({
+        success: true,
+        message: 'Test client already exists',
+        client: existingClient
+      });
+    }
+    
+    // Create test client
+    const testClient = await prisma.user.create({
+      data: {
+        email: 'maria.santos@flexcredi.test',
+        name: 'Maria Santos',
+        phone: '(305) 555-1234',
+        ssn: '123-45-6789',
+        role: 'CLIENT',
+        address: '1234 Ocean Drive',
+        city: 'Miami',
+        state: 'FL',
+        zipCode: '33139',
+        monthlyIncome: 5500.00,
+        employer: 'Tech Solutions Inc',
+        occupation: 'Software Developer',
+        employmentStatus: 'EMPLOYED',
+        active: true,
+        emailVerified: true
+      }
+    });
+    
+    console.log('[AdminRoutes] Test client created:', testClient.id);
+    
+    res.json({
+      success: true,
+      message: 'Test client created successfully',
+      client: testClient
+    });
+    
+  } catch (error) {
+    console.error('[AdminRoutes] Error creating test client:', error);
+    res.status(500).json({
+      success: false,
+      error: process.env.NODE_ENV === 'production' 
+        ? 'Erro ao criar cliente de teste' 
+        : error.message
+    });
+  }
+});
+
 module.exports = router;

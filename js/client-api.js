@@ -75,12 +75,8 @@ const ClientAPI = {
    * @returns {Promise<object>} - User data and token
    */
   async login(email, password) {
-    if (!this.useRealAPI) {
-      return this.demoLogin(email, password);
-    }
-    
     try {
-      const data = await this.request('/api/auth/login', {
+      const data = await this.request('/api/client/auth/login', {
         method: 'POST',
         body: JSON.stringify({ email, password })
       });
@@ -96,7 +92,7 @@ const ClientAPI = {
       
     } catch (error) {
       // Fallback to demo mode if API fails
-      console.warn('[ClientAPI] API login failed, falling back to demo mode');
+      console.warn('[ClientAPI] API login failed, falling back to demo mode:', error.message);
       return this.demoLogin(email, password);
     }
   },
@@ -107,12 +103,8 @@ const ClientAPI = {
    * @returns {Promise<object>} - Created user
    */
   async register(userData) {
-    if (!this.useRealAPI) {
-      return this.demoRegister(userData);
-    }
-    
     try {
-      const data = await this.request('/api/auth/register', {
+      const data = await this.request('/api/client/auth/register', {
         method: 'POST',
         body: JSON.stringify(userData)
       });
@@ -120,7 +112,7 @@ const ClientAPI = {
       return data;
       
     } catch (error) {
-      console.warn('[ClientAPI] API register failed, falling back to demo mode');
+      console.warn('[ClientAPI] API register failed, falling back to demo mode:', error.message);
       return this.demoRegister(userData);
     }
   },

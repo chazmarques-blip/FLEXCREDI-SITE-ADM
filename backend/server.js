@@ -25,6 +25,7 @@ const contractsRoutes = require('./routes/contracts');
 const documentsRoutes = require('./routes/documents');
 const debugRoutes = require('./routes/debug');
 const testDataRoutes = require('./routes/test-data');
+const clientAuthRoutes = require('./routes/client-auth');
 
 // Importar e inicializar agentes autônomos
 const AgentCreditAnalyzer = require('./agents/AgentCreditAnalyzer');
@@ -181,6 +182,7 @@ app.get('/api/test', (req, res) => {
 // ==================== ROTAS DE MÓDULOS ====================
 // Registrar rotas dos módulos
 app.use('/api/admin', authRoutes); // AUTH routes (login, logout, verify)
+app.use('/api/client/auth', clientAuthRoutes); // CLIENT AUTH routes
 app.use('/api/public', publicRoutes); // PUBLIC routes (no auth required)
 app.use('/api/partners', partnersRoutes);
 app.use('/api/applications', applicationsRoutes);

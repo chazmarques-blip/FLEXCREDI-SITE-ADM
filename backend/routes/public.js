@@ -65,14 +65,17 @@ router.post('/applications', async (req, res) => {
                     email: clientEmail,
                     name: clientName,
                     phone: clientPhone,
-                    document: clientSsn,
+                    ssn: clientSsn,
                     address: clientAddress,
                     city: clientCity,
                     state: clientState,
                     zipCode: clientZipCode,
                     occupation: occupation,
+                    employer: employer,
+                    employmentStatus: employmentStatus,
                     monthlyIncome: parseFloat(monthlyIncome) || null,
-                    isActive: true
+                    active: true,
+                    role: 'CLIENT'
                 }
             });
             console.log('[Public API] New user created:', user.id);
@@ -83,12 +86,13 @@ router.post('/applications', async (req, res) => {
                 data: {
                     name: clientName,
                     phone: clientPhone,
-                    document: clientSsn || user.document,
+                    ssn: clientSsn || user.ssn,
                     address: clientAddress || user.address,
                     city: clientCity || user.city,
                     state: clientState || user.state,
                     zipCode: clientZipCode || user.zipCode,
                     occupation: occupation || user.occupation,
+                    employer: employer || user.employer,
                     monthlyIncome: parseFloat(monthlyIncome) || user.monthlyIncome
                 }
             });
@@ -99,29 +103,37 @@ router.post('/applications', async (req, res) => {
         const application = await prisma.application.create({
             data: {
                 userId: user.id,
-                partnerId: partnerId || null,
+                partnerId: partnerId,
+                
+                // Client snapshot (required fields)
+                clientName: clientName,
+                clientEmail: clientEmail,
+                clientPhone: clientPhone,
+                clientSsn: clientSsn || '000-00-0000',
+                clientAddress: clientAddress,
+                clientCity: clientCity,
+                clientState: clientState,
+                clientZipCode: clientZipCode,
+                
+                // Income and employment
+                monthlyIncome: parseFloat(monthlyIncome) || 0,
+                employmentStatus: employmentStatus || 'EMPLOYED',
+                employer: employer,
+                occupation: occupation,
+                
+                // Credit request
                 desiredAmount: parseFloat(desiredAmount),
                 purpose: purpose,
-                status: 'PENDING',
                 
-                // Additional data from form
-                employmentStatus: employmentStatus,
-                employer: employer
+                // Status
+                status: 'PENDING'
             },
             include: {
-                user: {
-                    select: {
-                        id: true,
-                        name: true,
-                        email: true,
-                        phone: true
-                    }
-                },
                 partner: {
                     select: {
                         id: true,
-                        name: true,
-                        type: true
+                        companyName: true,
+                        tradeName: true
                     }
                 }
             }
