@@ -1845,7 +1845,8 @@ async function initLanguageSelector() {
     if (currentLang !== 'en') {
         changeLanguage(currentLang);
     } else {
-        // Aplicar classe de idioma padrão
+        // Aplicar inglês também para garantir que as traduções sejam carregadas
+        changeLanguage('en');
         document.body.setAttribute('data-lang', 'en');
     }
 }
