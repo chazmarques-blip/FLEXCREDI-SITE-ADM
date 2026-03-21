@@ -1161,65 +1161,85 @@ function checkContractEligibility() {
 // Show Contract Modal
 function showContractModal() {
     try {
-        // Obter dados do usuário e co-signatários
+        // Get user data
         const userData = getUserFromStorage();
-        const cobuyers = getCobuyersFromStorage();
         
         if (!userData) {
-            alert('Erro: Dados do usuário não encontrados.');
+            alert('Error: User data not found.');
             return;
         }
         
-        // Contrato simples para teste
-        const contractHtml = `
-            <div style="font-family: Times, serif; line-height: 1.6;">
-                <h1 style="text-align: center; color: #2ECC71;">FLEXCREDI LLC</h1>
-                <h2 style="text-align: center;">PERSONAL LOAN AGREEMENT</h2>
-                <hr>
-                
-                <h3>PARTIES:</h3>
-                <p><strong>LENDER:</strong> Flexcredi LLC</p>
-                <p><strong>BORROWER:</strong> ${userData.fullName || 'Carlos Eduardo Silva'}</p>
-                
-                <h3>LOAN TERMS:</h3>
-                <p><strong>Principal Amount:</strong> $25,000</p>
-                <p><strong>Annual Interest Rate:</strong> 18.5% per annum</p>
-                <p><strong>Loan Term:</strong> 24 months</p>
-                <p><strong>Monthly Payment:</strong> $1,287</p>
-                
-                <h3>TERMS AND CONDITIONS:</h3>
-                <p>This agreement is subject to the laws of the State of Florida...</p>
+        // Get current language
+        const currentLang = localStorage.getItem('flexcredi_language') || 'en';
+        
+        // Generate contract HTML using the template
+        let contractHtml;
+        if (typeof generateContractHTML === 'function') {
+            contractHtml = contractStyles + generateContractHTML(userData, currentLang, false, null);
+        } else {
+            // Fallback to simple contract
+            contractHtml = `
+                <div style="font-family: Times, serif; line-height: 1.6;">
+                    <h1 style="text-align: center; color: #2ECC71;">FLEXCREDI LLC</h1>
+                    <h2 style="text-align: center;">PERSONAL LOAN AGREEMENT</h2>
+                    <hr>
+                    <h3>PARTIES:</h3>
+                    <p><strong>LENDER:</strong> Flexcredi LLC</p>
+                    <p><strong>BORROWER:</strong> ${userData.fullName || 'N/A'}</p>
+                    <h3>LOAN TERMS:</h3>
+                    <p><strong>Principal Amount:</strong> $${(userData.requestedAmount || 10000).toLocaleString()}</p>
+                    <p><strong>Annual Interest Rate:</strong> ${userData.interestRate || 18.5}% per annum</p>
+                    <p><strong>Loan Term:</strong> ${userData.term || 24} months</p>
+                    <p><strong>Monthly Payment:</strong> $${userData.monthlyPayment || 508}</p>
+                </div>
+            `;
+        }
+        
+        // Language tabs HTML
+        const languageTabs = `
+            <div class="contract-language-tabs">
+                <button class="lang-tab ${currentLang === 'en' ? 'active' : ''}" onclick="switchContractLanguage('en')">
+                    <i class="fas fa-check-circle"></i> English (Official)
+                </button>
+                <button class="lang-tab ${currentLang === 'pt' ? 'active' : ''}" onclick="switchContractLanguage('pt')">
+                    <i class="fas fa-eye"></i> Português (Preview)
+                </button>
+                <button class="lang-tab ${currentLang === 'es' ? 'active' : ''}" onclick="switchContractLanguage('es')">
+                    <i class="fas fa-eye"></i> Español (Preview)
+                </button>
             </div>
         `;
     
         const modalHTML = `
             <div class="modal-overlay" id="contract-modal">
-                <div class="modal-content contract-modal">
+                <div class="modal-content contract-modal" style="max-width: 900px; max-height: 90vh;">
                     <div class="modal-header">
-                        <h3>Personal Loan Agreement #FL2024001</h3>
+                        <h3><i class="fas fa-file-contract"></i> Personal Loan Agreement - ${userData.fullName || 'Contract'}</h3>
                         <button class="modal-close" onclick="closeModal('contract-modal')">×</button>
                     </div>
-                    <div class="modal-body">
-                        <div class="contract-viewer">
-                            <div class="contract-language-notice">
-                                <p><strong>📋 LEGAL NOTICE:</strong> This contract is presented in English as the official legal version. 
-                                While summaries may be available in Portuguese and Spanish for reference, 
-                                <strong>the English version is binding and will be signed regardless of language preference.</strong></p>
+                    <div class="modal-body" style="padding: 0;">
+                        ${languageTabs}
+                        <div class="contract-viewer" id="mainContractViewer" style="max-height: 60vh; overflow-y: auto; padding: 20px;">
+                            <div class="contract-language-notice" style="background: #e8f5e9; border: 1px solid #c8e6c9; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+                                <p style="margin: 0;"><strong><i class="fas fa-info-circle"></i> LEGAL NOTICE:</strong> The official contract is in English as required by US law. 
+                                Preview translations are available for reference only.</p>
                             </div>
                             
-                            <div class="contract-content">
+                            <div class="contract-content" id="contractContent">
                                 ${contractHtml}
-                            </div>
-                            
-                            <div class="contract-footer">
-                                <p><em>This contract has been automatically generated using the official FLEXCREDI LLC template and is subject to legal verification before final signature.</em></p>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer" style="display: flex; gap: 10px; justify-content: flex-end; padding: 15px 20px; border-top: 1px solid #eee;">
+                        <button class="btn btn-outline" onclick="printContract()">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                        <button class="btn btn-outline" onclick="downloadContractPDF()">
+                            <i class="fas fa-download"></i> Download PDF
+                        </button>
                         <button class="btn btn-outline" onclick="closeModal('contract-modal')">Close</button>
                         <button class="btn btn-primary" onclick="closeModal('contract-modal'); initiateElectronicSignature();">
-                            <i class="fas fa-signature"></i> Sign Contract
+                            <i class="fas fa-signature"></i> Proceed to Signature
                         </button>
                     </div>
                 </div>
@@ -1228,9 +1248,61 @@ function showContractModal() {
         
         document.body.insertAdjacentHTML('beforeend', modalHTML);
     } catch (error) {
-        console.error('Erro ao abrir contrato:', error);
-        alert('Erro ao carregar o contrato. Tente novamente.');
+        console.error('Error opening contract:', error);
+        alert('Error loading contract. Please try again.');
     }
+}
+
+// Switch contract language (preview only for non-English)
+function switchContractLanguage(lang) {
+    const userData = getUserFromStorage();
+    if (!userData) return;
+    
+    // Update tabs
+    document.querySelectorAll('.lang-tab').forEach(tab => tab.classList.remove('active'));
+    document.querySelector(`.lang-tab[onclick="switchContractLanguage('${lang}')"]`)?.classList.add('active');
+    
+    // Generate new contract content
+    const contractContent = document.getElementById('contractContent');
+    if (contractContent && typeof generateContractHTML === 'function') {
+        contractContent.innerHTML = contractStyles + generateContractHTML(userData, lang, false, null);
+    }
+}
+
+// Show contract in English (from preview)
+function showContractInEnglish() {
+    switchContractLanguage('en');
+}
+
+// Print contract
+function printContract() {
+    const contractContent = document.getElementById('contractContent');
+    if (contractContent) {
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+            <html>
+            <head>
+                <title>FlexCredi - Personal Loan Agreement</title>
+                <style>
+                    body { font-family: 'Times New Roman', serif; padding: 40px; }
+                    h1, h2 { color: #2C3E50; }
+                    .contract-preview-notice { display: none; }
+                    .english-version-notice { display: none; }
+                </style>
+            </head>
+            <body>
+                ${contractContent.innerHTML}
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.print();
+    }
+}
+
+// Download contract as PDF (placeholder)
+function downloadContractPDF() {
+    alert('PDF download feature will be available soon. Please use the Print option to save as PDF.');
 }
 
 // Initiate Electronic Signature
@@ -2134,39 +2206,68 @@ function reviewCobuyerContract(cobuyerId) {
     const cobuyer = cobuyers.find(c => c.id === cobuyerId);
     if (!cobuyer) return;
     
+    // Get main signer data
+    const mainSignerData = getUserFromStorage();
+    
+    // Get current language
+    const currentLang = localStorage.getItem('flexcredi_language') || 'en';
+    
+    // Generate co-signer contract HTML
+    let contractHtml;
+    if (typeof generateCoSignerContractHTML === 'function') {
+        contractHtml = contractStyles + generateCoSignerContractHTML(cobuyer, mainSignerData, currentLang);
+    } else {
+        // Fallback
+        contractHtml = `
+            <div style="font-family: Times, serif; line-height: 1.6;">
+                <h2>CO-SIGNER AGREEMENT</h2>
+                <p><strong>CO-SIGNER:</strong> ${cobuyer.fullName}</p>
+                <p><strong>LENDER:</strong> FLEXCREDI LLC</p>
+                <h4>RESPONSIBILITIES:</h4>
+                <ul>
+                    <li>Joint liability for loan repayment</li>
+                    <li>Credit analysis consent</li>
+                    <li>Payment commitment in case of default</li>
+                </ul>
+            </div>
+        `;
+    }
+    
+    // Language tabs
+    const languageTabs = `
+        <div class="contract-language-tabs">
+            <button class="lang-tab ${currentLang === 'en' ? 'active' : ''}" onclick="switchCoSignerContractLanguage('${cobuyerId}', 'en')">
+                <i class="fas fa-check-circle"></i> English (Official)
+            </button>
+            <button class="lang-tab ${currentLang === 'pt' ? 'active' : ''}" onclick="switchCoSignerContractLanguage('${cobuyerId}', 'pt')">
+                <i class="fas fa-eye"></i> Português (Preview)
+            </button>
+            <button class="lang-tab ${currentLang === 'es' ? 'active' : ''}" onclick="switchCoSignerContractLanguage('${cobuyerId}', 'es')">
+                <i class="fas fa-eye"></i> Español (Preview)
+            </button>
+        </div>
+    `;
+    
     const modalHTML = `
         <div class="modal-overlay" id="cobuyer-contract-modal">
-            <div class="modal-content contract-modal">
+            <div class="modal-content contract-modal" style="max-width: 900px; max-height: 90vh;">
                 <div class="modal-header">
-                    <h3>Contrato de Co-signatário - ${cobuyer.fullName}</h3>
+                    <h3><i class="fas fa-file-signature"></i> Co-Signer Agreement - ${cobuyer.fullName}</h3>
                     <button class="modal-close" onclick="closeModal('cobuyer-contract-modal')">×</button>
                 </div>
-                <div class="modal-body">
-                    <div class="contract-viewer">
-                        <h4>CONTRATO DE CO-RESPONSABILIDADE FINANCEIRA</h4>
+                <div class="modal-body" style="padding: 0;">
+                    ${languageTabs}
+                    <div class="contract-viewer" style="max-height: 60vh; overflow-y: auto; padding: 20px;">
+                        <div class="contract-language-notice" style="background: #e8f5e9; border: 1px solid #c8e6c9; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+                            <p style="margin: 0;"><strong><i class="fas fa-info-circle"></i> LEGAL NOTICE:</strong> The official contract is in English as required by US law.</p>
+                        </div>
                         
-                        <p><strong>CO-SIGNATÁRIO:</strong> ${cobuyer.fullName}</p>
-                        <p><strong>CONTRATADA:</strong> FLEXCREDI LLC</p>
-                        
-                        <h5>RESPONSABILIDADES DO CO-SIGNATÁRIO</h5>
-                        <ul>
-                            <li>Responsabilidade solidária pelo pagamento do empréstimo</li>
-                            <li>Concordância com análise de crédito e verificação de renda</li>
-                            <li>Compromisso de pagamento em caso de inadimplência do contratante principal</li>
-                            <li>Autorização para débito automático em caso de necessidade</li>
-                        </ul>
-                        
-                        <h5>TERMOS E CONDIÇÕES</h5>
-                        <p>1. O co-signatário será responsável pelo pagamento integral do empréstimo...</p>
-                        <p>2. O co-signatário autoriza a verificação de seu histórico de crédito...</p>
-                        <p>3. Este contrato permanece válido até a quitação total do empréstimo...</p>
-                        
-                        <div class="contract-footer">
-                            <p><em>Este contrato está vinculado ao contrato principal de empréstimo #FL2024001.</em></p>
+                        <div class="contract-content" id="coSignerContractContent">
+                            ${contractHtml}
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" style="display: flex; gap: 10px; justify-content: flex-end; padding: 15px 20px; border-top: 1px solid #eee;">
                     <button class="btn btn-outline" onclick="closeModal('cobuyer-contract-modal')">Close</button>
                     <button class="btn btn-primary" onclick="closeModal('cobuyer-contract-modal'); signCobuyerContract('${cobuyerId}');">
                         <i class="fas fa-signature"></i> Proceed to Signature
@@ -2177,6 +2278,28 @@ function reviewCobuyerContract(cobuyerId) {
     `;
     
     document.body.insertAdjacentHTML('beforeend', modalHTML);
+}
+
+// Switch co-signer contract language
+function switchCoSignerContractLanguage(cobuyerId, lang) {
+    const cobuyer = cobuyers.find(c => c.id === cobuyerId);
+    const mainSignerData = getUserFromStorage();
+    if (!cobuyer) return;
+    
+    // Update tabs
+    document.querySelectorAll('#cobuyer-contract-modal .lang-tab').forEach(tab => tab.classList.remove('active'));
+    document.querySelector(`#cobuyer-contract-modal .lang-tab[onclick="switchCoSignerContractLanguage('${cobuyerId}', '${lang}')"]`)?.classList.add('active');
+    
+    // Generate new contract content
+    const contractContent = document.getElementById('coSignerContractContent');
+    if (contractContent && typeof generateCoSignerContractHTML === 'function') {
+        contractContent.innerHTML = contractStyles + generateCoSignerContractHTML(cobuyer, mainSignerData, lang);
+    }
+}
+
+// Show co-signer contract in English
+function showCoSignerContractInEnglish(cobuyerId) {
+    switchCoSignerContractLanguage(cobuyerId, 'en');
 }
 
 // Sign Cobuyer Contract

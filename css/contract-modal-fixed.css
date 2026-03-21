@@ -452,3 +452,93 @@
 body:has(.flexcredi-modal) {
     overflow: hidden;
 }
+/* Contract Language Tabs */
+.contract-language-tabs {
+    display: flex;
+    gap: 0;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 0;
+}
+
+.contract-language-tabs .lang-tab {
+    flex: 1;
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: #666;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.contract-language-tabs .lang-tab:hover {
+    background: #fff;
+    color: #2ECC71;
+}
+
+.contract-language-tabs .lang-tab.active {
+    background: #fff;
+    color: #2ECC71;
+    border-bottom-color: #2ECC71;
+}
+
+.contract-language-tabs .lang-tab i {
+    font-size: 12px;
+}
+
+/* Contract document styling overrides */
+.contract-modal .contract-document {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.contract-modal .contract-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #2C3E50;
+}
+
+.contract-modal .contract-header h1 {
+    font-size: 22px;
+    color: #2C3E50;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contract-modal .contract-section h2 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #2C3E50;
+    margin: 20px 0 10px 0;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.contract-modal .contract-section p {
+    margin: 8px 0;
+    text-align: justify;
+}
+
+.contract-modal .signatures-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.contract-modal .signature-block {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 6px;
+}
