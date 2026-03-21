@@ -129,4 +129,229 @@ router.get('/dashboard', async (req, res) => {
   }
 });
 
+// GET /api/admin/clients - List all clients (users with role CLIENT)
+router.get('/clients', async (req, res) => {
+  try {
+    console.log('[AdminRoutes] Fetching clients...');
+    
+    const { search, status, limit = 50, offset = 0 } = req.query;
+    
+    // Build where clause
+    const where = {
+      role: 'CLIENT'
+    };
+    
+    if (status === 'active') {
+      where.active = true;
+    } else if (status === 'inactive') {
+      where.active = false;
+    }
+    
+    if (search) {
+      where.OR = [
+        { name: { contains: search, mode: 'insensitive' } },
+        { email: { contains: search, mode: 'insensitive' } },
+        { ssn: { contains: search } },
+        { phone: { contains: search } }
+      ];
+    }
+    
+    const [clients, total] = await Promise.all([
+      prisma.user.findMany({
+        where,
+        take: parseInt(limit),
+        skip: parseInt(offset),
+        orderBy: { createdAt: 'desc' },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          phone: true,
+          ssn: true,
+          address: true,
+          city: true,
+          state: true,
+          zipCode: true,
+          monthlyIncome: true,
+          active: true,
+          emailVerified: true,
+          createdAt: true,
+          updatedAt: true,
+          _count: {
+            select: {
+              applications: true
+            }
+          }
+        }
+      }),
+      prisma.user.count({ where })
+    ]);
+    
+    // Transform data to match frontend expectations
+    const transformedClients = clients.map(client => ({
+      ...client,
+      status: client.active ? 'ACTIVE' : 'INACTIVE',
+      cpf: client.ssn, // Map SSN to CPF for frontend compatibility
+      creditScore: null // Will be populated from credit reports if needed
+    }));
+    
+    console.log(`[AdminRoutes] Found ${clients.length} clients`);
+    
+    res.json({
+      success: true,
+      clients: transformedClients,
+      pagination: {
+        total,
+        limit: parseInt(limit),
+        offset: parseInt(offset),
+        hasMore: (parseInt(offset) + clients.length) < total
+      }
+    });
+    
+  } catch (error) {
+    console.error('[AdminRoutes] Error fetching clients:', error);
+    res.status(500).json({
+      success: false,
+      error: process.env.NODE_ENV === 'production' 
+        ? 'Erro ao carregar clientes' 
+        : error.message
+    });
+  }
+});
+
+// GET /api/admin/clients/:id - Get single client details
+router.get('/clients/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(`[AdminRoutes] Fetching client ${id}...`);
+    
+    const client = await prisma.user.findUnique({
+      where: { id },
+      include: {
+        applications: {
+          orderBy: { createdAt: 'desc' },
+          include: {
+            partner: {
+              select: {
+                id: true,
+                companyName: true,
+                tradeName: true
+              }
+            }
+          }
+        },
+        documents: {
+          orderBy: { uploadedAt: 'desc' }
+        },
+        creditReports: {
+          orderBy: { pulledAt: 'desc' },
+          take: 1
+        }
+      }
+    });
+    
+    if (!client) {
+      return res.status(404).json({
+        success: false,
+        error: 'Cliente não encontrado'
+      });
+    }
+    
+    // Transform for frontend
+    const transformedClient = {
+      ...client,
+      status: client.active ? 'ACTIVE' : 'INACTIVE',
+      cpf: client.ssn,
+      creditScore: client.creditReports?.[0]?.creditScore || null
+    };
+    
+    res.json({
+      success: true,
+      client: transformedClient
+    });
+    
+  } catch (error) {
+    console.error('[AdminRoutes] Error fetching client:', error);
+    res.status(500).json({
+      success: false,
+      error: process.env.NODE_ENV === 'production' 
+        ? 'Erro ao carregar cliente' 
+        : error.message
+    });
+  }
+});
+
+// GET /api/admin/applications - List all applications (admin view)
+router.get('/applications', async (req, res) => {
+  try {
+    console.log('[AdminRoutes] Fetching applications...');
+    
+    const { search, status, limit = 50, offset = 0 } = req.query;
+    
+    // Build where clause
+    const where = {};
+    
+    if (status) {
+      where.status = status;
+    }
+    
+    if (search) {
+      where.OR = [
+        { clientName: { contains: search, mode: 'insensitive' } },
+        { clientEmail: { contains: search, mode: 'insensitive' } },
+        { clientSsn: { contains: search } },
+        { id: { contains: search } }
+      ];
+    }
+    
+    const [applications, total] = await Promise.all([
+      prisma.application.findMany({
+        where,
+        take: parseInt(limit),
+        skip: parseInt(offset),
+        orderBy: { createdAt: 'desc' },
+        include: {
+          partner: {
+            select: {
+              id: true,
+              companyName: true,
+              tradeName: true
+            }
+          },
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true
+            }
+          }
+        }
+      }),
+      prisma.application.count({ where })
+    ]);
+    
+    console.log(`[AdminRoutes] Found ${applications.length} applications`);
+    
+    res.json({
+      success: true,
+      applications,
+      pagination: {
+        total,
+        limit: parseInt(limit),
+        offset: parseInt(offset),
+        hasMore: (parseInt(offset) + applications.length) < total
+      }
+    });
+    
+  } catch (error) {
+    console.error('[AdminRoutes] Error fetching applications:', error);
+    res.status(500).json({
+      success: false,
+      error: process.env.NODE_ENV === 'production' 
+        ? 'Erro ao carregar aplicações' 
+        : error.message
+    });
+  }
+});
+
 module.exports = router;

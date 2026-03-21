@@ -55,7 +55,8 @@ const allowedOrigins = [
   'https://flexcredi.com',
   'https://www.flexcredi.com',
   /https:\/\/.*\.vercel\.app$/,
-  /https:\/\/.*\.sandbox\.novita\.ai$/
+  /https:\/\/.*\.sandbox\.novita\.ai$/,
+  /https:\/\/.*\.preview\.emergentagent\.com$/
 ];
 
 app.use(cors({

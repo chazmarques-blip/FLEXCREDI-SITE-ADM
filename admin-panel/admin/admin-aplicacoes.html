@@ -208,69 +208,78 @@
 
     // Load Applications
     async function loadApplications() {
+        const tbody = document.getElementById('applicationsTableBody');
+        tbody.innerHTML = '<tr><td colspan="8" class="loading">Carregando aplicações...</td></tr>';
+        
         try {
             const searchTerm = document.getElementById('searchInput').value;
             const status = document.getElementById('statusFilter').value;
             const sortBy = document.getElementById('sortBy').value;
 
-            let url = `${API_URL}/api/admin/applications?`;
+            let url = `${API_URL}/api/applications?`;
             if (searchTerm) url += `search=${searchTerm}&`;
             if (status) url += `status=${status}&`;
             if (sortBy) url += `sortBy=${sortBy}&`;
 
             const response = await fetch(url);
-            const data = await response.json();
-
-            const tbody = document.getElementById('applicationsTableBody');
             
-            if (!data.applications || data.applications.length === 0) {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            // Handle both response formats: { data: [...] } or { applications: [...] }
+            const applications = data.data || data.applications || [];
+            
+            if (applications.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="8" class="empty-state">
-                            <i class="fas fa-inbox"></i>
-                            <p>Nenhuma aplicação encontrada</p>
-                            <small>Tente ajustar os filtros de busca</small>
+                        <td colspan="8" class="empty-state" style="text-align: center; padding: 40px;">
+                            <i class="fas fa-inbox" style="font-size: 48px; color: #ccc; margin-bottom: 16px;"></i>
+                            <p style="font-size: 16px; color: #666; margin: 8px 0;">Nenhuma aplicação encontrada</p>
+                            <small style="color: #999;">Quando clientes solicitarem crédito, as aplicações aparecerão aqui</small>
                         </td>
                     </tr>
                 `;
                 return;
             }
 
-            tbody.innerHTML = data.applications.map(app => `
+            tbody.innerHTML = applications.map(app => `
                 <tr>
-                    <td><strong>#${app.id}</strong></td>
+                    <td><strong>#${(app.id || '').substring(0, 8)}</strong></td>
                     <td>
                         <div class="table-user">
-                            <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(app.client?.name || 'Cliente')}&background=2ECC71&color=fff" 
+                            <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(app.clientName || app.user?.name || 'Cliente')}&background=2ECC71&color=fff" 
                                  alt="Avatar" class="table-avatar">
                             <div class="table-user-info">
-                                <span class="table-user-name">${app.client?.name || 'N/A'}</span>
-                                <span class="table-user-email">${app.client?.email || 'N/A'}</span>
+                                <span class="table-user-name">${app.clientName || app.user?.name || 'N/A'}</span>
+                                <span class="table-user-email">${app.clientEmail || app.user?.email || 'N/A'}</span>
                             </div>
                         </div>
                     </td>
-                    <td><span class="table-partner">${app.partner?.name || 'N/A'}</span></td>
-                    <td><span class="table-amount">R$ ${(app.requestedAmount || 0).toLocaleString('pt-BR')}</span></td>
+                    <td><span class="table-partner">${app.partner?.tradeName || app.partner?.companyName || 'N/A'}</span></td>
+                    <td><span class="table-amount">$${(app.desiredAmount || app.approvedAmount || 0).toLocaleString('en-US')}</span></td>
                     <td><span class="table-score">${app.creditScore || '-'}</span></td>
                     <td>
-                        <span class="status-badge status-${app.status?.toLowerCase() || 'pending'}">
-                            ${app.status === 'APPROVED' ? 'Aprovado' : app.status === 'REJECTED' ? 'Rejeitado' : 'Pendente'}
+                        <span class="status-badge status-${(app.status || 'pending').toLowerCase()}">
+                            ${getStatusLabel(app.status)}
                         </span>
                     </td>
-                    <td><span class="table-date">${new Date(app.createdAt).toLocaleDateString('pt-BR')}</span></td>
+                    <td><span class="table-date">${app.createdAt ? new Date(app.createdAt).toLocaleDateString('en-US') : '-'}</span></td>
                     <td>
                         <div class="table-actions">
-                            <button class="btn-icon" title="Ver detalhes" onclick="viewApplication(${app.id})">
+                            <button class="btn-icon" title="Ver detalhes" onclick="viewApplication('${app.id}')">
                                 <i class="fas fa-eye"></i>
                             </button>
-                            <button class="btn-icon" title="Editar" onclick="editApplication(${app.id})">
+                            <button class="btn-icon" title="Editar" onclick="editApplication('${app.id}')">
                                 <i class="fas fa-edit"></i>
                             </button>
                             ${app.status === 'PENDING' ? `
-                            <button class="btn-icon" title="Aprovar" onclick="updateStatus(${app.id}, 'APPROVED')" style="background: rgba(39, 174, 96, 0.1); color: var(--verde-sucesso);">
+                            <button class="btn-icon" title="Aprovar" onclick="updateStatus('${app.id}', 'APPROVED')" style="background: rgba(39, 174, 96, 0.1); color: var(--verde-sucesso);">
                                 <i class="fas fa-check"></i>
                             </button>
-                            <button class="btn-icon" title="Rejeitar" onclick="updateStatus(${app.id}, 'REJECTED')" style="background: rgba(231, 76, 60, 0.1); color: var(--vermelho-erro);">
+                            <button class="btn-icon" title="Rejeitar" onclick="updateStatus('${app.id}', 'REJECTED')" style="background: rgba(231, 76, 60, 0.1); color: var(--vermelho-erro);">
                                 <i class="fas fa-times"></i>
                             </button>
                             ` : ''}
@@ -280,16 +289,37 @@
             `).join('');
         } catch (error) {
             console.error('Erro ao carregar aplicações:', error);
-            document.getElementById('applicationsTableBody').innerHTML = `
+            tbody.innerHTML = `
                 <tr>
-                    <td colspan="8" class="empty-state">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <p>Erro ao carregar aplicações</p>
-                        <small>${error.message}</small>
+                    <td colspan="8" class="empty-state" style="text-align: center; padding: 40px;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: #f39c12; margin-bottom: 16px;"></i>
+                        <p style="font-size: 16px; color: #666; margin: 8px 0;">Erro ao carregar aplicações</p>
+                        <small style="color: #999;">${error.message}</small>
+                        <br><br>
+                        <button onclick="loadApplications()" class="btn-add" style="padding: 8px 16px;">
+                            <i class="fas fa-redo"></i> Tentar novamente
+                        </button>
                     </td>
                 </tr>
             `;
         }
+    }
+
+    function getStatusLabel(status) {
+        const labels = {
+            'PENDING': 'Pending',
+            'ANALYZING': 'Analyzing',
+            'MANUAL_REVIEW': 'Review',
+            'APPROVED': 'Approved',
+            'REJECTED': 'Rejected',
+            'CONTRACT_PENDING': 'Contract',
+            'ACH_PENDING': 'ACH Setup',
+            'ACTIVE': 'Active',
+            'PAID_OFF': 'Paid Off',
+            'DEFAULTED': 'Defaulted',
+            'CANCELLED': 'Cancelled'
+        };
+        return labels[status] || status || 'Unknown';
     }
 
     function viewApplication(id) {
@@ -301,26 +331,27 @@
     }
 
     async function updateStatus(id, newStatus) {
-        if (!confirm(`Confirma ${newStatus === 'APPROVED' ? 'aprovação' : 'rejeição'} da aplicação #${id}?`)) {
+        if (!confirm(`Confirm ${newStatus === 'APPROVED' ? 'approval' : 'rejection'} of application #${id}?`)) {
             return;
         }
 
         try {
-            const response = await fetch(`${API_URL}/api/admin/applications/${id}/status`, {
+            const response = await fetch(`${API_URL}/api/applications/${id}/${newStatus.toLowerCase()}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ status: newStatus })
+                body: JSON.stringify({ notes: '' })
             });
 
             if (response.ok) {
-                alert('Status atualizado com sucesso!');
+                alert('Status updated successfully!');
                 loadApplications();
             } else {
-                alert('Erro ao atualizar status');
+                const data = await response.json();
+                alert(data.error || 'Error updating status');
             }
         } catch (error) {
             console.error('Erro:', error);
-            alert('Erro ao atualizar status');
+            alert('Error updating status');
         }
     }
 

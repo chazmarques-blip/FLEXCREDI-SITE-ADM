@@ -206,33 +206,45 @@
     const API_URL = 'https://flexcredi-site-adm-production-b27d.up.railway.app';
 
     async function loadClients() {
+        const tbody = document.getElementById('clientsTableBody');
+        tbody.innerHTML = '<tr><td colspan="9" class="loading">Carregando clientes...</td></tr>';
+        
         try {
             const response = await fetch(`${API_URL}/api/admin/clients`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            
             const data = await response.json();
 
-            // Update counters
-            document.getElementById('totalClients').innerHTML = `<i class="fas fa-users"></i> Total: <strong>${data.clients?.length || 0}</strong>`;
-            const activeCount = data.clients?.filter(c => c.status === 'ACTIVE').length || 0;
-            document.getElementById('activeClients').innerHTML = `<i class="fas fa-check-circle"></i> Ativos: <strong>${activeCount}</strong>`;
+            if (!data.success) {
+                throw new Error(data.error || 'Erro desconhecido');
+            }
 
-            const tbody = document.getElementById('clientsTableBody');
+            const clients = data.clients || [];
             
-            if (!data.clients || data.clients.length === 0) {
+            // Update counters
+            document.getElementById('totalClients').innerHTML = `<i class="fas fa-users"></i> Total: <strong>${clients.length}</strong>`;
+            const activeCount = clients.filter(c => c.status === 'ACTIVE' || c.active).length;
+            document.getElementById('activeClients').innerHTML = `<i class="fas fa-check-circle"></i> Ativos: <strong>${activeCount}</strong>`;
+            
+            if (clients.length === 0) {
                 tbody.innerHTML = `
                     <tr>
                         <td colspan="9" class="empty-state">
-                            <i class="fas fa-user-slash"></i>
-                            <p>Nenhum cliente encontrado</p>
-                            <small>Os clientes cadastrados aparecerão aqui</small>
+                            <i class="fas fa-user-slash" style="font-size: 48px; color: #ccc; margin-bottom: 16px;"></i>
+                            <p style="font-size: 16px; color: #666; margin: 8px 0;">Nenhum cliente cadastrado</p>
+                            <small style="color: #999;">Quando clientes se registrarem, aparecerão aqui</small>
                         </td>
                     </tr>
                 `;
                 return;
             }
 
-            tbody.innerHTML = data.clients.map(client => `
+            tbody.innerHTML = clients.map(client => `
                 <tr>
-                    <td><strong>#${client.id}</strong></td>
+                    <td><strong>#${(client.id || '').substring(0, 8)}</strong></td>
                     <td>
                         <div class="table-user">
                             <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(client.name || 'Cliente')}&background=2ECC71&color=fff" 
@@ -243,27 +255,27 @@
                             </div>
                         </div>
                     </td>
-                    <td>${formatCPF(client.cpf) || '-'}</td>
+                    <td>${formatSSN(client.ssn || client.cpf) || '-'}</td>
                     <td>${formatPhone(client.phone) || '-'}</td>
                     <td><strong>${client._count?.applications || 0}</strong> aplicações</td>
                     <td><span class="table-score">${client.creditScore || '-'}</span></td>
                     <td>
-                        <span class="status-badge ${client.status === 'ACTIVE' ? 'status-approved' : 'status-rejected'}">
-                            ${client.status === 'ACTIVE' ? 'Ativo' : 'Inativo'}
+                        <span class="status-badge ${(client.status === 'ACTIVE' || client.active) ? 'status-approved' : 'status-rejected'}">
+                            ${(client.status === 'ACTIVE' || client.active) ? 'Ativo' : 'Inativo'}
                         </span>
                     </td>
-                    <td><span class="table-date">${new Date(client.createdAt).toLocaleDateString('pt-BR')}</span></td>
+                    <td><span class="table-date">${client.createdAt ? new Date(client.createdAt).toLocaleDateString('en-US') : '-'}</span></td>
                     <td>
                         <div class="table-actions">
-                            <button class="btn-icon" title="Ver detalhes" onclick="viewClient(${client.id})">
+                            <button class="btn-icon" title="Ver detalhes" onclick="viewClient('${client.id}')">
                                 <i class="fas fa-eye"></i>
                             </button>
-                            <button class="btn-icon" title="Editar" onclick="editClient(${client.id})">
+                            <button class="btn-icon" title="Editar" onclick="editClient('${client.id}')">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn-icon" title="${client.status === 'ACTIVE' ? 'Desativar' : 'Ativar'}" 
-                                    onclick="toggleClientStatus(${client.id}, '${client.status}')">
-                                <i class="fas fa-${client.status === 'ACTIVE' ? 'ban' : 'check'}"></i>
+                            <button class="btn-icon" title="${(client.status === 'ACTIVE' || client.active) ? 'Desativar' : 'Ativar'}" 
+                                    onclick="toggleClientStatus('${client.id}', '${client.status || (client.active ? 'ACTIVE' : 'INACTIVE')}')">
+                                <i class="fas fa-${(client.status === 'ACTIVE' || client.active) ? 'ban' : 'check'}"></i>
                             </button>
                         </div>
                     </td>
@@ -271,26 +283,40 @@
             `).join('');
         } catch (error) {
             console.error('Erro ao carregar clientes:', error);
-            document.getElementById('clientsTableBody').innerHTML = `
+            tbody.innerHTML = `
                 <tr>
-                    <td colspan="9" class="empty-state">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <p>Erro ao carregar clientes</p>
-                        <small>${error.message}</small>
+                    <td colspan="9" class="empty-state" style="text-align: center; padding: 40px;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: #f39c12; margin-bottom: 16px;"></i>
+                        <p style="font-size: 16px; color: #666; margin: 8px 0;">Erro ao carregar clientes</p>
+                        <small style="color: #999;">${error.message}</small>
+                        <br><br>
+                        <button onclick="loadClients()" class="btn-add" style="padding: 8px 16px;">
+                            <i class="fas fa-redo"></i> Tentar novamente
+                        </button>
                     </td>
                 </tr>
             `;
         }
     }
 
-    function formatCPF(cpf) {
-        if (!cpf) return '-';
-        return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    function formatSSN(ssn) {
+        if (!ssn) return '-';
+        // Format as XXX-XX-XXXX (US SSN format)
+        const cleaned = ssn.replace(/\D/g, '');
+        if (cleaned.length === 9) {
+            return cleaned.replace(/(\d{3})(\d{2})(\d{4})/, '$1-$2-$3');
+        }
+        return ssn;
     }
 
     function formatPhone(phone) {
         if (!phone) return '-';
-        return phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        // Format as (XXX) XXX-XXXX (US phone format)
+        const cleaned = phone.replace(/\D/g, '');
+        if (cleaned.length === 10) {
+            return cleaned.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+        }
+        return phone;
     }
 
     function viewClient(id) {
