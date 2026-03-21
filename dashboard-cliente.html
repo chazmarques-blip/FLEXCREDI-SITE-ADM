@@ -960,25 +960,25 @@
                             
                             docsHtml += `
                                 <div class="document-card ${statusClass}" data-doc-key="${key}">
-                                    <div class="doc-image-container">
+                                    <div class="doc-image-container" onclick="viewDocument('${doc.url}', '${doc.name}')">
                                         <img src="${doc.url}" alt="${doc.name}" loading="lazy">
-                                        <div class="doc-image-overlay">
-                                            <button class="doc-action-btn view-btn" onclick="viewDocument('${doc.url}', '${doc.name}')" title="View">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button class="doc-action-btn replace-btn" onclick="replaceDocument('${key}', '${doc.name}')" title="Replace">
-                                                <i class="fas fa-sync-alt"></i>
-                                            </button>
-                                            <button class="doc-action-btn delete-btn" onclick="deleteDocument('${key}', '${doc.name}')" title="Delete">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
                                     </div>
                                     <div class="doc-card-footer">
                                         <div class="doc-card-name">${doc.name}</div>
                                         <span class="doc-card-status ${statusBadgeClass}">
                                             <i class="fas ${statusIcon}"></i> ${statusText}
                                         </span>
+                                        <div class="doc-card-actions">
+                                            <button class="doc-mini-btn" onclick="event.stopPropagation(); viewDocument('${doc.url}', '${doc.name}')" title="View">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="doc-mini-btn replace" onclick="event.stopPropagation(); replaceDocument('${key}', '${doc.name}')" title="Replace">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                            <button class="doc-mini-btn delete" onclick="event.stopPropagation(); deleteDocument('${key}', '${doc.name}')" title="Delete">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             `;
@@ -1215,65 +1215,56 @@
         }
         
         .doc-image-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.6);
+            display: none;
+        }
+        
+        /* Mini action buttons below status */
+        .doc-card-actions {
             display: flex;
-            align-items: center;
             justify-content: center;
             gap: 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #f0f0f0;
         }
         
-        .document-card:hover .doc-image-overlay {
-            opacity: 1;
-        }
-        
-        .doc-action-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: none;
+        .doc-mini-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+            background: #f8f9fa;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
-            font-size: 14px;
+            font-size: 11px;
+            color: #666;
         }
         
-        .doc-action-btn.view-btn {
-            background: #3498db;
-            color: white;
+        .doc-mini-btn:hover {
+            background: #e9ecef;
+            border-color: #ccc;
+            transform: scale(1.05);
         }
         
-        .doc-action-btn.view-btn:hover {
-            background: #2980b9;
-            transform: scale(1.1);
+        .doc-mini-btn.replace {
+            color: #2ECC71;
         }
         
-        .doc-action-btn.replace-btn {
-            background: #2ECC71;
-            color: white;
+        .doc-mini-btn.replace:hover {
+            background: #d4edda;
+            border-color: #2ECC71;
         }
         
-        .doc-action-btn.replace-btn:hover {
-            background: #27AE60;
-            transform: scale(1.1);
+        .doc-mini-btn.delete {
+            color: #e74c3c;
         }
         
-        .doc-action-btn.delete-btn {
-            background: #e74c3c;
-            color: white;
-        }
-        
-        .doc-action-btn.delete-btn:hover {
-            background: #c0392b;
-            transform: scale(1.1);
+        .doc-mini-btn.delete:hover {
+            background: #f8d7da;
+            border-color: #e74c3c;
         }
         
         /* Uploading state */
