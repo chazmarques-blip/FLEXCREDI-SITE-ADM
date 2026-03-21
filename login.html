@@ -674,9 +674,13 @@
                     </div>
                     <button class="btn-test" onclick="testAccess()">
                         <i class="fas fa-flask"></i>
-                        Enter Demo Dashboard
+                        Demo: Maria Santos
                     </button>
-                    <p class="test-note">Access a demo account to explore the dashboard</p>
+                    <button class="btn-test" style="margin-top: 8px; background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);" onclick="createNewFullApplication()">
+                        <i class="fas fa-user-plus"></i>
+                        New Application: João Ferreira
+                    </button>
+                    <p class="test-note">Access demo accounts to explore the dashboard</p>
                 </div>
             </div>
             
@@ -845,6 +849,42 @@
             // Simulate API call (replace with actual API)
             setTimeout(() => {
                 if (name && email && phone && password) {
+                    // Create complete user application
+                    const newUserId = 'USR-' + Date.now().toString(36).toUpperCase();
+                    const contractNumber = 'FL' + new Date().getFullYear() + String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+                    
+                    const newUser = {
+                        id: newUserId,
+                        email: email,
+                        fullName: name,
+                        phone: phone,
+                        ssn: '',
+                        address: '',
+                        city: '',
+                        state: '',
+                        zipCode: '',
+                        status: 'pending',
+                        createdAt: new Date().toISOString(),
+                        creditScore: 0,
+                        requestedAmount: 0,
+                        approvedAmount: 0,
+                        interestRate: 0,
+                        term: 0,
+                        monthlyPayment: 0,
+                        applicationProgress: 5,
+                        applicationStep: 'registration',
+                        contractNumber: contractNumber,
+                        cobuyers: []
+                    };
+                    
+                    // Save new user
+                    localStorage.setItem('flexcredi_user', JSON.stringify(newUser));
+                    
+                    // Add to users list for admin
+                    let allUsers = JSON.parse(localStorage.getItem('flexcredi_all_users') || '[]');
+                    allUsers.push(newUser);
+                    localStorage.setItem('flexcredi_all_users', JSON.stringify(allUsers));
+                    
                     successMsg.style.display = 'flex';
                     
                     // Switch to login tab after success
@@ -1011,6 +1051,189 @@
             }
             e.target.value = value;
         });
+        
+        // Create a NEW complete application (different from demo)
+        function createNewFullApplication() {
+            const btn = event.target.closest('button');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating application...';
+            btn.disabled = true;
+            
+            // Generate unique IDs
+            const userId = 'USR-' + Date.now().toString(36).toUpperCase();
+            const contractNumber = 'FL2026' + String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+            
+            // New complete user - João Pedro Ferreira
+            const newFullUser = {
+                id: userId,
+                email: 'joao.ferreira@gmail.com',
+                fullName: 'João Pedro Ferreira',
+                phone: '(407) 823-4567',
+                ssn: '123-45-6789',
+                dateOfBirth: '1985-06-15',
+                address: '7890 Palm Beach Boulevard',
+                city: 'Orlando',
+                state: 'FL',
+                zipCode: '32819',
+                country: 'USA',
+                
+                // Employment Info
+                employer: 'Tech Solutions Inc.',
+                jobTitle: 'Software Engineer',
+                monthlyIncome: 7500,
+                employmentYears: 5,
+                employmentType: 'Full-time',
+                
+                // Bank Info
+                bankName: 'Bank of America',
+                accountType: 'Checking',
+                accountLast4: '4521',
+                routingNumber: '****2345',
+                
+                // Loan Details
+                status: 'pre_approved',
+                createdAt: new Date().toISOString(),
+                creditScore: 720,
+                requestedAmount: 15000,
+                approvedAmount: 12500,
+                interestRate: 19.5,
+                term: 36,
+                monthlyPayment: 456,
+                loanPurpose: 'Home Improvement',
+                
+                // Application Progress
+                applicationProgress: 75,
+                applicationStep: 'document_review',
+                contractNumber: contractNumber,
+                
+                // References
+                references: [
+                    {
+                        name: 'Carlos Mendes',
+                        relationship: 'Friend',
+                        phone: '(407) 555-1111'
+                    },
+                    {
+                        name: 'Ana Paula Costa',
+                        relationship: 'Coworker',
+                        phone: '(407) 555-2222'
+                    }
+                ],
+                
+                // Co-signer
+                cobuyers: [
+                    {
+                        id: 'cobuyer_' + Date.now().toString(36),
+                        fullName: 'Lucia Ferreira',
+                        email: 'lucia.ferreira@email.com',
+                        phone: '(407) 555-8765',
+                        ssn: '987-65-4321',
+                        address: '7890 Palm Beach Boulevard',
+                        zipCode: '32819',
+                        city: 'Orlando',
+                        state: 'FL',
+                        relationship: 'spouse',
+                        profileComplete: true,
+                        documentsComplete: true,
+                        contractSigned: false,
+                        documents: {
+                            driverLicense: { 
+                                uploaded: true, 
+                                approved: true, 
+                                fileName: 'lucia_dl.jpg',
+                                url: 'https://images.pexels.com/photos/45113/pexels-photo-45113.jpeg?auto=compress&cs=tinysrgb&w=400'
+                            },
+                            proofAddress: { 
+                                uploaded: true, 
+                                approved: true, 
+                                fileName: 'lucia_address.jpg',
+                                url: 'https://images.unsplash.com/photo-1554224155-cfa08c2a758f?w=400&q=80'
+                            },
+                            socialSecurity: { 
+                                uploaded: true, 
+                                approved: true, 
+                                fileName: 'lucia_ssn.jpg',
+                                url: 'https://images.unsplash.com/photo-1487637419635-a2a471ff5c7b?w=400&q=80'
+                            },
+                            bankCard: { 
+                                uploaded: true, 
+                                approved: false, 
+                                fileName: 'lucia_bank.jpg',
+                                url: 'https://images.unsplash.com/photo-1752218804057-4fcdd1376f94?w=400&q=80'
+                            }
+                        },
+                        createdAt: new Date().toISOString()
+                    }
+                ],
+                
+                // Activity Log
+                activityLog: [
+                    { date: new Date(Date.now() - 7*24*60*60*1000).toISOString(), action: 'Application submitted', status: 'completed' },
+                    { date: new Date(Date.now() - 5*24*60*60*1000).toISOString(), action: 'Documents uploaded', status: 'completed' },
+                    { date: new Date(Date.now() - 3*24*60*60*1000).toISOString(), action: 'Credit check completed', status: 'completed' },
+                    { date: new Date(Date.now() - 1*24*60*60*1000).toISOString(), action: 'Pre-approved', status: 'completed' },
+                    { date: new Date().toISOString(), action: 'Document review', status: 'in_progress' }
+                ]
+            };
+            
+            // Documents with realistic images
+            const newDocuments = {
+                driverLicense: {
+                    name: 'Driver License',
+                    status: 'approved',
+                    uploadDate: new Date(Date.now() - 5*24*60*60*1000).toISOString(),
+                    url: 'https://images.pexels.com/photos/45113/pexels-photo-45113.jpeg?auto=compress&cs=tinysrgb&w=400',
+                    type: 'image/jpeg',
+                    fileName: 'joao_driver_license.jpg'
+                },
+                proofOfAddress: {
+                    name: 'Proof of Address',
+                    status: 'approved',
+                    uploadDate: new Date(Date.now() - 5*24*60*60*1000).toISOString(),
+                    url: 'https://images.unsplash.com/photo-1554224155-cfa08c2a758f?w=400&q=80',
+                    type: 'image/jpeg',
+                    fileName: 'utility_bill.jpg'
+                },
+                socialSecurityCard: {
+                    name: 'Social Security Card',
+                    status: 'approved',
+                    uploadDate: new Date(Date.now() - 5*24*60*60*1000).toISOString(),
+                    url: 'https://images.unsplash.com/photo-1487637419635-a2a471ff5c7b?w=400&q=80',
+                    type: 'image/jpeg',
+                    fileName: 'ssn_card.jpg'
+                },
+                bankCard: {
+                    name: 'Bank Card',
+                    status: 'pending',
+                    uploadDate: new Date(Date.now() - 2*24*60*60*1000).toISOString(),
+                    url: 'https://images.unsplash.com/photo-1752218804057-4fcdd1376f94?w=400&q=80',
+                    type: 'image/jpeg',
+                    fileName: 'bank_card.jpg'
+                }
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('flexcredi_user', JSON.stringify(newFullUser));
+            localStorage.setItem('flexcredi_documents', JSON.stringify(newDocuments));
+            localStorage.setItem('flexcredi_logged_in', 'true');
+            
+            // Add to admin clients list
+            const existingClients = JSON.parse(localStorage.getItem('flexcredi_admin_clients') || '[]');
+            
+            // Remove if exists and add fresh
+            const filteredClients = existingClients.filter(c => c.email !== newFullUser.email);
+            filteredClients.push({
+                ...newFullUser,
+                documents: newDocuments,
+                documentsCount: 4,
+                documentsApproved: 3,
+                documentsStatus: 'review'
+            });
+            localStorage.setItem('flexcredi_admin_clients', JSON.stringify(filteredClients));
+            
+            setTimeout(() => {
+                window.location.href = 'dashboard-cliente.html';
+            }, 1000);
+        }
     </script>
 </body>
 </html>
