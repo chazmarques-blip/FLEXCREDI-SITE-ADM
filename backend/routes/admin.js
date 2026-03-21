@@ -148,13 +148,19 @@ router.get('/clients', async (req, res) => {
     }
     
     if (search) {
-      where.OR = [
-        { name: { contains: search, mode: 'insensitive' } },
-        { email: { contains: search, mode: 'insensitive' } },
-        { ssn: { contains: search } },
-        { phone: { contains: search } }
+      where.AND = [
+        {
+          OR: [
+            { name: { contains: search, mode: 'insensitive' } },
+            { email: { contains: search, mode: 'insensitive' } },
+            { ssn: { contains: search } },
+            { phone: { contains: search } }
+          ]
+        }
       ];
     }
+    
+    console.log('[AdminRoutes] Query where:', JSON.stringify(where));
     
     const [clients, total] = await Promise.all([
       prisma.user.findMany({
@@ -296,13 +302,18 @@ router.get('/applications', async (req, res) => {
     }
     
     if (search) {
-      where.OR = [
-        { clientName: { contains: search, mode: 'insensitive' } },
-        { clientEmail: { contains: search, mode: 'insensitive' } },
-        { clientSsn: { contains: search } },
-        { id: { contains: search } }
+      where.AND = [
+        {
+          OR: [
+            { clientName: { contains: search, mode: 'insensitive' } },
+            { clientEmail: { contains: search, mode: 'insensitive' } },
+            { clientSsn: { contains: search } }
+          ]
+        }
       ];
     }
+    
+    console.log('[AdminRoutes] Applications query where:', JSON.stringify(where));
     
     const [applications, total] = await Promise.all([
       prisma.application.findMany({
@@ -316,13 +327,6 @@ router.get('/applications', async (req, res) => {
               id: true,
               companyName: true,
               tradeName: true
-            }
-          },
-          user: {
-            select: {
-              id: true,
-              name: true,
-              email: true
             }
           }
         }
