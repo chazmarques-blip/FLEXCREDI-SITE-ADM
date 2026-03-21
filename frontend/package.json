@@ -1,0 +1,7 @@
+{
+  "name": "flexcredi-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "python3 server.py"
+  }
+}
