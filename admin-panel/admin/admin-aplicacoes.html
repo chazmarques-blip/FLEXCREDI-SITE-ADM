@@ -216,7 +216,7 @@
             const status = document.getElementById('statusFilter').value;
             const sortBy = document.getElementById('sortBy').value;
 
-            let url = `${API_URL}/api/applications?`;
+            let url = `${API_URL}/api/admin/applications?`;
             if (searchTerm) url += `search=${searchTerm}&`;
             if (status) url += `status=${status}&`;
             if (sortBy) url += `sortBy=${sortBy}&`;
