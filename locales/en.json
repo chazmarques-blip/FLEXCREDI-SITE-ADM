@@ -451,5 +451,22 @@
   "Approval & Rates": "Approval & Rates",
   "Payments & Terms": "Payments & Terms",
   "Account Management": "Account Management",
-  "Once approved, funds transfer to your bank within 24-48 hours.": "Once approved, funds transfer to your bank within 24-48 hours."
+  "Once approved, funds transfer to your bank within 24-48 hours.": "Once approved, funds transfer to your bank within 24-48 hours.",
+  "footer_description": "Empower your dreams with easy, simple, and fast credit.",
+  "footer_quick_links": "Quick Links",
+  "footer_our_services": "Our Services",
+  "footer_contact_us": "Contact Us",
+  "footer_copyright": "© 2024 FLEXCREDI LLC. All rights reserved.",
+  "footer_privacy": "Privacy Policy",
+  "footer_terms": "Terms of Use",
+  "footer_client_area": "Client Area",
+  "nav_about": "About Us",
+  "nav_services": "Our Services",
+  "nav_how_it_works": "How It Works",
+  "nav_faq": "FAQ",
+  "nav_contact": "Contact",
+  "service_personal_credit": "Personal Credit",
+  "service_business_credit": "Business Credit",
+  "service_debt_settlement": "Debt Settlement",
+  "service_renovation_credit": "Renovation Credit"
 }

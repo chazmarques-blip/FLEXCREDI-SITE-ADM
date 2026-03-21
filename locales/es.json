@@ -538,5 +538,22 @@
   "Approval & Rates": "Aprobación y Tasas",
   "Payments & Terms": "Pagos y Plazos",
   "Account Management": "Gestión de Cuenta",
-  "Once approved, funds transfer to your bank within 24-48 hours.": "Una vez aprobado, los fondos se transfieren a tu banco en 24-48 horas."
+  "Once approved, funds transfer to your bank within 24-48 hours.": "Una vez aprobado, los fondos se transfieren a tu banco en 24-48 horas.",
+  "footer_description": "Empodera tus sueños con crédito fácil, simple y rápido.",
+  "footer_quick_links": "Enlaces Rápidos",
+  "footer_our_services": "Nuestros Servicios",
+  "footer_contact_us": "Contáctenos",
+  "footer_copyright": "© 2024 FLEXCREDI LLC. Todos los derechos reservados.",
+  "footer_privacy": "Política de Privacidad",
+  "footer_terms": "Términos de Uso",
+  "footer_client_area": "Área del Cliente",
+  "nav_about": "Sobre Nosotros",
+  "nav_services": "Nuestros Servicios",
+  "nav_how_it_works": "Cómo Funciona",
+  "nav_faq": "Preguntas Frecuentes",
+  "nav_contact": "Contacto",
+  "service_personal_credit": "Crédito Personal",
+  "service_business_credit": "Crédito para Negocios",
+  "service_debt_settlement": "Liquidación de Deudas",
+  "service_renovation_credit": "Crédito para Reformas"
 }
