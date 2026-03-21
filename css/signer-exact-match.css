@@ -186,21 +186,69 @@
     background: #f8d7da !important;
     border-color: #e74c3c !important;
 }
-    
-    background: #fef3c7 !important;
-    border: 1px solid #f59e0b !important;
-    border-radius: 5px !important;
-    
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    flex-direction: column !important;
-    
-    margin: 0 !important;
-    flex: 1 !important;
-    
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
+
+/* Document modal styles */
+.doc-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.doc-modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.doc-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.doc-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #2C3E50;
+}
+
+.doc-modal-header button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    line-height: 1;
+}
+
+.doc-modal-header button:hover {
+    color: #e74c3c;
+}
+
+.doc-modal-body {
+    padding: 20px;
+    max-height: 70vh;
+    overflow: auto;
+}
+
+.doc-modal-body img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .main-signer-card .doc-preview-box:hover,

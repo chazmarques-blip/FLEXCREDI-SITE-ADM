@@ -1938,7 +1938,7 @@ function renderCobuyerProfile(cobuyer) {
     `).join('');
 }
 
-// Render Cobuyer Documents
+// Render Cobuyer Documents - Same style as Main Signer
 function renderCobuyerDocuments(cobuyer) {
     const documents = [
         { key: 'driverLicense', name: 'Driver License', icon: 'id-card', desc: 'Front and back photo' },
@@ -1947,43 +1947,125 @@ function renderCobuyerDocuments(cobuyer) {
         { key: 'bankCard', name: 'Bank Card', icon: 'credit-card', desc: 'For automatic payment debit' }
     ];
     
+    // Default placeholder images for documents without uploads
+    const defaultImages = {
+        driverLicense: 'https://images.pexels.com/photos/45113/pexels-photo-45113.jpeg?auto=compress&cs=tinysrgb&w=400',
+        proofAddress: 'https://images.unsplash.com/photo-1554224155-cfa08c2a758f?w=400&q=80',
+        socialSecurity: 'https://images.unsplash.com/photo-1487637419635-a2a471ff5c7b?w=400&q=80',
+        bankCard: 'https://images.unsplash.com/photo-1752218804057-4fcdd1376f94?w=400&q=80'
+    };
+    
     return documents.map(doc => {
-        const docData = cobuyer.documents[doc.key];
-        const statusClass = docData.approved ? 'uploaded' : docData.uploaded ? 'uploaded' : 'pending';
+        const docData = cobuyer.documents ? cobuyer.documents[doc.key] : null;
+        const isApproved = docData && docData.approved;
+        const isUploaded = docData && (docData.uploaded || docData.url);
+        const statusClass = isApproved ? 'status-approved' : 'status-pending';
+        const statusIcon = isApproved ? 'fa-check-circle' : 'fa-clock';
+        const statusText = isApproved ? 'APPROVED' : 'PENDING';
+        const statusBadgeClass = isApproved ? '' : 'pending';
+        const imageUrl = (docData && docData.url) ? docData.url : defaultImages[doc.key];
         
         return `
-            <div class="document-card cobuyer-document-card" data-doc="${doc.key}">
-                <div class="doc-header">
-                    <div class="doc-icon">
-                        <i class="fas fa-${doc.icon}"></i>
-                    </div>
-                    <div class="doc-info">
-                        <h4>${doc.name}</h4>
-                        <p>${doc.desc}</p>
-                    </div>
+            <div class="document-card ${statusClass}" data-doc="${doc.key}" data-cobuyer-id="${cobuyer.id}">
+                <div class="doc-image-container" onclick="viewCobuyerDocument('${imageUrl}', '${doc.name}')">
+                    <img src="${imageUrl}" alt="${doc.name}" loading="lazy">
                 </div>
-                
-                <div class="doc-preview-box ${statusClass}" 
-                     id="cobuyer-preview-${cobuyer.id}-${doc.key}" 
-                     onclick="document.getElementById('cobuyer-file-${cobuyer.id}-${doc.key}').click()">
-                    ${getCobuyerMainPreviewContent(cobuyer, doc.key, doc.icon)}
-                </div>
-                
-                <div class="doc-actions">
-                    <input type="file" 
-                           id="cobuyer-file-${cobuyer.id}-${doc.key}" 
-                           accept="image/*,.pdf" 
-                           style="display: none;"
-                           onchange="handleCobuyerDocumentUpload('${cobuyer.id}', '${doc.key}', this.files[0])">
-                    <button class="btn-status ${statusClass}" 
-                            id="cobuyer-btn-${cobuyer.id}-${doc.key}"
-                            onclick="document.getElementById('cobuyer-file-${cobuyer.id}-${doc.key}').click()">
-                        ${getCobuyerButtonContent(cobuyer, doc.key)}
-                    </button>
+                <div class="doc-card-footer">
+                    <div class="doc-card-name">${doc.name}</div>
+                    <span class="doc-card-status ${statusBadgeClass}">
+                        <i class="fas ${statusIcon}"></i> ${statusText}
+                    </span>
+                    <div class="doc-card-actions">
+                        <button class="doc-mini-btn" onclick="event.stopPropagation(); viewCobuyerDocument('${imageUrl}', '${doc.name}')" title="View">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="doc-mini-btn replace" onclick="event.stopPropagation(); replaceCobuyerDocument('${cobuyer.id}', '${doc.key}', '${doc.name}')" title="Replace">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
     }).join('');
+}
+
+// View cobuyer document in modal
+function viewCobuyerDocument(url, name) {
+    const modal = document.createElement('div');
+    modal.className = 'doc-modal';
+    modal.innerHTML = `
+        <div class="doc-modal-content">
+            <div class="doc-modal-header">
+                <h3>${name}</h3>
+                <button onclick="this.parentElement.parentElement.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="doc-modal-body">
+                <img src="${url}" alt="${name}">
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) modal.remove();
+    });
+}
+
+// Replace cobuyer document
+function replaceCobuyerDocument(cobuyerId, docKey, docName) {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*,.pdf';
+    fileInput.style.display = 'none';
+    
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const newUrl = ev.target.result;
+                
+                // Update cobuyer document in storage
+                const userData = JSON.parse(localStorage.getItem('flexcredi_user') || '{}');
+                if (userData.cobuyers) {
+                    const cobuyer = userData.cobuyers.find(c => c.id === cobuyerId);
+                    if (cobuyer && cobuyer.documents) {
+                        cobuyer.documents[docKey] = {
+                            ...cobuyer.documents[docKey],
+                            url: newUrl,
+                            uploaded: true,
+                            approved: false,
+                            uploadDate: new Date().toISOString()
+                        };
+                        localStorage.setItem('flexcredi_user', JSON.stringify(userData));
+                    }
+                }
+                
+                // Update UI
+                const card = document.querySelector(`[data-doc="${docKey}"][data-cobuyer-id="${cobuyerId}"]`);
+                if (card) {
+                    const img = card.querySelector('img');
+                    if (img) img.src = newUrl;
+                    
+                    card.classList.remove('status-approved');
+                    card.classList.add('status-pending');
+                    const statusBadge = card.querySelector('.doc-card-status');
+                    if (statusBadge) {
+                        statusBadge.className = 'doc-card-status pending';
+                        statusBadge.innerHTML = '<i class="fas fa-clock"></i> PENDING';
+                    }
+                }
+                
+                showAlert('success', `${docName} uploaded successfully! Awaiting approval.`);
+            };
+            reader.readAsDataURL(file);
+        }
+        fileInput.remove();
+    });
+    
+    document.body.appendChild(fileInput);
+    fileInput.click();
 }
 
 // Helper functions for cobuyer status

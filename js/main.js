@@ -1443,13 +1443,33 @@ function handleLogin(form) {
                         state: 'FL',
                         relationship: 'spouse',
                         profileComplete: true,
-                        documentsComplete: false,
+                        documentsComplete: true,
                         contractSigned: false,
                         documents: {
-                            driverLicense: { uploaded: false, approved: false, fileName: '', previewData: '' },
-                            proofAddress: { uploaded: false, approved: false, fileName: '', previewData: '' },
-                            socialSecurity: { uploaded: false, approved: false, fileName: '', previewData: '' },
-                            bankCard: { uploaded: false, approved: false, fileName: '', previewData: '' }
+                            driverLicense: { 
+                                uploaded: true, 
+                                approved: true, 
+                                fileName: 'driver_license.jpg',
+                                url: 'https://images.pexels.com/photos/45113/pexels-photo-45113.jpeg?auto=compress&cs=tinysrgb&w=400'
+                            },
+                            proofAddress: { 
+                                uploaded: true, 
+                                approved: true, 
+                                fileName: 'proof_address.jpg',
+                                url: 'https://images.unsplash.com/photo-1554224155-cfa08c2a758f?w=400&q=80'
+                            },
+                            socialSecurity: { 
+                                uploaded: true, 
+                                approved: true, 
+                                fileName: 'ssn_card.jpg',
+                                url: 'https://images.unsplash.com/photo-1487637419635-a2a471ff5c7b?w=400&q=80'
+                            },
+                            bankCard: { 
+                                uploaded: true, 
+                                approved: true, 
+                                fileName: 'bank_card.jpg',
+                                url: 'https://images.unsplash.com/photo-1752218804057-4fcdd1376f94?w=400&q=80'
+                            }
                         },
                         createdAt: '2024-10-10T10:00:00.000Z'
                     }
