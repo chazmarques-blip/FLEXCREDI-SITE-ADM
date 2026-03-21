@@ -765,6 +765,9 @@
         </div>
     </div>
     
+    <!-- Client API Service -->
+    <script src="js/client-api.js"></script>
+    
     <script>
         // Tab switching function
         function switchTab(tabName) {
@@ -783,11 +786,11 @@
             document.getElementById(tabName + '-tab').classList.add('active');
         }
         
-        // Login handler
-        function handleLogin(event) {
+        // Login handler - Uses ClientAPI with real API + fallback
+        async function handleLogin(event) {
             event.preventDefault();
             
-            const email = document.getElementById('email').value;
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const submitBtn = document.getElementById('btn-submit');
             const errorMsg = document.getElementById('error-message');
@@ -797,34 +800,49 @@
             errorMsg.style.display = 'none';
             successMsg.style.display = 'none';
             
+            // Validate inputs
+            if (!email || !password) {
+                errorMsg.querySelector('span').textContent = 'Please enter email and password.';
+                errorMsg.style.display = 'flex';
+                return;
+            }
+            
             // Show loading state
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
             
-            // Simulate API call (replace with actual API)
-            setTimeout(() => {
-                if (email && password) {
+            try {
+                // Try login via API (falls back to demo mode automatically)
+                const result = await window.ClientAPI.login(email, password);
+                
+                if (result.success || result.user) {
+                    successMsg.querySelector('span').textContent = 'Login successful! Redirecting...';
                     successMsg.style.display = 'flex';
                     
-                    // Redirect to dashboard after success
+                    // Redirect to dashboard
                     setTimeout(() => {
                         window.location.href = 'dashboard-cliente.html';
-                    }, 1500);
+                    }, 1000);
                 } else {
-                    errorMsg.style.display = 'flex';
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<span>Sign In</span><i class="fas fa-arrow-right"></i>';
+                    throw new Error(result.message || 'Login failed');
                 }
-            }, 1500);
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                errorMsg.querySelector('span').textContent = error.message || 'Invalid email or password.';
+                errorMsg.style.display = 'flex';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>Sign In</span><i class="fas fa-arrow-right"></i>';
+            }
         }
         
-        // Register handler
-        function handleRegister(event) {
+        // Register handler - Uses ClientAPI with real API + fallback
+        async function handleRegister(event) {
             event.preventDefault();
             
-            const name = document.getElementById('reg-name').value;
-            const email = document.getElementById('reg-email').value;
-            const phone = document.getElementById('reg-phone').value;
+            const name = document.getElementById('reg-name').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const phone = document.getElementById('reg-phone').value.trim();
             const password = document.getElementById('reg-password').value;
             const confirm = document.getElementById('reg-confirm').value;
             const submitBtn = document.getElementById('btn-register');
@@ -835,9 +853,23 @@
             errorMsg.style.display = 'none';
             successMsg.style.display = 'none';
             
+            // Validate inputs
+            if (!name || !email || !phone || !password) {
+                errorMsg.querySelector('span').textContent = 'Please fill in all fields.';
+                errorMsg.style.display = 'flex';
+                return;
+            }
+            
             // Validate passwords match
             if (password !== confirm) {
                 errorMsg.querySelector('span').textContent = 'Passwords do not match.';
+                errorMsg.style.display = 'flex';
+                return;
+            }
+            
+            // Validate password length
+            if (password.length < 6) {
+                errorMsg.querySelector('span').textContent = 'Password must be at least 6 characters.';
                 errorMsg.style.display = 'flex';
                 return;
             }
@@ -846,59 +878,36 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
             
-            // Simulate API call (replace with actual API)
-            setTimeout(() => {
-                if (name && email && phone && password) {
-                    // Create complete user application
-                    const newUserId = 'USR-' + Date.now().toString(36).toUpperCase();
-                    const contractNumber = 'FL' + new Date().getFullYear() + String(Math.floor(Math.random() * 10000)).padStart(4, '0');
-                    
-                    const newUser = {
-                        id: newUserId,
-                        email: email,
-                        fullName: name,
-                        phone: phone,
-                        ssn: '',
-                        address: '',
-                        city: '',
-                        state: '',
-                        zipCode: '',
-                        status: 'pending',
-                        createdAt: new Date().toISOString(),
-                        creditScore: 0,
-                        requestedAmount: 0,
-                        approvedAmount: 0,
-                        interestRate: 0,
-                        term: 0,
-                        monthlyPayment: 0,
-                        applicationProgress: 5,
-                        applicationStep: 'registration',
-                        contractNumber: contractNumber,
-                        cobuyers: []
-                    };
-                    
-                    // Save new user
-                    localStorage.setItem('flexcredi_user', JSON.stringify(newUser));
-                    
-                    // Add to users list for admin
-                    let allUsers = JSON.parse(localStorage.getItem('flexcredi_all_users') || '[]');
-                    allUsers.push(newUser);
-                    localStorage.setItem('flexcredi_all_users', JSON.stringify(allUsers));
-                    
+            try {
+                // Try register via API (falls back to demo mode automatically)
+                const result = await window.ClientAPI.register({
+                    fullName: name,
+                    email: email,
+                    phone: phone,
+                    password: password
+                });
+                
+                if (result.success) {
+                    successMsg.querySelector('span').textContent = 'Account created! You can now sign in.';
                     successMsg.style.display = 'flex';
                     
-                    // Switch to login tab after success
+                    // Switch to login tab and pre-fill email
                     setTimeout(() => {
                         switchTab('login');
                         document.getElementById('email').value = email;
-                    }, 2000);
+                    }, 1500);
                 } else {
-                    errorMsg.style.display = 'flex';
+                    throw new Error(result.message || 'Registration failed');
                 }
                 
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<span>Create Account</span><i class="fas fa-user-plus"></i>';
-            }, 1500);
+            } catch (error) {
+                console.error('Registration error:', error);
+                errorMsg.querySelector('span').textContent = error.message || 'Registration failed. Please try again.';
+                errorMsg.style.display = 'flex';
+            }
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Create Account</span><i class="fas fa-user-plus"></i>';
         }
         
         // Test access - go directly to dashboard

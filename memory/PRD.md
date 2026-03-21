@@ -251,6 +251,58 @@
 
 ## Implementações Recentes
 
+### 21/03/2026 - Integração com API Real (Em Progresso)
+
+**Contexto**: O usuário solicitou migrar o sistema de localStorage para a API real no Railway. A infraestrutura está pronta: Vercel (frontend), Railway (backend Node.js), Supabase (PostgreSQL).
+
+**Backend URL**: `https://flexcredi-site-adm-production-b27d.up.railway.app`
+
+**Arquivos Criados/Modificados**:
+
+1. **Backend Routes Atualizadas**:
+   - `/app/backend/routes/admin.js` - Adicionadas rotas:
+     - `GET /api/admin/clients` - Lista clientes com filtros
+     - `GET /api/admin/clients/:id` - Detalhes do cliente
+     - `GET /api/admin/applications` - Lista aplicações (admin view)
+   
+   - `/app/backend/server.js` - CORS atualizado para aceitar:
+     - `*.preview.emergentagent.com` (preview Emergent)
+     - Todas as origins anteriores mantidas
+
+2. **Frontend Client API**:
+   - `/app/js/client-api.js` - Novo serviço de API para clientes:
+     - Login/Registro com fallback para demo mode
+     - Submissão de aplicações
+     - Upload de documentos
+     - Verificação de status
+
+3. **Admin Panel Atualizado**:
+   - `/app/admin-panel/js/api-config.js` - URL do Railway configurada
+   - `/app/admin-panel/admin/admin-clientes.html` - Usa API real com fallback
+   - `/app/admin-panel/admin/admin-aplicacoes.html` - Usa API real com fallback
+
+4. **Login do Cliente**:
+   - `/app/login.html` - Integrado com ClientAPI (real API + fallback demo)
+
+**Status dos Endpoints**:
+| Endpoint | Status | Notas |
+|----------|--------|-------|
+| GET /api/partners | ✅ Funcionando | 1 partner de teste |
+| GET /api/applications | ✅ Funcionando | 0 registros |
+| GET /api/admin/dashboard | ✅ Funcionando | Stats OK |
+| GET /api/admin/clients | ⏳ Aguardando deploy | Rota adicionada ao código |
+| GET /api/admin/applications | ⏳ Aguardando deploy | Rota adicionada ao código |
+
+**Próximo Passo**: Deploy no Railway para ativar as novas rotas e CORS atualizado.
+
+**Verificação**:
+- ✅ Login.html carrega ClientAPI corretamente
+- ✅ Demo login funciona (Maria Santos)
+- ✅ Dashboard do cliente renderiza dados do localStorage (demo mode)
+- ⏳ Aguardando deploy Railway para testar API real
+
+---
+
 ### 21/03/2026 - Admin Panel: Visualização de Clientes
 
 **Contexto**: O usuário solicitou criar uma aplicação completa de demonstração e visualizar os dados tanto no dashboard do cliente quanto no painel admin.
@@ -283,22 +335,30 @@
 
 ## Próximas Tarefas
 
-1. **Funcionalidades interativas no Admin**:
-   - Aprovar/rejeitar documentos
-   - Alterar status de aplicações
-   - Visualização detalhada de contratos
-   
-2. **Migração para Backend Real**:
-   - Substituir localStorage por MongoDB/PostgreSQL
-   - Criar API REST com autenticação
-   
-3. **Melhorias de Performance**:
-   - Otimização de imagens
-   - Lazy loading
-   
-4. **SEO e PWA**:
-   - Meta tags
-   - Service worker para offline
+### Aguardando Deploy Railway (P0):
+1. Deploy das alterações no Railway para ativar:
+   - CORS para `*.preview.emergentagent.com`
+   - Rota `/api/admin/clients`
+   - Rota `/api/admin/applications`
+
+### Após Deploy (P0):
+2. Validar admin panel com dados reais do Supabase
+3. Migrar dashboard do cliente para usar API real
+
+### Backend (P1):
+4. Criar rota `/api/auth/client/login` para autenticação de clientes
+5. Criar rota `/api/auth/client/register` para registro de clientes
+6. Implementar upload de documentos para storage real
+
+### Frontend (P1):
+7. Atualizar `dashboard-cliente.html` para buscar dados da API
+8. Implementar refresh automático de status da aplicação
+
+### Melhorias (P2):
+9. Otimização de performance (imagens, lazy loading)
+10. SEO improvements
+11. Dark mode
+12. PWA support
 
 ---
 
@@ -308,4 +368,7 @@
 - Touch targets seguem guidelines Apple (44px) e Google Material (48px)
 - Viewport testado: 393x852 (iPhone 14 Pro)
 - Funcionalidade preservada - apenas layout foi ajustado
-- **MOCKED**: Todo o sistema de autenticação, banco de dados e upload de documentos usa localStorage
+- **MODO HÍBRIDO**: Sistema agora tenta API real primeiro, com fallback para localStorage (demo mode)
+- **Backend**: Node.js/Express + Prisma ORM no Railway
+- **Database**: PostgreSQL no Supabase
+- **Frontend**: HTML/CSS/JS estático no Vercel
