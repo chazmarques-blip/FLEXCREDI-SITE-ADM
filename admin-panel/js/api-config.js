@@ -4,7 +4,7 @@
  */
 
 // Production API URL (Railway)
-const API_URL = 'https://web-production-e227.up.railway.app';
+const API_URL = 'https://flexcredi-site-adm-production-b27d.up.railway.app';
 
 // API Endpoints
 const API_ENDPOINTS = {
