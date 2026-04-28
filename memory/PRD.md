@@ -3,13 +3,87 @@
 ## Informações do Projeto
 - **Nome**: FlexCredi
 - **Tipo**: Site de crédito + Admin Dashboard
-- **Stack**: HTML/CSS/JS (Frontend) + Node.js/Express (Backend) + PostgreSQL
+- **Stack**: HTML/CSS/JS (Frontend) + Node.js/Express/Prisma (Backend) + PostgreSQL (Supabase)
 - **Deploy**: Vercel (frontend) + Railway (backend)
 - **Repositório**: https://github.com/chazmarques-blip/FLEXCREDI-SITE-ADM
+- **Branch Ativo**: Nova-Emergent
 
 ---
 
-## O que foi Implementado
+## Status Atual (28/04/2026)
+
+### ✅ FUNCIONALIDADES IMPLEMENTADAS
+
+#### Backend (Railway)
+1. **Autenticação de Clientes** (`/api/client/auth`)
+   - Login com JWT token
+   - Registro de novos clientes
+   - Perfil do usuário autenticado
+
+2. **Admin APIs** (`/api/admin`)
+   - Dashboard com métricas reais
+   - CRUD de clientes
+   - CRUD de aplicações
+   - Aprovar/Rejeitar aplicações
+   - Gerenciamento de documentos
+
+3. **APIs Públicas** (`/api/public`)
+   - Submissão de aplicações
+   - Listagem de parceiros
+
+#### Frontend Admin Panel
+1. **Dashboard** - Métricas em tempo real
+2. **Clientes** - Lista, detalhes, ativar/desativar
+3. **Aplicações** - Lista, detalhes, aprovar/rejeitar
+4. **Visualização detalhada** de clientes e aplicações
+
+#### Frontend Cliente
+1. **Login/Registro** integrado com API real
+2. **Dashboard do cliente** com dados reais
+3. **ClientAPI Service** com fallback para demo mode
+
+### 📁 Arquivos Criados/Modificados Nesta Sessão
+
+**Backend:**
+- `/app/backend/routes/admin.js` - Rotas admin completas
+- `/app/backend/routes/client-auth.js` - Autenticação de clientes
+- `/app/backend/routes/public.js` - APIs públicas corrigidas
+- `/app/backend/server.js` - CORS e rotas configuradas
+- `/app/backend/core/prisma.js` - Singleton Prisma otimizado
+
+**Frontend Admin:**
+- `/app/admin-panel/admin/admin-dashboard.html` - Dashboard com métricas
+- `/app/admin-panel/admin/admin-cliente-detalhes.html` - Detalhes do cliente
+- `/app/admin-panel/admin/admin-aplicacao-detalhes.html` - Detalhes da aplicação
+- `/app/admin-panel/admin/admin-clientes.html` - Lista de clientes atualizada
+- `/app/admin-panel/admin/admin-aplicacoes.html` - Lista de aplicações atualizada
+
+**Frontend Cliente:**
+- `/app/js/client-api.js` - Serviço de API do cliente
+- `/app/login.html` - Login integrado com API
+
+### ⏳ FUNCIONALIDADES PENDENTES
+
+| # | Funcionalidade | Prioridade | Status |
+|---|----------------|------------|--------|
+| 1 | Upload de documentos para storage real | P1 | Código existe, precisa testar |
+| 2 | Notificações por email | P2 | Não iniciado |
+| 3 | Deploy produção (flexcredi.com) | P2 | Aguardando testes |
+| 4 | Integração com análise de crédito | P3 | Não iniciado |
+
+### 🔧 Configuração do Ambiente
+
+**Railway:**
+- Branch: `Nova-Emergent`
+- DATABASE_URL: `postgresql://postgres.xxx:xxx@aws-1-us-east-2.pooler.supabase.com:6543/postgres?pgbouncer=true`
+
+**Supabase:**
+- Projeto: FLEXCREDI-SITE-ADM
+- Connection pooler (IPv4): porta 6543
+
+---
+
+## O que foi Implementado (Histórico)
 
 ### 20/03/2026 - Migração do Sistema de Traduções para JSON
 

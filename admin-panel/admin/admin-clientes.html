@@ -320,17 +320,33 @@
     }
 
     function viewClient(id) {
-        alert(`Ver detalhes do cliente #${id}`);
+        window.location.href = `/admin-panel/admin/admin-cliente-detalhes.html?id=${id}`;
     }
 
     function editClient(id) {
-        alert(`Editar cliente #${id}`);
+        window.location.href = `/admin-panel/admin/admin-cliente-detalhes.html?id=${id}&edit=true`;
     }
 
-    function toggleClientStatus(id, currentStatus) {
-        const newStatus = currentStatus === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE';
-        if (confirm(`Confirma ${newStatus === 'ACTIVE' ? 'ativação' : 'desativação'} do cliente #${id}?`)) {
-            alert('Funcionalidade em desenvolvimento');
+    async function toggleClientStatus(id, currentStatus) {
+        const newStatus = currentStatus === 'ACTIVE' ? false : true;
+        if (!confirm(`Confirma ${newStatus ? 'ativação' : 'desativação'} do cliente?`)) return;
+        
+        try {
+            const response = await fetch(`${API_URL}/api/admin/clients/${id}/status`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ active: newStatus })
+            });
+            const data = await response.json();
+            if (data.success) {
+                alert(data.message);
+                loadClients();
+            } else {
+                alert(data.error || 'Erro ao atualizar status');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Erro ao atualizar status');
         }
     }
 

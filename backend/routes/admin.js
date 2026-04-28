@@ -358,6 +358,308 @@ router.get('/applications', async (req, res) => {
   }
 });
 
+// ==================== APPLICATION ACTIONS ====================
+
+// PUT /api/admin/applications/:id/approve - Approve application
+router.put('/applications/:id/approve', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { approvedAmount, interestRate, term, notes } = req.body;
+    
+    console.log(`[AdminRoutes] Approving application ${id}...`);
+    
+    const application = await prisma.application.findUnique({
+      where: { id }
+    });
+    
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        error: 'Aplicação não encontrada'
+      });
+    }
+    
+    const updatedApplication = await prisma.application.update({
+      where: { id },
+      data: {
+        status: 'APPROVED',
+        approvedAmount: approvedAmount || application.desiredAmount,
+        approvedInterestRate: interestRate || 18.5,
+        approvedTerm: term || 24,
+        approvalNotes: notes,
+        approvedAt: new Date(),
+        approvedBy: 'admin' // TODO: get from auth token
+      }
+    });
+    
+    console.log(`[AdminRoutes] Application ${id} approved`);
+    
+    res.json({
+      success: true,
+      message: 'Aplicação aprovada com sucesso',
+      application: updatedApplication
+    });
+    
+  } catch (error) {
+    console.error('[AdminRoutes] Error approving application:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Erro ao aprovar aplicação'
+    });
+  }
+});
+
+// PUT /api/admin/applications/:id/reject - Reject application
+router.put('/applications/:id/reject', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { reason, notes } = req.body;
+    
+    console.log(`[AdminRoutes] Rejecting application ${id}...`);
+    
+    const application = await prisma.application.findUnique({
+      where: { id }
+    });
+    
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        error: 'Aplicação não encontrada'
+      });
+    }
+    
+    const updatedApplication = await prisma.application.update({
+      where: { id },
+      data: {
+        status: 'REJECTED',
+        rejectionReason: reason || 'Não aprovado pela análise de crédito',
+        rejectionNotes: notes,
+        rejectedAt: new Date(),
+        rejectedBy: 'admin'
+      }
+    });
+    
+    console.log(`[AdminRoutes] Application ${id} rejected`);
+    
+    res.json({
+      success: true,
+      message: 'Aplicação rejeitada',
+      application: updatedApplication
+    });
+    
+  } catch (error) {
+    console.error('[AdminRoutes] Error rejecting application:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Erro ao rejeitar aplicação'
+    });
+  }
+});
+
+// GET /api/admin/applications/:id - Get single application details
+router.get('/applications/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(`[AdminRoutes] Fetching application ${id}...`);
+    
+    const application = await prisma.application.findUnique({
+      where: { id },
+      include: {
+        partner: {
+          select: {
+            id: true,
+            companyName: true,
+            tradeName: true,
+            email: true,
+            phone: true
+          }
+        },
+        documents: {
+          orderBy: { uploadedAt: 'desc' }
+        },
+        contract: true
+      }
+    });
+    
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        error: 'Aplicação não encontrada'
+      });
+    }
+    
+    // Get user info separately
+    let user = null;
+    if (application.userId) {
+      user = await prisma.user.findUnique({
+        where: { id: application.userId },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          phone: true,
+          ssn: true,
+          address: true,
+          city: true,
+          state: true,
+          zipCode: true
+        }
+      });
+    }
+    
+    res.json({
+      success: true,
+      application: {
+        ...application,
+        user
+      }
+    });
+    
+  } catch (error) {
+    console.error('[AdminRoutes] Error fetching application:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Erro ao carregar aplicação'
+    });
+  }
+});
+
+// ==================== CLIENT ACTIONS ====================
+
+// PUT /api/admin/clients/:id/status - Toggle client active status
+router.put('/clients/:id/status', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { active } = req.body;
+    
+    console.log(`[AdminRoutes] Updating client ${id} status to ${active}...`);
+    
+    const updatedClient = await prisma.user.update({
+      where: { id },
+      data: { active: active }
+    });
+    
+    res.json({
+      success: true,
+      message: active ? 'Cliente ativado' : 'Cliente desativado',
+      client: updatedClient
+    });
+    
+  } catch (error) {
+    console.error('[AdminRoutes] Error updating client status:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Erro ao atualizar status do cliente'
+    });
+  }
+});
+
+// ==================== DOCUMENT MANAGEMENT ====================
+
+// GET /api/admin/documents - List all documents
+router.get('/documents', async (req, res) => {
+  try {
+    const { status, applicationId, limit = 50, offset = 0 } = req.query;
+    
+    const where = {};
+    if (status) where.status = status;
+    if (applicationId) where.applicationId = applicationId;
+    
+    const [documents, total] = await Promise.all([
+      prisma.document.findMany({
+        where,
+        take: parseInt(limit),
+        skip: parseInt(offset),
+        orderBy: { uploadedAt: 'desc' },
+        include: {
+          application: {
+            select: {
+              id: true,
+              clientName: true,
+              clientEmail: true,
+              status: true
+            }
+          }
+        }
+      }),
+      prisma.document.count({ where })
+    ]);
+    
+    res.json({
+      success: true,
+      documents,
+      pagination: { total, limit: parseInt(limit), offset: parseInt(offset) }
+    });
+    
+  } catch (error) {
+    console.error('[AdminRoutes] Error fetching documents:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Erro ao carregar documentos'
+    });
+  }
+});
+
+// PUT /api/admin/documents/:id/approve - Approve document
+router.put('/documents/:id/approve', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const document = await prisma.document.update({
+      where: { id },
+      data: {
+        status: 'APPROVED',
+        verifiedAt: new Date(),
+        verifiedBy: 'admin'
+      }
+    });
+    
+    res.json({
+      success: true,
+      message: 'Documento aprovado',
+      document
+    });
+    
+  } catch (error) {
+    console.error('[AdminRoutes] Error approving document:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Erro ao aprovar documento'
+    });
+  }
+});
+
+// PUT /api/admin/documents/:id/reject - Reject document
+router.put('/documents/:id/reject', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { reason } = req.body;
+    
+    const document = await prisma.document.update({
+      where: { id },
+      data: {
+        status: 'REJECTED',
+        rejectionReason: reason,
+        verifiedAt: new Date(),
+        verifiedBy: 'admin'
+      }
+    });
+    
+    res.json({
+      success: true,
+      message: 'Documento rejeitado',
+      document
+    });
+    
+  } catch (error) {
+    console.error('[AdminRoutes] Error rejecting document:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Erro ao rejeitar documento'
+    });
+  }
+});
+
 // POST /api/admin/clients/seed - Create test client for development
 router.post('/clients/seed', async (req, res) => {
   try {

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FlexCredi Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/admin-panel/css/admin.css">
+    <style>
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .stat-icon.green { background: rgba(46, 204, 113, 0.1); color: #2ECC71; }
+        .stat-icon.blue { background: rgba(52, 152, 219, 0.1); color: #3498db; }
+        .stat-icon.orange { background: rgba(243, 156, 18, 0.1); color: #f39c12; }
+        .stat-icon.red { background: rgba(231, 76, 60, 0.1); color: #e74c3c; }
+        .stat-icon.purple { background: rgba(155, 89, 182, 0.1); color: #9b59b6; }
+        .stat-content h3 {
+            margin: 0;
+            font-size: 28px;
+            color: #1a1a1a;
+        }
+        .stat-content p {
+            margin: 4px 0 0 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 32px 0 16px 0;
+        }
+        .recent-table {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .recent-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .recent-table th,
+        .recent-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .recent-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #666;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        .recent-table tr:hover {
+            background: #f8f9fa;
+        }
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-approved { background: #d4edda; color: #155724; }
+        .status-rejected { background: #f8d7da; color: #721c24; }
+        .status-active { background: #cce5ff; color: #004085; }
+        .amount {
+            font-weight: 600;
+            color: #2ECC71;
+        }
+        .user-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+        }
+        .user-info span {
+            display: block;
+            font-weight: 500;
+        }
+        .user-info small {
+            color: #666;
+            font-size: 12px;
+        }
+        .view-link {
+            color: #2ECC71;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .view-link:hover {
+            text-decoration: underline;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        .chart-placeholder {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            color: #666;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 1024px) {
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="sidebar-header">
+                <img src="/assets/img/logo-flexcredi.png" alt="FlexCredi" class="sidebar-logo">
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/admin-panel/admin/admin-dashboard.html" class="nav-item active">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a>
+                <a href="/admin-panel/admin/admin-aplicacoes.html" class="nav-item">
+                    <i class="fas fa-file-alt"></i> Applications
+                </a>
+                <a href="/admin-panel/admin/admin-clientes.html" class="nav-item">
+                    <i class="fas fa-users"></i> Clients
+                </a>
+                <a href="/admin-panel/admin/admin-partners.html" class="nav-item">
+                    <i class="fas fa-handshake"></i> Partners
+                </a>
+                <a href="/admin-panel/admin/admin-documents.html" class="nav-item">
+                    <i class="fas fa-folder"></i> Documents
+                </a>
+                <a href="/admin-panel/admin/admin-contratos.html" class="nav-item">
+                    <i class="fas fa-file-contract"></i> Contracts
+                </a>
+                <a href="/admin-panel/admin/admin-configuracoes.html" class="nav-item">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h2 style="margin: 0; font-size: 20px; color: #1a1a1a;">Dashboard</h2>
+                <div class="header-user">
+                    <div class="user-avatar" style="background: #2ECC71; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600;">AD</div>
+                    <span>Admin</span>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- Stats Cards -->
+                <div class="dashboard-grid" id="statsGrid">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i> Carregando estatísticas...
+                    </div>
+                </div>
+
+                <!-- Two Column Layout -->
+                <div class="two-columns">
+                    <!-- Recent Applications -->
+                    <div>
+                        <h3 class="section-title"><i class="fas fa-file-alt"></i> Aplicações Recentes</h3>
+                        <div class="recent-table" id="recentApplications">
+                            <div class="loading">
+                                <i class="fas fa-spinner fa-spin"></i> Carregando...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Clients -->
+                    <div>
+                        <h3 class="section-title"><i class="fas fa-users"></i> Novos Clientes</h3>
+                        <div class="recent-table" id="recentClients">
+                            <div class="loading">
+                                <i class="fas fa-spinner fa-spin"></i> Carregando...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    const API_URL = 'https://flexcredi-site-adm-production-b27d.up.railway.app';
+
+    async function loadDashboard() {
+        try {
+            // Load stats
+            const statsResponse = await fetch(`${API_URL}/api/admin/dashboard`);
+            const statsData = await statsResponse.json();
+            
+            if (statsData.success) {
+                renderStats(statsData.data.stats);
+            } else {
+                renderStatsError();
+            }
+        } catch (error) {
+            console.error('Error loading stats:', error);
+            renderStatsError();
+        }
+
+        // Load recent applications
+        try {
+            const appsResponse = await fetch(`${API_URL}/api/admin/applications?limit=5`);
+            const appsData = await appsResponse.json();
+            
+            if (appsData.success) {
+                renderRecentApplications(appsData.applications || []);
+            }
+        } catch (error) {
+            console.error('Error loading applications:', error);
+        }
+
+        // Load recent clients
+        try {
+            const clientsResponse = await fetch(`${API_URL}/api/admin/clients?limit=5`);
+            const clientsData = await clientsResponse.json();
+            
+            if (clientsData.success) {
+                renderRecentClients(clientsData.clients || []);
+            }
+        } catch (error) {
+            console.error('Error loading clients:', error);
+        }
+    }
+
+    function renderStats(stats) {
+        document.getElementById('statsGrid').innerHTML = `
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>${stats.totalApplications || 0}</h3>
+                    <p>Total Aplicações</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon orange">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>${stats.pendingApplications || 0}</h3>
+                    <p>Pendentes</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>${stats.approvedApplications || 0}</h3>
+                    <p>Aprovadas</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon red">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>${stats.rejectedApplications || 0}</h3>
+                    <p>Rejeitadas</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon purple">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>${stats.totalUsers || 0}</h3>
+                    <p>Total Clientes</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>$${((stats.totalApprovedAmount || 0) / 1000).toFixed(0)}k</h3>
+                    <p>Valor Aprovado</p>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderStatsError() {
+        document.getElementById('statsGrid').innerHTML = `
+            <div class="stat-card" style="grid-column: span 3;">
+                <p style="color: #e74c3c;"><i class="fas fa-exclamation-triangle"></i> Erro ao carregar estatísticas</p>
+            </div>
+        `;
+    }
+
+    function renderRecentApplications(applications) {
+        if (applications.length === 0) {
+            document.getElementById('recentApplications').innerHTML = `
+                <div style="padding: 40px; text-align: center; color: #666;">
+                    <i class="fas fa-inbox" style="font-size: 32px; margin-bottom: 12px;"></i>
+                    <p>Nenhuma aplicação encontrada</p>
+                </div>
+            `;
+            return;
+        }
+
+        document.getElementById('recentApplications').innerHTML = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${applications.map(app => `
+                        <tr>
+                            <td>
+                                <div class="user-cell">
+                                    <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(app.clientName || 'C')}&size=36&background=2ECC71&color=fff" class="user-avatar">
+                                    <div class="user-info">
+                                        <span>${app.clientName || 'N/A'}</span>
+                                        <small>${app.clientEmail || ''}</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="amount">$${(app.desiredAmount || 0).toLocaleString()}</td>
+                            <td><span class="status-badge status-${(app.status || 'pending').toLowerCase()}">${app.status || 'PENDING'}</span></td>
+                            <td><a href="/admin-panel/admin/admin-aplicacao-detalhes.html?id=${app.id}" class="view-link">Ver</a></td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+    }
+
+    function renderRecentClients(clients) {
+        if (clients.length === 0) {
+            document.getElementById('recentClients').innerHTML = `
+                <div style="padding: 40px; text-align: center; color: #666;">
+                    <i class="fas fa-user-slash" style="font-size: 32px; margin-bottom: 12px;"></i>
+                    <p>Nenhum cliente encontrado</p>
+                </div>
+            `;
+            return;
+        }
+
+        document.getElementById('recentClients').innerHTML = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Apps</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${clients.map(client => `
+                        <tr>
+                            <td>
+                                <div class="user-cell">
+                                    <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(client.name || 'C')}&size=36&background=2ECC71&color=fff" class="user-avatar">
+                                    <div class="user-info">
+                                        <span>${client.name || 'N/A'}</span>
+                                        <small>${client.email || ''}</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>${client._count?.applications || 0}</td>
+                            <td><span class="status-badge ${client.active ? 'status-active' : 'status-rejected'}">${client.active ? 'Ativo' : 'Inativo'}</span></td>
+                            <td><a href="/admin-panel/admin/admin-cliente-detalhes.html?id=${client.id}" class="view-link">Ver</a></td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+    }
+
+    // Mobile menu toggle
+    document.getElementById('mobileMenuToggle')?.addEventListener('click', () => {
+        document.getElementById('adminSidebar').classList.toggle('open');
+    });
+
+    // Load on page load
+    loadDashboard();
+    </script>
+</body>
+</html>

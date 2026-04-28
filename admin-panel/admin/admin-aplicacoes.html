@@ -323,30 +323,32 @@
     }
 
     function viewApplication(id) {
-        alert(`Ver detalhes da aplicação #${id}`);
+        window.location.href = `/admin-panel/admin/admin-aplicacao-detalhes.html?id=${id}`;
     }
 
     function editApplication(id) {
-        alert(`Editar aplicação #${id}`);
+        window.location.href = `/admin-panel/admin/admin-aplicacao-detalhes.html?id=${id}&edit=true`;
     }
 
     async function updateStatus(id, newStatus) {
-        if (!confirm(`Confirm ${newStatus === 'APPROVED' ? 'approval' : 'rejection'} of application #${id}?`)) {
+        if (!confirm(`Confirm ${newStatus === 'APPROVED' ? 'approval' : 'rejection'} of application?`)) {
             return;
         }
 
         try {
-            const response = await fetch(`${API_URL}/api/applications/${id}/${newStatus.toLowerCase()}`, {
+            const endpoint = newStatus === 'APPROVED' ? 'approve' : 'reject';
+            const response = await fetch(`${API_URL}/api/admin/applications/${id}/${endpoint}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ notes: '' })
             });
 
-            if (response.ok) {
-                alert('Status updated successfully!');
+            const data = await response.json();
+            
+            if (data.success) {
+                alert(data.message || 'Status updated successfully!');
                 loadApplications();
             } else {
-                const data = await response.json();
                 alert(data.error || 'Error updating status');
             }
         } catch (error) {
