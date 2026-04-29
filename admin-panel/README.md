@@ -1,130 +1,50 @@
-# 🏦 FlexCredi LLC - Admin Portal
+# FlexCredi Admin Dashboard
 
-Administrative portal for FlexCredi credit platform.
+## Desenvolvimento
 
-## 🚀 Quick Deploy to Vercel
+Este é o painel administrativo do FlexCredi, desenvolvido em HTML/CSS/JS puro.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/chazmarques-blip/FLEXCREDI-SITE-ADM)
+### URLs de Produção
+- **Admin**: https://admin.flexcredi.com
+- **API Backend**: https://flexcredi-site-adm-production-b27d.up.railway.app
 
-## 📦 Project Structure
-
+### Estrutura
 ```
-/
-├── public/                 # Static files (served by Vercel)
-│   ├── admin/             # Admin dashboard pages
-│   │   ├── index.html     # Main admin dashboard
-│   │   ├── clientes.html  # Client management
-│   │   └── simples.html   # Simple admin view
-│   ├── css/               # Stylesheets
-│   ├── js/                # JavaScript files
-│   │   └── api-config.js  # API configuration
-│   ├── assets/            # Images, fonts, etc.
-│   └── index.html         # Landing page
-├── backend/               # Node.js API (deployed on Railway)
-├── vercel.json            # Vercel configuration
-└── .vercelignore          # Files to ignore in deployment
+admin-panel/
+├── admin/                 # Páginas do painel
+│   ├── admin-dashboard.html
+│   ├── admin-clientes.html
+│   ├── admin-cliente-detalhes.html
+│   ├── admin-aplicacoes.html
+│   ├── admin-aplicacao-detalhes.html
+│   └── ...
+├── css/                   # Estilos
+├── js/                    # Scripts
+│   ├── api-config.js      # Configuração da API
+│   └── flexcredi-api.js   # Cliente API
+└── assets/                # Imagens e recursos
 ```
 
-## 🌐 Deployment
+### Configuração da API
 
-### Automatic Deployment
-
-1. **Connect to Vercel**
-   - Go to [Vercel Dashboard](https://vercel.com/dashboard)
-   - Click "Add New" → "Project"
-   - Import `chazmarques-blip/FLEXCREDI-SITE-ADM`
-   - Vercel auto-deploys on every push to `main`
-
-2. **Manual Deployment**
-   ```bash
-   # Install Vercel CLI
-   npm i -g vercel
-   
-   # Login
-   vercel login
-   
-   # Deploy
-   vercel --prod
-   ```
-
-### Custom Domain Setup
-
-1. **Add Domain in Vercel**
-   - Go to Project Settings → Domains
-   - Add `admin.flexcredi.com`
-   - Vercel provides DNS configuration
-
-2. **Configure DNS (Cloudflare/GoDaddy/etc.)**
-   - Type: `CNAME`
-   - Name: `admin`
-   - Value: `cname.vercel-dns.com`
-   - TTL: Auto
-
-3. **Wait for Verification**
-   - DNS propagation takes 1-24 hours
-   - Vercel auto-provisions SSL certificate
-
-## 🔧 Configuration
-
-### Environment Variables
-
-Set in Vercel Dashboard → Settings → Environment Variables:
-
-| Variable | Value | Description |
-|----------|-------|-------------|
-| `VITE_API_URL` | `https://web-production-e227.up.railway.app` | Backend API URL |
-| `NEXT_PUBLIC_API_URL` | `https://web-production-e227.up.railway.app` | (if using Next.js) |
-
-### API Configuration
-
-The API URL is configured in `/public/js/api-config.js`:
-
+A URL da API está configurada em `js/api-config.js`:
 ```javascript
-const API_URL = 'https://web-production-e227.up.railway.app';
+const API_URL = 'https://flexcredi-site-adm-production-b27d.up.railway.app';
 ```
 
-## 🧪 Testing
+### Endpoints Principais
 
-### Local Testing
+| Endpoint | Método | Descrição |
+|----------|--------|-----------|
+| `/api/admin/dashboard` | GET | Métricas do dashboard |
+| `/api/admin/clients` | GET | Lista de clientes |
+| `/api/admin/clients/:id` | GET | Detalhes do cliente |
+| `/api/admin/applications` | GET | Lista de aplicações |
+| `/api/admin/applications/:id` | GET | Detalhes da aplicação |
+| `/api/admin/applications/:id/approve` | PUT | Aprovar aplicação |
+| `/api/admin/applications/:id/reject` | PUT | Rejeitar aplicação |
 
-```bash
-# Install local server (optional)
-npm install -g http-server
+### Deploy
 
-# Serve public directory
-http-server public -p 8080
-
-# Open browser
-open http://localhost:8080
-```
-
-### Production Testing
-
-After deployment:
-
-1. **Landing Page**: https://admin.flexcredi.com
-2. **Admin Dashboard**: https://admin.flexcredi.com/admin/
-3. **API Health Check**: Network tab in browser console
-
-## 📚 Documentation
-
-- **Deployment Guide**: `/DEPLOYMENT-GUIDE.md`
-- **Self-Service Flow**: `/CLIENT-SELF-SERVICE-FLOW.md`
-- **US Market Adjustments**: `/US-MARKET-ADJUSTMENTS.md`
-- **Backend API**: https://web-production-e227.up.railway.app
-
-## 🔗 Links
-
-- **Repository**: https://github.com/chazmarques-blip/FLEXCREDI-SITE-ADM
-- **Backend API**: https://web-production-e227.up.railway.app
-- **Frontend**: https://admin.flexcredi.com (pending DNS)
-
-## 📝 Version
-
-- **Version**: 4.0
-- **Market**: US (Florida)
-- **Last Updated**: February 22, 2026
-
-## 📄 License
-
-Proprietary - FlexCredi LLC
+O deploy é feito via Vercel, conectado ao repositório GitHub.
+O domínio `admin.flexcredi.com` aponta para a pasta `/admin-panel/admin/`.

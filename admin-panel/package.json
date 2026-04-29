@@ -1,0 +1,14 @@
+{
+  "name": "flexcredi-admin",
+  "version": "1.0.0",
+  "description": "FlexCredi Admin Dashboard",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'Open admin/index.html in browser'",
+    "build": "echo 'Static site - no build required'"
+  },
+  "config": {
+    "api_url": "https://flexcredi-site-adm-production-b27d.up.railway.app",
+    "site_url": "https://admin.flexcredi.com"
+  }
+}

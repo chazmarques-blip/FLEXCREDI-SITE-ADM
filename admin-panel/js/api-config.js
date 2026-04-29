@@ -18,11 +18,28 @@ const API_ENDPOINTS = {
   partnerApprove: (id) => `${API_URL}/api/partners/${id}/approve`,
   partnerReject: (id) => `${API_URL}/api/partners/${id}/reject`,
   
-  // Applications
+  // Applications (public)
   applications: `${API_URL}/api/applications`,
   applicationById: (id) => `${API_URL}/api/applications/${id}`,
-  applicationApprove: (id) => `${API_URL}/api/applications/${id}/approve`,
-  applicationReject: (id) => `${API_URL}/api/applications/${id}/reject`,
+  
+  // Admin - Dashboard
+  adminDashboard: `${API_URL}/api/admin/dashboard`,
+  
+  // Admin - Clients
+  adminClients: `${API_URL}/api/admin/clients`,
+  adminClientById: (id) => `${API_URL}/api/admin/clients/${id}`,
+  adminClientStatus: (id) => `${API_URL}/api/admin/clients/${id}/status`,
+  
+  // Admin - Applications
+  adminApplications: `${API_URL}/api/admin/applications`,
+  adminApplicationById: (id) => `${API_URL}/api/admin/applications/${id}`,
+  adminApplicationApprove: (id) => `${API_URL}/api/admin/applications/${id}/approve`,
+  adminApplicationReject: (id) => `${API_URL}/api/admin/applications/${id}/reject`,
+  
+  // Admin - Documents
+  adminDocuments: `${API_URL}/api/admin/documents`,
+  adminDocumentApprove: (id) => `${API_URL}/api/admin/documents/${id}/approve`,
+  adminDocumentReject: (id) => `${API_URL}/api/admin/documents/${id}/reject`,
   
   // Contracts
   contracts: `${API_URL}/api/contracts`,
@@ -37,7 +54,7 @@ const API_ENDPOINTS = {
   documentDownload: (id) => `${API_URL}/api/documents/${id}/download`,
   documentReview: (id) => `${API_URL}/api/documents/${id}/review`,
   
-  // Admin
+  // Legacy (deprecated - use admin* versions)
   dashboard: `${API_URL}/api/admin/dashboard`,
   stats: `${API_URL}/api/admin/stats`
 };
